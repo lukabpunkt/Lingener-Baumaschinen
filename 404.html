@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0F14">
+  <title>Seite nicht gefunden — LIBA</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    body { background: var(--ink); }
+    .err-page { min-height: 100svh; display: grid; place-items: center; padding: 6rem var(--gutter) 4rem; background: var(--ink); color: var(--canvas); text-align: center; position: relative; overflow: hidden; }
+    .err-page::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(14,124,123,.3), transparent 55%); z-index: 0; }
+    .err-page::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 56px 56px; z-index: 0; mask-image: linear-gradient(180deg, transparent, black 30%, transparent); }
+    .err-page > * { position: relative; z-index: 1; }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<header class="nav is-solid" style="background: rgba(11,15,20,.85); border-bottom-color: rgba(255,255,255,.06); position: relative; z-index: 10;">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand" style="color: var(--canvas);"><img src="assets/images/logo/liba-logo-white.png" alt="LIBA" class="logo"><span class="meta" style="border-color: rgba(255,255,255,.15); color: var(--steel-400);">Lingener<br>Baumaschinen</span></a>
+    <nav class="nav-links">
+      <a href="index.html" style="color: var(--steel-300);">Start</a>
+      <a href="maschinen.html" style="color: var(--steel-300);">Maschinen</a>
+      <a href="anwendungen.html" style="color: var(--steel-300);">Anwendungen</a>
+      <a href="kontakt.html" style="color: var(--steel-300);">Kontakt</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="kontakt.html" class="btn btn-brand is-sm">Anfragen <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="err-page">
+  <div class="container" style="max-width: 760px;">
+    <div class="display" style="color: var(--brand-light); line-height: .9; font-size: clamp(6rem, 18vw, 14rem); font-weight: 400;">4<span class="serif-italic">0</span>4</div>
+    <span class="eyebrow is-dark mt-3" style="justify-content: center;"><span class="dot"></span>Diese Trasse führt ins Leere</span>
+    <h1 class="mt-3" style="color: var(--canvas); font-size: clamp(2rem, 4vw, 3rem); max-width: 24ch; margin-left: auto; margin-right: auto;">Hier wurde noch nicht <em class="serif-italic">gefräst.</em></h1>
+    <p class="mt-3" style="color: rgba(255,255,255,.75); font-size: 1.1rem; max-width: 50ch; margin-left: auto; margin-right: auto;">Die angeforderte Seite existiert nicht oder wurde verschoben. Zurück zum Werk geht es hier:</p>
+    <div class="mt-4" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="index.html" class="btn btn-brand is-lg">Zur Startseite <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="maschinen.html" class="btn btn-outline-light">Maschinen ansehen</a>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
