@@ -1,241 +1,268 @@
-/* LIBA — Lingener Baumaschinen | v3 */
+/* LIBA — Lingener Baumaschinen | v4 (mobile-first, robust) */
 (function () {
   'use strict';
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isCoarse = window.matchMedia('(pointer: coarse)').matches;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
 
-  /* Year auto-fill */
-  $$('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
+  /* ============================================================
+     MOBILE NAV — first priority, isolated, no dependencies
+     ============================================================ */
+  function setupMobileNav() {
+    const toggle = $('.nav-toggle');
+    const drawer = $('.mobile-nav');
+    if (!toggle || !drawer) return;
 
-  /* Page-enter class */
-  document.body.classList.add('page-enter');
-
-  /* Sticky nav scroll state */
-  const nav = $('.nav');
-  if (nav && !nav.classList.contains('is-solid')) {
-    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  /* Scroll progress bar */
-  if (!reduceMotion) {
-    const progress = document.createElement('div');
-    progress.className = 'scroll-progress';
-    progress.innerHTML = '<div class="scroll-progress-bar"></div>';
-    document.body.appendChild(progress);
-    const bar = progress.firstElementChild;
-    const updateBar = () => {
-      const doc = document.documentElement;
-      const scrolled = doc.scrollTop;
-      const max = doc.scrollHeight - doc.clientHeight;
-      const pct = max > 0 ? (scrolled / max) * 100 : 0;
-      bar.style.width = pct + '%';
-    };
-    window.addEventListener('scroll', updateBar, { passive: true });
-    updateBar();
-  }
-
-  /* Grain overlay */
-  if (!reduceMotion) {
-    const grain = document.createElement('div');
-    grain.className = 'grain';
-    grain.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(grain);
-  }
-
-  /* Custom cursor (desktop only) */
-  if (!isCoarse && !reduceMotion) {
-    const dot = document.createElement('div');
-    const ring = document.createElement('div');
-    dot.className = 'cursor-dot'; ring.className = 'cursor-ring';
-    dot.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
-    document.body.append(dot, ring);
-
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    let raf;
-    const loop = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-      dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-      raf = requestAnimationFrame(loop);
-    };
-    const onMove = (e) => {
-      mx = e.clientX; my = e.clientY;
-      document.body.classList.add('is-cursor-visible');
-    };
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseleave', () => document.body.classList.remove('is-cursor-visible'));
-    loop();
-
-    const hoverSel = 'a, button, .show-card, .app, .news-card, .media-frame, [data-cursor-hover]';
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest && e.target.closest(hoverSel)) document.body.classList.add('is-cursor-hover');
-    });
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest && e.target.closest(hoverSel)) document.body.classList.remove('is-cursor-hover');
-    });
-  }
-
-  /* Mobile nav */
-  const toggle = $('.nav-toggle');
-  const drawer = $('.mobile-nav');
-  if (toggle && drawer) {
-    toggle.addEventListener('click', () => {
-      const open = drawer.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(open));
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    $$('a', drawer).forEach(a => a.addEventListener('click', () => {
+    const close = () => {
       drawer.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
-    }));
-  }
-
-  /* Convert headlines with [data-split-lines] into line-masked spans */
-  $$('[data-split-lines]').forEach(el => {
-    if (el.dataset.split === '1') return;
-    const lines = el.innerHTML.split(/<br\s*\/?>/i);
-    el.innerHTML = lines.map((line, idx) =>
-      `<span class="mask-line mask-line-${idx + 1}"><span>${line.trim()}</span></span>`
-    ).join('');
-    el.dataset.split = '1';
-  });
-
-  /* IntersectionObserver for reveals + line masks */
-  const observed = $$('.reveal, .mask-line, .clip-reveal');
-  if ('IntersectionObserver' in window && observed.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
-    observed.forEach(el => io.observe(el));
-  } else {
-    observed.forEach(el => el.classList.add('is-visible'));
-  }
-
-  /* Hero slider */
-  const slides = $$('.hero-media img');
-  const dots = $$('.hero-dot');
-  if (slides.length > 1) {
-    let i = 0, timer = null;
-    const setActive = (n) => {
-      slides.forEach((s, idx) => s.classList.toggle('is-active', idx === n));
-      dots.forEach((d, idx) => d.classList.toggle('is-active', idx === n));
-      i = n;
     };
-    const next = () => setActive((i + 1) % slides.length);
-    setActive(0);
-    if (!reduceMotion) timer = setInterval(next, 6500);
-    dots.forEach((d, idx) => d.addEventListener('click', () => {
-      setActive(idx);
-      if (timer) { clearInterval(timer); timer = setInterval(next, 6500); }
-    }));
-  } else if (slides.length === 1) slides[0].classList.add('is-active');
+    const open = () => {
+      drawer.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
 
-  /* Counter animation */
-  const counters = $$('[data-count]');
-  if (counters.length && 'IntersectionObserver' in window && !reduceMotion) {
-    const co = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseFloat(el.dataset.count);
-        const decimals = (el.dataset.count.split('.')[1] || '').length;
-        const duration = 1800;
-        const start = performance.now();
-        const fmt = (v) => decimals ? v.toFixed(decimals) : Math.floor(v).toLocaleString('de-DE');
-        const tick = (now) => {
-          const p = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = fmt(target * eased);
-          if (p < 1) requestAnimationFrame(tick);
-          else el.textContent = decimals ? target.toFixed(decimals) : target.toLocaleString('de-DE');
-        };
-        requestAnimationFrame(tick);
-        co.unobserve(el);
-      });
-    }, { threshold: 0.4 });
-    counters.forEach(c => co.observe(c));
-  } else {
-    counters.forEach(c => {
-      const v = parseFloat(c.dataset.count);
-      const d = (c.dataset.count.split('.')[1] || '').length;
-      c.textContent = d ? v.toFixed(d) : v.toLocaleString('de-DE');
-    });
-  }
-
-  /* Marquee — seamless duplication */
-  $$('.marquee-track').forEach(track => {
-    const items = Array.from(track.children);
-    items.forEach(item => track.appendChild(item.cloneNode(true)));
-  });
-
-  /* Form: no-backend graceful submit */
-  $$('form[data-form]').forEach(form => {
-    form.addEventListener('submit', (e) => {
+    toggle.addEventListener('click', (e) => {
       e.preventDefault();
-      const status = $('[data-form-status]', form);
-      if (status) {
-        status.hidden = false;
-        status.textContent = 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.';
-      }
-      form.reset();
+      e.stopPropagation();
+      if (drawer.classList.contains('is-open')) close();
+      else open();
+    }, { passive: false });
+
+    // Close on any drawer link
+    $$('a', drawer).forEach(a => a.addEventListener('click', close));
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) close();
     });
-  });
 
-  /* Hero parallax (cheap, scroll-driven) */
-  const heroMedia = $('.hero-media');
-  if (heroMedia && !reduceMotion) {
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      requestAnimationFrame(() => {
-        const y = Math.min(window.scrollY * 0.3, 160);
-        heroMedia.style.transform = `translate3d(0, ${y}px, 0)`;
-        ticking = false;
-      });
-      ticking = true;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }
-
-  /* Magnetic effect on primary buttons */
-  if (!isCoarse && !reduceMotion) {
-    $$('[data-magnetic], .btn-brand.is-lg, .btn-accent.is-lg').forEach(el => {
-      const strength = 12;
-      el.addEventListener('mousemove', (e) => {
-        const r = el.getBoundingClientRect();
-        const x = e.clientX - (r.left + r.width / 2);
-        const y = e.clientY - (r.top + r.height / 2);
-        el.style.transform = `translate(${x * 0.15}px, ${y * 0.25}px)`;
-      });
-      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    // Close on resize to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024 && drawer.classList.contains('is-open')) close();
     });
   }
 
-  /* Tilt effect on showcase cards */
-  if (!isCoarse && !reduceMotion) {
-    $$('[data-tilt], .show-card.is-feature, .show-card.is-side').forEach(card => {
-      const inner = card;
-      card.style.transformStyle = 'preserve-3d';
-      card.style.transition = 'transform .5s var(--ease)';
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const cx = (e.clientX - r.left) / r.width - 0.5;
-        const cy = (e.clientY - r.top) / r.height - 0.5;
-        inner.style.transform = `perspective(1000px) rotateY(${cx * 4}deg) rotateX(${-cy * 3}deg)`;
+  // Run immediately if DOM ready, else on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileNav);
+  } else {
+    setupMobileNav();
+  }
+
+  /* ============================================================
+     Everything else — wrapped so one error doesn't break the page
+     ============================================================ */
+  try {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+
+    /* Year auto-fill */
+    $$('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
+
+    /* Page-enter (opacity only — no transform, see notes) */
+    document.body.classList.add('page-enter');
+
+    /* Sticky nav scroll state */
+    const nav = $('.nav');
+    if (nav && !nav.classList.contains('is-solid')) {
+      const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    /* Scroll progress bar */
+    if (!reduceMotion) {
+      const progress = document.createElement('div');
+      progress.className = 'scroll-progress';
+      progress.innerHTML = '<div class="scroll-progress-bar"></div>';
+      document.body.appendChild(progress);
+      const bar = progress.firstElementChild;
+      const updateBar = () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - doc.clientHeight;
+        bar.style.width = max > 0 ? ((doc.scrollTop / max) * 100) + '%' : '0%';
+      };
+      window.addEventListener('scroll', updateBar, { passive: true });
+      updateBar();
+    }
+
+    /* Grain overlay (desktop+ only, controlled by CSS) */
+    if (!reduceMotion) {
+      const grain = document.createElement('div');
+      grain.className = 'grain';
+      grain.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(grain);
+    }
+
+    /* Custom cursor — desktop fine-pointer only */
+    if (!isCoarse && !reduceMotion && window.matchMedia('(hover: hover)').matches) {
+      const dot = document.createElement('div');
+      const ring = document.createElement('div');
+      dot.className = 'cursor-dot'; ring.className = 'cursor-ring';
+      dot.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
+      document.body.append(dot, ring);
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      const loop = () => {
+        rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+        dot.style.transform  = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+      };
+      document.addEventListener('mousemove', (e) => {
+        mx = e.clientX; my = e.clientY;
+        document.body.classList.add('is-cursor-visible');
       });
-      card.addEventListener('mouseleave', () => { inner.style.transform = ''; });
+      document.addEventListener('mouseleave', () => document.body.classList.remove('is-cursor-visible'));
+      loop();
+      const hoverSel = 'a, button, .show-card, .app, .news-card, .media-frame, [data-cursor-hover]';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest && e.target.closest(hoverSel)) document.body.classList.add('is-cursor-hover');
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest && e.target.closest(hoverSel)) document.body.classList.remove('is-cursor-hover');
+      });
+    }
+
+    /* Split-lines transform (skip on .hero h1 — uses glass instead) */
+    $$('[data-split-lines]').forEach(el => {
+      if (el.dataset.split === '1') return;
+      const lines = el.innerHTML.split(/<br\s*\/?>/i);
+      el.innerHTML = lines.map((line, idx) =>
+        `<span class="mask-line mask-line-${idx + 1}"><span>${line.trim()}</span></span>`
+      ).join('');
+      el.dataset.split = '1';
     });
+
+    /* Reveal observer */
+    const observed = $$('.reveal, .mask-line, .clip-reveal');
+    if ('IntersectionObserver' in window && observed.length) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+      observed.forEach(el => io.observe(el));
+    } else {
+      observed.forEach(el => el.classList.add('is-visible'));
+    }
+
+    /* Hero slider */
+    const slides = $$('.hero-media img');
+    const dots = $$('.hero-dot');
+    if (slides.length > 1) {
+      let i = 0, timer = null;
+      const setActive = (n) => {
+        slides.forEach((s, idx) => s.classList.toggle('is-active', idx === n));
+        dots.forEach((d, idx) => d.classList.toggle('is-active', idx === n));
+        i = n;
+      };
+      const next = () => setActive((i + 1) % slides.length);
+      setActive(0);
+      if (!reduceMotion) timer = setInterval(next, 6500);
+      dots.forEach((d, idx) => d.addEventListener('click', () => {
+        setActive(idx);
+        if (timer) { clearInterval(timer); timer = setInterval(next, 6500); }
+      }));
+    } else if (slides.length === 1) slides[0].classList.add('is-active');
+
+    /* Counter animation */
+    const counters = $$('[data-count]');
+    if (counters.length && 'IntersectionObserver' in window && !reduceMotion) {
+      const co = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseFloat(el.dataset.count);
+          const decimals = (el.dataset.count.split('.')[1] || '').length;
+          const start = performance.now();
+          const fmt = v => decimals ? v.toFixed(decimals) : Math.floor(v).toLocaleString('de-DE');
+          const tick = (now) => {
+            const p = Math.min(1, (now - start) / 1800);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = fmt(target * eased);
+            if (p < 1) requestAnimationFrame(tick);
+            else el.textContent = decimals ? target.toFixed(decimals) : target.toLocaleString('de-DE');
+          };
+          requestAnimationFrame(tick);
+          co.unobserve(el);
+        });
+      }, { threshold: 0.4 });
+      counters.forEach(c => co.observe(c));
+    } else {
+      counters.forEach(c => {
+        const v = parseFloat(c.dataset.count);
+        const d = (c.dataset.count.split('.')[1] || '').length;
+        c.textContent = d ? v.toFixed(d) : v.toLocaleString('de-DE');
+      });
+    }
+
+    /* Marquee — duplicate items for seamless loop */
+    $$('.marquee-track').forEach(track => {
+      const items = Array.from(track.children);
+      items.forEach(item => track.appendChild(item.cloneNode(true)));
+    });
+
+    /* Forms — no-backend graceful submit */
+    $$('form[data-form]').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const status = $('[data-form-status]', form);
+        if (status) {
+          status.hidden = false;
+          status.textContent = 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.';
+        }
+        form.reset();
+      });
+    });
+
+    /* Hero parallax */
+    const heroMedia = $('.hero-media');
+    if (heroMedia && !reduceMotion && !isCoarse) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        requestAnimationFrame(() => {
+          const y = Math.min(window.scrollY * 0.3, 160);
+          heroMedia.style.transform = `translate3d(0, ${y}px, 0)`;
+          ticking = false;
+        });
+        ticking = true;
+      }, { passive: true });
+    }
+
+    /* Magnetic buttons — desktop only */
+    if (!isCoarse && !reduceMotion && window.matchMedia('(hover: hover)').matches) {
+      $$('[data-magnetic], .btn-brand.is-lg, .btn-accent.is-lg').forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+          const r = el.getBoundingClientRect();
+          const x = e.clientX - (r.left + r.width / 2);
+          const y = e.clientY - (r.top + r.height / 2);
+          el.style.transform = `translate(${x * 0.15}px, ${y * 0.25}px)`;
+        });
+        el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      });
+    }
+
+    /* 3D tilt — desktop only */
+    if (!isCoarse && !reduceMotion && window.matchMedia('(hover: hover)').matches) {
+      $$('[data-tilt], .show-card.is-feature, .show-card.is-side').forEach(card => {
+        card.style.transition = 'transform .5s var(--ease)';
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const cx = (e.clientX - r.left) / r.width - 0.5;
+          const cy = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(1000px) rotateY(${cx * 4}deg) rotateX(${-cy * 3}deg)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+      });
+    }
+  } catch (err) {
+    console.error('[LIBA] Non-critical script error:', err);
   }
 })();
