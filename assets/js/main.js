@@ -90,11 +90,13 @@
       toggle.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
     });
-    $$('a', drawer).forEach(a => a.addEventListener('click', () => {
-      drawer.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }));
+    $$('a', drawer)
+      .filter(a => !a.href.startsWith('tel:') && !a.href.startsWith('mailto:'))
+      .forEach(a => a.addEventListener('click', () => {
+        drawer.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }));
   }
 
   /* Convert headlines with [data-split-lines] into line-masked spans */
