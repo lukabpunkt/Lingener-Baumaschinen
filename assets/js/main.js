@@ -182,16 +182,46 @@
     items.forEach(item => track.appendChild(item.cloneNode(true)));
   });
 
-  /* Form: no-backend graceful submit */
+  /* Form: Formspree submission */
   $$('form[data-form]').forEach(form => {
-    form.addEventListener('submit', (e) => {
+    const endpoint = form.dataset.form;
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = $('[data-form-status]', form);
-      if (status) {
-        status.hidden = false;
-        status.textContent = 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.';
+      const btn = form.querySelector('[type="submit"]');
+      const origHTML = btn ? btn.innerHTML : null;
+      if (btn) { btn.disabled = true; btn.innerHTML = 'Wird gesendet&nbsp;…'; }
+
+      /* If no real endpoint is configured yet, show fallback */
+      if (!endpoint || endpoint.includes('YOUR_')) {
+        if (status) { status.hidden = false; status.textContent = 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.'; }
+        form.reset();
+        if (btn) { btn.disabled = false; btn.innerHTML = origHTML; }
+        return;
       }
-      form.reset();
+
+      try {
+        const resp = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (resp.ok) {
+          if (status) { status.hidden = false; status.textContent = 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.'; }
+          form.reset();
+        } else {
+          const data = await resp.json().catch(() => ({}));
+          throw new Error(data.error || 'Serverfehler');
+        }
+      } catch {
+        if (status) {
+          status.hidden = false;
+          status.style.color = '#dc2626';
+          status.textContent = 'Fehler beim Senden. Bitte rufen Sie uns an oder schreiben Sie eine E-Mail.';
+        }
+      } finally {
+        if (btn) { btn.disabled = false; btn.innerHTML = origHTML; }
+      }
     });
   });
 
