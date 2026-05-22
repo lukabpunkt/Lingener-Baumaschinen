@@ -1907,3 +1907,50 @@ p { color: var(--steel-700); text-wrap: pretty; }
 }
 .skip-link:focus { top: 1rem; }
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+
+/* ----------  Print  ---------- */
+@media print {
+  .topbar, .nav, .mobile-nav, .nav-cta, .hero-actions,
+  .cta-block, .gallery-grid, .apps > :nth-child(n+4),
+  .btn, [data-form], .footer-grid, .footer-bottom-links,
+  .page-hero-bg, .quote::before, .process::after { display: none !important; }
+
+  *, *::before, *::after { background: transparent !important; color: #000 !important; box-shadow: none !important; text-shadow: none !important; }
+
+  body { font-size: 10pt; font-family: Georgia, serif; }
+  .container { max-width: 100%; padding: 0; }
+
+  .page-hero { min-height: auto; padding: 1cm 0 .5cm; border-bottom: 2px solid #000; margin-bottom: .8cm; }
+  .page-hero h1 { font-size: 22pt; letter-spacing: -.02em; }
+  .page-hero p { font-size: 11pt; }
+
+  h2 { font-size: 15pt; margin-top: 1cm; }
+  h3 { font-size: 12pt; margin-top: .6cm; }
+  p, li { font-size: 10pt; line-height: 1.55; }
+
+  .spec-table { width: 100%; border-collapse: collapse; margin: .5cm 0; }
+  .spec-table th, .spec-table td { border: 1px solid #bbb; padding: .25cm .4cm; font-size: 9pt; text-align: left; }
+  .spec-table th { background: #eee !important; font-weight: 700; }
+
+  .section, .section-dark { padding: .6cm 0 !important; background: transparent !important; }
+  .split { display: block; }
+  .media-frame { display: none; }
+  .spec-list li { border: none; padding: .2cm 0; }
+  .spec-list li .num { display: none; }
+
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; gap: .4cm; }
+
+  a[href]::after { content: none; }
+
+  main::after {
+    content: "Lingener Baumaschinen GmbH & Co. KG · Diekstrasse 59 · 49809 Lingen (Ems) · Tel. +49 (0) 591 76 314 · info@lingener-baumaschinen.de · www.lingener-baumaschinen.de";
+    display: block;
+    margin-top: 1cm;
+    padding-top: .4cm;
+    border-top: 1px solid #999;
+    font-size: 8pt;
+    color: #555 !important;
+  }
+
+  @page { margin: 1.5cm 1.8cm; }
+}

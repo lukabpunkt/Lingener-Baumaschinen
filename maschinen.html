@@ -180,6 +180,79 @@
     </div>
   </section>
 
+  <section class="section section-dark" id="kalkulator">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="heading">
+          <span class="section-index is-dark" style="color: var(--brand-light);">06 / Kalkulator</span>
+          <h2 class="mt-3">Wie viel Trasse<br><em class="serif-italic">schaffen Sie pro Tag?</em></h2>
+        </div>
+        <div class="aside">
+          <p class="lead">Richtwerte auf Basis von Bodenart und Maschinenmodell. Exakte Werte hängen von Konfiguration, Fahrerprofil und Trassengeometrie ab — sprechen Sie uns an.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-lg, 16px); padding: clamp(1.5rem, 4vw, 2.5rem); max-width: 720px;">
+        <div class="grid grid-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+          <div class="field">
+            <label for="k-boden" style="color: var(--canvas); font-weight: 500;">Bodenart</label>
+            <select id="k-boden" style="margin-top: .5rem; background: var(--steel-900); color: var(--canvas); border-color: rgba(255,255,255,.12);">
+              <option value="1000">Sand / Lockerboden</option>
+              <option value="700" selected>Lehmiger Boden</option>
+              <option value="400">Kompakter Lehm / Mergel</option>
+              <option value="200">Halbfels / Weichgestein</option>
+              <option value="80">Hartgestein / Fels</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="k-modell" style="color: var(--canvas); font-weight: 500;">Maschinenmodell</label>
+            <select id="k-modell" style="margin-top: .5rem; background: var(--steel-900); color: var(--canvas); border-color: rgba(255,255,255,.12);">
+              <option value="1.0">GM 4 Raupe / Allrad</option>
+              <option value="0.8">GM 180 AF (Schlepperanbau)</option>
+              <option value="0.6">GM 140 AFH (Baggeranbau)</option>
+              <option value="0.5">GM 450 H (Tiefenfräse)</option>
+              <option value="0.15">GM 6 ASR (Felsfräse)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="k-result" style="border-top: 1px solid rgba(255,255,255,.1); padding-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; text-align: center;">
+          <div>
+            <div style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--brand-light); letter-spacing: -.04em;" id="k-day">700</div>
+            <div style="font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--steel-400); margin-top: .25rem;">Meter / Tag</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--canvas); letter-spacing: -.04em;" id="k-week">3.500</div>
+            <div style="font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--steel-400); margin-top: .25rem;">Meter / Woche</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--canvas); letter-spacing: -.04em;" id="k-month">14.000</div>
+            <div style="font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--steel-400); margin-top: .25rem;">Meter / Monat</div>
+          </div>
+        </div>
+        <p style="color: var(--steel-500); font-size: .8rem; margin-top: 1rem; font-family: var(--font-mono); letter-spacing: .02em;">Richtwert · Abweichungen ±30 % je nach Konfiguration und Einsatzbedingungen</p>
+      </div>
+
+      <script>
+        (function(){
+          var boden = document.getElementById('k-boden');
+          var modell = document.getElementById('k-modell');
+          function calc(){
+            var base = parseInt(boden.value);
+            var factor = parseFloat(modell.value);
+            var day = Math.round(base * factor / 50) * 50;
+            document.getElementById('k-day').textContent = day.toLocaleString('de');
+            document.getElementById('k-week').textContent = (day * 5).toLocaleString('de');
+            document.getElementById('k-month').textContent = (day * 20).toLocaleString('de');
+          }
+          boden.addEventListener('change', calc);
+          modell.addEventListener('change', calc);
+          calc();
+        })();
+      </script>
+    </div>
+  </section>
+
   <section class="section" style="padding-top: 0;">
     <div class="container">
       <div class="cta-block reveal">
@@ -220,9 +293,10 @@
       </ul></div>
       <div><h4>Service</h4><ul>
         <li><a href="mieten.html">Mieten</a></li>
+        <li><a href="gebrauchtmaschinen.html">Gebrauchtmaschinen</a></li>
+        <li><a href="referenzen.html">Referenzen</a></li>
         <li><a href="kontakt.html">Ersatzteile</a></li>
         <li><a href="kontakt.html">Schulungen</a></li>
-        <li><a href="kontakt.html">Händlersuche</a></li>
       </ul></div>
       <div><h4>Kontakt</h4><ul>
         <li><a href="tel:+4959176314">+49 (0) 591 76 314</a></li>

@@ -7,6 +7,9 @@
   <url><loc>https://www.lingener-baumaschinen.de/mieten.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
   <url><loc>https://www.lingener-baumaschinen.de/unternehmen.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.lingener-baumaschinen.de/kontakt.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.lingener-baumaschinen.de/gebrauchtmaschinen.html</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://www.lingener-baumaschinen.de/referenzen.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.lingener-baumaschinen.de/en/</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://www.lingener-baumaschinen.de/impressum.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://www.lingener-baumaschinen.de/datenschutz.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://www.lingener-baumaschinen.de/agb.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
