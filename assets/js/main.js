@@ -58,8 +58,11 @@
     let mx = 0, my = 0, rx = 0, ry = 0;
     let raf;
     const loop = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
+      const dx = mx - rx, dy = my - ry;
+      rx += dx * 0.26;
+      ry += dy * 0.26;
+      if (Math.abs(dx) < 0.5) rx = mx;
+      if (Math.abs(dy) < 0.5) ry = my;
       ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
       dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
       raf = requestAnimationFrame(loop);
