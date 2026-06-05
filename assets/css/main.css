@@ -632,6 +632,10 @@ p { color: var(--steel-700); text-wrap: pretty; }
   margin-top: 1.5rem;
   align-self: flex-start;
 }
+.mobile-nav a.btn-primary,
+.mobile-nav a.btn-brand { color: var(--canvas); }
+.mobile-nav a.btn-accent { color: var(--ink); }
+.mobile-nav a.btn-ghost { color: var(--ink); }
 .mobile-nav-meta {
   margin-top: 2rem; padding-top: 2rem;
   border-top: 1px solid var(--line);
