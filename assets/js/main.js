@@ -86,28 +86,15 @@
   const toggle = $('.nav-toggle');
   const drawer = $('.mobile-nav');
   if (toggle && drawer) {
-    let scrollY = 0;
-    const lockBody = () => {
-      scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-    };
-    const unlockBody = () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      window.scrollTo(0, scrollY);
-    };
     const closeDrawer = () => {
       drawer.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
-      unlockBody();
+      document.documentElement.classList.remove('nav-open');
     };
     toggle.addEventListener('click', () => {
       const open = drawer.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(open));
-      open ? lockBody() : unlockBody();
+      document.documentElement.classList.toggle('nav-open', open);
     });
     $$('a', drawer)
       .filter(a => !a.href.startsWith('tel:') && !a.href.startsWith('mailto:'))

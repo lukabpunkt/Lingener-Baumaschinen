@@ -611,6 +611,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   pointer-events: auto;
   transform: translateY(0);
 }
+html.nav-open { overflow: hidden; }
 .mobile-nav a {
   padding: 1rem 0;
   font-size: 1.5rem;
