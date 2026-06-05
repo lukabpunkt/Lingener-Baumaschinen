@@ -55,8 +55,7 @@
     dot.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
     document.body.append(dot, ring);
 
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    let raf;
+    let mx = 0, my = 0, rx = 0, ry = 0, raf = null;
     const loop = () => {
       const dx = mx - rx, dy = my - ry;
       rx += dx * 0.26;
@@ -65,15 +64,14 @@
       if (Math.abs(dy) < 0.5) ry = my;
       ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
       dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-      raf = requestAnimationFrame(loop);
+      raf = (rx !== mx || ry !== my) ? requestAnimationFrame(loop) : null;
     };
-    const onMove = (e) => {
+    document.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
       document.body.classList.add('is-cursor-visible');
-    };
-    document.addEventListener('mousemove', onMove);
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
     document.addEventListener('mouseleave', () => document.body.classList.remove('is-cursor-visible'));
-    loop();
 
     const hoverSel = 'a, button, .show-card, .app, .news-card, .media-frame, [data-cursor-hover]';
     document.addEventListener('mouseover', (e) => {
@@ -122,7 +120,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
     observed.forEach(el => io.observe(el));
   } else {
     observed.forEach(el => el.classList.add('is-visible'));
@@ -247,30 +245,44 @@
   /* Magnetic effect on primary buttons */
   if (!isCoarse && !reduceMotion) {
     $$('[data-magnetic], .btn-brand.is-lg, .btn-accent.is-lg').forEach(el => {
-      const strength = 12;
+      let ex = 0, ey = 0, mRaf = null;
       el.addEventListener('mousemove', (e) => {
-        const r = el.getBoundingClientRect();
-        const x = e.clientX - (r.left + r.width / 2);
-        const y = e.clientY - (r.top + r.height / 2);
-        el.style.transform = `translate(${x * 0.15}px, ${y * 0.25}px)`;
+        ex = e.clientX; ey = e.clientY;
+        if (!mRaf) mRaf = requestAnimationFrame(() => {
+          const r = el.getBoundingClientRect();
+          const x = ex - (r.left + r.width / 2);
+          const y = ey - (r.top + r.height / 2);
+          el.style.transform = `translate(${x * 0.15}px, ${y * 0.25}px)`;
+          mRaf = null;
+        });
       });
-      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      el.addEventListener('mouseleave', () => {
+        if (mRaf) { cancelAnimationFrame(mRaf); mRaf = null; }
+        el.style.transform = '';
+      });
     });
   }
 
   /* Tilt effect on showcase cards */
   if (!isCoarse && !reduceMotion) {
     $$('[data-tilt], .show-card.is-feature, .show-card.is-side').forEach(card => {
-      const inner = card;
       card.style.transformStyle = 'preserve-3d';
       card.style.transition = 'transform .5s var(--ease)';
+      let ex = 0, ey = 0, tRaf = null;
       card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const cx = (e.clientX - r.left) / r.width - 0.5;
-        const cy = (e.clientY - r.top) / r.height - 0.5;
-        inner.style.transform = `perspective(1000px) rotateY(${cx * 4}deg) rotateX(${-cy * 3}deg)`;
+        ex = e.clientX; ey = e.clientY;
+        if (!tRaf) tRaf = requestAnimationFrame(() => {
+          const r = card.getBoundingClientRect();
+          const cx = (ex - r.left) / r.width - 0.5;
+          const cy = (ey - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(1000px) rotateY(${cx * 4}deg) rotateX(${-cy * 3}deg)`;
+          tRaf = null;
+        });
       });
-      card.addEventListener('mouseleave', () => { inner.style.transform = ''; });
+      card.addEventListener('mouseleave', () => {
+        if (tRaf) { cancelAnimationFrame(tRaf); tRaf = null; }
+        card.style.transform = '';
+      });
     });
   }
 })();
