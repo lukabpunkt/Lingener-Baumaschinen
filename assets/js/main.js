@@ -86,18 +86,32 @@
   const toggle = $('.nav-toggle');
   const drawer = $('.mobile-nav');
   if (toggle && drawer) {
+    let scrollY = 0;
+    const lockBody = () => {
+      scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    };
+    const unlockBody = () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+    };
+    const closeDrawer = () => {
+      drawer.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      unlockBody();
+    };
     toggle.addEventListener('click', () => {
       const open = drawer.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(open));
-      document.body.style.overflow = open ? 'hidden' : '';
+      open ? lockBody() : unlockBody();
     });
     $$('a', drawer)
       .filter(a => !a.href.startsWith('tel:') && !a.href.startsWith('mailto:'))
-      .forEach(a => a.addEventListener('click', () => {
-        drawer.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }));
+      .forEach(a => a.addEventListener('click', closeDrawer));
   }
 
   /* Convert headlines with [data-split-lines] into line-masked spans */

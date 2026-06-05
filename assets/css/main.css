@@ -586,21 +586,31 @@ p { color: var(--steel-700); text-wrap: pretty; }
 /* Mobile drawer */
 .mobile-nav {
   position: fixed;
-  inset: calc(var(--nav-h) + var(--topbar-h)) 0 0 0;
+  top: calc(var(--nav-h) + var(--topbar-h));
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: var(--canvas);
-  z-index: 99;
+  z-index: 102;
   padding: 1.5rem var(--gutter) 2.5rem;
   display: flex;
   flex-direction: column;
   gap: .25rem;
-  transform: translateY(-100%);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: transform var(--dur) var(--ease), opacity var(--dur);
+  transform: translateY(-10px);
+  transition: opacity var(--dur) var(--ease), visibility var(--dur), transform var(--dur) var(--ease);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
-.mobile-nav.is-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.mobile-nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
 .mobile-nav a {
   padding: 1rem 0;
   font-size: 1.5rem;
