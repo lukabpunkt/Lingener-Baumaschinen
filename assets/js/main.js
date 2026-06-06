@@ -57,9 +57,10 @@
 
     let mx = 0, my = 0, raf = null;
     const loop = () => {
-      const t = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-      ring.style.transform = t;
-      dot.style.transform  = t;
+      ring.style.left = mx + 'px';
+      ring.style.top  = my + 'px';
+      dot.style.left  = mx + 'px';
+      dot.style.top   = my + 'px';
       raf = null;
     };
     document.addEventListener('mousemove', (e) => {

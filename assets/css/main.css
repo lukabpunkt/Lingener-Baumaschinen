@@ -1739,32 +1739,32 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .cursor-dot, .cursor-ring { display: none; }
 @media (hover: hover) and (pointer: fine) {
   .cursor-dot {
-    position: fixed; top: 0; left: 0;
+    position: fixed;
     width: 8px; height: 8px;
     border-radius: 50%;
     background: var(--brand);
     pointer-events: none;
     z-index: 9999;
+    /* left/top gesetzt per JS — transform nur fürs Zentrieren */
     transform: translate(-50%, -50%);
     transition: width var(--dur) var(--ease), height var(--dur) var(--ease), background var(--dur) var(--ease), opacity var(--dur);
     opacity: 0;
     mix-blend-mode: difference;
     display: block;
-    will-change: transform;
   }
   .cursor-ring {
-    position: fixed; top: 0; left: 0;
+    position: fixed;
     width: 40px; height: 40px;
     border: 1.5px solid var(--brand);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
+    /* left/top gesetzt per JS — transform nur fürs Zentrieren */
     transform: translate(-50%, -50%);
     transition: width .35s var(--ease), height .35s var(--ease), border-color .35s var(--ease), opacity var(--dur);
     opacity: 0;
     mix-blend-mode: difference;
     display: block;
-    will-change: transform;
   }
   .is-cursor-visible .cursor-dot, .is-cursor-visible .cursor-ring { opacity: .7; }
   .is-cursor-hover .cursor-ring { width: 64px; height: 64px; border-color: var(--brand-light); }
