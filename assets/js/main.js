@@ -402,6 +402,8 @@
       rentAmt.classList.toggle('is-winner', rentWins);
       ownAmt.classList.toggle('is-winner', !rentWins);
 
+      var machLabel = selMach.options[selMach.selectedIndex].text.split(' — ')[0].trim();
+
       if (rentWins) {
         verdict.className = 'roi-verdict is-rent';
         verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> ist Mieten aktuell günstiger. Ab <strong>' + breakEven + ' Tagen/Jahr</strong> rechnet sich der Kauf.</span>'
@@ -409,7 +411,7 @@
       } else {
         verdict.className = 'roi-verdict is-buy';
         verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> lohnt sich der <strong>Kauf bereits heute</strong> — Sie sparen ' + fmt(rentYear - ownYear) + ' jährlich.</span>'
-          + '<a href="kontakt.html?modell=Kaufanfrage+Grabenfr%C3%A4se" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
+          + '<a href="kontakt.html?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
       }
     }
 
