@@ -87,6 +87,85 @@
     </div>
   </section>
 
+  <!-- Maschinenberater -->
+  <section class="wizard-section" style="padding: 3rem 0;">
+    <div class="container">
+      <div class="wizard" id="maschinenwizard">
+        <div style="margin-bottom: 1.75rem;">
+          <span class="eyebrow" style="color: var(--brand-light); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;">Entscheidungshilfe</span>
+          <h2 class="wizard-headline mt-2" style="font-size: clamp(1.35rem,3vw,1.75rem);">Welche Fräse passt<br><em class="serif-italic">zu Ihrem Projekt?</em></h2>
+          <p class="wizard-sub-head">Zwei Fragen — direkte Empfehlung.</p>
+        </div>
+        <div class="wizard-progress" id="wizard-progress" style="margin-bottom:0;">
+          <div class="wizard-pdot is-active"></div>
+          <div class="wizard-pdot"></div>
+        </div>
+        <!-- Schritt 1 -->
+        <div class="wizard-step is-active" id="wstep-1" style="margin-top:1.5rem;">
+          <p class="wizard-q">Welches Trägergerät haben Sie?</p>
+          <p class="wizard-hint">Wählen Sie das Gerät, an das die Fräse angebaut werden soll.</p>
+          <div class="wizard-opts">
+            <button class="wizard-opt" data-key="bagger" type="button">
+              <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="2" y="14" width="20" height="6" rx="1"/><path d="M6 14V9l4-5h8v10"/><path d="M14 9H9"/></svg></span>
+              <span class="wizard-opt-title">Bagger</span>
+              <span class="wizard-opt-desc">Mobil- oder Kettenbagger ab 6 t</span>
+            </button>
+            <button class="wizard-opt" data-key="traktor" type="button">
+              <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="2"/><path d="M10 17h5V9l-3-4H4v12h3"/></svg></span>
+              <span class="wizard-opt-title">Traktor / Schlepper</span>
+              <span class="wizard-opt-desc">Heck- oder Frontanbau</span>
+            </button>
+            <button class="wizard-opt" data-key="self" type="button">
+              <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="3" y="8" width="18" height="9" rx="2"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/><path d="M8 8V5h8v3"/></svg></span>
+              <span class="wizard-opt-title">Kein (Selbstfahrer)</span>
+              <span class="wizard-opt-desc">Eigenständige Maschine</span>
+            </button>
+            <button class="wizard-opt" data-key="tiefe" type="button">
+              <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></span>
+              <span class="wizard-opt-title">Tiefenfräse</span>
+              <span class="wizard-opt-desc">Frästiefe &gt; 1.500 mm</span>
+            </button>
+          </div>
+        </div>
+        <!-- Schritt 2 -->
+        <div class="wizard-step" id="wstep-2" style="margin-top:1.5rem;">
+          <button class="wizard-back" id="wizard-back" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Zurück
+          </button>
+          <p class="wizard-q">Welche Frästiefe benötigen Sie?</p>
+          <p class="wizard-hint">Maximale Tiefe des geplanten Grabens.</p>
+          <div class="wizard-opts">
+            <button class="wizard-opt" data-key="s" type="button">
+              <span class="wizard-opt-title">bis 600 mm</span>
+              <span class="wizard-opt-desc">Glasfaser, Erdkabel, Kleinrohr</span>
+            </button>
+            <button class="wizard-opt" data-key="m" type="button">
+              <span class="wizard-opt-title">bis 1.200 mm</span>
+              <span class="wizard-opt-desc">Pipeline DN 100–200, Drainage</span>
+            </button>
+            <button class="wizard-opt" data-key="d" type="button">
+              <span class="wizard-opt-title">bis 2.000 mm</span>
+              <span class="wizard-opt-desc">Pipeline DN 300, Fernwärme</span>
+            </button>
+            <button class="wizard-opt" data-key="x" type="button">
+              <span class="wizard-opt-title">über 2.000 mm</span>
+              <span class="wizard-opt-desc">Sondertiefbau, Großrohr</span>
+            </button>
+          </div>
+        </div>
+        <!-- Ergebnis -->
+        <div class="wizard-result" id="wizard-result" style="margin-top:1.5rem;">
+          <button class="wizard-back" id="wizard-back-result" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Neue Auswahl
+          </button>
+          <p class="wizard-q">Empfehlung für Ihr Projekt</p>
+          <div class="wizard-rcards mt-3" id="wizard-cards"></div>
+          <button class="wizard-restart" type="button" onclick="(function(){var r=document.getElementById('wizard-result'),s=document.getElementById('wstep-1');r.classList.remove('is-active');s.classList.add('is-active');document.querySelectorAll('.wizard-pdot').forEach(function(d,i){d.classList.toggle('is-active',i===0);d.classList.remove('is-done');});})()">↺ Von vorne beginnen</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
 
@@ -114,7 +193,7 @@
               <tr><th>Anbau</th><td>Schnellwechsler-kompatibel</td></tr>
             </tbody>
           </table>
-          <a href="kontakt.html" class="btn-link mt-3">Baggeranbau-Fräse anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="kontakt.html?modell=Baggeranbau-Grabenfr%C3%A4se" class="btn-link mt-3">Baggeranbau-Fräse anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div>
         <div class="media-frame">
           <img loading="lazy" src="assets/images/products/gm-140-afh-500.jpg" alt="LIBA GM 140 AFH Grabenfräse für Bagger">
@@ -150,7 +229,7 @@
           </table>
           <div style="display:flex; gap:.85rem; flex-wrap:wrap; margin-top:1.25rem; align-items:center;">
             <a href="maschinen/gm-180-af.html" class="btn-link">Datenblatt GM 180 AF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-            <a href="kontakt.html" class="btn-link">Schlepperanbau anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            <a href="kontakt.html?modell=Schlepperanbau-Grabenfr%C3%A4se" class="btn-link">Schlepperanbau anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
           </div>
         </div>
         <div class="media-frame">
@@ -219,7 +298,7 @@
               <tr><th>Einsatz</th><td>Fernwärme, Entwässerung, Sondertiefbau</td></tr>
             </tbody>
           </table>
-          <a href="kontakt.html" class="btn-link mt-3">Tiefenfräse anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="kontakt.html?modell=Tiefen-Grabenfr%C3%A4se" class="btn-link mt-3">Tiefenfräse anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div>
         <div class="media-frame">
           <img loading="lazy" src="assets/images/products/gm-600-r-detail.jpg" alt="LIBA Tiefenfräse Spezialmaschine">
@@ -253,7 +332,7 @@
               <tr><th>Einsatz</th><td>Erdkabel, Drainage, Bewässerung</td></tr>
             </tbody>
           </table>
-          <a href="kontakt.html" class="btn-link mt-3">Kabelpflug anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="kontakt.html?modell=Kettengraben-Pflug" class="btn-link mt-3">Kabelpflug anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div>
         <div class="media-frame">
           <img loading="lazy" src="assets/images/products/gm-160-af.jpg" alt="LIBA Anbaupflug Kabelpflug">

@@ -250,6 +250,174 @@
       });
     });
   }
+  /* URL param → Kontaktformular vorausfüllen */
+  (function () {
+    var p = new URLSearchParams(window.location.search).get('modell');
+    if (!p) return;
+    var msg = document.getElementById('k-nachricht');
+    var subj = document.getElementById('k-betreff');
+    if (msg && !msg.value) msg.value = 'Ich interessiere mich für: ' + decodeURIComponent(p) + '\n\nBitte senden Sie mir ein Angebot.';
+    if (subj) { for (var i = 0; i < subj.options.length; i++) { if (subj.options[i].value === 'Kaufanfrage' || subj.options[i].text === 'Kaufanfrage') { subj.selectedIndex = i; break; } } }
+  })();
+
+  /* Maschinenberater-Wizard */
+  (function () {
+    var wiz = document.getElementById('maschinenwizard');
+    if (!wiz) return;
+
+    var step1 = document.getElementById('wstep-1');
+    var step2 = document.getElementById('wstep-2');
+    var result = document.getElementById('wizard-result');
+    var cards  = document.getElementById('wizard-cards');
+    var dots   = $$('.wizard-pdot', wiz);
+    var sel    = {};
+
+    var DB = {
+      bagger: {
+        s: [{ tag:'Baggeranbau', name:'GM 140 H', desc:'Bis 900 mm Frästiefe, ab 6 t Bagger. Ideal für Erdkabel und kommunalen Tiefbau.', modell:'GM+140+H' },
+            { tag:'Baggeranbau', name:'GM 140 AFH-500', desc:'Bis 500 mm, Träger ab 8 t. Rohrleitungs- und Kabelbau.', modell:'GM+140+AFH-500' }],
+        m: [{ tag:'Baggeranbau', name:'GM 140 AFH-500', desc:'Bis 500 mm Frästiefe, Träger ab 8 t.', modell:'GM+140+AFH-500' },
+            { tag:'Baggeranbau', name:'GM 140 AFH-600', desc:'Bis 600 mm, Pipeline DN 100–200, Träger ab 12 t.', modell:'GM+140+AFH-600' }],
+        d: [{ tag:'Baggeranbau', name:'GM 140 AFH-600', desc:'Bis 600 mm für Pipeline-Verlegung DN 100–200, Träger ab 12 t.', modell:'GM+140+AFH-600' },
+            { tag:'Beratung', name:'Sonderanfertigung', desc:'Für Frästiefen > 600 mm am Bagger sprechen Sie uns direkt an.', modell:'Baggeranbau-Tiefenfr%C3%A4se' }],
+        x: [{ tag:'Tiefenfräse', name:'GM 300 H / GM 300 HF', desc:'Bis 2.000 mm Frästiefe für Sondertiefbau und Fernwärme.', modell:'GM+300+H' },
+            { tag:'Tiefenfräse', name:'GM 450 H', desc:'Maximale Frästiefe bis 3.000 mm — für anspruchsvollsten Sondertiefbau.', modell:'GM+450+H' }]
+      },
+      traktor: {
+        s: [{ tag:'Schlepperanbau', name:'GM 1 AF / GM 1 AS', desc:'Kompakt für Erdkabel und Schmalgräben, bis 400 mm Frästiefe.', modell:'GM+1+AF' },
+            { tag:'Schlepperanbau', name:'GM 140 AF / GM 140 AS', desc:'Mittlere Klasse, Frästiefe bis 1.200 mm, Drainage und Kabelbau.', modell:'GM+140+AF' }],
+        m: [{ tag:'Schlepperanbau', name:'GM 160 AF / GM 160 AS', desc:'Bis 1.200 mm Frästiefe, Fräsbreite bis 300 mm.', modell:'GM+160+AF' },
+            { tag:'Schlepperanbau', name:'GM 180 AF', desc:'High-Performance bis 1.800 mm, Pipeline DN 300 und Backbone-Glasfaser.', modell:'GM+180+AF' }],
+        d: [{ tag:'Schlepperanbau', name:'GM 180 AF', desc:'Bis 1.800 mm Frästiefe — das leistungsstärkste Schleppergerät im Portfolio.', modell:'GM+180+AF' },
+            { tag:'Schlepperanbau', name:'GM 600 R', desc:'Bis 1.800 mm, speziell für Rohrleitungs- und Pipeline-Projekte.', modell:'GM+600+R' }],
+        x: [{ tag:'Tiefenfräse', name:'GM 300 H / GM 450 H', desc:'Über 2.000 mm Frästiefe — Unimog-Adaptionen und Sonderanbauten auf Anfrage.', modell:'Tiefenf%C3%A4se' }]
+      },
+      self: {
+        s: [{ tag:'Selbstfahrer', name:'GM 4 Raupe', desc:'Bis 650 mm, Tagesleistung bis 1.000 m — ideal für FTTH-Glasfaser.', modell:'GM+4+Raupe' },
+            { tag:'Selbstfahrer', name:'GM 4 Allrad', desc:'Allrad für Drainage, Solarpark und Sportplatz. Minimale Geländeschäden.', modell:'GM+4+Allrad' }],
+        m: [{ tag:'Selbstfahrer', name:'GM 6 ASR', desc:'Felsfräse bis 800 mm in Hartgestein. Wo Bagger und Trennsäge nicht wirtschaftlich sind.', modell:'GM+6+ASR' }],
+        d: [{ tag:'Selbstfahrer', name:'GM 6 ASR', desc:'Bis 800 mm in Kalkstein und Schiefer — das stärkste Selbstfahrer-Modell.', modell:'GM+6+ASR' }],
+        x: [{ tag:'Beratung', name:'Individuelle Lösung', desc:'Für Tiefen über 2.000 mm ohne Trägergerät beraten wir Sie direkt.', modell:'Selbstfahrer-Tiefenbau' }]
+      },
+      tiefe: {
+        s: [{ tag:'Tiefenfräse', name:'GM 250 H / GM 300 H', desc:'Frästiefen bis 2.000 mm für Sondertiefbau und Fernwärme.', modell:'GM+300+H' }],
+        m: [{ tag:'Tiefenfräse', name:'GM 300 H / GM 300 HF', desc:'Bis 2.000 mm Frästiefe, Fräsbreite bis 350 mm für Fernwärme.', modell:'GM+300+HF' }],
+        d: [{ tag:'Tiefenfräse', name:'GM 300 HF / GM 450 H', desc:'Bis 2.500 mm — Fernwärme, Entwässerungssysteme, Sonderprojekte.', modell:'GM+450+H' }],
+        x: [{ tag:'Tiefenfräse', name:'GM 450 H', desc:'Maximale Frästiefe bis 3.000 mm — das tiefste Gerät im LIBA-Portfolio.', modell:'GM+450+H' }]
+      }
+    };
+
+    function showDots(active, done) {
+      dots.forEach(function (d, i) {
+        d.classList.toggle('is-active', i === active);
+        d.classList.toggle('is-done',   i < done);
+      });
+    }
+
+    function showStep2() {
+      step1.classList.remove('is-active');
+      step2.classList.add('is-active');
+      showDots(1, 1);
+    }
+
+    function showResult(key1, key2) {
+      step2.classList.remove('is-active');
+      result.classList.add('is-active');
+      showDots(-1, 2);
+      var recs = (DB[key1] && DB[key1][key2]) || [];
+      cards.innerHTML = recs.map(function (r) {
+        return '<div class="wizard-rcard">'
+          + '<span class="wizard-rcard-tag">' + r.tag + '</span>'
+          + '<div class="wizard-rcard-name">' + r.name + '</div>'
+          + '<div class="wizard-rcard-desc">' + r.desc + '</div>'
+          + '<a href="kontakt.html?modell=' + r.modell + '" class="wizard-rcard-cta">Angebot anfragen'
+          + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>'
+          + '</div>';
+      }).join('');
+    }
+
+    $$('.wizard-opt', step1).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        sel.key1 = btn.dataset.key;
+        if (sel.key1 === 'tiefe') { showResult('tiefe', 'm'); } else { showStep2(); }
+      });
+    });
+
+    $$('.wizard-opt', step2).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        sel.key2 = btn.dataset.key;
+        showResult(sel.key1, sel.key2);
+      });
+    });
+
+    var backBtn = document.getElementById('wizard-back');
+    if (backBtn) backBtn.addEventListener('click', function () {
+      step2.classList.remove('is-active');
+      step1.classList.add('is-active');
+      showDots(0, 0);
+    });
+
+    var backResult = document.getElementById('wizard-back-result');
+    if (backResult) backResult.addEventListener('click', function () {
+      result.classList.remove('is-active');
+      if (sel.key1 === 'tiefe') { step1.classList.add('is-active'); showDots(0,0); }
+      else { step2.classList.add('is-active'); showDots(1,1); }
+    });
+  })();
+
+  /* ROI Rechner */
+  (function () {
+    var slider  = document.getElementById('roi-days');
+    var selMach = document.getElementById('roi-machine');
+    var daysVal = document.getElementById('roi-days-val');
+    var rentAmt = document.getElementById('roi-rent-amount');
+    var ownAmt  = document.getElementById('roi-own-amount');
+    var rentSub = document.getElementById('roi-rent-sub');
+    var verdict = document.getElementById('roi-verdict');
+    if (!slider || !selMach) return;
+
+    var MAINT = 4000;
+    var LIFE  = 15;
+
+    function fmt(n) {
+      return n.toLocaleString('de-DE') + ' €';
+    }
+
+    function calc() {
+      var days  = +slider.value;
+      var parts = selMach.value.split(',');
+      var price = +parts[0];
+      var rate  = +parts[1];
+
+      var rentYear = days * rate;
+      var ownYear  = Math.round(price / LIFE + MAINT);
+      var breakEven = Math.ceil((price / LIFE + MAINT) / rate);
+
+      daysVal.textContent = days + ' Tage / Jahr';
+      rentAmt.textContent = fmt(rentYear);
+      ownAmt.textContent  = fmt(ownYear);
+      rentSub.textContent = days + ' Tage × ' + rate.toLocaleString('de-DE') + ' €/Tag';
+
+      var rentWins = rentYear < ownYear;
+      rentAmt.classList.toggle('is-winner', rentWins);
+      ownAmt.classList.toggle('is-winner', !rentWins);
+
+      if (rentWins) {
+        verdict.className = 'roi-verdict is-rent';
+        verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> ist Mieten aktuell günstiger. Ab <strong>' + breakEven + ' Tagen/Jahr</strong> rechnet sich der Kauf.</span>'
+          + '<a href="#mietanfrage" class="btn btn-ghost is-sm">Mietangebot anfragen</a>';
+      } else {
+        verdict.className = 'roi-verdict is-buy';
+        verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> lohnt sich der <strong>Kauf bereits heute</strong> — Sie sparen ' + fmt(rentYear - ownYear) + ' jährlich.</span>'
+          + '<a href="kontakt.html?modell=Kaufanfrage+Grabenfr%C3%A4se" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
+      }
+    }
+
+    slider.addEventListener('input', calc);
+    selMach.addEventListener('change', calc);
+    calc();
+  })();
+
   /* Cookie Consent + GA4 Consent Mode v2 */
   var CONSENT_KEY = 'liba_consent_v1';
   function syncGA4(granted) {
