@@ -583,35 +583,44 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .nav-toggle[aria-expanded="true"] span::after  { top: 0; transform: rotate(-45deg); }
 @media (min-width: 1024px) { .nav-toggle { display: none; } }
 
-/* Mobile drawer */
+/* Mobile drawer — display:none approach, kein Transition-Bug auf iOS */
 .mobile-nav {
   position: fixed;
-  top: calc(var(--nav-h) + var(--topbar-h));
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: var(--canvas);
-  z-index: 102;
-  padding: 1.5rem var(--gutter) 2.5rem;
-  display: flex;
+  z-index: 9000;
+  /* padding-top schiebt Inhalt unter Nav-Bar */
+  padding-top: calc(var(--nav-h) + var(--topbar-h) + 1rem);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  padding-bottom: 3rem;
   flex-direction: column;
   gap: .25rem;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(-10px);
-  transition: opacity var(--dur) var(--ease), visibility var(--dur), transform var(--dur) var(--ease);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+  /* Standardmäßig verborgen — display:none ist auf iOS zuverlässiger */
+  display: none;
 }
 .mobile-nav.is-open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0);
+  display: flex;
+  animation: mobileNavIn 300ms cubic-bezier(.22, 1, .36, 1) both;
 }
-html.nav-open { overflow: hidden; }
+@keyframes mobileNavIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+/* Nav-Header liegt immer über dem Drawer */
+.nav { z-index: 9500; }
+.topbar { z-index: 9600; }
+/* Desktop: Drawer niemals anzeigen */
+@media (min-width: 1024px) {
+  .mobile-nav,
+  .mobile-nav.is-open { display: none !important; }
+}
 .mobile-nav a {
   padding: 1rem 0;
   font-size: 1.5rem;
@@ -636,7 +645,7 @@ html.nav-open { overflow: hidden; }
 .mobile-nav a.btn-primary,
 .mobile-nav a.btn-brand { color: var(--canvas); }
 .mobile-nav a.btn-accent { color: var(--ink); }
-.mobile-nav a.btn-ghost { color: var(--ink); }
+.mobile-nav a.btn-ghost  { color: var(--ink); }
 .mobile-nav-meta {
   margin-top: 2rem; padding-top: 2rem;
   border-top: 1px solid var(--line);

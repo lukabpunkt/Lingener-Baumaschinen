@@ -86,19 +86,18 @@
   const toggle = $('.nav-toggle');
   const drawer = $('.mobile-nav');
   if (toggle && drawer) {
-    const closeDrawer = () => {
+    const close = () => {
       drawer.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
-      document.documentElement.classList.remove('nav-open');
     };
     toggle.addEventListener('click', () => {
       const open = drawer.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(open));
-      document.documentElement.classList.toggle('nav-open', open);
     });
+    /* Schließen bei Link-Klick (außer tel/mailto) */
     $$('a', drawer)
       .filter(a => !a.href.startsWith('tel:') && !a.href.startsWith('mailto:'))
-      .forEach(a => a.addEventListener('click', closeDrawer));
+      .forEach(a => a.addEventListener('click', close));
   }
 
   /* Convert headlines with [data-split-lines] into line-masked spans */
