@@ -154,19 +154,19 @@
         </div>
       </div>
 
-      <div class="roi-inputs reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem;">
+      <div class="roi-inputs reveal">
         <div class="roi-field">
-          <label for="roi-days" style="display:block;font-weight:600;margin-bottom:.5rem;">Einsatztage pro Jahr</label>
-          <input type="range" id="roi-days" min="5" max="180" value="60" class="roi-slider" style="width:100%;accent-color:var(--brand);">
-          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-top:.35rem;opacity:.6;">
+          <label for="roi-days">Einsatztage pro Jahr</label>
+          <input type="range" id="roi-days" min="5" max="180" value="60" class="roi-slider">
+          <div class="roi-days-row">
             <span>5 Tage</span>
-            <strong id="roi-days-val" style="color:var(--brand);">60 Tage / Jahr</strong>
+            <strong id="roi-days-val">60 Tage / Jahr</strong>
             <span>180 Tage</span>
           </div>
         </div>
         <div class="roi-field">
-          <label for="roi-machine" style="display:block;font-weight:600;margin-bottom:.5rem;">Maschinentyp</label>
-          <select id="roi-machine" class="roi-select" style="width:100%;padding:.65rem .9rem;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,.15);background:var(--canvas);font-size:.95rem;">
+          <label for="roi-machine">Maschinentyp</label>
+          <select id="roi-machine" class="roi-select">
             <option value="95000,400">GM 4 Raupe — Glasfaser &amp; Telekommunikation</option>
             <option value="90000,380">GM 4 Allrad — Drainage &amp; Solarpark</option>
             <option value="135000,520">GM 6 ASR — Fels &amp; Hartgestein</option>
@@ -174,23 +174,23 @@
         </div>
       </div>
 
-      <div class="roi-comparison reveal" id="roi-comparison" style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;background:var(--canvas);border-radius:var(--radius-xl);overflow:hidden;border:1px solid rgba(0,0,0,.08);">
-        <div style="padding:2rem;text-align:center;">
-          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.5;margin-bottom:.75rem;">Jährliche Mietkosten</div>
-          <div class="roi-amount" id="roi-rent-amount" style="font-size:2rem;font-weight:800;line-height:1;">—</div>
-          <div id="roi-rent-sub" style="font-size:.8rem;margin-top:.4rem;opacity:.55;">60 Tage × 400 €/Tag</div>
+      <div class="roi-comparison reveal" id="roi-comparison">
+        <div class="roi-col">
+          <div class="roi-col-label">Jährliche Mietkosten</div>
+          <div class="roi-amount" id="roi-rent-amount">—</div>
+          <div class="roi-col-sub" id="roi-rent-sub">60 Tage × 400 €/Tag</div>
         </div>
-        <div style="display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.04);font-weight:700;color:var(--brand);font-size:1.1rem;">vs.</div>
-        <div style="padding:2rem;text-align:center;">
-          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.5;margin-bottom:.75rem;">Jährliche Eigentumskosten*</div>
-          <div class="roi-amount" id="roi-own-amount" style="font-size:2rem;font-weight:800;line-height:1;">—</div>
-          <div style="font-size:.8rem;margin-top:.4rem;opacity:.55;">Abschr. + Wartung / Jahr</div>
+        <div class="roi-vs">VS</div>
+        <div class="roi-col">
+          <div class="roi-col-label">Jährliche Eigentumskosten*</div>
+          <div class="roi-amount" id="roi-own-amount">—</div>
+          <div class="roi-col-sub">Abschr. + Wartung / Jahr</div>
         </div>
       </div>
 
-      <div class="roi-verdict" id="roi-verdict" style="margin-top:1.5rem;padding:1.25rem 1.5rem;border-radius:var(--radius-xl);text-align:center;"></div>
+      <div class="roi-verdict" id="roi-verdict"></div>
 
-      <p style="text-align:center;font-size:.75rem;opacity:.45;margin-top:1rem;" class="roi-disclaimer">* Richtwert: Kaufpreis / 15 Jahre + ca. 4.000 €/Jahr Wartungskosten. Unverbindliche Schätzung ohne Gewähr.</p>
+      <p class="roi-disclaimer">* Richtwert: Kaufpreis / 15 Jahre + ca. 4.000 €/Jahr Wartungskosten. Unverbindliche Schätzung ohne Gewähr.</p>
     </div>
   </section>
 

@@ -2300,17 +2300,15 @@ p { color: var(--steel-700); text-wrap: pretty; }
 
 /* ----------  ROI Rechner  ---------- */
 .roi-section { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.roi-inputs {
-  display: grid; gap: 1.5rem; margin: 2rem 0;
-}
-@media (min-width: 640px) { .roi-inputs { grid-template-columns: 1fr 1fr; } }
+.roi-inputs { display: grid; gap: 1.5rem; margin: 2rem 0; }
+@media (min-width: 560px) { .roi-inputs { grid-template-columns: 1fr 1fr; } }
 .roi-field label {
   display: block; font-size: .75rem; font-weight: 700;
   letter-spacing: .05em; text-transform: uppercase; color: var(--steel-500); margin-bottom: .6rem;
 }
 .roi-slider { width: 100%; accent-color: var(--brand); cursor: pointer; margin-bottom: .35rem; }
-.roi-days-row { display: flex; justify-content: space-between; font-size: .78rem; color: var(--steel-400); }
-.roi-days-row strong { font-size: 1rem; color: var(--ink); font-weight: 700; }
+.roi-days-row { display: flex; justify-content: space-between; align-items: baseline; font-size: .78rem; color: var(--steel-400); }
+.roi-days-row strong { font-size: .9rem; color: var(--ink); font-weight: 700; }
 .roi-select {
   width: 100%; padding: .65rem .9rem; padding-right: 2.25rem;
   border: 1.5px solid var(--line-strong); border-radius: var(--radius);
@@ -2321,26 +2319,44 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .roi-select:focus { border-color: var(--brand); outline: none; }
 .roi-comparison {
   display: grid; grid-template-columns: 1fr auto 1fr;
-  gap: 1rem; align-items: center;
+  gap: 0; align-items: stretch;
   background: var(--canvas); border: 1.5px solid var(--line);
-  border-radius: var(--radius-xl); padding: 1.75rem 1.5rem;
+  border-radius: var(--radius-xl); overflow: hidden;
   margin-bottom: 1.25rem;
 }
-.roi-col { text-align: center; }
-.roi-col-label { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--steel-400); margin-bottom: .5rem; }
+.roi-col { text-align: center; padding: 1.5rem 1.25rem; }
+.roi-col-label {
+  font-size: .72rem; font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--steel-400); margin-bottom: .5rem;
+}
 .roi-amount { font-size: 1.75rem; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1.1; transition: color var(--dur); }
 .roi-amount.is-winner { color: var(--brand); }
 .roi-col-sub { font-size: .75rem; color: var(--steel-400); margin-top: .3rem; line-height: 1.4; }
-.roi-vs { font-size: .7rem; font-weight: 800; letter-spacing: .12em; color: var(--steel-300); text-align: center; }
+.roi-vs {
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem .75rem; background: var(--paper-2);
+  font-size: .7rem; font-weight: 800; letter-spacing: .12em; color: var(--steel-300);
+  border-left: 1px solid var(--line); border-right: 1px solid var(--line);
+}
+@media (max-width: 520px) {
+  .roi-comparison { grid-template-columns: 1fr; }
+  .roi-vs {
+    padding: .65rem 1.25rem; text-align: center;
+    border-left: none; border-right: none;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .roi-col { padding: 1.25rem 1rem; }
+  .roi-amount { font-size: 1.5rem; }
+}
 .roi-verdict {
-  border-radius: var(--radius-lg); padding: 1.1rem 1.35rem;
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  border-radius: var(--radius-lg); padding: 1rem 1.25rem;
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 .roi-verdict.is-buy { background: rgba(14,124,123,.07); border: 1px solid rgba(14,124,123,.2); }
 .roi-verdict.is-rent { background: rgba(94,234,212,.05); border: 1px solid rgba(94,234,212,.15); }
-.roi-verdict-msg { font-size: .9375rem; font-weight: 500; color: var(--ink); }
-.roi-disclaimer { font-size: .72rem; color: var(--steel-400); line-height: 1.6; }
+.roi-verdict-msg { font-size: .9rem; font-weight: 500; color: var(--ink); flex: 1; min-width: 0; }
+.roi-disclaimer { font-size: .72rem; color: var(--steel-400); line-height: 1.6; text-align: center; }
 
 /* ----------  Cookie Consent Banner  ---------- */
 .cookie-banner {
