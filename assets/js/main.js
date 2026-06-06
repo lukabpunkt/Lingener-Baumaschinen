@@ -250,6 +250,48 @@
       });
     });
   }
+  /* Cookie Consent + GA4 Consent Mode v2 */
+  var CONSENT_KEY = 'liba_consent_v1';
+  function syncGA4(granted) {
+    if (typeof gtag !== 'function') return;
+    gtag('consent', 'update', {
+      analytics_storage: granted ? 'granted' : 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+  }
+  var savedChoice = localStorage.getItem(CONSENT_KEY);
+  if (savedChoice === 'granted') {
+    syncGA4(true);
+  } else if (!savedChoice) {
+    var cookieBanner = document.getElementById('cookie-banner');
+    if (cookieBanner) {
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        cookieBanner.classList.add('is-visible');
+      }); });
+      var btnAccept = document.getElementById('cookie-accept');
+      var btnDecline = document.getElementById('cookie-decline');
+      var hideBanner = function () { cookieBanner.classList.remove('is-visible'); };
+      if (btnAccept) btnAccept.addEventListener('click', function () {
+        localStorage.setItem(CONSENT_KEY, 'granted');
+        syncGA4(true);
+        hideBanner();
+      });
+      if (btnDecline) btnDecline.addEventListener('click', function () {
+        localStorage.setItem(CONSENT_KEY, 'declined');
+        hideBanner();
+      });
+    }
+  }
+  $$('[data-reset-consent]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      localStorage.removeItem(CONSENT_KEY);
+      location.reload();
+    });
+  });
+
   /* Floating Action Button — Kontakt */
   const fab    = document.getElementById('fab');
   const fabBtn = document.getElementById('fab-btn');
