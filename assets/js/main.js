@@ -55,16 +55,12 @@
     dot.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
     document.body.append(dot, ring);
 
-    let mx = 0, my = 0, rx = 0, ry = 0, raf = null;
+    let mx = 0, my = 0, raf = null;
     const loop = () => {
-      const dx = mx - rx, dy = my - ry;
-      rx += dx * 0.26;
-      ry += dy * 0.26;
-      if (Math.abs(dx) < 0.5) rx = mx;
-      if (Math.abs(dy) < 0.5) ry = my;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-      dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-      raf = (rx !== mx || ry !== my) ? requestAnimationFrame(loop) : null;
+      const t = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+      ring.style.transform = t;
+      dot.style.transform  = t;
+      raf = null;
     };
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
