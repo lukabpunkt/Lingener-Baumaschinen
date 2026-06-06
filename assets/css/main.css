@@ -1823,10 +1823,9 @@ p { color: var(--steel-700); text-wrap: pretty; }
 
 .page-enter {
   opacity: 0;
-  transform: translateY(8px);
   animation: pageEnter .9s var(--ease-out) .1s forwards;
 }
-@keyframes pageEnter { to { opacity: 1; transform: none; } }
+@keyframes pageEnter { to { opacity: 1; } }
 
 /* ----------  Floating Action Button — Kontakt  ---------- */
 .fab {
