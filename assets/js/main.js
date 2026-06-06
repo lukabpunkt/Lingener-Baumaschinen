@@ -47,38 +47,6 @@
     document.body.appendChild(grain);
   }
 
-  /* Custom cursor (desktop only) */
-  if (!isCoarse && !reduceMotion) {
-    const dot = document.createElement('div');
-    const ring = document.createElement('div');
-    dot.className = 'cursor-dot'; ring.className = 'cursor-ring';
-    dot.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
-    document.body.append(dot, ring);
-
-    let mx = 0, my = 0, raf = null;
-    const loop = () => {
-      ring.style.left = mx + 'px';
-      ring.style.top  = my + 'px';
-      dot.style.left  = mx + 'px';
-      dot.style.top   = my + 'px';
-      raf = null;
-    };
-    document.addEventListener('mousemove', (e) => {
-      mx = e.clientX; my = e.clientY;
-      document.body.classList.add('is-cursor-visible');
-      if (!raf) raf = requestAnimationFrame(loop);
-    });
-    document.addEventListener('mouseleave', () => document.body.classList.remove('is-cursor-visible'));
-
-    const hoverSel = 'a, button, .show-card, .app, .news-card, .media-frame, [data-cursor-hover]';
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest && e.target.closest(hoverSel)) document.body.classList.add('is-cursor-hover');
-    });
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest && e.target.closest(hoverSel)) document.body.classList.remove('is-cursor-hover');
-    });
-  }
-
   /* Mobile nav */
   const toggle = $('.nav-toggle');
   const drawer = $('.mobile-nav');
@@ -282,4 +250,31 @@
       });
     });
   }
+  /* Floating Action Button — Kontakt */
+  const fab    = document.getElementById('fab');
+  const fabBtn = document.getElementById('fab-btn');
+  const fabMenu = document.getElementById('fab-menu');
+  if (fab && fabBtn) {
+    const openFab = () => {
+      fab.classList.add('is-open');
+      fabBtn.setAttribute('aria-expanded', 'true');
+      if (fabMenu) fabMenu.removeAttribute('aria-hidden');
+    };
+    const closeFab = () => {
+      fab.classList.remove('is-open');
+      fabBtn.setAttribute('aria-expanded', 'false');
+      if (fabMenu) fabMenu.setAttribute('aria-hidden', 'true');
+    };
+    fabBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fab.classList.contains('is-open') ? closeFab() : openFab();
+    });
+    document.addEventListener('click', (e) => {
+      if (fab.classList.contains('is-open') && !fab.contains(e.target)) closeFab();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && fab.classList.contains('is-open')) { closeFab(); fabBtn.focus(); }
+    });
+  }
+
 })();
