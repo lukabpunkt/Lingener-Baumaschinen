@@ -2085,43 +2085,37 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .skip-link:focus { top: 1rem; }
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
 
-/* ----------  WhatsApp Sticky Button  ---------- */
-.wa-btn {
-  position: fixed;
-  right: 1.25rem;
-  bottom: 5.5rem;
-  z-index: 500;
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  background: #25D366;
-  color: #fff;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 4px 20px rgba(37,211,102,.45);
-  transition: transform var(--dur) var(--ease), box-shadow var(--dur);
-  text-decoration: none;
-}
-.wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.6); }
-.wa-btn svg { width: 26px; height: 26px; flex-shrink: 0; }
-@media (min-width: 1024px) {
-  .wa-btn { bottom: 2rem; }
-}
-
-/* ----------  Mobile Sticky CTA Bar  ---------- */
+/* ----------  Mobile Sticky CTA Bar (nur kontakt.html)  ---------- */
 .mobile-cta-bar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
   z-index: 400;
-  background: var(--canvas);
-  border-top: 1px solid var(--line);
-  padding: .65rem var(--gutter);
-  padding-bottom: calc(.65rem + env(safe-area-inset-bottom, 0px));
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding: .75rem var(--gutter);
+  padding-bottom: calc(.75rem + env(safe-area-inset-bottom, 0px));
   display: flex;
   gap: .65rem;
 }
 .mobile-cta-bar .btn { flex: 1; justify-content: center; font-size: .875rem; }
+.mobile-cta-bar .btn-ghost {
+  color: rgba(255,255,255,.75);
+  border-color: rgba(255,255,255,.2);
+  background: transparent;
+}
+.mobile-cta-bar .btn-ghost:hover {
+  background: rgba(255,255,255,.08);
+  color: var(--canvas);
+  border-color: rgba(255,255,255,.35);
+}
 @media (min-width: 1024px) {
   .mobile-cta-bar { display: none; }
+}
+
+/* ----------  WhatsApp contact-card icon variant  ---------- */
+.contact-card-icon.is-whatsapp {
+  background: rgba(37,211,102,.1);
+  color: #25D366;
 }
 
 /* ----------  Footer Social Links  ---------- */
@@ -2154,7 +2148,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   .cta-block, .gallery-grid, .apps > :nth-child(n+4),
   .btn, [data-form], .footer-grid, .footer-bottom-links,
   .page-hero-bg, .quote::before, .process::after,
-  .wa-btn, .mobile-cta-bar, .footer-social { display: none !important; }
+  .mobile-cta-bar, .footer-social { display: none !important; }
 
   *, *::before, *::after { background: transparent !important; color: #000 !important; box-shadow: none !important; text-shadow: none !important; }
 
