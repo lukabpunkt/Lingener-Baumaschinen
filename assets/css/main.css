@@ -583,43 +583,42 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .nav-toggle[aria-expanded="true"] span::after  { top: 0; transform: rotate(-45deg); }
 @media (min-width: 1024px) { .nav-toggle { display: none; } }
 
-/* Mobile drawer — display:none approach, kein Transition-Bug auf iOS */
+/* Mobile drawer — iOS-sicher, kein display-Switch-Bug bei gescrollter Seite */
 .mobile-nav {
+  /* Immer im DOM, aber per Clip unsichtbar — kein display:none-Positionierungs-Bug auf iOS */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  /* 100dvh passt sich der dynamischen iOS-Toolbar-Höhe an */
+  height: 100dvh;
   background: var(--canvas);
   z-index: 9000;
-  /* padding-top schiebt Inhalt unter Nav-Bar */
   padding-top: calc(var(--nav-h) + var(--topbar-h) + 1rem);
   padding-left: var(--gutter);
   padding-right: var(--gutter);
-  padding-bottom: 3rem;
+  padding-bottom: env(safe-area-inset-bottom, 2rem);
+  display: flex;
   flex-direction: column;
   gap: .25rem;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-  /* Standardmäßig verborgen — display:none ist auf iOS zuverlässiger */
-  display: none;
+  /* Versteckt per Clip — kein display-Toggle nötig */
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+  transition: clip-path 320ms cubic-bezier(.22, 1, .36, 1);
 }
 .mobile-nav.is-open {
-  display: flex;
-  animation: mobileNavIn 300ms cubic-bezier(.22, 1, .36, 1) both;
+  clip-path: inset(0 0 0% 0);
+  pointer-events: auto;
 }
-@keyframes mobileNavIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: none; }
-}
-/* Nav-Header liegt immer über dem Drawer */
-.nav { z-index: 9500; }
+/* Nav-Header immer über dem Drawer */
+.nav    { z-index: 9500; }
 .topbar { z-index: 9600; }
-/* Desktop: Drawer niemals anzeigen */
+/* Desktop: Drawer niemals interaktiv */
 @media (min-width: 1024px) {
-  .mobile-nav,
-  .mobile-nav.is-open { display: none !important; }
+  .mobile-nav { display: none !important; }
 }
 .mobile-nav a {
   padding: 1rem 0;
