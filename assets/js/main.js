@@ -370,18 +370,26 @@
       }, 500);
     }
 
-    /* Keep viewport height in sync after resize */
+    /* Keep viewport height in sync after window resize / orientation change */
+    var resizeRaf;
     window.addEventListener('resize', function () {
-      if (!busy) {
+      if (busy) return;
+      cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(function () {
         viewport.style.transition = 'none';
         viewport.style.height = panes[cur].offsetHeight + 'px';
-      }
+      });
     }, { passive: true });
 
-    /* Set initial viewport height once layout is complete */
-    requestAnimationFrame(function () {
-      viewport.style.height = panes[0].offsetHeight + 'px';
-    });
+    /* Set initial viewport height — wait for fonts so measurement is accurate */
+    function setInitH() {
+      if (!busy) viewport.style.height = panes[0].offsetHeight + 'px';
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { requestAnimationFrame(setInitH); });
+    } else {
+      requestAnimationFrame(setInitH);
+    }
 
     function buildCards(key1, key2) {
       var recs = (DB[key1] && DB[key1][key2]) || [];

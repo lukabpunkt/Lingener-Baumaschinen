@@ -2242,6 +2242,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   min-width: 100%;
   flex-shrink: 0;
   padding-top: .25rem;
+  padding-bottom: .75rem;
   will-change: opacity;
 }
 .wizard-q { font-size: 1.0625rem; font-weight: 600; color: var(--canvas); margin-bottom: .3rem; }
