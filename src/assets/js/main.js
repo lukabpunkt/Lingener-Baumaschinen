@@ -454,9 +454,10 @@
 
     var MAINT = 4000;
     var LIFE  = 15;
+    var isEN  = document.documentElement.lang === 'en';
 
     function fmt(n) {
-      return n.toLocaleString('de-DE') + ' €';
+      return isEN ? '€' + n.toLocaleString('en-GB') : n.toLocaleString('de-DE') + ' €';
     }
 
     function calc() {
@@ -465,14 +466,20 @@
       var price = +parts[0];
       var rate  = +parts[1];
 
-      var rentYear = days * rate;
-      var ownYear  = Math.round(price / LIFE + MAINT);
+      var rentYear  = days * rate;
+      var ownYear   = Math.round(price / LIFE + MAINT);
       var breakEven = Math.ceil((price / LIFE + MAINT) / rate);
 
-      daysVal.textContent = days + ' Tage / Jahr';
+      if (isEN) {
+        daysVal.textContent = days + ' days / year';
+        rentSub.textContent = days + ' days × €' + rate.toLocaleString('en-GB') + '/day';
+      } else {
+        daysVal.textContent = days + ' Tage / Jahr';
+        rentSub.textContent = days + ' Tage × ' + rate.toLocaleString('de-DE') + ' €/Tag';
+      }
+
       rentAmt.textContent = fmt(rentYear);
       ownAmt.textContent  = fmt(ownYear);
-      rentSub.textContent = days + ' Tage × ' + rate.toLocaleString('de-DE') + ' €/Tag';
 
       var rentWins = rentYear < ownYear;
       rentAmt.classList.toggle('is-winner', rentWins);
@@ -480,17 +487,28 @@
 
       var machLabel = selMach.options[selMach.selectedIndex].text.split(' — ')[0].trim();
 
-      if (rentWins) {
-        verdict.className = 'roi-verdict is-rent';
-        verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> ist Mieten aktuell günstiger. Ab <strong>' + breakEven + ' Tagen/Jahr</strong> rechnet sich der Kauf.</span>'
-          + '<a href="#mietanfrage" class="btn btn-ghost is-sm">Mietangebot anfragen</a>';
+      if (isEN) {
+        if (rentWins) {
+          verdict.className = 'roi-verdict is-rent';
+          verdict.innerHTML = '<span class="roi-verdict-msg">At <strong>' + days + ' operating days/year</strong>, hiring is currently cheaper. Buying pays off from <strong>' + breakEven + ' days/year</strong>.</span>'
+            + '<a href="#mietanfrage" class="btn btn-ghost is-sm">Request a hire quote</a>';
+        } else {
+          verdict.className = 'roi-verdict is-buy';
+          verdict.innerHTML = '<span class="roi-verdict-msg">At <strong>' + days + ' operating days/year</strong>, <strong>buying already makes sense today</strong> — you save ' + fmt(rentYear - ownYear) + ' annually.</span>'
+            + '<a href="/en/kontakt.html?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Request a purchase quote</a>';
+        }
       } else {
-        verdict.className = 'roi-verdict is-buy';
-        verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> lohnt sich der <strong>Kauf bereits heute</strong> — Sie sparen ' + fmt(rentYear - ownYear) + ' jährlich.</span>'
-          + '<a href="kontakt.html?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
+        if (rentWins) {
+          verdict.className = 'roi-verdict is-rent';
+          verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> ist Mieten aktuell günstiger. Ab <strong>' + breakEven + ' Tagen/Jahr</strong> rechnet sich der Kauf.</span>'
+            + '<a href="#mietanfrage" class="btn btn-ghost is-sm">Mietangebot anfragen</a>';
+        } else {
+          verdict.className = 'roi-verdict is-buy';
+          verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> lohnt sich der <strong>Kauf bereits heute</strong> — Sie sparen ' + fmt(rentYear - ownYear) + ' jährlich.</span>'
+            + '<a href="/kontakt.html?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
+        }
       }
     }
-
     slider.addEventListener('input', calc);
     selMach.addEventListener('change', calc);
     calc();
