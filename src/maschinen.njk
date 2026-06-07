@@ -1,0 +1,482 @@
+---
+layout: base.njk
+permalink: /maschinen.html
+title: "Grabenfräsen Maschinenpark — LIBA Lingener Baumaschinen | bis 3.000 mm Frästiefe"
+description: "LIBA Grabenfräsen: Anbaufräsen für Bagger (bis 1.400 mm Frästiefe), Schlepperanbau (bis 1.800 mm), Selbstfahrer, Tiefenfräsen bis 3.000 mm. Über 40 Modelle — Made in Germany seit 1969."
+canonical: "https://www.lingener-baumaschinen.de/maschinen.html"
+nav: "maschinen"
+navSolid: true
+og:
+  title: "Maschinenpark — LIBA Lingener Baumaschinen"
+  description: "Fünf Produktfamilien, über 40 Modelle. Anbaufräsen für Bagger und Traktoren, Selbstfahrer, Spezialmaschinen und Pflüge — Made in Germany."
+  image: "https://www.lingener-baumaschinen.de/assets/images/products/gm-180-af.jpg"
+  locale: "de_DE"
+schema: >
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kann ich bei Lingener Baumaschinen eine Grabenfräse mieten?","acceptedAnswer":{"@type":"Answer","text":"Ja. Lingener Baumaschinen bietet Grabenfräsen zur Miete an. Verfügbar sind unter anderem die GM 4 Allrad, GM 4 Raupe und GM 6 ASR. Die Mietgeräte eignen sich für kurzfristige Projekte, bei denen ein Kauf nicht wirtschaftlich wäre. Eine Mietanfrage können Sie direkt über die Website stellen."}},{"@type":"Question","name":"Welche Grabenfräsen gibt es für den Baggeranbau?","acceptedAnswer":{"@type":"Answer","text":"Lingener Baumaschinen bietet folgende Grabenfräsen als Baggeranbaufräsen an: GM 140 AFH-500, GM 140 AFH-600 und GM 140 H. Diese Anbaufräsen werden an handelsübliche Bagger montiert und ermöglichen präzise Fräsarbeiten auch in schwer zugänglichem Gelände."}},{"@type":"Question","name":"Welche Grabenfräsen sind für Traktoren und Schlepper geeignet?","acceptedAnswer":{"@type":"Answer","text":"Als Traktorfräse oder Schlepperanbaufräse eignen sich bei Lingener Baumaschinen folgende Modelle: GM 1 AF, GM 1 AS, GM 140 AF, GM 140 AS, GM 140 AFH-600 H, GM 160 AS, GM 160 AF, GM 180 AF und GM 600 R. Die Wahl des richtigen Modells hängt von der gewünschten Grabentiefe, -breite und dem verfügbaren Trägerfahrzeug ab."}},{"@type":"Question","name":"Wie tief kann eine Grabenfräse fräsen?","acceptedAnswer":{"@type":"Answer","text":"Die Frästiefe hängt vom Modell ab. Standardgrabenfräsen erreichen Tiefen von 40–80 cm. Tiefenfräsen wie die GM 300 H, GM 300 HF und GM 450 H ermöglichen Arbeiten bis zu mehreren Metern Tiefe — die GM 450 H erreicht bis zu 3.000 mm Frästiefe."}},{"@type":"Question","name":"Kann eine Grabenfräse auch in hartem Boden oder Fels eingesetzt werden?","acceptedAnswer":{"@type":"Answer","text":"Ja. Die Grabenfräse GM 6 ASR von Lingener Baumaschinen ist speziell für extrem harten Boden und steiniges Gelände entwickelt worden. Sie bewährt sich im Fels-, Stein- und Bergbaubereich und wird weltweit für anspruchsvollste Böden eingesetzt."}},{"@type":"Question","name":"Sind bei Lingener Baumaschinen auch Gebraucht-Grabenfräsen erhältlich?","acceptedAnswer":{"@type":"Answer","text":"Ja, Lingener Baumaschinen bietet neben Neumaschinen auch gebrauchte Grabenfräsen sowie Ersatzteile und Zubehör an. Das aktuelle Angebot an Gebrauchtmaschinen finden Sie im entsprechenden Bereich der Website."}},{"@type":"Question","name":"In welchen Ländern sind Grabenfräsen von Lingener Baumaschinen erhältlich?","acceptedAnswer":{"@type":"Answer","text":"Lingener Baumaschinen ist seit 1969 tätig und verfügt über ein weltweites Händlernetz. Die Maschinen werden in nahezu alle Teile der Welt geliefert. Eine Händlerübersicht mit internationalen Kontakten finden Sie auf der Website unter 'Händlerübersicht'."}}]}
+---
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('/assets/images/products/gm-180-af.jpg');" aria-hidden="true"></div>
+  <div class="container">
+    <div class="breadcrumbs"><a href="/index.html">Start</a><span class="sep">/</span><span>Maschinenpark</span></div>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>Produktportfolio</span>
+    <h1 data-split-lines class="mt-3">Der LIBA <em class="serif-italic">Maschinenpark.</em></h1>
+    <p>Über 40 Grabenfräsen-Modelle — von der Baggeranbau-Fräse mit 200 mm Frästiefe bis zur Tiefenfräse mit 3.000 mm. Jede Maschine ist auf Trägergerät, Untergrund und Einsatzszenario hin entwickelt: kompromisslos auf Effizienz im Graben getrimmt. Made in Germany seit 1969.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Maschinenberater — inline card -->
+    <div class="wizard-inline reveal" id="maschinenwizard" style="margin-bottom:3.5rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1.25rem;">
+        <div>
+          <span style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);display:block;margin-bottom:.25rem;">Entscheidungshilfe</span>
+          <p style="font-size:1rem;font-weight:700;color:var(--canvas);margin:0;">Welche Fräse passt zu Ihrem Projekt? — Zwei Fragen, direkte Empfehlung.</p>
+        </div>
+        <div class="wizard-progress" id="wizard-progress" style="flex-shrink:0;">
+          <div class="wizard-pdot is-active"></div>
+          <div class="wizard-pdot"></div>
+        </div>
+      </div>
+      <div class="wizard-viewport" id="wizard-viewport">
+        <div class="wizard-track" id="wizard-track">
+          <!-- Schritt 1 -->
+          <div class="wizard-pane" id="wstep-1">
+            <p class="wizard-hint" style="margin-bottom:.75rem;">Welches Trägergerät haben Sie?</p>
+            <div class="wizard-opts">
+              <button class="wizard-opt" data-key="bagger" type="button">
+                <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="2" y="14" width="20" height="6" rx="1"/><path d="M6 14V9l4-5h8v10"/><path d="M14 9H9"/></svg></span>
+                <span class="wizard-opt-title">Bagger</span>
+                <span class="wizard-opt-desc">Mobil- oder Kettenbagger ab 6 t</span>
+              </button>
+              <button class="wizard-opt" data-key="traktor" type="button">
+                <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="2"/><path d="M10 17h5V9l-3-4H4v12h3"/></svg></span>
+                <span class="wizard-opt-title">Traktor / Schlepper</span>
+                <span class="wizard-opt-desc">Heck- oder Frontanbau</span>
+              </button>
+              <button class="wizard-opt" data-key="self" type="button">
+                <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="3" y="8" width="18" height="9" rx="2"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/><path d="M8 8V5h8v3"/></svg></span>
+                <span class="wizard-opt-title">Kein (Selbstfahrer)</span>
+                <span class="wizard-opt-desc">Eigenständige Maschine</span>
+              </button>
+              <button class="wizard-opt" data-key="tiefe" type="button">
+                <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></span>
+                <span class="wizard-opt-title">Tiefenfräse</span>
+                <span class="wizard-opt-desc">Frästiefe &gt; 1.500 mm</span>
+              </button>
+            </div>
+          </div>
+          <!-- Schritt 2 -->
+          <div class="wizard-pane" id="wstep-2">
+            <button class="wizard-back" id="wizard-back" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Zurück
+            </button>
+            <p class="wizard-hint" style="margin-bottom:.75rem;">Welche maximale Frästiefe brauchen Sie?</p>
+            <div class="wizard-opts">
+              <button class="wizard-opt" data-key="s" type="button">
+                <span class="wizard-opt-title">bis 600 mm</span>
+                <span class="wizard-opt-desc">Glasfaser, Erdkabel, Kleinrohr</span>
+              </button>
+              <button class="wizard-opt" data-key="m" type="button">
+                <span class="wizard-opt-title">bis 1.200 mm</span>
+                <span class="wizard-opt-desc">Pipeline DN 100–200, Drainage</span>
+              </button>
+              <button class="wizard-opt" data-key="d" type="button">
+                <span class="wizard-opt-title">bis 2.000 mm</span>
+                <span class="wizard-opt-desc">Pipeline DN 300, Fernwärme</span>
+              </button>
+              <button class="wizard-opt" data-key="x" type="button">
+                <span class="wizard-opt-title">über 2.000 mm</span>
+                <span class="wizard-opt-desc">Sondertiefbau, Großrohr</span>
+              </button>
+            </div>
+          </div>
+          <!-- Ergebnis -->
+          <div class="wizard-pane" id="wizard-result">
+            <button class="wizard-back" id="wizard-back-result" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Neue Auswahl
+            </button>
+            <p class="wizard-hint" style="margin-bottom:.75rem;">Empfehlung für Ihr Projekt</p>
+            <div class="wizard-rcards" id="wizard-cards"></div>
+            <button class="wizard-restart" type="button">↺ Von vorne beginnen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="anbau-bagger" class="split align-start reveal">
+      <div>
+        <span class="section-index">01 / Anbaufräsen Bagger</span>
+        <h2 class="mt-3">Grabenfräsen für Bagger —<br><em class="serif-italic">bis 1.400 mm Frästiefe</em></h2>
+        <p class="lead mt-3">Die LIBA Baggeranbau-Grabenfräsen GM 140 H, GM 140 AFH-500 und GM 140 AFH-600 sind hydraulisch angetriebene Kettenfräsen für Mobil- und Kettenbagger ab 6 t. Frästiefen von 200 bis 1.400 mm, Fräsbreiten von 60 bis 400 mm — für Kabel-, Rohrleitungs- und Leitungsbau.</p>
+        <ul class="spec-list">
+          <li><span class="num">01</span><div><strong>GM 140 H</strong><span>Grabenfräse für Bagger ab 6 t. Frästiefe bis 900 mm, Fräsbreite 60–350 mm. Kompakt für Erdkabel und kommunalen Tiefbau.</span></div></li>
+          <li><span class="num">02</span><div><strong>GM 140 AFH-500</strong><span>Mittlere Klasse für Rohrleitungs- und Kabelbau. Frästiefe bis 500 mm, Trägergerät ab 8 t.</span></div></li>
+          <li><span class="num">03</span><div><strong>GM 140 AFH-600</strong><span>Erhöhte Frästiefe bis 600 mm für Pipeline-Verlegung DN 100–DN 200, Trägergerät ab 12 t.</span></div></li>
+        </ul>
+        <div class="spec-stats">
+          <div class="spec-stat"><span class="spec-stat-val">1.400<span style="font-size:.6em;font-weight:400;"> mm</span></span><span class="spec-stat-key">Frästiefe max.</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">60–400<span style="font-size:.6em;font-weight:400;"> mm</span></span><span class="spec-stat-key">Fräsbreite</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">ab 6<span style="font-size:.6em;font-weight:400;"> t</span></span><span class="spec-stat-key">Trägergerät</span></div>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr><th>Frästiefe max.</th><td>bis 1.400 mm</td></tr>
+            <tr><th>Fräsbreite</th><td>60–400 mm</td></tr>
+            <tr><th>Trägergerät</th><td>ab 6 t (Mobil- / Kettenbagger)</td></tr>
+            <tr><th>Antrieb</th><td>Hydraulisch über Bagger-Hydraulik</td></tr>
+            <tr><th>Anbau</th><td>Schnellwechsler-kompatibel</td></tr>
+          </tbody>
+        </table>
+        <a href="/kontakt.html?modell=Baggeranbau-Grabenfr%C3%A4se" class="btn-link mt-3">Baggeranbau-Fräse anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="media-frame">
+        <img loading="lazy" src="/assets/images/products/gm-140-afh-500.jpg" alt="LIBA GM 140 AFH Grabenfräse für Bagger" width="1500" height="2250">
+        <span class="tag">5 Modelle · ab 6 t Trägergerät</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div id="anbau-traktor" class="split align-start reverse reveal">
+      <div>
+        <span class="section-index">02 / Anbaufräsen Traktor</span>
+        <h2 class="mt-3">Grabenfräsen Schlepperanbau —<br><em class="serif-italic">bis 1.800 mm Frästiefe</em></h2>
+        <p class="lead mt-3">LIBA Schlepperanbau-Grabenfräsen für Heck- oder Frontanbau an Standard- und Spezial-Traktoren. Frästiefen von 300 mm (GM 1 AF, Erdkabel) bis 1.800 mm (GM 180 AF, Pipeline DN 300). 18 Modelle für Glasfaser-, Kabel-, Drainage- und Pipeline-Verlegung.</p>
+        <ul class="spec-list">
+          <li><span class="num">01</span><div><strong>GM 1 AS · GM 1 AF</strong><span>Kompakt-Grabenfräsen für Erdkabel und Schmalgräben. Frästiefe bis 400 mm, Fräsbreite 40–100 mm.</span></div></li>
+          <li><span class="num">02</span><div><strong>GM 140 AF · GM 160 AF · GM 160 AS</strong><span>Mittelklasse für Drainage, Kabelbau und kommunale Aufgaben. Frästiefe bis 1.200 mm, Fräsbreite bis 300 mm.</span></div></li>
+          <li><span class="num">03</span><div><strong>GM 180 AF · GM 600 R</strong><span>High-Performance-Grabenfräsen für Pipeline DN 300, Felsen und Glasfaser-Backbone. Frästiefe bis 1.800 mm.</span></div></li>
+        </ul>
+        <div class="spec-stats">
+          <div class="spec-stat"><span class="spec-stat-val">1.800<span style="font-size:.6em;font-weight:400;"> mm</span></span><span class="spec-stat-key">Frästiefe max.</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">18<span style="font-size:.6em;font-weight:400;"> Modelle</span></span><span class="spec-stat-key">Schlepperanbau</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">ab 60<span style="font-size:.6em;font-weight:400;"> kW</span></span><span class="spec-stat-key">Trägerleistung</span></div>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr><th>Frästiefe max.</th><td>bis 1.800 mm (GM 180 AF)</td></tr>
+            <tr><th>Fräsbreite</th><td>40–500 mm je Modell</td></tr>
+            <tr><th>Trägergerät</th><td>Standardtraktor ab 60 kW</td></tr>
+            <tr><th>Anbau</th><td>Heck- oder Frontanbau, Kat. II/III</td></tr>
+            <tr><th>Antrieb</th><td>Zapfwelle / Hydraulik</td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex; gap:.85rem; flex-wrap:wrap; margin-top:1.25rem; align-items:center;">
+          <a href="/maschinen/gm-180-af.html" class="btn-link">Datenblatt GM 180 AF <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="/kontakt.html?modell=Schlepperanbau-Grabenfr%C3%A4se" class="btn-link">Schlepperanbau anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="media-frame">
+        <img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt="LIBA GM 180 AF Schlepperanbau-Grabenfräse" width="1024" height="576">
+        <span class="tag">18 Modelle · Schlepperanbau</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div id="selbstfahrer" class="split align-start reveal">
+      <div>
+        <span class="section-index">03 / Selbstfahrer</span>
+        <h2 class="mt-3">Selbstfahrende Grabenfräsen —<br><em class="serif-italic">bis 1.000 m Tagesleistung</em></h2>
+        <p class="lead mt-3">Die LIBA Selbstfahrer-Grabenfräsen GM 4 Raupe, GM 4 Allrad und GM 6 ASR sind dieselhydraulische Eigenfahrer für Glasfaserausbau, Solarparks, Drainage und Felseinsatz. Tagesleistungen bis 1.000 m im Lockerboden — autark ohne Trägergerät.</p>
+        <ul class="spec-list">
+          <li><span class="num">01</span><div><strong>GM 4 Raupe</strong><span>Selbstfahrende Grabenfräse auf Raupenlaufwerk für FTTH-Glasfaser und Telekommunikation. Tagesleistung bis 1.000 m, Frästiefe bis 650 mm, Fräsbreite 50–150 mm.</span></div></li>
+          <li><span class="num">02</span><div><strong>GM 4 Allrad</strong><span>Allradgetriebene Grabenfräse für Sportplatzdrainage, Solarpark-Kabelgräben und Bewässerung. Minimale Oberflächenschäden.</span></div></li>
+          <li><span class="num">03</span><div><strong>GM 6 ASR</strong><span>Selbstfahrende Felsfräse für Hartgestein bis FK IV. Frästiefe bis 800 mm in Kalkstein und Schiefer — wo Bagger und Trennsäge nicht wirtschaftlich sind.</span></div></li>
+        </ul>
+        <div class="spec-stats">
+          <div class="spec-stat"><span class="spec-stat-val">1.000<span style="font-size:.6em;font-weight:400;"> m</span></span><span class="spec-stat-key">Tagesleistung</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">800<span style="font-size:.6em;font-weight:400;"> mm</span></span><span class="spec-stat-key">Frästiefe max.</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">50–200<span style="font-size:.6em;font-weight:400;"> mm</span></span><span class="spec-stat-key">Fräsbreite</span></div>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr><th>Tagesleistung max.</th><td>bis 1.000 m (Lockerboden)</td></tr>
+            <tr><th>Frästiefe</th><td>bis 800 mm je Modell</td></tr>
+            <tr><th>Fräsbreite</th><td>50–200 mm</td></tr>
+            <tr><th>Antrieb</th><td>Dieselhydraulisch, eigenständig</td></tr>
+            <tr><th>Einsatz</th><td>Glasfaser, Solar, Drainage, Fels</td></tr>
+          </tbody>
+        </table>
+        <a href="/mieten.html" class="btn-link mt-3">Selbstfahrer mieten oder kaufen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="media-frame">
+        <img loading="lazy" src="/assets/images/products/gm-4-raupe.jpg" alt="LIBA GM 4 Raupe selbstfahrende Grabenfräse" width="1024" height="768">
+        <span class="tag">3 Modelle · Selbstfahrer</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div id="spezial" class="split align-start reverse reveal">
+      <div>
+        <span class="section-index">04 / Spezialmaschinen</span>
+        <h2 class="mt-3">Tiefenfräsen für Sondertiefbau —<br><em class="serif-italic">bis 3.000 mm Frästiefe</em></h2>
+        <p class="lead mt-3">Wenn Standard-Geometrien nicht reichen: Die LIBA Tiefenfräsen GM 250 H, GM 300 HF und GM 450 H erreichen Frästiefen bis 3.000 mm — für Sondertiefbau, Fernwärme-Verlegung und Entwässerungssysteme mit großem Querschnitt. Unimog-Adaptionen und kundenspezifische Anbauten auf Anfrage.</p>
+        <ul class="spec-list">
+          <li><span class="num">01</span><div><strong>GM 250 H · GM 300 H · GM 300 HF</strong><span>Tiefenfräsen für Sondertiefbau: Frästiefe bis 2.000 mm, Fräsbreite bis 350 mm. Für Fernwärme und Entwässerung.</span></div></li>
+          <li><span class="num">02</span><div><strong>GM 450 H</strong><span>Maximale Frästiefe bis 3.000 mm für anspruchsvollsten Tiefbau und Sonderprojekte. Hydraulischer Antrieb für präzise Tiefenkontrolle.</span></div></li>
+          <li><span class="num">03</span><div><strong>Unimogfräse</strong><span>Grabenfräse adaptiert für Unimog U300–U530 — für kommunalen Tiefbau und Straßenbegleitgräben.</span></div></li>
+        </ul>
+        <div class="spec-stats">
+          <div class="spec-stat"><span class="spec-stat-val">3.000<span style="font-size:.6em;font-weight:400;"> mm</span></span><span class="spec-stat-key">Frästiefe max.</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">bis 350<span style="font-size:.6em;font-weight:400;"> mm</span></span><span class="spec-stat-key">Fräsbreite</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">ab 20<span style="font-size:.6em;font-weight:400;"> t</span></span><span class="spec-stat-key">Trägergerät</span></div>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr><th>Frästiefe max.</th><td>bis 3.000 mm (GM 450 H)</td></tr>
+            <tr><th>Fräsbreite</th><td>bis 350 mm</td></tr>
+            <tr><th>Trägergerät</th><td>Schwerlast-Bagger ab 20 t / Unimog</td></tr>
+            <tr><th>Antrieb</th><td>Hydraulisch, Hochdrucksystem</td></tr>
+            <tr><th>Einsatz</th><td>Fernwärme, Entwässerung, Sondertiefbau</td></tr>
+          </tbody>
+        </table>
+        <a href="/kontakt.html?modell=Tiefen-Grabenfr%C3%A4se" class="btn-link mt-3">Tiefenfräse anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="media-frame">
+        <img loading="lazy" src="/assets/images/products/gm-600-r-detail.jpg" alt="LIBA Tiefenfräse Spezialmaschine" width="1024" height="768">
+        <span class="tag">4+ Modelle · Spezialbau</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div id="pfluege" class="split align-start reveal">
+      <div>
+        <span class="section-index">05 / Pflüge</span>
+        <h2 class="mt-3">Anbaupflüge &amp; Kabelpflüge —<br><em class="serif-italic">ohne Aushub, ohne Verfüllen</em></h2>
+        <p class="lead mt-3">LIBA Kabelpflüge und Anbaupflüge verlegen Erdkabel, Drainagerohre und Schutzrohre in einem Arbeitsgang — ohne offenen Graben, ohne Verfüllen. Verlegeleistungen bis 3.000 m/Tag in geeignetem Boden.</p>
+        <ul class="spec-list">
+          <li><span class="num">01</span><div><strong>GMV 100</strong><span>Vibrations-Anbaupflug für Schlepper und Traktoren. Verlegetiefe bis 600 mm, für Erdkabel und Drainagerohre bis DN 100.</span></div></li>
+          <li><span class="num">02</span><div><strong>GMV 130</strong><span>Vibrationskabelpflug für großflächige Erdkabel-Verlegung. Verlegetiefe bis 800 mm, hohe Tagesleistung in sandigem Boden.</span></div></li>
+          <li><span class="num">03</span><div><strong>GM 1800 P</strong><span>Großpflug für Landschaftsbau und Tiefenverlegung bis 1.200 mm. Für Bewässerungs-, Drainage- und Energieprojekte mit großem Volumen.</span></div></li>
+        </ul>
+        <div class="spec-stats">
+          <div class="spec-stat"><span class="spec-stat-val">1.200<span style="font-size:.6em;font-weight:400;"> mm</span></span><span class="spec-stat-key">Verlegetiefe</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">3.000<span style="font-size:.6em;font-weight:400;"> m</span></span><span class="spec-stat-key">Tagesleistung</span></div>
+          <div class="spec-stat"><span class="spec-stat-val">DN 150<span style="font-size:.6em;font-weight:400;"></span></span><span class="spec-stat-key">Max. Rohrdurchm.</span></div>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr><th>Verlegetiefe max.</th><td>bis 1.200 mm</td></tr>
+            <tr><th>Rohr-/Kabeldurchmesser</th><td>bis DN 150</td></tr>
+            <tr><th>Trägergerät</th><td>Traktor ab 80 kW</td></tr>
+            <tr><th>Tagesleistung</th><td>bis 3.000 m (Lockerboden)</td></tr>
+            <tr><th>Einsatz</th><td>Erdkabel, Drainage, Bewässerung</td></tr>
+          </tbody>
+        </table>
+        <a href="/kontakt.html?modell=Kettengraben-Pflug" class="btn-link mt-3">Kabelpflug anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="media-frame">
+        <img loading="lazy" src="/assets/images/products/gm-160-af.jpg" alt="LIBA Anbaupflug Kabelpflug" width="1024" height="768">
+        <span class="tag">3 Modelle · Pflüge</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="padding-top: 0;">
+  <div class="container">
+    <hr class="divider">
+    <div class="section-header reveal">
+      <div class="heading">
+        <span class="section-index">06 / FAQ</span>
+        <h2 class="mt-3">Häufige Fragen<br><em class="serif-italic">zu LIBA-Grabenfräsen.</em></h2>
+      </div>
+      <div class="aside">
+        <p class="lead">Alles Wichtige zu Modellen, Einsatzgebieten, Frästiefen und Mietoptionen — direkt beantwortet vom Werk in Lingen.</p>
+      </div>
+    </div>
+
+    <div class="faq-list reveal">
+
+      <details class="faq-item">
+        <summary>Wie tief kann eine Grabenfräse fräsen?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">Die Frästiefe hängt vom Modell ab. Kompakte Baggeranbau-Fräsen (GM 140 H) erreichen bis zu 900 mm. Schlepperanbau-Modelle wie die GM 180 AF fräsen bis 1.800 mm. Tiefenfräsen wie die GM 300 HF und GM 450 H ermöglichen Arbeiten bis zu 3.000 mm Frästiefe — für anspruchsvollen Sondertiefbau und Fernwärmeprojekte.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Welche Grabenfräsen gibt es für den Baggeranbau?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">LIBA bietet folgende Grabenfräsen als Baggeranbaufräsen an: GM 140 H (ab 6 t, bis 900 mm Frästiefe), GM 140 AFH-500 (bis 500 mm, ab 8 t) und GM 140 AFH-600 (bis 600 mm, ab 12 t). Diese Anbaufräsen werden hydraulisch über die Bagger-Hydraulik angetrieben und sind Schnellwechsler-kompatibel.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Welche Grabenfräsen sind für Traktoren und Schlepper geeignet?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">Als Schlepperanbau-Grabenfräse eignen sich: GM 1 AF, GM 1 AS (bis 400 mm, kompakt), GM 140 AF, GM 160 AF, GM 160 AS (bis 1.200 mm, Mittelklasse) sowie GM 180 AF und GM 600 R (bis 1.800 mm, High-Performance). Die Modellwahl hängt von Frästiefe, Fräsbreite und dem verfügbaren Trägerfahrzeug ab.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Kann eine Grabenfräse in hartem Boden oder Fels eingesetzt werden?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">Ja. Die selbstfahrende Grabenfräse GM 6 ASR ist speziell für Hartgestein bis Felsklasse IV entwickelt worden. Sie bewährt sich in Kalkstein, Schiefer und Bergbaugebieten und erreicht Frästiefen bis 800 mm in Fels — wirtschaftlich dort, wo Bagger und Trennsäge nicht rentabel sind.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Kann ich bei Lingener Baumaschinen eine Grabenfräse mieten?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">Ja. LIBA bietet Grabenfräsen zur Tages-, Wochen- und Monatsmiete an. Verfügbar sind GM 4 Allrad, GM 4 Raupe und GM 6 ASR — jeweils mit Bedienereinweisung und 24/7-Werkshotline während des Einsatzes. Bis zu 100 % der Mietkosten können beim späteren Kauf angerechnet werden. <a href="/mieten.html" style="color:var(--brand);text-decoration:underline;">Zur Mietseite</a></p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Sind Gebraucht-Grabenfräsen erhältlich?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">Ja. LIBA verkauft gebrauchte Grabenfräsen direkt aus dem Werk — nach vollständiger Werksinspektion, mit lückenloser Maschinenhistorie und Garantie auf alle im Rahmen der Inspektion getauschten Teile. Kein Zwischenhändler, kein Aufschlag. <a href="/gebrauchtmaschinen.html" style="color:var(--brand);text-decoration:underline;">Zu den Gebrauchtmaschinen</a></p>
+      </details>
+
+      <details class="faq-item">
+        <summary>In welchen Ländern sind LIBA-Grabenfräsen erhältlich?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">Lingener Baumaschinen ist seit 1969 tätig und liefert Grabenfräsen in über 60 Länder weltweit. Vertrieb und Lieferung erfolgen direkt ab Werk Lingen (Ems) — inklusive Tieflader-Transport auf Wunsch. Für internationale Anfragen und Händlerinformationen wenden Sie sich direkt an <a href="/kontakt.html" style="color:var(--brand);text-decoration:underline;">info@lingener-baumaschinen.de</a>.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="kalkulator">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="heading">
+        <span class="section-index is-dark" style="color: var(--brand-light);">07 / Kalkulator</span>
+        <h2 class="mt-3">Wie viel Trasse<br><em class="serif-italic">schaffen Sie pro Tag?</em></h2>
+      </div>
+      <div class="aside">
+        <p class="lead">Richtwerte auf Basis von Bodenart und Maschinenmodell. Exakte Werte hängen von Konfiguration, Fahrerprofil und Trassengeometrie ab — sprechen Sie uns an.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-lg, 16px); padding: clamp(1.5rem, 4vw, 2.5rem); max-width: 720px;">
+      <div class="grid grid-2" style="gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div class="field">
+          <label for="k-boden" style="color: var(--canvas); font-weight: 500;">Bodenart</label>
+          <select id="k-boden" style="margin-top: .5rem; background: var(--steel-900); color: var(--canvas); border-color: rgba(255,255,255,.12);">
+            <option value="1000">Sand / Lockerboden</option>
+            <option value="700" selected>Lehmiger Boden</option>
+            <option value="400">Kompakter Lehm / Mergel</option>
+            <option value="200">Halbfels / Weichgestein</option>
+            <option value="80">Hartgestein / Fels</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="k-modell" style="color: var(--canvas); font-weight: 500;">Maschinenmodell</label>
+          <select id="k-modell" style="margin-top: .5rem; background: var(--steel-900); color: var(--canvas); border-color: rgba(255,255,255,.12);">
+            <option value="1.0">GM 4 Raupe / Allrad</option>
+            <option value="0.8">GM 180 AF (Schlepperanbau)</option>
+            <option value="0.6">GM 140 AFH (Baggeranbau)</option>
+            <option value="0.5">GM 450 H (Tiefenfräse)</option>
+            <option value="0.15">GM 6 ASR (Felsfräse)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="k-result" style="border-top: 1px solid rgba(255,255,255,.1); padding-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; text-align: center;">
+        <div>
+          <div style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--brand-light); letter-spacing: -.04em;" id="k-day">0</div>
+          <div style="font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--steel-400); margin-top: .25rem;">Meter / Tag</div>
+          <div style="margin-top: .85rem; height: 4px; background: rgba(255,255,255,.07); border-radius: 2px; overflow: hidden;">
+            <div id="k-bar-day" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand), var(--brand-light)); border-radius: 2px; transition: width .65s cubic-bezier(.22,1,.36,1);"></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--canvas); letter-spacing: -.04em;" id="k-week">0</div>
+          <div style="font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--steel-400); margin-top: .25rem;">Meter / Woche</div>
+          <div style="margin-top: .85rem; height: 4px; background: rgba(255,255,255,.07); border-radius: 2px; overflow: hidden;">
+            <div id="k-bar-week" style="height: 100%; width: 0%; background: rgba(255,255,255,.4); border-radius: 2px; transition: width .65s .08s cubic-bezier(.22,1,.36,1);"></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--canvas); letter-spacing: -.04em;" id="k-month">0</div>
+          <div style="font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--steel-400); margin-top: .25rem;">Meter / Monat</div>
+          <div style="margin-top: .85rem; height: 4px; background: rgba(255,255,255,.07); border-radius: 2px; overflow: hidden;">
+            <div id="k-bar-month" style="height: 100%; width: 0%; background: rgba(255,255,255,.4); border-radius: 2px; transition: width .65s .16s cubic-bezier(.22,1,.36,1);"></div>
+          </div>
+        </div>
+      </div>
+      <p style="color: var(--steel-500); font-size: .8rem; margin-top: 1.25rem; font-family: var(--font-mono); letter-spacing: .02em;">Richtwert · Abweichungen ±30 % je nach Konfiguration und Einsatzbedingungen</p>
+    </div>
+
+    <script>
+      (function(){
+        var boden   = document.getElementById('k-boden');
+        var modell  = document.getElementById('k-modell');
+        var dayEl   = document.getElementById('k-day');
+        var weekEl  = document.getElementById('k-week');
+        var monthEl = document.getElementById('k-month');
+        var barD    = document.getElementById('k-bar-day');
+        var barW    = document.getElementById('k-bar-week');
+        var barM    = document.getElementById('k-bar-month');
+        var MAX     = 1000;
+        var cur     = { d: 0, w: 0, m: 0 };
+        var raf     = null;
+
+        function calcDay() {
+          var raw = parseInt(boden.value) * parseFloat(modell.value);
+          if (raw >= 100) return Math.round(raw / 50) * 50;
+          if (raw >= 20)  return Math.round(raw / 10) * 10;
+          return Math.max(Math.round(raw / 5) * 5, 5);
+        }
+
+        function animateTo(target) {
+          var from = { d: cur.d, w: cur.w, m: cur.m };
+          var dur  = 650;
+          var t0   = null;
+          if (raf) cancelAnimationFrame(raf);
+          (function step(ts) {
+            if (!t0) t0 = ts;
+            var p = Math.min((ts - t0) / dur, 1);
+            var e = 1 - Math.pow(1 - p, 3);
+            dayEl.textContent   = Math.round(from.d + (target.d - from.d) * e).toLocaleString('de');
+            weekEl.textContent  = Math.round(from.w + (target.w - from.w) * e).toLocaleString('de');
+            monthEl.textContent = Math.round(from.m + (target.m - from.m) * e).toLocaleString('de');
+            if (p < 1) { raf = requestAnimationFrame(step); }
+            else {
+              dayEl.textContent   = target.d.toLocaleString('de');
+              weekEl.textContent  = target.w.toLocaleString('de');
+              monthEl.textContent = target.m.toLocaleString('de');
+              cur = { d: target.d, w: target.w, m: target.m };
+              raf = null;
+            }
+          })(performance.now());
+          var pct = Math.max(target.d / MAX * 100, 2).toFixed(1);
+          barD.style.width = pct + '%';
+          barW.style.width = pct + '%';
+          barM.style.width = pct + '%';
+        }
+
+        function update() { var d = calcDay(); animateTo({ d: d, w: d * 5, m: d * 20 }); }
+
+        boden.addEventListener('change', update);
+        modell.addEventListener('change', update);
+
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) { update(); io.disconnect(); }
+          }, { threshold: 0.25 });
+          io.observe(document.getElementById('kalkulator'));
+        } else { update(); }
+      })();
+    </script>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-block reveal">
+      <div>
+        <span class="eyebrow is-dark"><span class="dot"></span>Schnellfinder</span>
+        <h2 class="mt-3">Nicht sicher, welche<br>Fräse Sie <em>brauchen?</em></h2>
+        <p>Sagen Sie uns Bodenart, Trägergerät und Grabentiefe — wir empfehlen Ihnen das passende Modell aus dem LIBA-Portfolio und nennen typische Tages­leistungen.</p>
+        <div class="actions">
+          <a href="/kontakt.html" class="btn btn-accent is-lg">Beratung anfragen <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="/mieten.html" class="btn btn-outline-light">Mieten statt kaufen</a>
+        </div>
+      </div>
+      <dl class="cta-side">
+        <dt>Vertrieb direkt vom Werk</dt>
+        <dd>+49 (0) 591 76 314</dd>
+        <dt>E-Mail</dt>
+        <dd style="word-break: break-word;">info@lingener-baumaschinen.de</dd>
+      </dl>
+    </div>
+  </div>
+</section>

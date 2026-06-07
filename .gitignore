@@ -27,6 +27,7 @@ yarn.lock
 # Build outputs
 dist/
 build/
+_site/
 .cache/
 
 # Local env
