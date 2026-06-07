@@ -2228,19 +2228,24 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .wizard-pdot.is-done  { background: var(--brand); }
 .wizard-viewport {
   overflow: hidden;
-  /* iOS Safari: translateZ creates a compositing layer so overflow:hidden
-     correctly clips animating children */
-  transform: translateZ(0);
+  /* No transform here — on iOS Safari, transform on a child causes it to
+     use the parent's padding-box width instead of content-box width,
+     making the panes 40px too wide and clipping the right column */
 }
 .wizard-track {
   display: flex;
   align-items: flex-start;
   transition: transform 480ms cubic-bezier(.4,0,.2,1);
+  /* will-change promotes the track to its own compositing layer, which is
+     sufficient for smooth animation without needing transform on the parent */
   will-change: transform;
 }
 .wizard-pane {
-  min-width: 100%;
-  flex-shrink: 0;
+  /* flex: 0 0 100% is more reliable than min-width:100% + flex-shrink:0 in all browsers */
+  flex: 0 0 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   padding-top: .25rem;
   padding-bottom: .75rem;
   will-change: opacity;
