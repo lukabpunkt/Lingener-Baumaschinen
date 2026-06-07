@@ -2522,3 +2522,37 @@ p { color: var(--steel-700); text-wrap: pretty; }
 
   @page { margin: 1.5cm 1.8cm; }
 }
+
+/* === LANGUAGE SWITCH === */
+.lang-switch {
+  display: flex;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--radius);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: .3rem .55rem;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--steel-400);
+  text-decoration: none;
+  transition: background var(--dur-fast), color var(--dur-fast);
+  line-height: 1;
+}
+.lang-btn + .lang-btn { border-left: 1px solid rgba(255,255,255,.15); }
+.lang-btn:hover { color: var(--canvas); background: rgba(255,255,255,.08); }
+.lang-btn.is-active { color: var(--canvas); background: rgba(255,255,255,.1); pointer-events: none; }
+
+.mobile-lang-switch {
+  display: flex;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: .5rem;
+  align-self: flex-start;
+}
