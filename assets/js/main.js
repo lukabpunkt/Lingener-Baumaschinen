@@ -321,6 +321,7 @@
     }
 
     function showResult(key1, key2) {
+      step1.classList.remove('is-active');
       step2.classList.remove('is-active');
       result.classList.add('is-active');
       showDots(-1, 2);
