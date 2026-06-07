@@ -265,12 +265,19 @@
     var wiz = document.getElementById('maschinenwizard');
     if (!wiz) return;
 
-    var step1 = document.getElementById('wstep-1');
-    var step2 = document.getElementById('wstep-2');
-    var result = document.getElementById('wizard-result');
-    var cards  = document.getElementById('wizard-cards');
-    var dots   = $$('.wizard-pdot', wiz);
-    var sel    = {};
+    var viewport = document.getElementById('wizard-viewport');
+    var track    = document.getElementById('wizard-track');
+    var panes    = [
+      document.getElementById('wstep-1'),
+      document.getElementById('wstep-2'),
+      document.getElementById('wizard-result')
+    ];
+    var cards = document.getElementById('wizard-cards');
+    var dots  = $$('.wizard-pdot', wiz);
+    var sel   = {};
+    var cur   = 0;
+    var busy  = false;
+    var noAnim = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     var DB = {
       bagger: {
@@ -314,17 +321,69 @@
       });
     }
 
-    function showStep2() {
-      step1.classList.remove('is-active');
-      step2.classList.add('is-active');
-      showDots(1, 1);
+    function slideTo(idx) {
+      if (busy) return;
+      busy = true;
+      var prevIdx = cur;
+      var fromH   = viewport.offsetHeight;
+      var toH     = panes[idx].offsetHeight || fromH;
+      cur = idx;
+
+      if (noAnim) {
+        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        viewport.style.height = toH + 'px';
+        busy = false;
+        return;
+      }
+
+      /* Arriving pane starts invisible so it can fade in as it enters */
+      panes[idx].style.opacity = '0';
+
+      /* Snapshot current height — no transition */
+      viewport.style.transition = 'none';
+      viewport.style.height     = fromH + 'px';
+      /* Flush layout: commits all "from" states before animating */
+      void viewport.offsetHeight;
+
+      /* ① Slide track + animate height */
+      track.style.transform     = 'translateX(-' + (idx * 100) + '%)';
+      viewport.style.transition = 'height 400ms cubic-bezier(.4,0,.2,1)';
+      viewport.style.height     = toH + 'px';
+
+      /* ② Fade out departing pane */
+      panes[prevIdx].style.transition = 'opacity 200ms ease';
+      panes[prevIdx].style.opacity    = '0';
+
+      /* ③ Fade in arriving pane — delayed so it enters mid-slide */
+      setTimeout(function () {
+        panes[idx].style.transition = 'opacity 260ms ease';
+        panes[idx].style.opacity    = '1';
+      }, 180);
+
+      /* Cleanup inline styles after animation */
+      setTimeout(function () {
+        panes[prevIdx].style.transition = '';
+        panes[prevIdx].style.opacity    = '';
+        panes[idx].style.transition     = '';
+        panes[idx].style.opacity        = '';
+        busy = false;
+      }, 500);
     }
 
-    function showResult(key1, key2) {
-      step1.classList.remove('is-active');
-      step2.classList.remove('is-active');
-      result.classList.add('is-active');
-      showDots(-1, 2);
+    /* Keep viewport height in sync after resize */
+    window.addEventListener('resize', function () {
+      if (!busy) {
+        viewport.style.transition = 'none';
+        viewport.style.height = panes[cur].offsetHeight + 'px';
+      }
+    }, { passive: true });
+
+    /* Set initial viewport height once layout is complete */
+    requestAnimationFrame(function () {
+      viewport.style.height = panes[0].offsetHeight + 'px';
+    });
+
+    function buildCards(key1, key2) {
       var recs = (DB[key1] && DB[key1][key2]) || [];
       cards.innerHTML = recs.map(function (r) {
         return '<div class="wizard-rcard">'
@@ -337,32 +396,40 @@
       }).join('');
     }
 
-    $$('.wizard-opt', step1).forEach(function (btn) {
+    $$('.wizard-opt', panes[0]).forEach(function (btn) {
       btn.addEventListener('click', function () {
         sel.key1 = btn.dataset.key;
-        if (sel.key1 === 'tiefe') { showResult('tiefe', 'm'); } else { showStep2(); }
+        if (sel.key1 === 'tiefe') {
+          buildCards('tiefe', 'm');
+          slideTo(2); showDots(-1, 2);
+        } else {
+          slideTo(1); showDots(1, 1);
+        }
       });
     });
 
-    $$('.wizard-opt', step2).forEach(function (btn) {
+    $$('.wizard-opt', panes[1]).forEach(function (btn) {
       btn.addEventListener('click', function () {
         sel.key2 = btn.dataset.key;
-        showResult(sel.key1, sel.key2);
+        buildCards(sel.key1, sel.key2);
+        slideTo(2); showDots(-1, 2);
       });
     });
 
     var backBtn = document.getElementById('wizard-back');
     if (backBtn) backBtn.addEventListener('click', function () {
-      step2.classList.remove('is-active');
-      step1.classList.add('is-active');
-      showDots(0, 0);
+      slideTo(0); showDots(0, 0);
     });
 
     var backResult = document.getElementById('wizard-back-result');
     if (backResult) backResult.addEventListener('click', function () {
-      result.classList.remove('is-active');
-      if (sel.key1 === 'tiefe') { step1.classList.add('is-active'); showDots(0,0); }
-      else { step2.classList.add('is-active'); showDots(1,1); }
+      if (sel.key1 === 'tiefe') { slideTo(0); showDots(0, 0); }
+      else                      { slideTo(1); showDots(1, 1); }
+    });
+
+    var restartBtn = document.querySelector('#maschinenwizard .wizard-restart');
+    if (restartBtn) restartBtn.addEventListener('click', function () {
+      slideTo(0); showDots(0, 0);
     });
   })();
 

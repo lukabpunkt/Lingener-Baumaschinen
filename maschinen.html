@@ -101,65 +101,69 @@
             <div class="wizard-pdot"></div>
           </div>
         </div>
-        <!-- Schritt 1 -->
-        <div class="wizard-step is-active" id="wstep-1">
-          <p class="wizard-hint" style="margin-bottom:.75rem;">Welches Trägergerät haben Sie?</p>
-          <div class="wizard-opts">
-            <button class="wizard-opt" data-key="bagger" type="button">
-              <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="2" y="14" width="20" height="6" rx="1"/><path d="M6 14V9l4-5h8v10"/><path d="M14 9H9"/></svg></span>
-              <span class="wizard-opt-title">Bagger</span>
-              <span class="wizard-opt-desc">Mobil- oder Kettenbagger ab 6 t</span>
-            </button>
-            <button class="wizard-opt" data-key="traktor" type="button">
-              <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="2"/><path d="M10 17h5V9l-3-4H4v12h3"/></svg></span>
-              <span class="wizard-opt-title">Traktor / Schlepper</span>
-              <span class="wizard-opt-desc">Heck- oder Frontanbau</span>
-            </button>
-            <button class="wizard-opt" data-key="self" type="button">
-              <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="3" y="8" width="18" height="9" rx="2"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/><path d="M8 8V5h8v3"/></svg></span>
-              <span class="wizard-opt-title">Kein (Selbstfahrer)</span>
-              <span class="wizard-opt-desc">Eigenständige Maschine</span>
-            </button>
-            <button class="wizard-opt" data-key="tiefe" type="button">
-              <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></span>
-              <span class="wizard-opt-title">Tiefenfräse</span>
-              <span class="wizard-opt-desc">Frästiefe &gt; 1.500 mm</span>
-            </button>
+        <div class="wizard-viewport" id="wizard-viewport">
+          <div class="wizard-track" id="wizard-track">
+            <!-- Schritt 1 -->
+            <div class="wizard-pane" id="wstep-1">
+              <p class="wizard-hint" style="margin-bottom:.75rem;">Welches Trägergerät haben Sie?</p>
+              <div class="wizard-opts">
+                <button class="wizard-opt" data-key="bagger" type="button">
+                  <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="2" y="14" width="20" height="6" rx="1"/><path d="M6 14V9l4-5h8v10"/><path d="M14 9H9"/></svg></span>
+                  <span class="wizard-opt-title">Bagger</span>
+                  <span class="wizard-opt-desc">Mobil- oder Kettenbagger ab 6 t</span>
+                </button>
+                <button class="wizard-opt" data-key="traktor" type="button">
+                  <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="2"/><path d="M10 17h5V9l-3-4H4v12h3"/></svg></span>
+                  <span class="wizard-opt-title">Traktor / Schlepper</span>
+                  <span class="wizard-opt-desc">Heck- oder Frontanbau</span>
+                </button>
+                <button class="wizard-opt" data-key="self" type="button">
+                  <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><rect x="3" y="8" width="18" height="9" rx="2"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/><path d="M8 8V5h8v3"/></svg></span>
+                  <span class="wizard-opt-title">Kein (Selbstfahrer)</span>
+                  <span class="wizard-opt-desc">Eigenständige Maschine</span>
+                </button>
+                <button class="wizard-opt" data-key="tiefe" type="button">
+                  <span class="wizard-opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></span>
+                  <span class="wizard-opt-title">Tiefenfräse</span>
+                  <span class="wizard-opt-desc">Frästiefe &gt; 1.500 mm</span>
+                </button>
+              </div>
+            </div>
+            <!-- Schritt 2 -->
+            <div class="wizard-pane" id="wstep-2">
+              <button class="wizard-back" id="wizard-back" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Zurück
+              </button>
+              <p class="wizard-hint" style="margin-bottom:.75rem;">Welche maximale Frästiefe brauchen Sie?</p>
+              <div class="wizard-opts">
+                <button class="wizard-opt" data-key="s" type="button">
+                  <span class="wizard-opt-title">bis 600 mm</span>
+                  <span class="wizard-opt-desc">Glasfaser, Erdkabel, Kleinrohr</span>
+                </button>
+                <button class="wizard-opt" data-key="m" type="button">
+                  <span class="wizard-opt-title">bis 1.200 mm</span>
+                  <span class="wizard-opt-desc">Pipeline DN 100–200, Drainage</span>
+                </button>
+                <button class="wizard-opt" data-key="d" type="button">
+                  <span class="wizard-opt-title">bis 2.000 mm</span>
+                  <span class="wizard-opt-desc">Pipeline DN 300, Fernwärme</span>
+                </button>
+                <button class="wizard-opt" data-key="x" type="button">
+                  <span class="wizard-opt-title">über 2.000 mm</span>
+                  <span class="wizard-opt-desc">Sondertiefbau, Großrohr</span>
+                </button>
+              </div>
+            </div>
+            <!-- Ergebnis -->
+            <div class="wizard-pane" id="wizard-result">
+              <button class="wizard-back" id="wizard-back-result" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Neue Auswahl
+              </button>
+              <p class="wizard-hint" style="margin-bottom:.75rem;">Empfehlung für Ihr Projekt</p>
+              <div class="wizard-rcards" id="wizard-cards"></div>
+              <button class="wizard-restart" type="button">↺ Von vorne beginnen</button>
+            </div>
           </div>
-        </div>
-        <!-- Schritt 2 -->
-        <div class="wizard-step" id="wstep-2">
-          <button class="wizard-back" id="wizard-back" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Zurück
-          </button>
-          <p class="wizard-hint" style="margin-bottom:.75rem;">Welche maximale Frästiefe brauchen Sie?</p>
-          <div class="wizard-opts">
-            <button class="wizard-opt" data-key="s" type="button">
-              <span class="wizard-opt-title">bis 600 mm</span>
-              <span class="wizard-opt-desc">Glasfaser, Erdkabel, Kleinrohr</span>
-            </button>
-            <button class="wizard-opt" data-key="m" type="button">
-              <span class="wizard-opt-title">bis 1.200 mm</span>
-              <span class="wizard-opt-desc">Pipeline DN 100–200, Drainage</span>
-            </button>
-            <button class="wizard-opt" data-key="d" type="button">
-              <span class="wizard-opt-title">bis 2.000 mm</span>
-              <span class="wizard-opt-desc">Pipeline DN 300, Fernwärme</span>
-            </button>
-            <button class="wizard-opt" data-key="x" type="button">
-              <span class="wizard-opt-title">über 2.000 mm</span>
-              <span class="wizard-opt-desc">Sondertiefbau, Großrohr</span>
-            </button>
-          </div>
-        </div>
-        <!-- Ergebnis -->
-        <div class="wizard-result" id="wizard-result">
-          <button class="wizard-back" id="wizard-back-result" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Neue Auswahl
-          </button>
-          <p class="wizard-hint" style="margin-bottom:.75rem;">Empfehlung für Ihr Projekt</p>
-          <div class="wizard-rcards" id="wizard-cards"></div>
-          <button class="wizard-restart" type="button" onclick="(function(){var r=document.getElementById('wizard-result'),s=document.getElementById('wstep-1');r.classList.remove('is-active');s.classList.add('is-active');document.querySelectorAll('.wizard-pdot').forEach(function(d,i){d.classList.toggle('is-active',i===0);d.classList.remove('is-done');});})()">↺ Von vorne beginnen</button>
         </div>
       </div>
 

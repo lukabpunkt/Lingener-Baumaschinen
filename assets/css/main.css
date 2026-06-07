@@ -2223,10 +2223,19 @@ p { color: var(--steel-700); text-wrap: pretty; }
 }
 .wizard-pdot.is-active { background: var(--brand-light); }
 .wizard-pdot.is-done  { background: var(--brand); }
-.wizard-step { display: none; }
-.wizard-step.is-active { display: block; padding-top: .25rem; }
-.wizard-result { display: none; }
-.wizard-result.is-active { display: block; padding-top: .25rem; }
+.wizard-viewport { overflow: hidden; }
+.wizard-track {
+  display: flex;
+  align-items: flex-start;
+  transition: transform 480ms cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+.wizard-pane {
+  min-width: 100%;
+  flex-shrink: 0;
+  padding-top: .25rem;
+  will-change: opacity;
+}
 .wizard-q { font-size: 1.0625rem; font-weight: 600; color: var(--canvas); margin-bottom: .3rem; }
 .wizard-hint { font-size: .8375rem; color: var(--steel-400); margin-bottom: 1rem; }
 .wizard-opts {
