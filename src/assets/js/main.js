@@ -85,7 +85,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -4% 0px' });
     observed.forEach(el => io.observe(el));
   } else {
     observed.forEach(el => el.classList.add('is-visible'));
