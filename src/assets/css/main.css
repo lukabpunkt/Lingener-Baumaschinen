@@ -1845,7 +1845,9 @@ p { color: var(--steel-700); text-wrap: pretty; }
   flex-direction: column;
   align-items: flex-end;
   gap: .65rem;
+  pointer-events: none;
 }
+.fab-btn, .fab-item { pointer-events: auto; }
 @media (min-width: 768px) {
   .fab { right: 2rem; bottom: 2rem; }
 }
@@ -2564,7 +2566,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   position: fixed;
   right: 1.25rem;
   bottom: 5.5rem;
-  z-index: 490;
+  z-index: 510;
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;
