@@ -470,10 +470,10 @@ p { color: var(--steel-700); text-wrap: pretty; }
   justify-content: space-between;
   gap: 1rem;
 }
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .nav-inner { grid-template-columns: auto 1fr auto; gap: 1.5rem; }
 }
-@media (min-width: 1100px) {
+@media (min-width: 1280px) {
   .nav-inner { gap: 2.5rem; }
 }
 
@@ -506,11 +506,11 @@ p { color: var(--steel-700); text-wrap: pretty; }
   border-left: 1px solid var(--line-strong);
   display: none;
 }
-@media (min-width: 1200px) { .nav-brand .meta { display: block; } }
+@media (min-width: 1400px) { .nav-brand .meta { display: block; } }
 
-/* Nav links — hidden on mobile, visible at 900px+ */
+/* Nav links — hidden on mobile/tablet, visible at 1100px+ */
 .nav-links { display: none; }
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .nav-links {
     display: flex;
     align-items: center;
@@ -519,9 +519,9 @@ p { color: var(--steel-700); text-wrap: pretty; }
   }
   .nav-links a {
     position: relative;
-    padding: .55rem .75rem;
+    padding: .5rem .6rem;
     font-weight: 500;
-    font-size: .875rem;
+    font-size: .85rem;
     color: var(--steel-700);
     border-radius: 8px;
     transition: color var(--dur-fast);
@@ -532,13 +532,13 @@ p { color: var(--steel-700); text-wrap: pretty; }
   .nav-links a[aria-current="page"]::after {
     content: "";
     position: absolute;
-    left: .75rem; right: .75rem;
+    left: .6rem; right: .6rem;
     bottom: 0;
     height: 2px;
     background: var(--brand);
   }
 }
-@media (min-width: 1100px) {
+@media (min-width: 1280px) {
   .nav-links a { padding: .65rem 1rem; font-size: .9375rem; }
   .nav-links a[aria-current="page"]::after { left: 1rem; right: 1rem; }
 }
@@ -555,11 +555,11 @@ p { color: var(--steel-700); text-wrap: pretty; }
 @media (min-width: 480px) {
   .nav-cta .btn.btn-primary, .nav-cta .btn.btn-brand { display: inline-flex; }
 }
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .nav-cta .btn { display: inline-flex; }
 }
 
-/* Hamburger — visible by default, hidden at 900px+ */
+/* Hamburger — visible by default, hidden at 1100px+ */
 .nav-toggle {
   width: 44px; height: 44px;
   border-radius: 10px;
@@ -589,7 +589,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .nav-toggle[aria-expanded="true"] span { background: transparent; }
 .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span::after  { top: 0; transform: rotate(-45deg); }
-@media (min-width: 900px) { .nav-toggle { display: none; } }
+@media (min-width: 1100px) { .nav-toggle { display: none; } }
 
 /* Mobile drawer — iOS-sicher, kein display-Switch-Bug bei gescrollter Seite */
 .mobile-nav {
