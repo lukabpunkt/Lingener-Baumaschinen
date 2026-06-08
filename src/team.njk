@@ -1,0 +1,195 @@
+---
+pagination:
+  data: site.langs
+  size: 1
+  alias: lang
+permalink: "{{ '/en/team.html' if lang == 'en' else '/team.html' }}"
+layout: base.njk
+nav: "team"
+navSolid: true
+langDE: "/team.html"
+langEN: "/en/team.html"
+
+titleDE: "Über uns — LIBA Lingener Baumaschinen"
+titleEN: "About Us — LIBA Lingener Baumaschinen"
+descDE: "Das Team hinter LIBA – Lingener Baumaschinen: Geschäftsführung, Konstrukteure, Schweißer und Monteure, die seit Jahrzehnten Grabenfräsen für den weltweiten Einsatz bauen."
+descEN: "The team behind LIBA – Lingener Baumaschinen: management, engineers, welders and assembly technicians who have been building trench cutters for worldwide deployment for decades."
+canonicalDE: "https://www.lingener-baumaschinen.de/team.html"
+canonicalEN: "https://www.lingener-baumaschinen.de/en/team.html"
+ogTitleDE: "Über uns — LIBA Lingener Baumaschinen"
+ogTitleEN: "About Us — LIBA Lingener Baumaschinen"
+ogDescDE: "Menschen, die LIBA ausmachen: Geschäftsführung, Konstruktion, Fertigung — alle unter einem Dach in Lingen (Ems)."
+ogDescEN: "The people who make LIBA: management, engineering, manufacturing — all under one roof in Lingen (Ems)."
+
+eleventyComputed:
+  title: "{{ titleDE if lang == 'de' else titleEN }}"
+  description: "{{ descDE if lang == 'de' else descEN }}"
+  canonical: "{{ canonicalDE if lang == 'de' else canonicalEN }}"
+  ogTitle: "{{ ogTitleDE if lang == 'de' else ogTitleEN }}"
+  ogDescription: "{{ ogDescDE if lang == 'de' else ogDescEN }}"
+  ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
+---
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('/assets/images/hero/hero-3.jpg');" aria-hidden="true"></div>
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
+      <span class="sep">/</span>
+      <span>{% if lang == "de" %}Über uns{% else %}About Us{% endif %}</span>
+    </div>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Das Team{% else %}The Team{% endif %}</span>
+    <h1 data-split-lines class="mt-3">{% if lang == "de" %}Das Team hinter LIBA.<br><em class="serif-italic">Menschen, die Maschinen bauen.</em>{% else %}The team behind LIBA.<br><em class="serif-italic">People who build machines.</em>{% endif %}</h1>
+    <p>{% if lang == "de" %}Nicht Konzern, nicht anonym — ein Team aus Lingen (Ems), das seit Jahrzehnten Grabenfräsen baut, die auf der ganzen Welt im Einsatz sind.{% else %}Not a corporation, not anonymous — a team from Lingen (Ems) that has been building trench cutters for decades, deployed all over the world.{% endif %}</p>
+  </div>
+</section>
+
+<!-- 01 / Geschäftsführer -->
+<section class="section">
+  <div class="container">
+    <div class="split align-start reveal">
+      <div>
+        <span class="section-index">{% if lang == "de" %}01 / Geschäftsführer{% else %}01 / Managing Director{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Inhabergeführt.<br><em class="serif-italic">In der dritten Generation.</em>{% else %}Owner-managed.<br><em class="serif-italic">Third generation.</em>{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}[Platzhalter: Kurze Vorstellung des Geschäftsführers — Name, Hintergrund und Werdegang in 2–3 Sätzen.]{% else %}[Placeholder: Brief introduction of the managing director — name, background and career in 2–3 sentences.]{% endif %}</p>
+        <p class="mt-3" style="color: var(--steel-700);">{% if lang == "de" %}[Platzhalter: Persönliche Motivation und Verbindung zum Unternehmen — z. B. Aufgewachsen mit dem Betrieb, Übernahme der Leitung in [Jahr], Schwerpunkte und Ziele.]{% else %}[Placeholder: Personal motivation and connection to the company — e.g. grew up with the business, took over management in [year], areas of focus and goals.]{% endif %}</p>
+        <ul class="team-facts mt-4">
+          <li>
+            <span class="team-facts-key">{% if lang == "de" %}Funktion{% else %}Role{% endif %}</span>
+            <span class="team-facts-val">{% if lang == "de" %}Geschäftsführer{% else %}Managing Director{% endif %}</span>
+          </li>
+          <li>
+            <span class="team-facts-key">{% if lang == "de" %}Im Amt seit{% else %}In role since{% endif %}</span>
+            <span class="team-facts-val">[Jahr]</span>
+          </li>
+          <li>
+            <span class="team-facts-key">{% if lang == "de" %}Generation{% else %}Generation{% endif %}</span>
+            <span class="team-facts-val">{% if lang == "de" %}3. Generation der Gründerfamilie{% else %}3rd generation of founding family{% endif %}</span>
+          </li>
+          <li>
+            <span class="team-facts-key">{% if lang == "de" %}Standort{% else %}Location{% endif %}</span>
+            <span class="team-facts-val">Lingen (Ems)</span>
+          </li>
+        </ul>
+      </div>
+      <div class="media-frame">
+        <div class="img-placeholder">
+          <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="img-placeholder-label">{% if lang == "de" %}Foto des Geschäftsführers{% else %}Photo of Managing Director{% endif %}</span>
+        </div>
+        <span class="tag">[Name] · {% if lang == "de" %}Geschäftsführer{% else %}Managing Director{% endif %}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 / Das Team -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="heading">
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}02 / Das Team{% else %}02 / The Team{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Die Menschen<br><em class="serif-italic">hinter den Maschinen.</em>{% else %}The people<br><em class="serif-italic">behind the machines.</em>{% endif %}</h2>
+      </div>
+      <div class="aside">
+        <p class="lead">{% if lang == "de" %}Ein eingespieltes Team aus Konstrukteuren, Schweißern, Monteuren und Servicefachleuten — alle unter einem Dach in Lingen (Ems).{% else %}A close-knit team of engineers, welders, assembly technicians and service specialists — all under one roof in Lingen (Ems).{% endif %}</p>
+      </div>
+    </div>
+
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="team-card-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">[Name]</div>
+          <div class="team-card-role">{% if lang == "de" %}Konstruktion{% else %}Engineering{% endif %}</div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">[Name]</div>
+          <div class="team-card-role">{% if lang == "de" %}Fertigung{% else %}Manufacturing{% endif %}</div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">[Name]</div>
+          <div class="team-card-role">{% if lang == "de" %}Montage{% else %}Assembly{% endif %}</div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">[Name]</div>
+          <div class="team-card-role">{% if lang == "de" %}Vertrieb & Service{% else %}Sales & Service{% endif %}</div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">[Name]</div>
+          <div class="team-card-role">{% if lang == "de" %}[Abteilung / Funktion]{% else %}[Department / Role]{% endif %}</div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+        </div>
+        <div class="team-card-body">
+          <div class="team-card-name">[Name]</div>
+          <div class="team-card-role">{% if lang == "de" %}[Abteilung / Funktion]{% else %}[Department / Role]{% endif %}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 / Motivation -->
+<section class="section">
+  <div class="container">
+    <div class="split align-start reveal">
+      <div class="media-frame">
+        <div class="img-placeholder">
+          <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="img-placeholder-label">{% if lang == "de" %}Foto des Geschäftsführers{% else %}Photo of Managing Director{% endif %}</span>
+        </div>
+        <span class="tag">[Name] · {% if lang == "de" %}Geschäftsführer{% else %}Managing Director{% endif %}</span>
+      </div>
+      <div>
+        <span class="section-index">{% if lang == "de" %}03 / Motivation{% else %}03 / Motivation{% endif %}</span>
+        <blockquote class="team-quote mt-3">
+          {% if lang == "de" %}„[Platzhalter: Zitat des Geschäftsführers — eigene Worte zu Unternehmensphilosophie, Qualitätsanspruch oder dem Antrieb hinter LIBA. <em>2–3 prägnante Sätze.</em>]"{% else %}"[Placeholder: Quote from the managing director — personal words about the company philosophy, quality standards or the drive behind LIBA. <em>2–3 concise sentences.</em>]"{% endif %}
+        </blockquote>
+        <p class="lead mt-4" style="color: var(--steel-700);">{% if lang == "de" %}[Platzhalter: 2–3 Sätze über die Vision und Werte, die den Geschäftsführer und das gesamte Team jeden Tag antreiben.]{% else %}[Placeholder: 2–3 sentences about the vision and values that drive the managing director and the entire team every day.]{% endif %}</p>
+        <div class="mt-5">
+          <a href="{% if lang == 'de' %}/kontakt.html{% else %}/en/kontakt.html{% endif %}" class="btn btn-primary">
+            {% if lang == "de" %}Jetzt Termin vereinbaren{% else %}Book a consultation{% endif %}
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
