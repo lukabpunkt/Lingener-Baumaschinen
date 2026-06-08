@@ -87,7 +87,7 @@ eleventyComputed:
           {% for row in maschine.specs %}
           <tr>
             <th>{% if lang == "de" %}{{ row.de }}{% else %}{{ row.en }}{% endif %}</th>
-            <td>{{ row.val }}</td>
+            <td>{% if lang == "en" and row.valEN %}{{ row.valEN }}{% else %}{{ row.val }}{% endif %}</td>
           </tr>
           {% endfor %}
         </tbody>
