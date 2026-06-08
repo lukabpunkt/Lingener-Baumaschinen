@@ -37,7 +37,7 @@ eleventyComputed:
   ogDescription: "{{ ogDescDE if lang == 'de' else ogDescEN }}"
   ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
   schema: "{{ schemaDE if lang == 'de' else schemaEN }}"
-  extraBody: "{{ extraBodyDE if lang == 'de' else extraBodyEN }}"
+  extraBody: "{{ (extraBodyDE if lang == 'de' else extraBodyEN) | safe }}"
 ---
 
 <section class="page-hero">
