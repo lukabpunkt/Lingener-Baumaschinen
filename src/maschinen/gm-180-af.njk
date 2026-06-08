@@ -1,35 +1,51 @@
 ---
+pagination:
+  data: site.langs
+  size: 1
+  alias: lang
+permalink: "{{ '/en/maschinen/gm-180-af.html' if lang == 'en' else '/maschinen/gm-180-af.html' }}"
 layout: base.njk
-permalink: /maschinen/gm-180-af.html
-title: "GM 180 AF — Hochleistungs-Grabenfräse | LIBA"
-description: "Die GM 180 AF ist das Flaggschiff unter den LIBA Schlepperanbau-Fräsen — bis zu 1.800 mm Frästiefe für Pipeline, Glasfaser und Kabel."
-canonical: "https://www.lingener-baumaschinen.de/maschinen/gm-180-af.html"
-langDE: "/maschinen/gm-180-af.html"
-langEN: "/en/maschinen/gm-180-af.html"
 nav: "maschinen"
 navSolid: true
 useGoogleFonts: true
-og:
-  type: "website"
-  url: "https://www.lingener-baumaschinen.de/maschinen/gm-180-af.html"
-  title: "GM 180 AF — Hochleistungs-Grabenfräse | LIBA"
-  description: "Das Flaggschiff der LIBA Schlepperanbau-Fräsen. Bis zu 1.800 mm Frästiefe für Pipeline, Glasfaser und Kabel. Made in Germany."
-  image: "https://www.lingener-baumaschinen.de/assets/images/products/gm-180-af.jpg"
-  locale: "de_DE"
-schema: >
+langDE: "/maschinen/gm-180-af.html"
+langEN: "/en/maschinen/gm-180-af.html"
+
+titleDE: "GM 180 AF — Hochleistungs-Grabenfräse | LIBA"
+titleEN: "GM 180 AF — High-Performance Trench Cutter | LIBA"
+descDE: "Die GM 180 AF ist das Flaggschiff unter den LIBA Schlepperanbau-Fräsen — bis zu 1.800 mm Frästiefe für Pipeline, Glasfaser und Kabel."
+descEN: "The GM 180 AF is the flagship LIBA tractor-mounted trench cutter — up to 1,800 mm cutting depth for pipeline, fibre optic and cable installation."
+canonicalDE: "https://www.lingener-baumaschinen.de/maschinen/gm-180-af.html"
+canonicalEN: "https://www.lingener-baumaschinen.de/en/maschinen/gm-180-af.html"
+ogTitleDE: "GM 180 AF — Hochleistungs-Grabenfräse | LIBA"
+ogTitleEN: "GM 180 AF — High-Performance Trench Cutter | LIBA"
+ogDescDE: "Das Flaggschiff der LIBA Schlepperanbau-Fräsen. Bis zu 1.800 mm Frästiefe für Pipeline, Glasfaser und Kabel. Made in Germany."
+ogDescEN: "The flagship LIBA tractor-mounted trench cutter. Up to 1,800 mm cutting depth for pipeline, fibre optic and cable installation. Made in Germany."
+schemaDE: >-
   {"@context":"https://schema.org","@type":"Product","name":"GM 180 AF","description":"Hochleistungs-Grabenfräse für Pipeline-, Kabel- und Glasfaserverlegung. Bis zu 1.800 mm Frästiefe. Zapfwellenantrieb ab 180 kW. Made in Germany.","image":"https://www.lingener-baumaschinen.de/assets/images/products/gm-180-af.jpg","url":"https://www.lingener-baumaschinen.de/maschinen/gm-180-af.html","brand":{"@type":"Brand","name":"LIBA – Lingener Baumaschinen"},"manufacturer":{"@type":"Organization","name":"Lingener Baumaschinen GmbH & Co. KG","url":"https://www.lingener-baumaschinen.de"},"countryOfOrigin":"DE","offers":{"@type":"Offer","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://www.lingener-baumaschinen.de/kontakt.html","seller":{"@type":"Organization","name":"Lingener Baumaschinen GmbH & Co. KG"}}}
+schemaEN: >-
+  {"@context":"https://schema.org","@type":"Product","name":"GM 180 AF","description":"High-performance trench cutter for pipeline, cable and fibre optic installation. Up to 1,800 mm cutting depth. PTO drive from 180 kW. Made in Germany.","image":"https://www.lingener-baumaschinen.de/assets/images/products/gm-180-af.jpg","url":"https://www.lingener-baumaschinen.de/en/maschinen/gm-180-af.html","brand":{"@type":"Brand","name":"LIBA – Lingener Baumaschinen"},"manufacturer":{"@type":"Organization","name":"Lingener Baumaschinen GmbH & Co. KG","url":"https://www.lingener-baumaschinen.de"},"countryOfOrigin":"DE","offers":{"@type":"Offer","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://www.lingener-baumaschinen.de/en/kontakt.html","seller":{"@type":"Organization","name":"Lingener Baumaschinen GmbH & Co. KG"}}}
+
+eleventyComputed:
+  title: "{{ titleDE if lang == 'de' else titleEN }}"
+  description: "{{ descDE if lang == 'de' else descEN }}"
+  canonical: "{{ canonicalDE if lang == 'de' else canonicalEN }}"
+  ogTitle: "{{ ogTitleDE if lang == 'de' else ogTitleEN }}"
+  ogDescription: "{{ ogDescDE if lang == 'de' else ogDescEN }}"
+  ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
+  schema: "{{ schemaDE if lang == 'de' else schemaEN }}"
 ---
 
 <section class="page-hero">
   <div class="page-hero-bg" style="background-image: url('/assets/images/products/gm-180-af.jpg');" aria-hidden="true"></div>
   <div class="container">
-    <div class="breadcrumbs"><a href="/index.html">Start</a><span class="sep">/</span><a href="/maschinen.html">Maschinen</a><span class="sep">/</span><span>GM 180 AF</span></div>
-    <span class="eyebrow hero-eyebrow"><span class="dot"></span>Schlepperanbau · Flaggschiff</span>
+    <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}">{% if lang == "de" %}Maschinen{% else %}Machines{% endif %}</a><span class="sep">/</span><span>GM 180 AF</span></div>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Schlepperanbau · Flaggschiff{% else %}Tractor-mounted · Flagship{% endif %}</span>
     <h1 data-split-lines class="mt-3">GM 180 AF</h1>
-    <p>Die Hochleistungs-Grabenfräse für Pipeline-, Kabel- und Glasfaser­verlegung. Bis zu 1.800 mm Frästiefe, kompromisslose Konstruktion, präzise Steuerung.</p>
+    <p>{% if lang == "de" %}Die Hochleistungs-Grabenfräse für Pipeline-, Kabel- und Glasfaser­verlegung. Bis zu 1.800 mm Frästiefe, kompromisslose Konstruktion, präzise Steuerung.{% else %}The high-performance trench cutter for pipeline, cable and fibre optic installation. Up to 1,800 mm cutting depth, uncompromising construction, precise control.{% endif %}</p>
     <div class="hero-actions mt-4">
-      <a href="/kontakt.html" class="btn btn-accent is-lg">Angebot anfragen <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-      <a href="#technik" class="btn btn-outline-light">Technische Daten</a>
+      <a href="{% if lang == 'de' %}/kontakt.html{% else %}/en/kontakt.html{% endif %}" class="btn btn-accent is-lg">{% if lang == "de" %}Angebot anfragen{% else %}Request a quote{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#technik" class="btn btn-outline-light">{% if lang == "de" %}Technische Daten{% else %}Technical specifications{% endif %}</a>
     </div>
   </div>
 </section>
@@ -37,16 +53,16 @@ schema: >
 <section class="section">
   <div class="container">
     <div class="split align-start reveal">
-      <div class="media-frame is-wide"><img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt=""><span class="tag">Im Einsatz · Norddeutschland</span></div>
+      <div class="media-frame is-wide"><img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt=""><span class="tag">{% if lang == "de" %}Im Einsatz · Norddeutschland{% else %}In deployment · Northern Germany{% endif %}</span></div>
       <div>
-        <span class="section-index">01 / Übersicht</span>
-        <h2 class="mt-3">Mehr Tiefe.<br>Mehr Vortrieb.<br><em class="serif-italic">Mehr Tag.</em></h2>
-        <p class="lead mt-3">Die GM 180 AF ist die kompromissloseste Schlepperanbau-Fräse im LIBA-Portfolio. Entwickelt für Tiefbau-Profis, die jeden Tag liefern müssen — egal ob Mergel, Asphalt­randstreifen oder vibrierender Lehm.</p>
+        <span class="section-index">{% if lang == "de" %}01 / Übersicht{% else %}01 / Overview{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Mehr Tiefe.<br>Mehr Vortrieb.<br><em class="serif-italic">Mehr Tag.</em>{% else %}More depth.<br>More advance.<br><em class="serif-italic">More day.</em>{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}Die GM 180 AF ist die kompromissloseste Schlepperanbau-Fräse im LIBA-Portfolio. Entwickelt für Tiefbau-Profis, die jeden Tag liefern müssen — egal ob Mergel, Asphalt­randstreifen oder vibrierender Lehm.{% else %}The GM 180 AF is the most uncompromising tractor-mounted trench cutter in the LIBA portfolio. Developed for civil engineering professionals who need to deliver every single day — whether it's marl, tarmac edge strips or vibrating clay.{% endif %}</p>
         <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>Bis zu 1.800 mm Frästiefe</strong><span>Größte verlängerte Schlepperanbau-Fräse von LIBA.</span></div></li>
-          <li><span class="num">02</span><div><strong>Stufenlos einstellbare Schnittbreite</strong><span>Adaptierbar an Pipeline-Geometrie und Verfüllvolumen.</span></div></li>
-          <li><span class="num">03</span><div><strong>Auswurfband seriell</strong><span>Aushub kontrolliert ablegen oder seitlich verlagern.</span></div></li>
-          <li><span class="num">04</span><div><strong>Werkzeug nach Boden</strong><span>Standard, Mergel, Hartgestein — passende Bestückung.</span></div></li>
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Bis zu 1.800 mm Frästiefe{% else %}Up to 1,800 mm cutting depth{% endif %}</strong><span>{% if lang == "de" %}Größte verlängerte Schlepperanbau-Fräse von LIBA.{% else %}The largest extended tractor-mounted trench cutter from LIBA.{% endif %}</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Stufenlos einstellbare Schnittbreite{% else %}Continuously adjustable cutting width{% endif %}</strong><span>{% if lang == "de" %}Adaptierbar an Pipeline-Geometrie und Verfüllvolumen.{% else %}Adaptable to pipeline geometry and backfill volume.{% endif %}</span></div></li>
+          <li><span class="num">03</span><div><strong>{% if lang == "de" %}Auswurfband seriell{% else %}Spoil conveyor as standard{% endif %}</strong><span>{% if lang == "de" %}Aushub kontrolliert ablegen oder seitlich verlagern.{% else %}Controlled spoil placement or lateral displacement.{% endif %}</span></div></li>
+          <li><span class="num">04</span><div><strong>{% if lang == "de" %}Werkzeug nach Boden{% else %}Tooling matched to ground{% endif %}</strong><span>{% if lang == "de" %}Standard, Mergel, Hartgestein — passende Bestückung.{% else %}Standard, marl, hard rock — the right configuration.{% endif %}</span></div></li>
         </ul>
       </div>
     </div>
@@ -57,31 +73,31 @@ schema: >
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index is-dark" style="color: var(--brand-light);">02 / Technische Daten</span>
-        <h2 class="mt-3">Spezifikationen<br><em class="serif-italic">GM 180 AF.</em></h2>
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}02 / Technische Daten{% else %}02 / Technical Specifications{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Spezifikationen<br><em class="serif-italic">GM 180 AF.</em>{% else %}Specifications<br><em class="serif-italic">GM 180 AF.</em>{% endif %}</h2>
       </div>
       <div class="aside">
-        <p class="lead">Richtwerte je nach Konfiguration. Wir bestücken jede Maschine individuell — schicken Sie uns Boden- und Trassenprofil zu.</p>
+        <p class="lead">{% if lang == "de" %}Richtwerte je nach Konfiguration. Wir bestücken jede Maschine individuell — schicken Sie uns Boden- und Trassenprofil zu.{% else %}Indicative figures depending on configuration. We configure every machine individually — please send us your ground and route profile.{% endif %}</p>
       </div>
     </div>
 
     <div class="grid grid-2 reveal" style="gap: 2rem;">
       <table class="spec-table">
         <tbody>
-          <tr><th>Antriebsart</th><td>Zapfwellen-Antrieb über Schlepper</td></tr>
-          <tr><th>Empfohlene Trägerleistung</th><td>ab 180 kW / 245 PS</td></tr>
-          <tr><th>Max. Frästiefe</th><td>bis 1.800 mm</td></tr>
-          <tr><th>Frässchnittbreite</th><td>200 – 600 mm (konfigurierbar)</td></tr>
-          <tr><th>Anbau</th><td>Dreipunkt-Heckanbau, Kat. III/IV</td></tr>
+          <tr><th>{% if lang == "de" %}Antriebsart{% else %}Drive type{% endif %}</th><td>{% if lang == "de" %}Zapfwellen-Antrieb über Schlepper{% else %}PTO shaft drive via tractor{% endif %}</td></tr>
+          <tr><th>{% if lang == "de" %}Empfohlene Trägerleistung{% else %}Recommended carrier power{% endif %}</th><td>{% if lang == "de" %}ab 180 kW / 245 PS{% else %}from 180 kW / 245 hp{% endif %}</td></tr>
+          <tr><th>{% if lang == "de" %}Max. Frästiefe{% else %}Max. cutting depth{% endif %}</th><td>{% if lang == "de" %}bis 1.800 mm{% else %}up to 1,800 mm{% endif %}</td></tr>
+          <tr><th>{% if lang == "de" %}Frässchnittbreite{% else %}Cutting width{% endif %}</th><td>{% if lang == "de" %}200 – 600 mm (konfigurierbar){% else %}200 – 600 mm (configurable){% endif %}</td></tr>
+          <tr><th>{% if lang == "de" %}Anbau{% else %}Attachment{% endif %}</th><td>{% if lang == "de" %}Dreipunkt-Heckanbau, Kat. III/IV{% else %}Three-point rear linkage, Cat. III/IV{% endif %}</td></tr>
         </tbody>
       </table>
       <table class="spec-table">
         <tbody>
-          <tr><th>Steuerung</th><td>Elektrohydraulisch · proportional</td></tr>
-          <tr><th>Aushubband</th><td>Serienmäßig · seitenwechselbar</td></tr>
-          <tr><th>Werkzeug</th><td>Wechselbare Meißel-Bestückung</td></tr>
-          <tr><th>Einsatzgebiet</th><td>Pipeline, Kabel, Glasfaser, Drainage</td></tr>
-          <tr><th>Fertigung</th><td>Werk Lingen (Ems) · Made in Germany</td></tr>
+          <tr><th>{% if lang == "de" %}Steuerung{% else %}Control{% endif %}</th><td>{% if lang == "de" %}Elektrohydraulisch · proportional{% else %}Electro-hydraulic · proportional{% endif %}</td></tr>
+          <tr><th>{% if lang == "de" %}Aushubband{% else %}Spoil conveyor{% endif %}</th><td>{% if lang == "de" %}Serienmäßig · seitenwechselbar{% else %}Standard · side-reversible{% endif %}</td></tr>
+          <tr><th>{% if lang == "de" %}Werkzeug{% else %}Tooling{% endif %}</th><td>{% if lang == "de" %}Wechselbare Meißel-Bestückung{% else %}Interchangeable pick configuration{% endif %}</td></tr>
+          <tr><th>{% if lang == "de" %}Einsatzgebiet{% else %}Application{% endif %}</th><td>{% if lang == "de" %}Pipeline, Kabel, Glasfaser, Drainage{% else %}Pipeline, cable, fibre optic, drainage{% endif %}</td></tr>
+          <tr><th>{% if lang == "de" %}Fertigung{% else %}Manufacturing{% endif %}</th><td>{% if lang == "de" %}Werk Lingen (Ems) · Made in Germany{% else %}Factory Lingen (Ems) · Made in Germany{% endif %}</td></tr>
         </tbody>
       </table>
     </div>
@@ -92,27 +108,25 @@ schema: >
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index is-dark" style="color: var(--brand-light);">03 / Maschinenfilm</span>
-        <h2 class="mt-3">Die GM 180 AF<br><em class="serif-italic">in Aktion.</em></h2>
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}03 / Maschinenfilm{% else %}03 / Machine Film{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Die GM 180 AF<br><em class="serif-italic">in Aktion.</em>{% else %}The GM 180 AF<br><em class="serif-italic">in action.</em>{% endif %}</h2>
       </div>
       <div class="aside">
-        <p class="lead">Sehen Sie, wie die GM 180 AF durch kompakten Mergel schneidet — 1.200 mm Frästiefe, kontrollierter Aushub, konstanter Vortrieb.</p>
+        <p class="lead">{% if lang == "de" %}Sehen Sie, wie die GM 180 AF durch kompakten Mergel schneidet — 1.200 mm Frästiefe, kontrollierter Aushub, konstanter Vortrieb.{% else %}See how the GM 180 AF cuts through compact marl — 1,200 mm cutting depth, controlled spoil removal, consistent advance.{% endif %}</p>
       </div>
     </div>
     <div class="reveal" style="position: relative; aspect-ratio: 16/9; border-radius: var(--radius); overflow: hidden; background: var(--steel-900); border: 1px solid rgba(255,255,255,.08);">
-      <!-- YouTube-Embed: VIDEO_ID durch die echte YouTube-ID ersetzen, z.B. dQw4w9WgXcQ -->
       <iframe
         src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0&modestbranding=1&color=white"
-        title="GM 180 AF — LIBA Lingener Baumaschinen im Einsatz"
+        title="{% if lang == 'de' %}GM 180 AF — LIBA Lingener Baumaschinen im Einsatz{% else %}GM 180 AF — LIBA Lingener Baumaschinen in action{% endif %}"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
         loading="lazy"
         style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;">
       </iframe>
-      <!-- Platzhalter solange VIDEO_ID nicht gesetzt ist -->
       <div id="video-placeholder" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; background: var(--steel-900); color: var(--steel-400);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48" style="color: var(--brand-light); opacity: .6;"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
-        <p style="font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; font-family: var(--font-mono);">Maschinenfilm · folgt</p>
+        <p style="font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; font-family: var(--font-mono);">{% if lang == "de" %}Maschinenfilm · folgt{% else %}Machine film · coming soon{% endif %}</p>
       </div>
     </div>
     <script>
@@ -129,22 +143,22 @@ schema: >
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index">04 / Typische Einsätze</span>
-        <h2 class="mt-3">Wo die GM 180 AF<br><em class="serif-italic">arbeitet.</em></h2>
+        <span class="section-index">{% if lang == "de" %}04 / Typische Einsätze{% else %}04 / Typical Applications{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Wo die GM 180 AF<br><em class="serif-italic">arbeitet.</em>{% else %}Where the GM 180 AF<br><em class="serif-italic">works.</em>{% endif %}</h2>
       </div>
     </div>
     <div class="apps">
-      <a href="/anwendungen.html#pipeline" class="app reveal">
+      <a href="{% if lang == 'de' %}/anwendungen.html#pipeline{% else %}/en/anwendungen.html#pipeline{% endif %}" class="app reveal">
         <img loading="lazy" src="/assets/images/applications/rohrleitungsbau.jpg" alt="">
-        <div class="app-body"><div class="idx">01 — Versorgung</div><h3>Pipeline-Verlegung</h3><p>Gas, Wasser, Fernwärme — definierte Grabengeometrie.</p></div>
+        <div class="app-body"><div class="idx">{% if lang == "de" %}01 — Versorgung{% else %}01 — Utilities{% endif %}</div><h3>{% if lang == "de" %}Pipeline-Verlegung{% else %}Pipeline installation{% endif %}</h3><p>{% if lang == "de" %}Gas, Wasser, Fernwärme — definierte Grabengeometrie.{% else %}Gas, water, district heating — defined trench geometry.{% endif %}</p></div>
       </a>
-      <a href="/anwendungen.html#kabel" class="app reveal reveal-delay-1">
+      <a href="{% if lang == 'de' %}/anwendungen.html#kabel{% else %}/en/anwendungen.html#kabel{% endif %}" class="app reveal reveal-delay-1">
         <img loading="lazy" src="/assets/images/applications/kabelverlegung.jpg" alt="">
-        <div class="app-body"><div class="idx">02 — Energie</div><h3>Erdkabel &amp; Solar</h3><p>Hohe Tagesleistung in Solarpark- und Trassen-Projekten.</p></div>
+        <div class="app-body"><div class="idx">{% if lang == "de" %}02 — Energie{% else %}02 — Energy{% endif %}</div><h3>{% if lang == "de" %}Erdkabel &amp; Solar{% else %}Earth cables &amp; solar{% endif %}</h3><p>{% if lang == "de" %}Hohe Tagesleistung in Solarpark- und Trassen-Projekten.{% else %}High daily output on solar park and route projects.{% endif %}</p></div>
       </a>
-      <a href="/anwendungen.html#glasfaser" class="app reveal reveal-delay-2">
+      <a href="{% if lang == 'de' %}/anwendungen.html#glasfaser{% else %}/en/anwendungen.html#glasfaser{% endif %}" class="app reveal reveal-delay-2">
         <img loading="lazy" src="/assets/images/applications/glasfaser.webp" alt="">
-        <div class="app-body"><div class="idx">03 — Telekom</div><h3>Glasfaser Backbone</h3><p>Schnelle, präzise Verlegung in der Backbone-Trasse.</p></div>
+        <div class="app-body"><div class="idx">{% if lang == "de" %}03 — Telekom{% else %}03 — Telecom{% endif %}</div><h3>{% if lang == "de" %}Glasfaser Backbone{% else %}Fibre optic backbone{% endif %}</h3><p>{% if lang == "de" %}Schnelle, präzise Verlegung in der Backbone-Trasse.{% else %}Fast, precise installation on backbone routes.{% endif %}</p></div>
       </a>
     </div>
   </div>
@@ -154,18 +168,18 @@ schema: >
   <div class="container">
     <div class="cta-block reveal">
       <div>
-        <span class="eyebrow is-dark"><span class="dot"></span>Konkrete Anfrage</span>
-        <h2 class="mt-3">Konfigurieren Sie<br>Ihre <em>GM 180 AF.</em></h2>
-        <p>Werkzeug-Bestückung, Schnittbreite, Anbau-Kategorie — jede Maschine wird individuell konfiguriert. Sprechen Sie mit unserer Konstruktion über Ihren Einsatz.</p>
+        <span class="eyebrow is-dark"><span class="dot"></span>{% if lang == "de" %}Konkrete Anfrage{% else %}Specific Enquiry{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Konfigurieren Sie<br>Ihre <em>GM 180 AF.</em>{% else %}Configure your<br><em>GM 180 AF.</em>{% endif %}</h2>
+        <p>{% if lang == "de" %}Werkzeug-Bestückung, Schnittbreite, Anbau-Kategorie — jede Maschine wird individuell konfiguriert. Sprechen Sie mit unserer Konstruktion über Ihren Einsatz.{% else %}Tooling configuration, cutting width, attachment category — every machine is individually configured. Talk to our engineering team about your application.{% endif %}</p>
         <div class="actions">
-          <a href="/kontakt.html" class="btn btn-accent is-lg">Angebot anfragen <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-          <a href="/maschinen.html" class="btn btn-outline-light">Alle Maschinen</a>
+          <a href="{% if lang == 'de' %}/kontakt.html{% else %}/en/kontakt.html{% endif %}" class="btn btn-accent is-lg">{% if lang == "de" %}Angebot anfragen{% else %}Request a quote{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}" class="btn btn-outline-light">{% if lang == "de" %}Alle Maschinen{% else %}All machines{% endif %}</a>
         </div>
       </div>
       <dl class="cta-side">
-        <dt>Vertrieb direkt vom Werk</dt>
+        <dt>{% if lang == "de" %}Vertrieb direkt vom Werk{% else %}Sales direct from the factory{% endif %}</dt>
         <dd>+49 (0) 591 76 314</dd>
-        <dt>E-Mail</dt>
+        <dt>{% if lang == "de" %}E-Mail{% else %}Email{% endif %}</dt>
         <dd style="word-break: break-word;">info@lingener-baumaschinen.de</dd>
       </dl>
     </div>

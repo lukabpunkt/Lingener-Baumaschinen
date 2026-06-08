@@ -10,16 +10,20 @@
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ canonical }}">
-  <meta property="og:title" content="{{ og.title if og.title else title }}">
-  <meta property="og:description" content="{{ og.description if og.description else description }}">
-  <meta property="og:image" content="{{ og.image if og.image else 'https://www.lingener-baumaschinen.de/assets/images/hero/hero-1.jpg' }}">
-  <meta property="og:locale" content="{{ og.locale if og.locale else 'de_DE' }}">
+  <meta property="og:title" content="{{ ogTitle if ogTitle else (og.title if og else title) }}">
+  <meta property="og:description" content="{{ ogDescription if ogDescription else (og.description if og else description) }}">
+  <meta property="og:image" content="{{ ogImage if ogImage else (og.image if og else 'https://www.lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
+  <meta property="og:locale" content="{{ ogLocale if ogLocale else (og.locale if og else 'de_DE') }}">
   {% if lang == "en" %}<meta property="og:locale:alternate" content="de_DE">{% endif %}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ og.title if og.title else title }}">
-  <meta name="twitter:description" content="{{ og.description if og.description else description }}">
-  <meta name="twitter:image" content="{{ og.image if og.image else 'https://www.lingener-baumaschinen.de/assets/images/hero/hero-1.jpg' }}">
+  <meta name="twitter:title" content="{{ ogTitle if ogTitle else (og.title if og else title) }}">
+  <meta name="twitter:description" content="{{ ogDescription if ogDescription else (og.description if og else description) }}">
+  <meta name="twitter:image" content="{{ ogImage if ogImage else (og.image if og else 'https://www.lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
   <link rel="canonical" href="{{ canonical }}">
+  {% if langDE and langEN %}
+  <link rel="alternate" hreflang="de" href="https://www.lingener-baumaschinen.de{{ langDE }}">
+  <link rel="alternate" hreflang="en" href="https://www.lingener-baumaschinen.de{{ langEN }}">
+  {% endif %}
   {% if extraHead %}{{ extraHead | safe }}{% endif %}
   {% if preloadImage %}<link rel="preload" as="image" href="{{ preloadImage }}" fetchpriority="high">{% endif %}
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo/favicon-32.png">

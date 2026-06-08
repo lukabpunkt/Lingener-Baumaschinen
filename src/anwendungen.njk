@@ -1,29 +1,47 @@
 ---
+pagination:
+  data: site.langs
+  size: 1
+  alias: lang
+permalink: "{{ '/en/anwendungen.html' if lang == 'en' else '/anwendungen.html' }}"
 layout: base.njk
-permalink: /anwendungen.html
-title: "Anwendungen — LIBA Lingener Baumaschinen"
-description: "LIBA Grabenfräsen im Einsatz: Glasfaserausbau, Pipeline, Kabeltiefbau, Drainage, Landwirtschaft, Sportplatzbau, Bergbau und mehr."
-canonical: "https://www.lingener-baumaschinen.de/anwendungen.html"
-langDE: "/anwendungen.html"
-langEN: "/en/anwendungen.html"
 nav: "anwendungen"
 navSolid: true
-og:
-  title: "Anwendungen — LIBA Lingener Baumaschinen"
-  description: "Glasfaser, Pipeline, Strom, Wasser, Sport, Agrar, Bergbau. Sechzig Jahre Maschinenentwicklung — abgestimmt auf reale Aufgaben unter realen Bedingungen."
-  image: "https://www.lingener-baumaschinen.de/assets/images/applications/rohrleitungsbau.jpg"
-  locale: "de_DE"
-schema: >
+langDE: "/anwendungen.html"
+langEN: "/en/anwendungen.html"
+
+titleDE: "Anwendungen — LIBA Lingener Baumaschinen"
+titleEN: "Applications — LIBA Lingener Baumaschinen"
+descDE: "LIBA Grabenfräsen im Einsatz: Glasfaserausbau, Pipeline, Kabeltiefbau, Drainage, Landwirtschaft, Sportplatzbau, Bergbau und mehr."
+descEN: "LIBA trench cutters in action: fibre optic rollout, pipeline, cable civil engineering, drainage, agriculture, sports field construction, mining and more."
+canonicalDE: "https://www.lingener-baumaschinen.de/anwendungen.html"
+canonicalEN: "https://www.lingener-baumaschinen.de/en/anwendungen.html"
+ogTitleDE: "Anwendungen — LIBA Lingener Baumaschinen"
+ogTitleEN: "Applications — LIBA Lingener Baumaschinen"
+ogDescDE: "Glasfaser, Pipeline, Strom, Wasser, Sport, Agrar, Bergbau. Sechzig Jahre Maschinenentwicklung — abgestimmt auf reale Aufgaben unter realen Bedingungen."
+ogDescEN: "Fibre optic, pipeline, power, water, sports, agriculture, mining. Sixty years of machine development — tailored to real tasks under real conditions."
+schemaDE: >-
   {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+schemaEN: >-
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de/en/anwendungen.html","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Manufacturer specialising in the sale, hire and servicing of trench cutters for civil engineering, cable, road and track construction. Founded 1969, worldwide dealer network.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Lower Saxony","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+
+eleventyComputed:
+  title: "{{ titleDE if lang == 'de' else titleEN }}"
+  description: "{{ descDE if lang == 'de' else descEN }}"
+  canonical: "{{ canonicalDE if lang == 'de' else canonicalEN }}"
+  ogTitle: "{{ ogTitleDE if lang == 'de' else ogTitleEN }}"
+  ogDescription: "{{ ogDescDE if lang == 'de' else ogDescEN }}"
+  ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
+  schema: "{{ schemaDE if lang == 'de' else schemaEN }}"
 ---
 
 <section class="page-hero">
   <div class="page-hero-bg" style="background-image: url('/assets/images/applications/rohrleitungsbau.jpg');" aria-hidden="true"></div>
   <div class="container">
-    <div class="breadcrumbs"><a href="/index.html">Start</a><span class="sep">/</span><span>Anwendungen</span></div>
-    <span class="eyebrow hero-eyebrow"><span class="dot"></span>Einsatzbereiche</span>
-    <h1 data-split-lines class="mt-3">Wo LIBA <em class="serif-italic">arbeitet.</em></h1>
-    <p>Glasfaser, Pipeline, Strom, Wasser, Sport, Agrar, Bergbau, Gleis. Sechzig Jahre Maschinenentwicklung — abgestimmt auf reale Aufgaben unter realen Bedingungen.</p>
+    <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Anwendungen{% else %}Applications{% endif %}</span></div>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Einsatzbereiche{% else %}Fields of Application{% endif %}</span>
+    <h1 data-split-lines class="mt-3">{% if lang == "de" %}Wo LIBA <em class="serif-italic">arbeitet.</em>{% else %}Where LIBA <em class="serif-italic">works.</em>{% endif %}</h1>
+    <p>{% if lang == "de" %}Glasfaser, Pipeline, Strom, Wasser, Sport, Agrar, Bergbau, Gleis. Sechzig Jahre Maschinenentwicklung — abgestimmt auf reale Aufgaben unter realen Bedingungen.{% else %}Fibre optic, pipeline, power, water, sports, agriculture, mining, track. Sixty years of machine development — tailored to real tasks under real conditions.{% endif %}</p>
   </div>
 </section>
 
@@ -32,13 +50,13 @@ schema: >
 
     <div id="glasfaser" class="split align-start reveal">
       <div>
-        <span class="section-index">01 / Telekommunikation</span>
-        <h2 class="mt-3">Glasfaser­ausbau</h2>
-        <p class="lead mt-3">Schmale Gräben, schnelle Vortriebsgeschwindigkeit, minimale Schädigung der Oberfläche. LIBA-Fräsen verlegen tagelang stabil bis zu 1.000 Meter Glasfaser-Trasse pro Tag — wirtschaftlich überlegen gegenüber Bagger und Trennsäge.</p>
+        <span class="section-index">{% if lang == "de" %}01 / Telekommunikation{% else %}01 / Telecommunications{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Glasfaser­ausbau{% else %}Fibre Optic Rollout{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}Schmale Gräben, schnelle Vortriebsgeschwindigkeit, minimale Schädigung der Oberfläche. LIBA-Fräsen verlegen tagelang stabil bis zu 1.000 Meter Glasfaser-Trasse pro Tag — wirtschaftlich überlegen gegenüber Bagger und Trennsäge.{% else %}Narrow trenches, fast advance speed, minimal surface damage. LIBA cutters work steadily day after day, achieving up to 1,000 metres of fibre optic route per day — economically superior to excavators and cut-off saws.{% endif %}</p>
         <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>Empfohlene Modelle</strong><span>GM 600 R · GM 4 Raupe · GM 450 H · GM 180 AF</span></div></li>
-          <li><span class="num">02</span><div><strong>Trassengeometrie</strong><span>Schnittbreiten ab 80 mm — präzise und reproduzierbar.</span></div></li>
-          <li><span class="num">03</span><div><strong>Tagesleistung</strong><span>Bis zu 1.000 Laufmeter im Vortrieb (bodenabhängig).</span></div></li>
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Empfohlene Modelle{% else %}Recommended models{% endif %}</strong><span>GM 600 R · {% if lang == "de" %}GM 4 Raupe{% else %}GM 4 Crawler{% endif %} · GM 450 H · GM 180 AF</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Trassengeometrie{% else %}Route geometry{% endif %}</strong><span>{% if lang == "de" %}Schnittbreiten ab 80 mm — präzise und reproduzierbar.{% else %}Cut widths from 80 mm — precise and reproducible.{% endif %}</span></div></li>
+          <li><span class="num">03</span><div><strong>{% if lang == "de" %}Tagesleistung{% else %}Daily output{% endif %}</strong><span>{% if lang == "de" %}Bis zu 1.000 Laufmeter im Vortrieb (bodenabhängig).{% else %}Up to 1,000 linear metres in advance (ground-dependent).{% endif %}</span></div></li>
         </ul>
       </div>
       <div class="media-frame"><img loading="lazy" src="/assets/images/applications/glasfaser.webp" alt="" width="1536" height="1152"><span class="tag">FTTH · FTTB · Backbone</span></div>
@@ -48,13 +66,13 @@ schema: >
 
     <div id="pipeline" class="split align-start reverse reveal">
       <div>
-        <span class="section-index">02 / Versorgung</span>
-        <h2 class="mt-3">Pipeline &amp; Rohrleitungsbau</h2>
-        <p class="lead mt-3">Gas, Wasser, Abwasser, Fernwärme — präzise Gräben für sichere Versorgungstrassen mit definierten Wandungen und stabilem Bett.</p>
+        <span class="section-index">{% if lang == "de" %}02 / Versorgung{% else %}02 / Utilities{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Pipeline &amp; Rohrleitungsbau{% else %}Pipeline &amp; Pipe Installation{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}Gas, Wasser, Abwasser, Fernwärme — präzise Gräben für sichere Versorgungstrassen mit definierten Wandungen und stabilem Bett.{% else %}Gas, water, sewage, district heating — precise trenches for safe utility routes with defined walls and a stable bed.{% endif %}</p>
         <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>Empfohlene Modelle</strong><span>GM 180 AF · GM 140 AFH-600 · GM 6 ASR</span></div></li>
-          <li><span class="num">02</span><div><strong>Frästiefe</strong><span>Bis 1.800 mm, optional mit Verlege- und Verfüll­einrichtung.</span></div></li>
-          <li><span class="num">03</span><div><strong>Rohrgrößen</strong><span>DN 50 — DN 600, konfigurierbar.</span></div></li>
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Empfohlene Modelle{% else %}Recommended models{% endif %}</strong><span>GM 180 AF · GM 140 AFH-600 · GM 6 ASR</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Frästiefe{% else %}Cutting depth{% endif %}</strong><span>{% if lang == "de" %}Bis 1.800 mm, optional mit Verlege- und Verfüll­einrichtung.{% else %}Up to 1,800 mm, optionally with installation and backfill equipment.{% endif %}</span></div></li>
+          <li><span class="num">03</span><div><strong>{% if lang == "de" %}Rohrgrößen{% else %}Pipe sizes{% endif %}</strong><span>DN 50 — DN 600, {% if lang == "de" %}konfigurierbar{% else %}configurable{% endif %}.</span></div></li>
         </ul>
       </div>
       <div class="media-frame"><img loading="lazy" src="/assets/images/applications/rohrleitungsbau.jpg" alt="" width="1024" height="768"><span class="tag">DN 50 — DN 600</span></div>
@@ -64,60 +82,60 @@ schema: >
 
     <div id="kabel" class="split align-start reveal">
       <div>
-        <span class="section-index">03 / Energie</span>
-        <h2 class="mt-3">Strom- &amp; Solar­trassen</h2>
-        <p class="lead mt-3">Erdkabel-Verlegung für Solarparks, Windparks, Mittelspannung. Eine LIBA-Fräse macht aus mehreren Wochen Bagger-Einsatz wenige Tage planbaren Vortrieb.</p>
+        <span class="section-index">{% if lang == "de" %}03 / Energie{% else %}03 / Energy{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Strom- &amp; Solar­trassen{% else %}Power &amp; Solar Cable Routes{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}Erdkabel-Verlegung für Solarparks, Windparks, Mittelspannung. Eine LIBA-Fräse macht aus mehreren Wochen Bagger-Einsatz wenige Tage planbaren Vortrieb.{% else %}Earth cable installation for solar parks, wind farms and medium-voltage networks. A LIBA cutter turns weeks of excavator work into a few days of planned, predictable progress.{% endif %}</p>
         <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>Empfohlene Modelle</strong><span>GM 4 Allrad · GM 4 Raupe · GMV 130 Vibrationspflug</span></div></li>
-          <li><span class="num">02</span><div><strong>Simultanverlegung</strong><span>Fräsen + Kabel verlegen + Verfüllen in einem Arbeitsgang.</span></div></li>
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Empfohlene Modelle{% else %}Recommended models{% endif %}</strong><span>{% if lang == "de" %}GM 4 Allrad · GM 4 Raupe · GMV 130 Vibrationspflug{% else %}GM 4 All-Wheel · GM 4 Crawler · GMV 130 vibrating plough{% endif %}</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Simultanverlegung{% else %}Simultaneous installation{% endif %}</strong><span>{% if lang == "de" %}Fräsen + Kabel verlegen + Verfüllen in einem Arbeitsgang.{% else %}Cutting + cable laying + backfilling in a single pass.{% endif %}</span></div></li>
         </ul>
       </div>
-      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/kabelverlegung.jpg" alt="" width="1024" height="768"><span class="tag">PV · Wind · Mittelspannung</span></div>
+      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/kabelverlegung.jpg" alt="" width="1024" height="768"><span class="tag">{% if lang == "de" %}PV · Wind · Mittelspannung{% else %}PV · Wind · Medium voltage{% endif %}</span></div>
     </div>
 
     <hr class="divider">
 
     <div id="drainage" class="split align-start reverse reveal">
       <div>
-        <span class="section-index">04 / Sport &amp; Drainage</span>
-        <h2 class="mt-3">Sportplatzbau &amp; Drainage</h2>
-        <p class="lead mt-3">Drainagegräben in Rasen- und Kunstrasenanlagen — präzise, schmal und mit minimaler Schädigung der Spielfläche. Auch für Golfplätze und Hippodrome bewährt.</p>
+        <span class="section-index">{% if lang == "de" %}04 / Sport &amp; Drainage{% else %}04 / Sports &amp; Drainage{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Sportplatzbau &amp; Drainage{% else %}Sports Field Construction &amp; Drainage{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}Drainagegräben in Rasen- und Kunstrasenanlagen — präzise, schmal und mit minimaler Schädigung der Spielfläche. Auch für Golfplätze und Hippodrome bewährt.{% else %}Drainage trenches in natural and artificial turf installations — precise, narrow and with minimal damage to the playing surface. Also proven on golf courses and equestrian arenas.{% endif %}</p>
         <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>Empfohlene Modelle</strong><span>GM 4 Allrad · GM 450 H · GM 180 AF · GM 300 HF</span></div></li>
-          <li><span class="num">02</span><div><strong>Oberflächenschutz</strong><span>Minimale Spurbildung, schnelle Wiederherstellung.</span></div></li>
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Empfohlene Modelle{% else %}Recommended models{% endif %}</strong><span>{% if lang == "de" %}GM 4 Allrad{% else %}GM 4 All-Wheel{% endif %} · GM 450 H · GM 180 AF · GM 300 HF</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Oberflächenschutz{% else %}Surface protection{% endif %}</strong><span>{% if lang == "de" %}Minimale Spurbildung, schnelle Wiederherstellung.{% else %}Minimal rutting, rapid reinstatement.{% endif %}</span></div></li>
         </ul>
       </div>
-      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/sportplatzbau.jpg" alt="" width="1024" height="768"><span class="tag">Rasen · Kunstrasen · Golf</span></div>
+      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/sportplatzbau.jpg" alt="" width="1024" height="768"><span class="tag">{% if lang == "de" %}Rasen · Kunstrasen · Golf{% else %}Natural turf · Artificial turf · Golf{% endif %}</span></div>
     </div>
 
     <hr class="divider">
 
     <div id="landwirtschaft" class="split align-start reveal">
       <div>
-        <span class="section-index">05 / Agrar</span>
-        <h2 class="mt-3">Landwirtschaft &amp; Bewässerung</h2>
-        <p class="lead mt-3">Drainage- und Bewässerungsgräben für Felder, Plantagen, Weinberge — abgestimmt auf den Bauernhof-Traktor und die landwirtschaftliche Saisonpflicht.</p>
+        <span class="section-index">{% if lang == "de" %}05 / Agrar{% else %}05 / Agriculture{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Landwirtschaft &amp; Bewässerung{% else %}Agriculture &amp; Irrigation{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}Drainage- und Bewässerungsgräben für Felder, Plantagen, Weinberge — abgestimmt auf den Bauernhof-Traktor und die landwirtschaftliche Saisonpflicht.{% else %}Drainage and irrigation trenches for fields, plantations and vineyards — matched to the farm tractor and the demands of the agricultural season.{% endif %}</p>
         <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>Empfohlene Modelle</strong><span>GMV 100 Pflug · GM 180 AF · GM 1800 P · GMV 130</span></div></li>
-          <li><span class="num">02</span><div><strong>Anbau</strong><span>Standard-Dreipunkt für gängige Schlepper.</span></div></li>
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Empfohlene Modelle{% else %}Recommended models{% endif %}</strong><span>{% if lang == "de" %}GMV 100 Pflug · GM 180 AF · GM 1800 P · GMV 130{% else %}GMV 100 plough · GM 180 AF · GM 1800 P · GMV 130{% endif %}</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Anbau{% else %}Attachment{% endif %}</strong><span>{% if lang == "de" %}Standard-Dreipunkt für gängige Schlepper.{% else %}Standard three-point linkage for common tractors.{% endif %}</span></div></li>
         </ul>
       </div>
-      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/landwirtschaft.jpg" alt="" width="1024" height="768"><span class="tag">Drainage · Bewässerung</span></div>
+      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/landwirtschaft.jpg" alt="" width="1024" height="768"><span class="tag">{% if lang == "de" %}Drainage · Bewässerung{% else %}Drainage · Irrigation{% endif %}</span></div>
     </div>
 
     <hr class="divider">
 
     <div id="tiefbau" class="split align-start reverse reveal">
       <div>
-        <span class="section-index">06 / Spezialbau</span>
-        <h2 class="mt-3">Bergbau, Felsen &amp; Gleisbau</h2>
-        <p class="lead mt-3">Wo Bagger an Grenzen kommen, fängt LIBA erst an. Extrem harte Böden, felsiger Untergrund, beengte Bedingungen entlang von Gleisen.</p>
+        <span class="section-index">{% if lang == "de" %}06 / Spezialbau{% else %}06 / Special Construction{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Bergbau, Felsen &amp; Gleisbau{% else %}Mining, Rock &amp; Track Construction{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}Wo Bagger an Grenzen kommen, fängt LIBA erst an. Extrem harte Böden, felsiger Untergrund, beengte Bedingungen entlang von Gleisen.{% else %}Where excavators reach their limits, LIBA is just getting started. Extremely hard ground, rocky subsoil, confined conditions alongside railway tracks.{% endif %}</p>
         <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>Empfohlene Modelle</strong><span>GM 6 ASR Felsfräse · GM 4 Allrad · GM 140 AFH-600</span></div></li>
-          <li><span class="num">02</span><div><strong>Werkzeug</strong><span>Hartmetall-Meißel, kundenspezifisch konfigurierbar.</span></div></li>
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Empfohlene Modelle{% else %}Recommended models{% endif %}</strong><span>{% if lang == "de" %}GM 6 ASR Felsfräse · GM 4 Allrad · GM 140 AFH-600{% else %}GM 6 ASR rock cutter · GM 4 All-Wheel · GM 140 AFH-600{% endif %}</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Werkzeug{% else %}Tooling{% endif %}</strong><span>{% if lang == "de" %}Hartmetall-Meißel, kundenspezifisch konfigurierbar.{% else %}Tungsten carbide picks, customer-specifically configurable.{% endif %}</span></div></li>
         </ul>
       </div>
-      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/baustelle.jpg" alt="" width="1536" height="1024"><span class="tag">Bergbau · Gleis · Fels</span></div>
+      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/baustelle.jpg" alt="" width="1536" height="1024"><span class="tag">{% if lang == "de" %}Bergbau · Gleis · Fels{% else %}Mining · Track · Rock{% endif %}</span></div>
     </div>
 
   </div>
@@ -127,17 +145,17 @@ schema: >
   <div class="container">
     <div class="cta-block reveal">
       <div>
-        <span class="eyebrow is-dark"><span class="dot"></span>Konkretes Projekt</span>
-        <h2 class="mt-3">Wir kennen<br>Ihren <em>Boden.</em></h2>
-        <p>Sand, Mergel, Fels, Lehm, Asphalt — schicken Sie uns Bodengutachten oder Standortfotos. Wir empfehlen Maschine und Werkzeugbestückung.</p>
+        <span class="eyebrow is-dark"><span class="dot"></span>{% if lang == "de" %}Konkretes Projekt{% else %}Specific Project{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Wir kennen<br>Ihren <em>Boden.</em>{% else %}We know<br>your <em>ground.</em>{% endif %}</h2>
+        <p>{% if lang == "de" %}Sand, Mergel, Fels, Lehm, Asphalt — schicken Sie uns Bodengutachten oder Standortfotos. Wir empfehlen Maschine und Werkzeugbestückung.{% else %}Sand, marl, rock, clay, tarmac — send us soil reports or site photographs. We'll recommend the machine and tooling configuration.{% endif %}</p>
         <div class="actions">
-          <a href="/kontakt.html" class="btn btn-accent is-lg">Projekt besprechen <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="/kontakt.html" class="btn btn-accent is-lg">{% if lang == "de" %}Projekt besprechen{% else %}Discuss your project{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div>
       </div>
       <dl class="cta-side">
-        <dt>Direkter Werkskontakt</dt>
+        <dt>{% if lang == "de" %}Direkter Werkskontakt{% else %}Direct factory contact{% endif %}</dt>
         <dd>+49 (0) 591 76 314</dd>
-        <dt>E-Mail</dt>
+        <dt>{% if lang == "de" %}E-Mail{% else %}Email{% endif %}</dt>
         <dd style="word-break: break-word;">info@lingener-baumaschinen.de</dd>
       </dl>
     </div>

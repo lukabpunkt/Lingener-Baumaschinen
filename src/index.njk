@@ -1,38 +1,57 @@
 ---
+pagination:
+  data: site.langs
+  size: 1
+  alias: lang
+permalink: "{{ '/en/index.html' if lang == 'en' else '/index.html' }}"
 layout: base.njk
-permalink: /index.html
-title: "LIBA — Lingener Baumaschinen · Grabenfräsen aus dem Emsland seit 1969"
-description: "LIBA fertigt seit 1969 hochleistungsfähige Grabenfräsen, Anbaufräsen und Spezialmaschinen für Glasfaser-, Kabel-, Pipeline- und Tiefbauprojekte – Made in Germany."
-canonical: "https://www.lingener-baumaschinen.de/"
-langDE: "/"
-langEN: "/en/"
 nav: "start"
 navSolid: false
+langDE: "/"
+langEN: "/en/"
 preloadImage: "/assets/images/hero/hero-1.jpg"
-og:
-  title: "LIBA — Lingener Baumaschinen · Grabenfräsen Made in Germany"
-  description: "Seit über fünfzig Jahren entwickelt und fertigt LIBA Grabenfräsen, Anbaufräsen und Spezialmaschinen für den Tief-, Leitungs- und Glasfaserbau."
-  image: "https://www.lingener-baumaschinen.de/assets/images/hero/hero-1.jpg"
-  locale: "de_DE"
-schema: >
+
+titleDE: "LIBA — Lingener Baumaschinen · Grabenfräsen aus dem Emsland seit 1969"
+titleEN: "LIBA — Trench Cutters Made in Germany | Lingener Baumaschinen"
+descDE: "LIBA fertigt seit 1969 hochleistungsfähige Grabenfräsen, Anbaufräsen und Spezialmaschinen für Glasfaser-, Kabel-, Pipeline- und Tiefbauprojekte – Made in Germany."
+descEN: "LIBA manufactures high-performance trench cutters for pipeline, fibre optic, cable and utility installation. Made in Germany since 1969. Worldwide deployment."
+canonicalDE: "https://www.lingener-baumaschinen.de/"
+canonicalEN: "https://www.lingener-baumaschinen.de/en/"
+ogTitleDE: "LIBA — Lingener Baumaschinen · Grabenfräsen Made in Germany"
+ogTitleEN: "LIBA — Trench Cutters Made in Germany"
+ogDescDE: "Seit über fünfzig Jahren entwickelt und fertigt LIBA Grabenfräsen, Anbaufräsen und Spezialmaschinen für den Tief-, Leitungs- und Glasfaserbau."
+ogDescEN: "High-performance trench cutters for pipeline, fibre optic, cable and utility installation. Manufacturer-direct, Made in Germany since 1969."
+schemaDE: >-
   {"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","image":"https://www.lingener-baumaschinen.de/assets/images/hero/hero-1.jpg","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","foundingDate":"1969","telephone":"+4959176314","email":"info@lingener-baumaschinen.de","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"geo":{"@type":"GeoCoordinates","latitude":52.5246,"longitude":7.3231},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"17:00"}],"priceRange":"€€€","areaServed":"Worldwide","sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"],"contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]}}
+schemaEN: >-
+  {"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de/en/","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","description":"Manufacturer of trench cutters, chain trenchers and specialist machinery for pipeline, fibre optic and cable installation. Made in Germany since 1969.","foundingDate":"1969","telephone":"+4959176314","email":"info@lingener-baumaschinen.de","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Lower Saxony","addressCountry":"DE"}}
+
+eleventyComputed:
+  title: "{{ titleDE if lang == 'de' else titleEN }}"
+  description: "{{ descDE if lang == 'de' else descEN }}"
+  canonical: "{{ canonicalDE if lang == 'de' else canonicalEN }}"
+  ogTitle: "{{ ogTitleDE if lang == 'de' else ogTitleEN }}"
+  ogDescription: "{{ ogDescDE if lang == 'de' else ogDescEN }}"
+  ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
+  schema: "{{ schemaDE if lang == 'de' else schemaEN }}"
 ---
 
 <!-- ==========  HERO  ========== -->
-<section class="hero" aria-label="Einleitung">
+<section class="hero" aria-label="{% if lang == 'de' %}Einleitung{% else %}Introduction{% endif %}">
   <div class="hero-media" aria-hidden="true">
     <img src="/assets/images/hero/hero-1.jpg" alt="" width="1024" height="576">
     <img src="/assets/images/hero/hero-2.jpg" alt="" width="1024" height="576">
     <img src="/assets/images/hero/hero-3.jpg" alt="" width="1536" height="1152">
-    <img src="/assets/images/hero/hero-4.jpg" alt="" width="1024" height="768">
+    {% if lang == "de" %}<img src="/assets/images/hero/hero-4.jpg" alt="" width="1024" height="768">{% endif %}
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
 
   <div class="container hero-content">
-    <span class="eyebrow hero-eyebrow"><span class="dot"></span>Made in Lingen (Ems) · seit 1969</span>
-    <h1 class="mt-3" data-split-lines>Wir fräsen, wo<br>andere <em>graben.</em></h1>
-    <p class="hero-sub">Seit über fünfzig Jahren entwickelt und fertigt LIBA Grabenfräsen, Anbaufräsen und Spezialmaschinen für den Tief-, Leitungs- und Glasfaserbau. Robust. Präzise. Made in Germany.</p>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Made in Lingen (Ems) · seit 1969{% else %}Made in Germany · Since 1969{% endif %}</span>
+    <h1 class="mt-3" data-split-lines>{% if lang == "de" %}Wir fräsen, wo<br>andere <em>graben.</em>{% else %}Built for the<br>toughest <em class="serif-italic">ground.</em>{% endif %}</h1>
+    <p class="hero-sub">{% if lang == "de" %}Seit über fünfzig Jahren entwickelt und fertigt LIBA Grabenfräsen, Anbaufräsen und Spezialmaschinen für den Tief-, Leitungs- und Glasfaserbau. Robust. Präzise. Made in Germany.{% else %}LIBA manufactures chain trenchers and trench cutters for pipeline, fibre optic, power cable and utility installation — from compact tractor-mounted models to heavy-duty self-propelled machines for rock.{% endif %}</p>
     <div class="hero-actions">
+      {% if lang == "de" %}
       <a href="/kontakt.html" class="btn btn-brand is-lg">
         Kostenlose Beratung anfragen
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -41,9 +60,14 @@ schema: >
         Maschinenpark entdecken
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
+      {% else %}
+      <a href="/maschinen.html" class="btn btn-accent is-lg">View machines <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="/kontakt.html" class="btn btn-outline-light">Request a quote</a>
+      {% endif %}
     </div>
 
     <div class="hero-ticker">
+      {% if lang == "de" %}
       <div class="hero-ticker-item">
         <span class="k">Erfahrung seit</span>
         <span class="v">1969</span>
@@ -60,6 +84,24 @@ schema: >
         <span class="k">Ersatzteil-Lieferzeit</span>
         <span class="v">24<span style="font-family: var(--font-serif); font-style: italic; color: var(--brand-light); font-weight: 400; font-size: .75em;"> h</span></span>
       </div>
+      {% else %}
+      <div class="hero-ticker-item">
+        <span class="k">Founded</span>
+        <span class="v">1969</span>
+      </div>
+      <div class="hero-ticker-item">
+        <span class="k">Machine models</span>
+        <span class="v"><span data-count="40">0</span>+</span>
+      </div>
+      <div class="hero-ticker-item">
+        <span class="k">Countries</span>
+        <span class="v"><span data-count="60">0</span></span>
+      </div>
+      <div class="hero-ticker-item">
+        <span class="k">Made in Germany</span>
+        <span class="v">100 <span style="font-family: var(--font-serif); font-style: italic; color: var(--brand-light); font-weight: 400; font-size: .8em;">%</span></span>
+      </div>
+      {% endif %}
     </div>
   </div>
 
@@ -67,13 +109,14 @@ schema: >
     <button class="hero-dot is-active" type="button" aria-label="Slide 1"></button>
     <button class="hero-dot" type="button" aria-label="Slide 2"></button>
     <button class="hero-dot" type="button" aria-label="Slide 3"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 4"></button>
+    {% if lang == "de" %}<button class="hero-dot" type="button" aria-label="Slide 4"></button>{% endif %}
   </div>
 
   <div class="scroll-hint" aria-hidden="true">scroll</div>
 </section>
 
 <!-- ==========  MARQUEE  ========== -->
+{% if lang == "de" %}
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
     <span class="marquee-item">Glasfaserausbau</span>
@@ -88,7 +131,9 @@ schema: >
     <span class="marquee-item">Solarparks</span>
   </div>
 </div>
+{% endif %}
 
+{% if lang == "de" %}
 <!-- ==========  INTRO / UNTERNEHMEN  ========== -->
 <section class="section">
   <div class="container">
@@ -131,19 +176,20 @@ schema: >
     </div>
   </div>
 </section>
+{% endif %}
 
 <!-- ==========  PRODUKTFAMILIEN  ========== -->
-<section class="section section-dark" id="produkte">
+<section class="section section-dark" id="{% if lang == 'de' %}produkte{% else %}machines{% endif %}">
   <div class="container" style="position: relative;">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index is-dark" style="color: var(--brand-light);">02 / Maschinen</span>
-        <h2 class="mt-3">Die richtige Maschine<br>für jeden <em class="serif-italic">Untergrund.</em></h2>
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}02 / Maschinen{% else %}01 / Machines{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Die richtige Maschine<br>für jeden <em class="serif-italic">Untergrund.</em>{% else %}The right machine<br>for every <em class="serif-italic">ground.</em>{% endif %}</h2>
       </div>
       <div class="aside">
-        <p class="lead">Vom kompakten Schlepperanbau bis zur selbstfahrenden Felsfräse — fünf Produktfamilien, ein gemeinsames Ziel: Effizienz im Graben.</p>
+        <p class="lead">{% if lang == "de" %}Vom kompakten Schlepperanbau bis zur selbstfahrenden Felsfräse — fünf Produktfamilien, ein gemeinsames Ziel: Effizienz im Graben.{% else %}From compact tractor-mounted trenchers to heavy self-propelled rock cutters — five product families, one shared goal: efficiency in the trench.{% endif %}</p>
         <a href="/maschinen.html" class="btn btn-outline-light">
-          Alle Maschinen
+          {% if lang == "de" %}Alle Maschinen{% else %}All machines{% endif %}
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
@@ -151,45 +197,45 @@ schema: >
 
     <div class="showcase">
       <a href="/maschinen/gm-180-af.html" class="show-card is-feature reveal">
-        <img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt="LIBA GM 180 AF Schlepperanbau-Grabenfräse — bis 1.800 mm Frästiefe" width="1024" height="576">
+        <img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt="{% if lang == 'de' %}LIBA GM 180 AF Schlepperanbau-Grabenfräse — bis 1.800 mm Frästiefe{% else %}{% endif %}" width="1024" height="576">
         <div class="show-card-body">
           <div>
-            <div class="meta">Schlepperanbau · Flaggschiff</div>
+            <div class="meta">{% if lang == "de" %}Schlepperanbau · Flaggschiff{% else %}Tractor-mounted · Flagship{% endif %}</div>
             <h3>GM 180 AF</h3>
-            <p class="desc">Hochleistungs-Grabenfräse für anspruchsvolle Pipeline- und Kabelverlegung. Bis zu 1.800 mm Frästiefe.</p>
+            <p class="desc">{% if lang == "de" %}Hochleistungs-Grabenfräse für anspruchsvolle Pipeline- und Kabelverlegung. Bis zu 1.800 mm Frästiefe.{% else %}High-performance trench cutter for pipeline and cable installation. Up to 1,800 mm cutting depth.{% endif %}</p>
           </div>
           <span class="show-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
         </div>
       </a>
 
       <a href="/maschinen.html#selbstfahrer" class="show-card is-side reveal reveal-delay-1">
-        <img loading="lazy" src="/assets/images/products/gm-4-raupe.jpg" alt="LIBA GM 4 Raupe selbstfahrende Grabenfräse für Glasfaserausbau" width="1024" height="768">
+        <img loading="lazy" src="/assets/images/products/gm-4-raupe.jpg" alt="{% if lang == 'de' %}LIBA GM 4 Raupe selbstfahrende Grabenfräse für Glasfaserausbau{% else %}{% endif %}" width="1024" height="768">
         <div class="show-card-body">
           <div>
-            <div class="meta">Selbstfahrer · Glasfaser</div>
-            <h3>GM 4 Raupe</h3>
-            <p class="desc">Wendige Raupenmaschine für FTTH-Trassen mit hoher Tagesleistung.</p>
+            <div class="meta">{% if lang == "de" %}Selbstfahrer · Glasfaser{% else %}Self-propelled · Fibre Optic{% endif %}</div>
+            <h3>{% if lang == "de" %}GM 4 Raupe{% else %}GM 4 Crawler{% endif %}</h3>
+            <p class="desc">{% if lang == "de" %}Wendige Raupenmaschine für FTTH-Trassen mit hoher Tagesleistung.{% else %}Compact tracked trencher for FTTH with high daily output.{% endif %}</p>
           </div>
           <span class="show-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
         </div>
       </a>
 
       <a href="/maschinen.html#anbau-bagger" class="show-card is-trio reveal">
-        <img loading="lazy" src="/assets/images/products/gm-140-afh-500.jpg" alt="LIBA GM 140 AFH-500 Baggeranbau-Grabenfräse" width="1500" height="2250">
+        <img loading="lazy" src="/assets/images/products/gm-140-afh-500.jpg" alt="{% if lang == 'de' %}LIBA GM 140 AFH-500 Baggeranbau-Grabenfräse{% else %}{% endif %}" width="1500" height="2250">
         <div class="show-card-body">
           <div>
-            <div class="meta">Baggeranbau</div>
-            <h3>GM 140 AFH-500</h3>
+            <div class="meta">{% if lang == "de" %}Baggeranbau{% else %}Excavator attachment{% endif %}</div>
+            <h3>{% if lang == "de" %}GM 140 AFH-500{% else %}GM 140 AFH{% endif %}</h3>
           </div>
           <span class="show-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
         </div>
       </a>
 
       <a href="/maschinen.html#spezial" class="show-card is-trio reveal reveal-delay-1">
-        <img loading="lazy" src="/assets/images/products/gm-6-asr.jpg" alt="LIBA GM 6 ASR selbstfahrende Felsfräse für Hartgestein und Bergbau" width="1024" height="768">
+        <img loading="lazy" src="/assets/images/products/gm-6-asr.jpg" alt="{% if lang == 'de' %}LIBA GM 6 ASR selbstfahrende Felsfräse für Hartgestein und Bergbau{% else %}{% endif %}" width="1024" height="768">
         <div class="show-card-body">
           <div>
-            <div class="meta">Spezialmaschine · Felsen</div>
+            <div class="meta">{% if lang == "de" %}Spezialmaschine · Felsen{% else %}Rock cutter{% endif %}</div>
             <h3>GM 6 ASR</h3>
           </div>
           <span class="show-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
@@ -197,10 +243,10 @@ schema: >
       </a>
 
       <a href="/maschinen.html" class="show-card is-trio reveal reveal-delay-2">
-        <img loading="lazy" src="/assets/images/products/gm-600-r.jpg" alt="LIBA GM 600 R Fräsrad für Kabelbau und Leitungsverlegung" width="1024" height="768">
+        <img loading="lazy" src="/assets/images/products/gm-600-r.jpg" alt="{% if lang == 'de' %}LIBA GM 600 R Fräsrad für Kabelbau und Leitungsverlegung{% else %}{% endif %}" width="1024" height="768">
         <div class="show-card-body">
           <div>
-            <div class="meta">Fräsrad · Kabelbau</div>
+            <div class="meta">{% if lang == "de" %}Fräsrad · Kabelbau{% else %}Cutter wheel · Cable{% endif %}</div>
             <h3>GM 600 R</h3>
           </div>
           <span class="show-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
@@ -211,69 +257,71 @@ schema: >
 </section>
 
 <!-- ==========  ANWENDUNGEN  ========== -->
-<section class="section" id="anwendungen">
+<section class="section" id="{% if lang == 'de' %}anwendungen{% else %}applications{% endif %}">
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index">03 / Anwendungen</span>
-        <h2 class="mt-3">Eine Technologie.<br><em class="serif-italic">Dutzende Anwendungen.</em></h2>
+        <span class="section-index">{% if lang == "de" %}03 / Anwendungen{% else %}02 / Applications{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Eine Technologie.<br><em class="serif-italic">Dutzende Anwendungen.</em>{% else %}One technology.<br><em class="serif-italic">Dozens of applications.</em>{% endif %}</h2>
       </div>
       <div class="aside">
-        <p class="lead">Vom Glasfaserausbau bis zur Bewässerung im Weinberg — überall dort, wo präzise Gräben unter wirtschaftlichen Bedingungen entstehen müssen, liefert LIBA die passende Lösung.</p>
+        <p class="lead">{% if lang == "de" %}Vom Glasfaserausbau bis zur Bewässerung im Weinberg — überall dort, wo präzise Gräben unter wirtschaftlichen Bedingungen entstehen müssen, liefert LIBA die passende Lösung.{% else %}From fibre optic rollout to vineyard irrigation — wherever precise trenches need to be cut efficiently, LIBA has the right solution.{% endif %}</p>
+        {% if lang == "de" %}
         <a href="/anwendungen.html" class="btn btn-ghost">
           Alle Anwendungen
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
+        {% endif %}
       </div>
     </div>
 
     <div class="apps">
       <a href="/anwendungen.html#glasfaser" class="app reveal">
-        <img loading="lazy" src="/assets/images/applications/glasfaser.webp" alt="Glasfaserkabel verlegen mit LIBA Grabenfräse — FTTH-Ausbau" width="1536" height="1152">
+        <img loading="lazy" src="/assets/images/applications/glasfaser.webp" alt="{% if lang == 'de' %}Glasfaserkabel verlegen mit LIBA Grabenfräse — FTTH-Ausbau{% endif %}" width="1536" height="1152">
         <div class="app-body">
-          <div class="idx">01 — Telekom</div>
-          <h3>Glasfaser­ausbau</h3>
-          <p>Schmale Gräben, hohe Tagesleistung, präzise Geometrie — wirtschaftlich überlegen.</p>
+          <div class="idx">{% if lang == "de" %}01 — Telekom{% else %}01 — Telecom{% endif %}</div>
+          <h3>{% if lang == "de" %}Glasfaser­ausbau{% else %}Fibre Optic{% endif %}</h3>
+          <p>{% if lang == "de" %}Schmale Gräben, hohe Tagesleistung, präzise Geometrie — wirtschaftlich überlegen.{% else %}Narrow trenches, high daily output, precise geometry.{% endif %}</p>
         </div>
       </a>
       <a href="/anwendungen.html#pipeline" class="app reveal reveal-delay-1">
-        <img loading="lazy" src="/assets/images/applications/rohrleitungsbau.jpg" alt="Rohrleitungsbau und Pipeline-Verlegung mit LIBA Grabenfräse" width="1024" height="768">
+        <img loading="lazy" src="/assets/images/applications/rohrleitungsbau.jpg" alt="{% if lang == 'de' %}Rohrleitungsbau und Pipeline-Verlegung mit LIBA Grabenfräse{% endif %}" width="1024" height="768">
         <div class="app-body">
-          <div class="idx">02 — Versorgung</div>
-          <h3>Pipeline &amp; Rohrleitungen</h3>
-          <p>Gas, Wasser, Fernwärme. Definierte Grabengeometrie für sichere Trassen.</p>
+          <div class="idx">{% if lang == "de" %}02 — Versorgung{% else %}02 — Utilities{% endif %}</div>
+          <h3>{% if lang == "de" %}Pipeline &amp; Rohrleitungen{% else %}Pipeline{% endif %}</h3>
+          <p>{% if lang == "de" %}Gas, Wasser, Fernwärme. Definierte Grabengeometrie für sichere Trassen.{% else %}Gas, water, district heating — defined trench geometry for safe routes.{% endif %}</p>
         </div>
       </a>
       <a href="/anwendungen.html#kabel" class="app reveal reveal-delay-2">
-        <img loading="lazy" src="/assets/images/applications/kabelverlegung.jpg" alt="Stromkabel und Solartrassenverlegung mit Kettenfräse" width="1024" height="768">
+        <img loading="lazy" src="/assets/images/applications/kabelverlegung.jpg" alt="{% if lang == 'de' %}Stromkabel und Solartrassenverlegung mit Kettenfräse{% endif %}" width="1024" height="768">
         <div class="app-body">
-          <div class="idx">03 — Energie</div>
-          <h3>Strom- &amp; Solar­trassen</h3>
-          <p>Erdkabel-Verlegung für Solarparks, Windparks und Mittelspannungs­netze.</p>
+          <div class="idx">{% if lang == "de" %}03 — Energie{% else %}03 — Energy{% endif %}</div>
+          <h3>{% if lang == "de" %}Strom- &amp; Solar­trassen{% else %}Power &amp; Solar Cables{% endif %}</h3>
+          <p>{% if lang == "de" %}Erdkabel-Verlegung für Solarparks, Windparks und Mittelspannungs­netze.{% else %}Cable trenching for solar parks, wind farms and medium-voltage grids.{% endif %}</p>
         </div>
       </a>
       <a href="/anwendungen.html#drainage" class="app reveal">
-        <img loading="lazy" src="/assets/images/applications/sportplatzbau.jpg" alt="Sportplatzdrainage mit LIBA Grabenfräse — minimale Rasenschäden" width="1024" height="768">
+        <img loading="lazy" src="/assets/images/applications/sportplatzbau.jpg" alt="{% if lang == 'de' %}Sportplatzdrainage mit LIBA Grabenfräse — minimale Rasenschäden{% endif %}" width="1024" height="768">
         <div class="app-body">
-          <div class="idx">04 — Sport</div>
-          <h3>Sportplatzbau &amp; Drainage</h3>
-          <p>Saubere Drainagegräben mit minimaler Rasennarben-Schädigung.</p>
+          <div class="idx">{% if lang == "de" %}04 — Sport{% else %}04 — Sports{% endif %}</div>
+          <h3>{% if lang == "de" %}Sportplatzbau &amp; Drainage{% else %}Drainage{% endif %}</h3>
+          <p>{% if lang == "de" %}Saubere Drainagegräben mit minimaler Rasennarben-Schädigung.{% else %}Precision drainage on sports pitches with minimal surface damage.{% endif %}</p>
         </div>
       </a>
       <a href="/anwendungen.html#landwirtschaft" class="app reveal reveal-delay-1">
-        <img loading="lazy" src="/assets/images/applications/landwirtschaft.jpg" alt="Bewässerungs- und Drainagegräben in der Landwirtschaft mit LIBA-Grabenfräse" width="1024" height="768">
+        <img loading="lazy" src="/assets/images/applications/landwirtschaft.jpg" alt="{% if lang == 'de' %}Bewässerungs- und Drainagegräben in der Landwirtschaft mit LIBA-Grabenfräse{% endif %}" width="1024" height="768">
         <div class="app-body">
-          <div class="idx">05 — Agrar</div>
-          <h3>Landwirtschaft &amp; Bewässerung</h3>
-          <p>Bewässerungs- und Drainagelösungen für effiziente Bewirtschaftung.</p>
+          <div class="idx">{% if lang == "de" %}05 — Agrar{% else %}05 — Agriculture{% endif %}</div>
+          <h3>{% if lang == "de" %}Landwirtschaft &amp; Bewässerung{% else %}Irrigation &amp; Drainage{% endif %}</h3>
+          <p>{% if lang == "de" %}Bewässerungs- und Drainagelösungen für effiziente Bewirtschaftung.{% else %}Irrigation and drainage solutions for fields and plantations.{% endif %}</p>
         </div>
       </a>
       <a href="/anwendungen.html#tiefbau" class="app reveal reveal-delay-2">
-        <img loading="lazy" src="/assets/images/applications/baustelle.jpg" alt="LIBA Tiefenfräse im Bergbau- und Tiefbaueinsatz auf Baustelle" width="1536" height="1024">
+        <img loading="lazy" src="/assets/images/applications/baustelle.jpg" alt="{% if lang == 'de' %}LIBA Tiefenfräse im Bergbau- und Tiefbaueinsatz auf Baustelle{% endif %}" width="1536" height="1024">
         <div class="app-body">
-          <div class="idx">06 — Infra</div>
-          <h3>Tief- &amp; Spezialbau</h3>
-          <p>Bergbau, Felsen, Gleisbau — wo Bagger an Grenzen kommen, beginnt LIBA.</p>
+          <div class="idx">{% if lang == "de" %}06 — Infra{% else %}06 — Special{% endif %}</div>
+          <h3>{% if lang == "de" %}Tief- &amp; Spezialbau{% else %}Mining &amp; Rock{% endif %}</h3>
+          <p>{% if lang == "de" %}Bergbau, Felsen, Gleisbau — wo Bagger an Grenzen kommen, beginnt LIBA.{% else %}Where excavators fail, LIBA begins.{% endif %}</p>
         </div>
       </a>
     </div>
@@ -283,6 +331,7 @@ schema: >
 <!-- ==========  STATS + QUOTE  ========== -->
 <section class="section section-dark">
   <div class="container" style="position: relative;">
+    {% if lang == "de" %}
     <div class="quote reveal">
       <span class="eyebrow is-dark" style="justify-content: center;"><span class="dot"></span>Was uns ausmacht</span>
       <blockquote class="mt-3">Eine LIBA-Fräse ist kein Werkzeug. Sie ist eine <em>Investition</em> in jeden Meter, den Sie unter dem Boden ehrlich verdient haben.</blockquote>
@@ -291,32 +340,34 @@ schema: >
         Lingen (Ems) · Deutschland
       </div>
     </div>
+    {% endif %}
 
-    <div class="stats-grid mt-6 reveal">
+    <div class="stats-grid {% if lang == 'de' %}mt-6 {% endif %}reveal">
       <div class="stat-cell">
-        <span class="lbl">Gegründet</span>
+        <span class="lbl">{% if lang == "de" %}Gegründet{% else %}Founded{% endif %}</span>
         <span class="num">1969</span>
-        <span class="desc">Familienbetrieb seit über fünf Jahrzehnten im Emsland.</span>
+        <span class="desc">{% if lang == "de" %}Familienbetrieb seit über fünf Jahrzehnten im Emsland.{% else %}Family-owned business in Lingen (Ems), Germany.{% endif %}</span>
       </div>
       <div class="stat-cell">
-        <span class="lbl">Werkserfahrung</span>
-        <span class="num"><span data-count="55">0</span><span class="unit">Jahre</span></span>
-        <span class="desc">Konstruktion und Fertigung am selben Standort.</span>
+        <span class="lbl">{% if lang == "de" %}Werkserfahrung{% else %}Experience{% endif %}</span>
+        <span class="num"><span data-count="55">0</span><span class="unit">{% if lang == "de" %}Jahre{% else %}Years{% endif %}</span></span>
+        <span class="desc">{% if lang == "de" %}Konstruktion und Fertigung am selben Standort.{% else %}Design and manufacturing at the same location.{% endif %}</span>
       </div>
       <div class="stat-cell">
-        <span class="lbl">Weltweit</span>
-        <span class="num"><span data-count="60">0</span><span class="unit">Länder</span></span>
-        <span class="desc">Maschinen-Einsatz auf vier Kontinenten.</span>
+        <span class="lbl">{% if lang == "de" %}Weltweit{% else %}Worldwide{% endif %}</span>
+        <span class="num"><span data-count="60">0</span><span class="unit">{% if lang == "de" %}Länder{% else %}Countries{% endif %}</span></span>
+        <span class="desc">{% if lang == "de" %}Maschinen-Einsatz auf vier Kontinenten.{% else %}LIBA machines deployed on four continents.{% endif %}</span>
       </div>
       <div class="stat-cell">
-        <span class="lbl">Maschinenmodelle</span>
+        <span class="lbl">{% if lang == "de" %}Maschinenmodelle{% else %}Machine models{% endif %}</span>
         <span class="num"><span data-count="40">0</span>+</span>
-        <span class="desc">Vom Schlepperanbau bis zur Felsfräse.</span>
+        <span class="desc">{% if lang == "de" %}Vom Schlepperanbau bis zur Felsfräse.{% else %}From tractor attachment to rock cutter.{% endif %}</span>
       </div>
     </div>
   </div>
 </section>
 
+{% if lang == "de" %}
 <!-- ==========  FERTIGUNGSPROZESS  ========== -->
 <section class="section section-dark" style="padding-top: 0;">
   <div class="container">
@@ -402,12 +453,14 @@ schema: >
     </div>
   </div>
 </section>
+{% endif %}
 
 <!-- ==========  CTA  ========== -->
 <section class="section" style="padding-top: 0;">
   <div class="container">
     <div class="cta-block reveal">
       <div>
+        {% if lang == "de" %}
         <span class="eyebrow is-dark"><span class="dot"></span>Beratung anfordern</span>
         <h2 class="mt-3">Welche Fräse passt<br>zu Ihrem <em>Projekt?</em></h2>
         <p>Erzählen Sie uns von Ihrem Vorhaben — Bodenart, Trägergerät, Graben­tiefe. Innerhalb von 24 Stunden erhalten Sie eine technische Einschätzung direkt vom LIBA-Werk in Lingen.</p>
@@ -418,14 +471,32 @@ schema: >
           </a>
           <a href="/mieten.html" class="btn btn-outline-light">Maschine mieten</a>
         </div>
+        {% else %}
+        <span class="eyebrow is-dark"><span class="dot"></span>Direct from the manufacturer</span>
+        <h2 class="mt-3">No dealers.<br>No middlemen.<br><em>Just LIBA.</em></h2>
+        <p>Tell us your soil type, carrier machine and trench depth — we'll recommend the right model and give you typical daily output figures. All from our engineering team in Lingen.</p>
+        <div class="actions">
+          <a href="/kontakt.html" class="btn btn-accent is-lg">Request a quote <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="/maschinen.html" class="btn btn-ghost">View all machines</a>
+        </div>
+        {% endif %}
       </div>
       <dl class="cta-side">
+        {% if lang == "de" %}
         <dt>Telefon</dt>
         <dd>+49 (0) 591 76 314</dd>
         <dt>E-Mail</dt>
         <dd style="word-break: break-word;">info@lingener-baumaschinen.de</dd>
         <dt>Werk</dt>
         <dd>Diekstrasse 59 · 49809 Lingen (Ems)</dd>
+        {% else %}
+        <dt>Sales — direct from the factory</dt>
+        <dd>+49 (0) 591 76 314</dd>
+        <dt>Email</dt>
+        <dd style="word-break: break-word;">info@lingener-baumaschinen.de</dd>
+        <dt>Address</dt>
+        <dd>Diekstrasse 59<br>49809 Lingen (Ems)<br>Germany</dd>
+        {% endif %}
       </dl>
     </div>
   </div>
