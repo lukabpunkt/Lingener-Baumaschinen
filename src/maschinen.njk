@@ -126,6 +126,68 @@ eleventyComputed:
       </div>
     </div>
 
+    <hr class="divider">
+
+    <!-- Maschinenübersicht — alle 30 Maschinen als Karten -->
+    <div class="reveal" style="margin-bottom: 3.5rem;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:1.75rem;">
+        <div>
+          <span class="section-index">{% if lang == "de" %}00 / Maschinenübersicht{% else %}00 / All Machines{% endif %}</span>
+          <h2 class="mt-2">{% if lang == "de" %}Alle 30 Maschinen<br><em class="serif-italic">im Überblick.</em>{% else %}All 30 Machines<br><em class="serif-italic">at a glance.</em>{% endif %}</h2>
+        </div>
+        <div class="maschinen-filter" role="tablist" id="mf-tabs">
+          <button class="mf-tab is-active" data-filter="all" type="button">{% if lang == "de" %}Alle (30){% else %}All (30){% endif %}</button>
+          <button class="mf-tab" data-filter="Selbstfahrer" type="button">{% if lang == "de" %}Selbstfahrer (7){% else %}Self-Propelled (7){% endif %}</button>
+          <button class="mf-tab" data-filter="Schlepperanbau" type="button">{% if lang == "de" %}Schlepperanbau (18){% else %}Tractor-Mounted (18){% endif %}</button>
+          <button class="mf-tab" data-filter="Baggeranbau" type="button">{% if lang == "de" %}Baggeranbau (5){% else %}Excavator-Mounted (5){% endif %}</button>
+        </div>
+      </div>
+
+      <div class="maschinen-grid" id="maschinen-grid">
+        {% for m in maschinen %}
+        <a href="{% if lang == 'de' %}/maschinen/{{ m.slug }}.html{% else %}/en/maschinen/{{ m.slug }}.html{% endif %}"
+           class="maschine-card"
+           data-category="{{ m.category }}">
+          <div class="maschine-card-img">
+            <img loading="lazy" src="{{ m.heroImage }}"
+                 alt="{% if lang == 'de' %}{{ m.heroAltDE }}{% else %}{{ m.heroAltEN }}{% endif %}">
+          </div>
+          <div class="maschine-card-body">
+            <span class="maschine-card-cat">{{ m.category }}</span>
+            <p class="maschine-card-name">{{ m.name }}</p>
+            <p class="maschine-card-sub">{% if lang == "de" %}{{ m.subtitleDE }}{% else %}{{ m.subtitleEN }}{% endif %}</p>
+            <span class="maschine-card-badge {% if m.condition == 'Neu' %}badge-neu{% elif m.condition == 'Gebraucht' %}badge-gebraucht{% else %}badge-vorfuehrmaschine{% endif %}">
+              {% if lang == "de" %}{{ m.condition }}{% if m.year %} {{ m.year }}{% endif %}{% else %}{% if m.condition == 'Neu' %}New{% elif m.condition == 'Gebraucht' %}Used{% else %}Demo{% endif %}{% if m.year %} {{ m.year }}{% endif %}{% endif %}
+            </span>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script>
+    (function(){
+      var tabs = document.querySelectorAll('#mf-tabs .mf-tab');
+      var cards = document.querySelectorAll('#maschinen-grid .maschine-card');
+      tabs.forEach(function(tab){
+        tab.addEventListener('click', function(){
+          var filter = tab.dataset.filter;
+          tabs.forEach(function(t){ t.classList.remove('is-active'); });
+          tab.classList.add('is-active');
+          cards.forEach(function(card){
+            if(filter === 'all' || card.dataset.category === filter){
+              card.classList.remove('is-hidden');
+            } else {
+              card.classList.add('is-hidden');
+            }
+          });
+        });
+      });
+    })();
+    </script>
+
+    <hr class="divider">
+
     <div id="anbau-bagger" class="split align-start reveal">
       <div>
         <span class="section-index">{% if lang == "de" %}01 / Anbaufräsen Bagger{% else %}01 / Excavator-Mounted Cutters{% endif %}</span>

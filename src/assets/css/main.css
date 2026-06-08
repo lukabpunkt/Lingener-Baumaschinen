@@ -2595,3 +2595,105 @@ p { color: var(--steel-700); text-wrap: pretty; }
 }
 .scroll-top:hover { background: var(--brand-deep); }
 .scroll-top svg { width: 18px; height: 18px; }
+
+/* ===  Maschinen-Karten (Listing) === */
+.maschinen-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+.mf-tab {
+  padding: .35rem .85rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  white-space: nowrap;
+}
+.mf-tab:hover { border-color: var(--ink); color: var(--ink); }
+.mf-tab.is-active { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
+
+.maschinen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .maschinen-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+}
+
+.maschine-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: var(--canvas);
+  transition: box-shadow var(--dur-fast), transform var(--dur-fast);
+}
+.maschine-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.10); transform: translateY(-2px); }
+.maschine-card.is-hidden { display: none; }
+
+.maschine-card-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--steel-50);
+}
+.maschine-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s var(--ease);
+}
+.maschine-card:hover .maschine-card-img img { transform: scale(1.04); }
+
+.maschine-card-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: .3rem;
+}
+.maschine-card-cat {
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--brand-light);
+}
+.maschine-card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.2;
+}
+.maschine-card-sub {
+  font-size: .82rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+.maschine-card-badge {
+  display: inline-block;
+  margin-top: .5rem;
+  padding: .2rem .6rem;
+  font-size: .63rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  border-radius: 99px;
+  align-self: flex-start;
+}
+.maschine-card-badge.badge-neu { background: rgba(16,185,129,.12); color: #059669; }
+.maschine-card-badge.badge-gebraucht { background: rgba(234,179,8,.12); color: #a16207; }
+.maschine-card-badge.badge-vorfuehrmaschine { background: rgba(59,130,246,.12); color: #2563eb; }

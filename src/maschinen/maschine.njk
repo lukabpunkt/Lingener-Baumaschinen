@@ -1,0 +1,119 @@
+---
+pagination:
+  data: maschinenseiten
+  size: 1
+  alias: maschine
+permalink: "{{ '/en/maschinen/' + maschine.slug + '.html' if maschine.lang == 'en' else '/maschinen/' + maschine.slug + '.html' }}"
+layout: base.njk
+nav: "maschinen"
+navSolid: true
+
+eleventyComputed:
+  lang: "{{ maschine.lang }}"
+  langDE: "{{ maschine.langDE }}"
+  langEN: "{{ maschine.langEN }}"
+  title: "{% if maschine.lang == 'de' %}{{ maschine.name }} — {{ maschine.subtitleDE }} | LIBA{% else %}{{ maschine.name }} — {{ maschine.subtitleEN }} | LIBA{% endif %}"
+  description: "{% if maschine.lang == 'de' %}{{ maschine.name }}: {{ maschine.subtitleDE }}. Grabenfräsen Made in Germany — LIBA Lingener Baumaschinen.{% else %}{{ maschine.name }}: {{ maschine.subtitleEN }}. Trench cutters Made in Germany — LIBA Lingener Baumaschinen.{% endif %}"
+  canonical: "{% if maschine.lang == 'de' %}https://www.lingener-baumaschinen.de{{ maschine.langDE }}{% else %}https://www.lingener-baumaschinen.de{{ maschine.langEN }}{% endif %}"
+  ogTitle: "{% if maschine.lang == 'de' %}{{ maschine.name }} — {{ maschine.subtitleDE }} | LIBA{% else %}{{ maschine.name }} — {{ maschine.subtitleEN }} | LIBA{% endif %}"
+  ogDescription: "{% if maschine.lang == 'de' %}{{ maschine.subtitleDE }}. LIBA Lingener Baumaschinen — Made in Germany seit 1969.{% else %}{{ maschine.subtitleEN }}. LIBA Lingener Baumaschinen — Made in Germany since 1969.{% endif %}"
+  ogLocale: "{{ 'de_DE' if maschine.lang == 'de' else 'en_GB' }}"
+---
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('{{ maschine.heroImage }}');" aria-hidden="true"></div>
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
+      <span class="sep">/</span>
+      <a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}">{% if lang == "de" %}Maschinen{% else %}Machines{% endif %}</a>
+      <span class="sep">/</span>
+      <span>{{ maschine.name }}</span>
+    </div>
+    <span class="eyebrow hero-eyebrow">
+      <span class="dot"></span>{{ maschine.category }}{% if maschine.condition != 'Neu' %} · {{ maschine.condition }}{% if maschine.year %} {{ maschine.year }}{% endif %}{% endif %}
+    </span>
+    <h1 data-split-lines class="mt-3">{{ maschine.name }}</h1>
+    <p>{% if lang == "de" %}{{ maschine.subtitleDE }}{% else %}{{ maschine.subtitleEN }}{% endif %}</p>
+    <div class="hero-actions mt-4">
+      <a href="{% if lang == 'de' %}/kontakt.html{% else %}/en/kontakt.html{% endif %}" class="btn btn-accent is-lg">{% if lang == "de" %}Angebot anfragen{% else %}Request a quote{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#technik" class="btn btn-outline-light">{% if lang == "de" %}Technische Daten{% else %}Technical specifications{% endif %}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="split align-start reveal">
+      <div class="media-frame is-wide">
+        <img loading="lazy" src="{{ maschine.heroImage }}" alt="{% if lang == 'de' %}{{ maschine.heroAltDE }}{% else %}{{ maschine.heroAltEN }}{% endif %}">
+        <span class="tag">{{ maschine.category }}{% if maschine.condition != 'Neu' %} · {{ maschine.condition }}{% if maschine.year %} {{ maschine.year }}{% endif %}{% endif %}</span>
+      </div>
+      <div>
+        <span class="section-index">{% if lang == "de" %}01 / Übersicht{% else %}01 / Overview{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}{{ maschine.subtitleDE }}<br><em class="serif-italic">{{ maschine.name }}.</em>{% else %}{{ maschine.subtitleEN }}<br><em class="serif-italic">{{ maschine.name }}.</em>{% endif %}</h2>
+        <p class="lead mt-3">
+          {% if lang == "de" %}
+            Die {{ maschine.name }} ist eine {{ maschine.category }}-Grabenfräse von LIBA Lingener Baumaschinen — entwickelt und gefertigt in Lingen (Ems). Made in Germany seit 1969.
+          {% else %}
+            The {{ maschine.name }} is a {{ maschine.category }} trench cutter from LIBA Lingener Baumaschinen — designed and manufactured in Lingen (Ems). Made in Germany since 1969.
+          {% endif %}
+        </p>
+        {% if maschine.pdfUrl %}
+        <a href="{{ maschine.pdfUrl }}" class="btn-link mt-3" download>
+          {% if lang == "de" %}Prospekt herunterladen{% else %}Download brochure{% endif %}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 15V3m0 12l-4-4m4 4l4-4"/><path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="technik">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="heading">
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}02 / Technische Daten{% else %}02 / Technical Specifications{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Spezifikationen<br><em class="serif-italic">{{ maschine.name }}.</em>{% else %}Specifications<br><em class="serif-italic">{{ maschine.name }}.</em>{% endif %}</h2>
+      </div>
+      <div class="aside">
+        <p class="lead">{% if lang == "de" %}Richtwerte je nach Konfiguration. Wir konfigurieren jede Maschine individuell — schicken Sie uns Ihr Einsatzprofil.{% else %}Indicative figures depending on configuration. We configure every machine individually — please send us your application profile.{% endif %}</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <table class="spec-table" style="max-width: 680px;">
+        <tbody>
+          {% for row in maschine.specs %}
+          <tr>
+            <th>{% if lang == "de" %}{{ row.de }}{% else %}{{ row.en }}{% endif %}</th>
+            <td>{{ row.val }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="cta-block reveal">
+      <div>
+        <span class="eyebrow is-dark"><span class="dot"></span>{% if lang == "de" %}Konkrete Anfrage{% else %}Specific Enquiry{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Konfigurieren Sie<br>Ihre <em>{{ maschine.name }}.</em>{% else %}Configure your<br><em>{{ maschine.name }}.</em>{% endif %}</h2>
+        <p>{% if lang == "de" %}Jede Maschine wird individuell auf Ihr Projekt abgestimmt. Sprechen Sie mit unserer Konstruktion über Trägergerät, Frästiefe und Werkzeugbestückung.{% else %}Every machine is individually configured for your project. Talk to our engineering team about carrier machine, cutting depth and tooling configuration.{% endif %}</p>
+        <div class="actions">
+          <a href="{% if lang == 'de' %}/kontakt.html{% else %}/en/kontakt.html{% endif %}" class="btn btn-accent is-lg">{% if lang == "de" %}Angebot anfragen{% else %}Request a quote{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}" class="btn btn-outline-light">{% if lang == "de" %}Alle Maschinen{% else %}All machines{% endif %}</a>
+        </div>
+      </div>
+      <dl class="cta-side">
+        <dt>{% if lang == "de" %}Vertrieb direkt vom Werk{% else %}Sales direct from the factory{% endif %}</dt>
+        <dd>+49 (0) 591 76 314</dd>
+        <dt>{% if lang == "de" %}E-Mail{% else %}Email{% endif %}</dt>
+        <dd style="word-break: break-word;">info@lingener-baumaschinen.de</dd>
+      </dl>
+    </div>
+  </div>
+</section>
