@@ -116,9 +116,9 @@ eleventyComputed:
 </section>
 
 <!-- ==========  MARQUEE  ========== -->
-{% if lang == "de" %}
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
+    {% if lang == "de" %}
     <span class="marquee-item">Glasfaserausbau</span>
     <span class="marquee-item">Pipeline-Verlegung</span>
     <span class="marquee-item">Kabeltiefbau</span>
@@ -129,21 +129,31 @@ eleventyComputed:
     <span class="marquee-item">Sportplatzbau</span>
     <span class="marquee-item">Landwirtschaft</span>
     <span class="marquee-item">Solarparks</span>
+    {% else %}
+    <span class="marquee-item">Fibre Optic</span>
+    <span class="marquee-item">Pipeline Installation</span>
+    <span class="marquee-item">Cable Civil Engineering</span>
+    <span class="marquee-item">Drainage</span>
+    <span class="marquee-item">Irrigation</span>
+    <span class="marquee-item">Track Construction</span>
+    <span class="marquee-item">Mining</span>
+    <span class="marquee-item">Sports Facilities</span>
+    <span class="marquee-item">Agriculture</span>
+    <span class="marquee-item">Solar Parks</span>
+    {% endif %}
   </div>
 </div>
-{% endif %}
 
-{% if lang == "de" %}
 <!-- ==========  INTRO / UNTERNEHMEN  ========== -->
 <section class="section">
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index">01 / Unternehmen</span>
-        <h2 class="mt-3">Eine Familien­manufaktur.<br><em class="serif-italic">Eine globale Referenz.</em></h2>
+        <span class="section-index">01 / {% if lang == "de" %}Unternehmen{% else %}Company{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Eine Familien­manufaktur.<br><em class="serif-italic">Eine globale Referenz.</em>{% else %}A family manufactory.<br><em class="serif-italic">A global reference.</em>{% endif %}</h2>
       </div>
       <div class="aside">
-        <p class="lead">Seit 1969 entwickelt LIBA Grabenfräsen, die unter härtesten Bedingungen liefern. Was im Emsland mit einer Idee begann, ist heute eine weltweit eingesetzte Maschinenfamilie für Tiefbau, Versorgung und Infrastruktur.</p>
+        <p class="lead">{% if lang == "de" %}Seit 1969 entwickelt LIBA Grabenfräsen, die unter härtesten Bedingungen liefern. Was im Emsland mit einer Idee begann, ist heute eine weltweit eingesetzte Maschinenfamilie für Tiefbau, Versorgung und Infrastruktur.{% else %}Since 1969 LIBA has developed trench cutters that perform under the harshest conditions. What began in Emsland with one idea is today a family of machines deployed worldwide for civil engineering, utilities and infrastructure.{% endif %}</p>
       </div>
     </div>
 
@@ -152,38 +162,37 @@ eleventyComputed:
         <ul class="spec-list">
           <li>
             <span class="num">01</span>
-            <div><strong>Eigene Fertigung in Lingen (Ems)</strong><span>Konstruktion, Schweißbau, Hydraulik-Integration und Endmontage unter einem Dach.</span></div>
+            <div><strong>{% if lang == "de" %}Eigene Fertigung in Lingen (Ems){% else %}Own manufacturing in Lingen (Ems){% endif %}</strong><span>{% if lang == "de" %}Konstruktion, Schweißbau, Hydraulik-Integration und Endmontage unter einem Dach.{% else %}Design, welding, hydraulic integration and final assembly under one roof.{% endif %}</span></div>
           </li>
           <li>
             <span class="num">02</span>
-            <div><strong>Über 40 Maschinenmodelle</strong><span>Anbaufräsen, Selbstfahrer, Pflüge und Spezialmaschinen — abgestimmt auf jedes Trägergerät.</span></div>
+            <div><strong>{% if lang == "de" %}Über 40 Maschinenmodelle{% else %}Over 40 machine models{% endif %}</strong><span>{% if lang == "de" %}Anbaufräsen, Selbstfahrer, Pflüge und Spezialmaschinen — abgestimmt auf jedes Trägergerät.{% else %}Attachment cutters, self-propelled machines, ploughs and specialist machines — matched to every carrier.{% endif %}</span></div>
           </li>
           <li>
             <span class="num">03</span>
-            <div><strong>Direkter Werkskontakt</strong><span>Kein Anrufcenter, kein Zwischenhändler. Persönliche Ansprechpartner vom Erstkontakt bis zur Auslieferung.</span></div>
+            <div><strong>{% if lang == "de" %}Direkter Werkskontakt{% else %}Direct factory contact{% endif %}</strong><span>{% if lang == "de" %}Kein Anrufcenter, kein Zwischenhändler. Persönliche Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}No call centres, no middlemen. Personal points of contact from first enquiry through to delivery.{% endif %}</span></div>
           </li>
           <li>
             <span class="num">04</span>
-            <div><strong>Lebensdauer statt Lebenszyklus</strong><span>Maschinen, die nach Jahrzehnten noch im Einsatz sind — und mit Original­ersatzteilen aus dem Werk weiterlaufen.</span></div>
+            <div><strong>{% if lang == "de" %}Lebensdauer statt Lebenszyklus{% else %}Lifespan, not lifecycle{% endif %}</strong><span>{% if lang == "de" %}Maschinen, die nach Jahrzehnten noch im Einsatz sind — und mit Original­ersatzteilen aus dem Werk weiterlaufen.{% else %}Machines still in service after decades — running on original spare parts from the factory.{% endif %}</span></div>
           </li>
         </ul>
-        <a href="/unternehmen.html" class="btn-link mt-4">Mehr über LIBA <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="{% if lang == 'de' %}/unternehmen.html{% else %}/en/unternehmen.html{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Mehr über LIBA{% else %}More about LIBA{% endif %} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
       <div class="media-frame reveal-delay-2">
-        <img loading="lazy" src="/assets/images/products/gm-180-af-detail.jpg" alt="Grabenfräse GM 180 AF im Einsatz" width="1200" height="2133">
-        <span class="tag">GM 180 AF · Schlepperanbau</span>
+        <img loading="lazy" src="/assets/images/products/gm-180-af-detail.jpg" alt="{% if lang == 'de' %}Grabenfräse GM 180 AF im Einsatz{% else %}Trench cutter GM 180 AF in use{% endif %}" width="1200" height="2133">
+        <span class="tag">{% if lang == "de" %}GM 180 AF · Schlepperanbau{% else %}GM 180 AF · Tractor-mounted{% endif %}</span>
       </div>
     </div>
   </div>
 </section>
-{% endif %}
 
 <!-- ==========  PRODUKTFAMILIEN  ========== -->
 <section class="section section-dark" id="{% if lang == 'de' %}produkte{% else %}machines{% endif %}">
   <div class="container" style="position: relative;">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}02 / Maschinen{% else %}01 / Machines{% endif %}</span>
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}02 / Maschinen{% else %}02 / Machines{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Die richtige Maschine<br>für jeden <em class="serif-italic">Untergrund.</em>{% else %}The right machine<br>for every <em class="serif-italic">ground.</em>{% endif %}</h2>
       </div>
       <div class="aside">
@@ -261,17 +270,15 @@ eleventyComputed:
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index">{% if lang == "de" %}03 / Anwendungen{% else %}02 / Applications{% endif %}</span>
+        <span class="section-index">{% if lang == "de" %}03 / Anwendungen{% else %}03 / Applications{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Eine Technologie.<br><em class="serif-italic">Dutzende Anwendungen.</em>{% else %}One technology.<br><em class="serif-italic">Dozens of applications.</em>{% endif %}</h2>
       </div>
       <div class="aside">
         <p class="lead">{% if lang == "de" %}Vom Glasfaserausbau bis zur Bewässerung im Weinberg — überall dort, wo präzise Gräben unter wirtschaftlichen Bedingungen entstehen müssen, liefert LIBA die passende Lösung.{% else %}From fibre optic rollout to vineyard irrigation — wherever precise trenches need to be cut efficiently, LIBA has the right solution.{% endif %}</p>
-        {% if lang == "de" %}
-        <a href="/anwendungen.html" class="btn btn-ghost">
-          Alle Anwendungen
+        <a href="{% if lang == 'de' %}/anwendungen.html{% else %}/en/anwendungen.html{% endif %}" class="btn btn-ghost">
+          {% if lang == "de" %}Alle Anwendungen{% else %}All applications{% endif %}
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        {% endif %}
       </div>
     </div>
 
@@ -331,16 +338,14 @@ eleventyComputed:
 <!-- ==========  STATS + QUOTE  ========== -->
 <section class="section section-dark">
   <div class="container" style="position: relative;">
-    {% if lang == "de" %}
     <div class="quote reveal">
-      <span class="eyebrow is-dark" style="justify-content: center;"><span class="dot"></span>Was uns ausmacht</span>
-      <blockquote class="mt-3">Eine LIBA-Fräse ist kein Werkzeug. Sie ist eine <em>Investition</em> in jeden Meter, den Sie unter dem Boden ehrlich verdient haben.</blockquote>
+      <span class="eyebrow is-dark" style="justify-content: center;"><span class="dot"></span>{% if lang == "de" %}Was uns ausmacht{% else %}What sets us apart{% endif %}</span>
+      <blockquote class="mt-3">{% if lang == "de" %}Eine LIBA-Fräse ist kein Werkzeug. Sie ist eine <em>Investition</em> in jeden Meter, den Sie unter dem Boden ehrlich verdient haben.{% else %}A LIBA machine is not a tool. It is an <em>investment</em> in every metre honestly earned below the surface.{% endif %}</blockquote>
       <div class="cite">
-        <strong>Geschäftsleitung LIBA</strong>
-        Lingen (Ems) · Deutschland
+        <strong>{% if lang == "de" %}Geschäftsleitung LIBA{% else %}LIBA Management{% endif %}</strong>
+        Lingen (Ems) · {% if lang == "de" %}Deutschland{% else %}Germany{% endif %}
       </div>
     </div>
-    {% endif %}
 
     <div class="stats-grid {% if lang == 'de' %}mt-6 {% endif %}reveal">
       <div class="stat-cell">
@@ -367,39 +372,38 @@ eleventyComputed:
   </div>
 </section>
 
-{% if lang == "de" %}
 <!-- ==========  FERTIGUNGSPROZESS  ========== -->
 <section class="section section-dark" style="padding-top: 0;">
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index is-dark" style="color: var(--brand-light);">04 / Fertigung</span>
-        <h2 class="mt-3">Vier Schritte.<br><em class="serif-italic">Eine LIBA-Maschine.</em></h2>
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}04 / Fertigung{% else %}04 / Manufacturing{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Vier Schritte.<br><em class="serif-italic">Eine LIBA-Maschine.</em>{% else %}Four steps.<br><em class="serif-italic">One LIBA machine.</em>{% endif %}</h2>
       </div>
       <div class="aside">
-        <p class="lead">Vom Konstruktionsplan bis zur Auslieferung — jede Maschine entsteht in unserer eigenen Manufaktur in Lingen (Ems). Nichts wird zugekauft, was wir besser selbst machen können.</p>
+        <p class="lead">{% if lang == "de" %}Vom Konstruktionsplan bis zur Auslieferung — jede Maschine entsteht in unserer eigenen Manufaktur in Lingen (Ems). Nichts wird zugekauft, was wir besser selbst machen können.{% else %}From design drawing to delivery — every machine is built in our own factory in Lingen (Ems). Nothing is bought in that we can make better ourselves.{% endif %}</p>
       </div>
     </div>
     <div class="process reveal">
       <div class="process-step">
-        <div class="step-num">Schritt 01</div>
-        <h4>Konstruktion</h4>
-        <p>Jede Maschine wird gemeinsam mit dem Kunden auf Bodenart, Trägergerät und Einsatzprofil hin spezifiziert.</p>
+        <div class="step-num">{% if lang == "de" %}Schritt 01{% else %}Step 01{% endif %}</div>
+        <h4>{% if lang == "de" %}Konstruktion{% else %}Design{% endif %}</h4>
+        <p>{% if lang == "de" %}Jede Maschine wird gemeinsam mit dem Kunden auf Bodenart, Trägergerät und Einsatzprofil hin spezifiziert.{% else %}Every machine is specified together with the customer for ground type, carrier machine and application profile.{% endif %}</p>
       </div>
       <div class="process-step">
-        <div class="step-num">Schritt 02</div>
-        <h4>Schweißbau</h4>
-        <p>Hochfeste Stahlrahmen und Tragstrukturen — eigene Schweißerei mit erfahrenen Konstruktions­meistern.</p>
+        <div class="step-num">{% if lang == "de" %}Schritt 02{% else %}Step 02{% endif %}</div>
+        <h4>{% if lang == "de" %}Schweißbau{% else %}Welding{% endif %}</h4>
+        <p>{% if lang == "de" %}Hochfeste Stahlrahmen und Tragstrukturen — eigene Schweißerei mit erfahrenen Konstruktions­meistern.{% else %}High-tensile steel frames and load structures — our own welding shop with experienced master craftsmen.{% endif %}</p>
       </div>
       <div class="process-step">
-        <div class="step-num">Schritt 03</div>
-        <h4>Hydraulik &amp; Mechanik</h4>
-        <p>Integration von Antrieb, Steuerung, Bestückung. Original­komponenten von Markenherstellern.</p>
+        <div class="step-num">{% if lang == "de" %}Schritt 03{% else %}Step 03{% endif %}</div>
+        <h4>{% if lang == "de" %}Hydraulik &amp; Mechanik{% else %}Hydraulics &amp; Mechanics{% endif %}</h4>
+        <p>{% if lang == "de" %}Integration von Antrieb, Steuerung, Bestückung. Original­komponenten von Markenherstellern.{% else %}Integration of drive, controls and tooling. Original components from branded manufacturers.{% endif %}</p>
       </div>
       <div class="process-step">
-        <div class="step-num">Schritt 04</div>
-        <h4>Abnahme &amp; Auslieferung</h4>
-        <p>Funktionsprüfung im Werk, persönliche Übergabe und Bediener­einweisung beim Kunden vor Ort.</p>
+        <div class="step-num">{% if lang == "de" %}Schritt 04{% else %}Step 04{% endif %}</div>
+        <h4>{% if lang == "de" %}Abnahme &amp; Auslieferung{% else %}Testing &amp; Delivery{% endif %}</h4>
+        <p>{% if lang == "de" %}Funktionsprüfung im Werk, persönliche Übergabe und Bediener­einweisung beim Kunden vor Ort.{% else %}Function testing at the factory, personal handover and operator training at the customer's site.{% endif %}</p>
       </div>
     </div>
   </div>
@@ -410,50 +414,49 @@ eleventyComputed:
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index">05 / Maschinen im Einsatz</span>
-        <h2 class="mt-3">Technik, die<br><em class="serif-italic">man sieht.</em></h2>
+        <span class="section-index">{% if lang == "de" %}05 / Maschinen im Einsatz{% else %}05 / Machines in use{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Technik, die<br><em class="serif-italic">man sieht.</em>{% else %}Engineering<br><em class="serif-italic">you can see.</em>{% endif %}</h2>
       </div>
       <div class="aside">
-        <a href="/anwendungen.html" class="btn btn-ghost">
-          Alle Anwendungen
+        <a href="{% if lang == 'de' %}/anwendungen.html{% else %}/en/anwendungen.html{% endif %}" class="btn btn-ghost">
+          {% if lang == "de" %}Alle Anwendungen{% else %}All applications{% endif %}
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
     </div>
 
     <div class="gallery-grid">
-      <a href="/maschinen.html" class="gallery-item reveal">
-        <img loading="lazy" src="/assets/images/gallery/01.jpg" alt="LIBA Grabenfräse im Feldeinsatz">
+      <a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}" class="gallery-item reveal">
+        <img loading="lazy" src="/assets/images/gallery/01.jpg" alt="{% if lang == 'de' %}LIBA Grabenfräse im Feldeinsatz{% else %}LIBA trench cutter in field use{% endif %}">
         <div class="gallery-item-overlay">
-          <span>Maschinenpark</span>
+          <span>{% if lang == "de" %}Maschinenpark{% else %}Machine Range{% endif %}</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </div>
       </a>
-      <a href="/maschinen.html" class="gallery-item reveal reveal-delay-1">
-        <img loading="lazy" src="/assets/images/gallery/02.jpg" alt="LIBA Maschine bei der Kabelverlegung">
+      <a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}" class="gallery-item reveal reveal-delay-1">
+        <img loading="lazy" src="/assets/images/gallery/02.jpg" alt="{% if lang == 'de' %}LIBA Maschine bei der Kabelverlegung{% else %}LIBA machine during cable installation{% endif %}">
         <div class="gallery-item-overlay">
-          <span>Maschinenpark</span>
+          <span>{% if lang == "de" %}Maschinenpark{% else %}Machine Range{% endif %}</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </div>
       </a>
-      <a href="/anwendungen.html" class="gallery-item reveal reveal-delay-2">
-        <img loading="lazy" src="/assets/images/gallery/03.jpg" alt="LIBA Fräse im Glasfaserausbau">
+      <a href="{% if lang == 'de' %}/anwendungen.html{% else %}/en/anwendungen.html{% endif %}" class="gallery-item reveal reveal-delay-2">
+        <img loading="lazy" src="/assets/images/gallery/03.jpg" alt="{% if lang == 'de' %}LIBA Fräse im Glasfaserausbau{% else %}LIBA cutter in fibre optic installation{% endif %}">
         <div class="gallery-item-overlay">
-          <span>Anwendungen</span>
+          <span>{% if lang == "de" %}Anwendungen{% else %}Applications{% endif %}</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </div>
       </a>
-      <a href="/anwendungen.html" class="gallery-item reveal reveal-delay-3">
-        <img loading="lazy" src="/assets/images/gallery/04.jpg" alt="LIBA Grabenfräse im Einsatz">
+      <a href="{% if lang == 'de' %}/anwendungen.html{% else %}/en/anwendungen.html{% endif %}" class="gallery-item reveal reveal-delay-3">
+        <img loading="lazy" src="/assets/images/gallery/04.jpg" alt="{% if lang == 'de' %}LIBA Grabenfräse im Einsatz{% else %}LIBA trench cutter in operation{% endif %}">
         <div class="gallery-item-overlay">
-          <span>Anwendungen</span>
+          <span>{% if lang == "de" %}Anwendungen{% else %}Applications{% endif %}</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </div>
       </a>
     </div>
   </div>
 </section>
-{% endif %}
 
 <!-- ==========  CTA  ========== -->
 <section class="section" style="padding-top: 0;">
