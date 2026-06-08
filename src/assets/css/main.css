@@ -2708,8 +2708,8 @@ p { color: var(--steel-700); text-wrap: pretty; }
 /* ── Opening Hours ─────────────────────────────────────────────────── */
 .opening-hours {
   display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;
-  padding: 1.75rem 2rem; background: var(--steel-950);
-  border: 1px solid rgba(255,255,255,.07); border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem; background: var(--steel-900);
+  border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-lg);
 }
 .opening-hours-title {
   display: flex; align-items: center; gap: .5rem;

@@ -50,6 +50,30 @@ eleventyComputed:
   </div>
 </section>
 
+<section class="section section-dark" id="anfrage">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom: 2.5rem;">
+      <div class="heading">
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}01 / Termin{% else %}01 / Book a call{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Termin für ein<br><em class="serif-italic">Beratungsgespräch.</em>{% else %}Book a<br><em class="serif-italic">consultation call.</em>{% endif %}</h2>
+      </div>
+      <div class="aside">
+        <p class="lead">{% if lang == "de" %}Wählen Sie einen freien Termin — wir rufen Sie zur vereinbarten Zeit direkt an. Kein Callcenter, keine Warteschleife.{% else %}Pick a free slot and we'll call you at the agreed time. No call centre, no hold music.{% endif %}</p>
+        <ul class="spec-list mt-3">
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}30 Minuten{% else %}30 minutes{% endif %}</strong><span>{% if lang == "de" %}Technische Beratung direkt vom LIBA-Konstrukteur.{% else %}Technical advice direct from the LIBA engineering team.{% endif %}</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Direkte Leitung{% else %}Direct line{% endif %}</strong><span>{% if lang == "de" %}Persönlicher Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}Personal point of contact from first enquiry through to delivery.{% endif %}</span></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="calendly-inline-widget"
+        data-url="https://calendly.com/luka-bloemendal/30min?background_color=111827&text_color=f1f5f9&primary_color=5eead4{% if lang == 'de' %}&locale=de{% else %}&locale=en{% endif %}"
+        style="min-width: 320px; height: 700px;"></div>
+      <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <div class="grid grid-2 reveal">
@@ -85,7 +109,7 @@ eleventyComputed:
   </div>
 </section>
 
-<section class="section" style="padding-top: 0; padding-bottom: 0;">
+<section class="section" style="padding-top: 0; padding-bottom: var(--section-y);">
   <div class="container">
     <div class="opening-hours reveal">
       <h3 class="opening-hours-title">
@@ -101,30 +125,6 @@ eleventyComputed:
         <dt class="is-closed">{% if lang == "de" %}Samstag{% else %}Saturday{% endif %}</dt><dd class="is-closed">{% if lang == "de" %}Geschlossen{% else %}Closed{% endif %}</dd>
         <dt class="is-closed">{% if lang == "de" %}Sonntag{% else %}Sunday{% endif %}</dt>  <dd class="is-closed">{% if lang == "de" %}Geschlossen{% else %}Closed{% endif %}</dd>
       </dl>
-    </div>
-  </div>
-</section>
-
-<section class="section section-dark" id="anfrage" style="padding-top: 0;">
-  <div class="container" style="padding-top: var(--section-y);">
-    <div class="section-header reveal" style="margin-bottom: 2.5rem;">
-      <div class="heading">
-        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}01 / Termin{% else %}01 / Book a call{% endif %}</span>
-        <h2 class="mt-3">{% if lang == "de" %}Termin für ein<br><em class="serif-italic">Beratungsgespräch.</em>{% else %}Book a<br><em class="serif-italic">consultation call.</em>{% endif %}</h2>
-      </div>
-      <div class="aside">
-        <p class="lead">{% if lang == "de" %}Wählen Sie einen freien Termin — wir rufen Sie zur vereinbarten Zeit direkt an. Kein Callcenter, keine Warteschleife.{% else %}Pick a free slot and we'll call you at the agreed time. No call centre, no hold music.{% endif %}</p>
-        <ul class="spec-list mt-3">
-          <li><span class="num">01</span><div><strong>{% if lang == "de" %}30 Minuten{% else %}30 minutes{% endif %}</strong><span>{% if lang == "de" %}Technische Beratung direkt vom LIBA-Konstrukteur.{% else %}Technical advice direct from the LIBA engineering team.{% endif %}</span></div></li>
-          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Direkte Leitung{% else %}Direct line{% endif %}</strong><span>{% if lang == "de" %}Persönlicher Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}Personal point of contact from first enquiry through to delivery.{% endif %}</span></div></li>
-        </ul>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="calendly-inline-widget"
-        data-url="https://calendly.com/luka-bloemendal/30min?background_color=111827&text_color=f1f5f9&primary_color=5eead4{% if lang == 'de' %}&locale=de{% else %}&locale=en{% endif %}"
-        style="min-width: 320px; height: 700px;"></div>
-      <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </div>
 </section>
