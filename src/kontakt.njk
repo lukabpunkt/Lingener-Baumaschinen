@@ -21,9 +21,9 @@ ogTitleEN: "Contact — LIBA Lingener Baumaschinen"
 ogDescDE: "Kein Anrufcenter, kein Zwischenhändler. Sprechen Sie direkt mit dem LIBA-Team in Lingen — Kauf, Miete, Ersatzteil oder Schulung."
 ogDescEN: "No call centre, no middlemen. Speak directly with the LIBA team in Lingen — purchase, hire, spare part or training."
 extraBodyDE: >-
-  <div class="mobile-cta-bar"><a href="tel:+4959176314" class="btn btn-ghost is-sm">Anrufen</a><a href="#anfrage" class="btn btn-brand is-sm">Anfrage stellen</a></div>
+  <div class="mobile-cta-bar"><a href="tel:+4959176314" class="btn btn-ghost is-sm">Anrufen</a><a href="#anfrage" class="btn btn-brand is-sm">Termin buchen</a></div>
 extraBodyEN: >-
-  <div class="mobile-cta-bar"><a href="tel:+4959176314" class="btn btn-ghost is-sm">Call us</a><a href="#anfrage" class="btn btn-brand is-sm">Request a quote</a></div>
+  <div class="mobile-cta-bar"><a href="tel:+4959176314" class="btn btn-ghost is-sm">Call us</a><a href="#anfrage" class="btn btn-brand is-sm">Book a call</a></div>
 schemaDE: >-
   {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
 schemaEN: >-
@@ -107,42 +107,24 @@ eleventyComputed:
 
 <section class="section section-dark" id="anfrage" style="padding-top: 0;">
   <div class="container" style="padding-top: var(--section-y);">
-    <div class="split align-start" style="gap: 4rem;">
-      <div class="reveal">
-        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}01 / Anfrage{% else %}01 / Enquiry{% endif %}</span>
-        <h2 class="mt-3">{% if lang == "de" %}Sagen Sie uns,<br>was Sie <em>planen.</em>{% else %}Tell us what<br>you're <em>planning.</em>{% endif %}</h2>
-        <p class="lead mt-3">{% if lang == "de" %}Egal ob konkretes Projekt, allgemeine Beratung oder Ersatzteil-Suche — wir melden uns zeitnah und sprechen direkt über Ihren Anwendungsfall.{% else %}Whether it's a specific project, general advice or a spare part search — we respond promptly and talk directly about your application.{% endif %}</p>
-        <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Technische Beratung{% else %}Technical advice{% endif %}</strong><span>{% if lang == "de" %}Direkt vom LIBA-Konstrukteur.{% else %}Direct from the LIBA design engineers.{% endif %}</span></div></li>
-          <li><span class="num">02</span><div><strong>{% if lang == "de" %}24h-Rückmeldung{% else %}24h response{% endif %}</strong><span>{% if lang == "de" %}Werktags innerhalb eines Arbeitstages.{% else %}On working days, within one business day.{% endif %}</span></div></li>
-          <li><span class="num">03</span><div><strong>{% if lang == "de" %}Persönlicher Ansprechpartner{% else %}Personal point of contact{% endif %}</strong><span>{% if lang == "de" %}Vom Erstkontakt bis zur Auslieferung.{% else %}From first enquiry through to delivery.{% endif %}</span></div></li>
+    <div class="section-header reveal" style="margin-bottom: 2.5rem;">
+      <div class="heading">
+        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}01 / Termin{% else %}01 / Book a call{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Termin für ein<br><em class="serif-italic">Beratungsgespräch.</em>{% else %}Book a<br><em class="serif-italic">consultation call.</em>{% endif %}</h2>
+      </div>
+      <div class="aside">
+        <p class="lead">{% if lang == "de" %}Wählen Sie einen freien Termin — wir rufen Sie zur vereinbarten Zeit direkt an. Kein Callcenter, keine Warteschleife.{% else %}Pick a free slot and we'll call you at the agreed time. No call centre, no hold music.{% endif %}</p>
+        <ul class="spec-list mt-3">
+          <li><span class="num">01</span><div><strong>{% if lang == "de" %}30 Minuten{% else %}30 minutes{% endif %}</strong><span>{% if lang == "de" %}Technische Beratung direkt vom LIBA-Konstrukteur.{% else %}Technical advice direct from the LIBA engineering team.{% endif %}</span></div></li>
+          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Direkte Leitung{% else %}Direct line{% endif %}</strong><span>{% if lang == "de" %}Persönlicher Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}Personal point of contact from first enquiry through to delivery.{% endif %}</span></div></li>
         </ul>
       </div>
-      <form class="form reveal reveal-delay-1" data-form="https://formspree.io/f/YOUR_FORMSPREE_ID" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-        <div class="form-row">
-          <div class="field"><label for="k-name">Name</label><input id="k-name" name="name" required></div>
-          <div class="field"><label for="k-firma">{% if lang == "de" %}Firma{% else %}Company{% endif %}</label><input id="k-firma" name="firma"></div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label for="k-email">{% if lang == "de" %}E-Mail{% else %}Email{% endif %}</label><input id="k-email" type="email" name="email" required></div>
-          <div class="field"><label for="k-tel">{% if lang == "de" %}Telefon{% else %}Phone{% endif %}</label><input id="k-tel" type="tel" name="tel"></div>
-        </div>
-        <div class="field">
-          <label for="k-betreff">{% if lang == "de" %}Betreff{% else %}Subject{% endif %}</label>
-          <select id="k-betreff" name="betreff">
-            <option>{% if lang == "de" %}Kaufanfrage{% else %}Purchase enquiry{% endif %}</option>
-            <option>{% if lang == "de" %}Mietanfrage{% else %}Hire enquiry{% endif %}</option>
-            <option>{% if lang == "de" %}Ersatzteile{% else %}Spare parts{% endif %}</option>
-            <option>{% if lang == "de" %}Gebrauchtmaschinen{% else %}Used machines{% endif %}</option>
-            <option>{% if lang == "de" %}Schulung{% else %}Training{% endif %}</option>
-            <option>{% if lang == "de" %}Allgemeine Anfrage{% else %}General enquiry{% endif %}</option>
-          </select>
-        </div>
-        <div class="field"><label for="k-nachricht">{% if lang == "de" %}Nachricht{% else %}Message{% endif %}</label><textarea id="k-nachricht" name="nachricht" placeholder="{% if lang == 'de' %}Bitte beschreiben Sie Ihr Anliegen, Projekt oder gesuchtes Bauteil.{% else %}Please describe your requirements, project or the part you are looking for.{% endif %}" required></textarea></div>
-        <label class="field-check"><input type="checkbox" required> {% if lang == "de" %}Ich habe die <a href="/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Datenschutzerklärung</a> zur Kenntnis genommen.{% else %}I have read the <a href="/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Privacy Policy</a>.{% endif %}</label>
-        <button type="submit" class="btn btn-brand is-lg" style="justify-self: start;">{% if lang == "de" %}Anfrage senden{% else %}Send enquiry{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
-        <p data-form-status role="status" hidden style="color: var(--brand); font-weight: 500;"></p>
-      </form>
+    </div>
+    <div class="reveal">
+      <div class="calendly-inline-widget"
+        data-url="https://calendly.com/luka-bloemendal/30min?background_color=111827&text_color=f1f5f9&primary_color=5eead4{% if lang == 'de' %}&locale=de{% else %}&locale=en{% endif %}"
+        style="min-width: 320px; height: 700px;"></div>
+      <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </div>
 </section>
