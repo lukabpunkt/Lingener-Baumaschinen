@@ -2313,6 +2313,13 @@ p { color: var(--steel-700); text-wrap: pretty; }
   -webkit-tap-highlight-color: transparent;
 }
 .wizard-rcard-cta:hover, .wizard-rcard-cta:active { color: var(--canvas); }
+.wizard-rcard-link {
+  display: inline-flex; align-items: center; margin-top: .1rem; margin-bottom: .1rem;
+  color: var(--steel-400); font-size: .775rem; font-weight: 500; text-decoration: none;
+  transition: color var(--dur-fast);
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.wizard-rcard-link:hover, .wizard-rcard-link:active { color: var(--brand-light); }
 .wizard-restart {
   background: none; border: 0; padding: .5rem 0; margin-top: 1rem;
   color: var(--steel-500); font: inherit; font-size: .8125rem; cursor: pointer;

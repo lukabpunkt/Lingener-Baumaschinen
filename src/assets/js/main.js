@@ -278,39 +278,182 @@
     var cur   = 0;
     var busy  = false;
     var noAnim = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var isEN       = document.documentElement.lang === 'en';
+    var kontaktBase = isEN ? '/en/kontakt.html' : '/kontakt.html';
+    var maschBase   = isEN ? '/en/maschinen/'   : '/maschinen/';
 
     var DB = {
       bagger: {
-        s: [{ tag:'Baggeranbau', name:'GM 140 H', desc:'Bis 900 mm Frästiefe, ab 6 t Bagger. Ideal für Erdkabel und kommunalen Tiefbau.', modell:'GM+140+H' },
-            { tag:'Baggeranbau', name:'GM 140 AFH-500', desc:'Bis 500 mm, Träger ab 8 t. Rohrleitungs- und Kabelbau.', modell:'GM+140+AFH-500' }],
-        m: [{ tag:'Baggeranbau', name:'GM 140 AFH-500', desc:'Bis 500 mm Frästiefe, Träger ab 8 t.', modell:'GM+140+AFH-500' },
-            { tag:'Baggeranbau', name:'GM 140 AFH-600', desc:'Bis 600 mm, Pipeline DN 100–200, Träger ab 12 t.', modell:'GM+140+AFH-600' }],
-        d: [{ tag:'Baggeranbau', name:'GM 140 AFH-600', desc:'Bis 600 mm für Pipeline-Verlegung DN 100–200, Träger ab 12 t.', modell:'GM+140+AFH-600' },
-            { tag:'Beratung', name:'Sonderanfertigung', desc:'Für Frästiefen > 600 mm am Bagger sprechen Sie uns direkt an.', modell:'Baggeranbau-Tiefenfr%C3%A4se' }],
-        x: [{ tag:'Tiefenfräse', name:'GM 300 H / GM 300 HF', desc:'Bis 2.000 mm Frästiefe für Sondertiefbau und Fernwärme.', modell:'GM+300+H' },
-            { tag:'Tiefenfräse', name:'GM 450 H', desc:'Maximale Frästiefe bis 3.000 mm — für anspruchsvollsten Sondertiefbau.', modell:'GM+450+H' }]
+        s: [
+          { tag:'Baggeranbau', tagEN:'Excavator-Mounted', name:'GM 140 H', slug:'gm-140-h',
+            desc:'Bis 1.500 mm Frästiefe, ab 17 t Bagger. Ideal für Glasfaser, Kabelbau und Drainage.',
+            descEN:'Up to 1,500 mm cutting depth, excavator from 17 t. Ideal for fibre optic, cable and drainage work.', modell:'gm-140-h' },
+          { tag:'Baggeranbau', tagEN:'Excavator-Mounted', name:'GM 140 AFH-500', slug:'gm-140-afh-500',
+            desc:'Bis 1.500 mm, Träger ab 15 t. Für Rohrleitungs- und Kabelbau.',
+            descEN:'Up to 1,500 mm, carrier from 15 t. For pipeline and cable installation.', modell:'gm-140-afh-500' },
+          { tag:'Baggeranbau · Vorführmaschine', tagEN:'Excavator-Mounted · Demo', name:'GM 140 H', slug:'gm-140-h-2009',
+            desc:'Vorführmaschine Bj. 2009 — gleiche Specs zum günstigeren Einstiegspreis.',
+            descEN:'Demo machine 2009 — same specs at a lower entry price.', modell:'gm-140-h-2009' },
+          { tag:'Baggeranbau · Gebraucht', tagEN:'Excavator-Mounted · Used', name:'GM 140 AFH 500', slug:'gm-140-afh-500-2011',
+            desc:'Gebrauchtmaschine Bj. 2011 — geprüft und einsatzbereit.',
+            descEN:'Used machine 2011 — inspected and ready for use.', modell:'gm-140-afh-500-2011' }
+        ],
+        m: [
+          { tag:'Baggeranbau', tagEN:'Excavator-Mounted', name:'GM 140 AFH-500', slug:'gm-140-afh-500',
+            desc:'Bis 1.500 mm, Träger ab 15 t. Standardlösung für Kabel- und Rohrleitungsbau.',
+            descEN:'Up to 1,500 mm, carrier from 15 t. Standard solution for cable and pipeline installation.', modell:'gm-140-afh-500' },
+          { tag:'Baggeranbau', tagEN:'Excavator-Mounted', name:'GM 140 AFH-600', slug:'gm-140-afh-600',
+            desc:'Bis 1.500 mm, Träger ab 17 t. Für Pipeline DN 100–200 und größere Schnittbreiten.',
+            descEN:'Up to 1,500 mm, carrier from 17 t. For pipeline DN 100–200 and wider cutting widths.', modell:'gm-140-afh-600' },
+          { tag:'Baggeranbau · Gebraucht', tagEN:'Excavator-Mounted · Used', name:'GM 140 AFH 500', slug:'gm-140-afh-500-2011',
+            desc:'Gebrauchtmaschine Bj. 2011 — wirtschaftliche Alternative für Standardprojekte.',
+            descEN:'Used machine 2011 — economical alternative for standard projects.', modell:'gm-140-afh-500-2011' }
+        ],
+        d: [
+          { tag:'Baggeranbau', tagEN:'Excavator-Mounted', name:'GM 140 AFH-600', slug:'gm-140-afh-600',
+            desc:'Maximale Baggeranbau-Option: bis 1.500 mm Frästiefe, Träger ab 17 t.',
+            descEN:'Maximum excavator attachment option: up to 1,500 mm cutting depth, carrier from 17 t.', modell:'gm-140-afh-600' },
+          { tag:'Beratung', tagEN:'Consultation', name:'Sonderlösung > 1.500 mm', slug:null,
+            desc:'Für Frästiefen über 1.500 mm am Bagger sprechen Sie uns direkt an — wir finden die optimale Lösung.',
+            descEN:'For cutting depths over 1,500 mm on an excavator, contact us directly — we will find the optimal solution.', modell:'Baggeranbau-Sonderl%C3%B6sung' }
+        ],
+        x: [
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 300 H', slug:'gm-300-h',
+            desc:'Bis 3.000 mm Frästiefe für Sondertiefbau und Fernwärme mit schwerem Trägergerät.',
+            descEN:'Up to 3,000 mm cutting depth for special deep construction and district heating with heavy carrier.', modell:'gm-300-h' },
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 450 H', slug:'gm-450-h',
+            desc:'Bis 4.500 mm — das tiefste Gerät im LIBA-Portfolio für anspruchsvollsten Sondertiefbau.',
+            descEN:'Up to 4,500 mm — the deepest machine in the LIBA portfolio for the most demanding deep construction.', modell:'gm-450-h' }
+        ]
       },
       traktor: {
-        s: [{ tag:'Schlepperanbau', name:'GM 1 AF / GM 1 AS', desc:'Kompakt für Erdkabel und Schmalgräben, bis 400 mm Frästiefe.', modell:'GM+1+AF' },
-            { tag:'Schlepperanbau', name:'GM 140 AF / GM 140 AS', desc:'Mittlere Klasse, Frästiefe bis 1.200 mm, Drainage und Kabelbau.', modell:'GM+140+AF' }],
-        m: [{ tag:'Schlepperanbau', name:'GM 160 AF / GM 160 AS', desc:'Bis 1.200 mm Frästiefe, Fräsbreite bis 300 mm.', modell:'GM+160+AF' },
-            { tag:'Schlepperanbau', name:'GM 180 AF', desc:'High-Performance bis 1.800 mm, Pipeline DN 300 und Backbone-Glasfaser.', modell:'GM+180+AF' }],
-        d: [{ tag:'Schlepperanbau', name:'GM 180 AF', desc:'Bis 1.800 mm Frästiefe — das leistungsstärkste Schleppergerät im Portfolio.', modell:'GM+180+AF' },
-            { tag:'Schlepperanbau', name:'GM 600 R', desc:'Bis 1.800 mm, speziell für Rohrleitungs- und Pipeline-Projekte.', modell:'GM+600+R' }],
-        x: [{ tag:'Tiefenfräse', name:'GM 300 H / GM 450 H', desc:'Über 2.000 mm Frästiefe — Unimog-Adaptionen und Sonderanbauten auf Anfrage.', modell:'Tiefenf%C3%A4se' }]
+        s: [
+          { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 1 AF', slug:'gm-1-af',
+            desc:'Bis 1.200 mm Frästiefe, ab 60 PS. Kompakt für Erdkabel und Schmalgräben.',
+            descEN:'Up to 1,200 mm cutting depth, from 60 hp. Compact for earth cables and narrow trenches.', modell:'gm-1-af' },
+          { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 1 AS', slug:'gm-1-as',
+            desc:'Bis 1.200 mm, ab 60 PS. Schnelle Erdkabelverlegung mit hoher Tagesleistung.',
+            descEN:'Up to 1,200 mm, from 60 hp. Fast earth cable installation with high daily output.', modell:'gm-1-as' },
+          { tag:'Schlepperanbau · Fräsrad', tagEN:'Tractor-Mounted · Milling Wheel', name:'Fräsrad GM 600 R', slug:'gm-600-r',
+            desc:'Bis 600 mm, Fräsbreite 80–200 mm. Ideal für Kabel- und Leitungsbau, ab 190 PS.',
+            descEN:'Up to 600 mm, cutting width 80–200 mm. Ideal for cable and utility installation, from 190 hp.', modell:'gm-600-r' },
+          { tag:'Schlepperanbau · Pflug', tagEN:'Tractor-Mounted · Plough', name:'GMV 100', slug:'gmv-100',
+            desc:'Anbaupflug bis 800 mm Verlegetiefe — kein offener Graben, hohe Tagesleistung.',
+            descEN:'Attachment plough up to 800 mm installation depth — no open trench, high daily output.', modell:'gmv-100' }
+        ],
+        m: [
+          { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 140 AF', slug:'gm-140-af',
+            desc:'Bis 1.500 mm, ab 70 PS. Universell für Drainage, Kabel und Glasfaser.',
+            descEN:'Up to 1,500 mm, from 70 hp. Versatile for drainage, cable and fibre optic work.', modell:'gm-140-af' },
+          { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 160 AF', slug:'gm-160-af',
+            desc:'Bis 1.600 mm, ab 160 PS. Flexibel für Schlepper und Unimog.',
+            descEN:'Up to 1,600 mm, from 160 hp. Flexible for tractors and Unimog.', modell:'gm-160-af' },
+          { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 160 AS', slug:'gm-160-as',
+            desc:'Bis 1.600 mm, mit 2 Schnecken. Für effiziente Drainage-Projekte ab 160 PS.',
+            descEN:'Up to 1,600 mm, with 2 augers. For efficient drainage projects from 160 hp.', modell:'gm-160-as' },
+          { tag:'Schlepperanbau · Pflug', tagEN:'Tractor-Mounted · Plough', name:'GMV 130', slug:'gmv-130',
+            desc:'Vibrationskabelpflug bis 1.300 mm — schnelle Verlegung ohne Aushub.',
+            descEN:'Vibrating cable plough up to 1,300 mm — fast installation without excavation.', modell:'gmv-130' },
+          { tag:'Schlepperanbau · Unimog', tagEN:'Tractor-Mounted · Unimog', name:'Unimogfräse', slug:'unimogfraese',
+            desc:'Speziell für Mercedes-Benz Unimog ab 160 PS. Bis 1.600 mm Frästiefe.',
+            descEN:'Specifically for Mercedes-Benz Unimog from 160 hp. Up to 1,600 mm cutting depth.', modell:'unimogfraese' },
+          { tag:'Schlepperanbau · Gebraucht', tagEN:'Tractor-Mounted · Used', name:'GM 140 AF', slug:'gm-140-af-2011',
+            desc:'Gebrauchtmaschine Bj. 2011 — geprüfte Traktorfräse bis 1.500 mm.',
+            descEN:'Used machine 2011 — inspected tractor cutter up to 1,500 mm.', modell:'gm-140-af-2011' },
+          { tag:'Schlepperanbau · Gebraucht', tagEN:'Tractor-Mounted · Used', name:'GM 160 AS', slug:'gm-160-as-2014',
+            desc:'Gebrauchtmaschine Bj. 2014 — bis 1.600 mm, mit 300 mm Messerbestückung.',
+            descEN:'Used machine 2014 — up to 1,600 mm, with 300 mm blade tooling.', modell:'gm-160-as-2014' },
+          { tag:'Schlepperanbau · Gebraucht', tagEN:'Tractor-Mounted · Used', name:'GMV 130', slug:'gmv-130-2020',
+            desc:'Gebrauchter Vibrationskabelpflug Bj. 2020 — bis 1.300 mm Verlegetiefe.',
+            descEN:'Used vibrating cable plough 2020 — up to 1,300 mm installation depth.', modell:'gmv-130-2020' }
+        ],
+        d: [
+          { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 180 AF', slug:'gm-180-af',
+            desc:'Bis 1.800 mm Frästiefe — das leistungsstärkste Schlepperanbaugerät im Portfolio.',
+            descEN:'Up to 1,800 mm cutting depth — the most powerful tractor-mounted machine in the portfolio.', modell:'gm-180-af' },
+          { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 140 AF 600 H', slug:'gm-140-af-600-h',
+            desc:'Bis 1.500 mm mit flexiblem 1- oder 2-Balken-System. Ab Schlepper 10 t.',
+            descEN:'Up to 1,500 mm with flexible 1- or 2-bar system. Tractor from 10 t.', modell:'gm-140-af-600-h' },
+          { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 160 AF', slug:'gm-160-af',
+            desc:'Bis 1.600 mm, flexibel für Schlepper und Unimog. Zapfwelle oder Hydraulikmotor.',
+            descEN:'Up to 1,600 mm, flexible for tractors and Unimog. PTO shaft or hydraulic motor.', modell:'gm-160-af' },
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 300 HF', slug:'gm-300-hf',
+            desc:'Bis 2.000 mm mit eigenem Turbodiesel 195 PS. Für Fernwärme und Sondertiefbau.',
+            descEN:'Up to 2,000 mm with its own 195 hp turbodiesel engine. For district heating and special deep construction.', modell:'gm-300-hf' }
+        ],
+        x: [
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 250 H', slug:'gm-250-h',
+            desc:'Bis 2.500 mm Frästiefe, 70–450 mm Schnittbreite. Für Sondertiefbau und Fernwärme.',
+            descEN:'Up to 2,500 mm cutting depth, 70–450 mm cutting width. For special deep construction and district heating.', modell:'gm-250-h' },
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 300 H', slug:'gm-300-h',
+            desc:'Bis 3.000 mm, 150–400 mm Schnittbreite. Für Großprojekte und tiefe Drainagen.',
+            descEN:'Up to 3,000 mm, 150–400 mm cutting width. For major projects and deep drainage.', modell:'gm-300-h' },
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 300 HF', slug:'gm-300-hf',
+            desc:'Bis 2.000 mm mit eigenem Turbodiesel. Kompakte Tiefenfräse für anspruchsvolle Einsätze.',
+            descEN:'Up to 2,000 mm with its own turbodiesel engine. Compact deep-cut machine for demanding applications.', modell:'gm-300-hf' },
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 450 H', slug:'gm-450-h',
+            desc:'Bis 4.500 mm — maximale Frästiefe im gesamten LIBA-Portfolio. Für Sonderprojekte.',
+            descEN:'Up to 4,500 mm — maximum cutting depth in the entire LIBA portfolio. For special projects.', modell:'gm-450-h' }
+        ]
       },
       self: {
-        s: [{ tag:'Selbstfahrer', name:'GM 4 Raupe', desc:'Bis 650 mm, Tagesleistung bis 1.000 m — ideal für FTTH-Glasfaser.', modell:'GM+4+Raupe' },
-            { tag:'Selbstfahrer', name:'GM 4 Allrad', desc:'Allrad für Drainage, Solarpark und Sportplatz. Minimale Geländeschäden.', modell:'GM+4+Allrad' }],
-        m: [{ tag:'Selbstfahrer', name:'GM 6 ASR', desc:'Felsfräse bis 800 mm in Hartgestein. Wo Bagger und Trennsäge nicht wirtschaftlich sind.', modell:'GM+6+ASR' }],
-        d: [{ tag:'Selbstfahrer', name:'GM 6 ASR', desc:'Bis 800 mm in Kalkstein und Schiefer — das stärkste Selbstfahrer-Modell.', modell:'GM+6+ASR' }],
-        x: [{ tag:'Beratung', name:'Individuelle Lösung', desc:'Für Tiefen über 2.000 mm ohne Trägergerät beraten wir Sie direkt.', modell:'Selbstfahrer-Tiefenbau' }]
+        s: [
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Raupe', slug:'gm-4-raupe',
+            desc:'Bis 1.500 mm, Tagesleistung bis 1.000 m. Ideal für FTTH-Glasfaser und Solarprojekte.',
+            descEN:'Up to 1,500 mm, daily output up to 1,000 m. Ideal for FTTH fibre optic and solar projects.', modell:'gm-4-raupe' },
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Allrad', slug:'gm-4-allrad',
+            desc:'Allrad-Selbstfahrer für Drainage, Solarpark und Sportplatz. Minimale Geländeschäden.',
+            descEN:'All-wheel-drive self-propelled machine for drainage, solar parks and sports fields. Minimal ground damage.', modell:'gm-4-allrad' },
+          { tag:'Selbstfahrer · Vorführmaschine', tagEN:'Self-Propelled · Demo', name:'GM 4 Raupe', slug:'gm-4-raupe-2023',
+            desc:'Vorführmaschine Bj. 2023 — top Zustand, direkt verfügbar.',
+            descEN:'Demo machine 2023 — excellent condition, immediately available.', modell:'gm-4-raupe-2023' },
+          { tag:'Selbstfahrer · Vorführmaschine', tagEN:'Self-Propelled · Demo', name:'GM 4 Rad', slug:'gm-4-rad-2024',
+            desc:'Vorführmaschine Bj. 2024 mit Allradantrieb — nahezu neuwertig.',
+            descEN:'Demo machine 2024 with all-wheel drive — near-new condition.', modell:'gm-4-rad-2024' }
+        ],
+        m: [
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Raupe', slug:'gm-4-raupe',
+            desc:'Bis 1.500 mm, autark ohne Trägergerät. Tagesleistung bis 1.000 m im Lockerboden.',
+            descEN:'Up to 1,500 mm, autonomous without carrier machine. Daily output up to 1,000 m in loose ground.', modell:'gm-4-raupe' },
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Allrad', slug:'gm-4-allrad',
+            desc:'Allrad für empfindliche Flächen, Drainage und Sportplatzentwässerung.',
+            descEN:'All-wheel drive for sensitive surfaces, drainage and sports field water management.', modell:'gm-4-allrad' },
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 6 ASR', slug:'gm-6-asr',
+            desc:'Felsfräse bis 1.700 mm in Hartgestein FK IV — wo Bagger nicht wirtschaftlich sind.',
+            descEN:'Rock cutter up to 1,700 mm in hard rock class IV — where excavators are not economical.', modell:'gm-6-asr' }
+        ],
+        d: [
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 6 ASR', slug:'gm-6-asr',
+            desc:'Bis 1.700 mm in Kalkstein und Schiefer — das stärkste Selbstfahrer-Modell.',
+            descEN:'Up to 1,700 mm in limestone and slate — the most powerful self-propelled model.', modell:'gm-6-asr' },
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 1800 P', slug:'gm-1800-p',
+            desc:'Bis 1.800 mm, Drainrohr bis Ø 160 mm. Für großflächige Drainage- und Landschaftsbauprojekte.',
+            descEN:'Up to 1,800 mm, drain pipe up to Ø 160 mm. For large-scale drainage and landscaping projects.', modell:'gm-1800-p' },
+          { tag:'Selbstfahrer · Gebraucht', tagEN:'Self-Propelled · Used', name:'GM 6 ASR', slug:'gm-6-asr-2015',
+            desc:'Gebrauchtmaschine Bj. 2015, 370 Bh — starke Alternative für Hartbodeneinsatz.',
+            descEN:'Used machine 2015, 370 operating hours — strong alternative for hard ground applications.', modell:'gm-6-asr-2015' }
+        ],
+        x: [
+          { tag:'Beratung', tagEN:'Consultation', name:'Individuelle Lösung', slug:null,
+            desc:'Für Frästiefen über 2.000 mm ohne Trägergerät beraten wir Sie direkt.',
+            descEN:'For cutting depths over 2,000 mm without a carrier machine, contact us directly.', modell:'Selbstfahrer-Sonderl%C3%B6sung' }
+        ]
       },
       tiefe: {
-        s: [{ tag:'Tiefenfräse', name:'GM 250 H / GM 300 H', desc:'Frästiefen bis 2.000 mm für Sondertiefbau und Fernwärme.', modell:'GM+300+H' }],
-        m: [{ tag:'Tiefenfräse', name:'GM 300 H / GM 300 HF', desc:'Bis 2.000 mm Frästiefe, Fräsbreite bis 350 mm für Fernwärme.', modell:'GM+300+HF' }],
-        d: [{ tag:'Tiefenfräse', name:'GM 300 HF / GM 450 H', desc:'Bis 2.500 mm — Fernwärme, Entwässerungssysteme, Sonderprojekte.', modell:'GM+450+H' }],
-        x: [{ tag:'Tiefenfräse', name:'GM 450 H', desc:'Maximale Frästiefe bis 3.000 mm — das tiefste Gerät im LIBA-Portfolio.', modell:'GM+450+H' }]
+        m: [
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 250 H', slug:'gm-250-h',
+            desc:'Bis 2.500 mm Frästiefe, 70–450 mm Schnittbreite. Schlepperanbau ab 300 PS.',
+            descEN:'Up to 2,500 mm cutting depth, 70–450 mm cutting width. Tractor-mounted from 300 hp.', modell:'gm-250-h' },
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 300 H', slug:'gm-300-h',
+            desc:'Bis 3.000 mm, 150–400 mm Schnittbreite. Für Fernwärme und Sondertiefbau.',
+            descEN:'Up to 3,000 mm, 150–400 mm cutting width. For district heating and special deep construction.', modell:'gm-300-h' },
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 300 HF', slug:'gm-300-hf',
+            desc:'Bis 2.000 mm mit eigenem 195-PS-Turbodiesel. Kompakt und leistungsstark.',
+            descEN:'Up to 2,000 mm with its own 195 hp turbodiesel engine. Compact and powerful.', modell:'gm-300-hf' },
+          { tag:'Tiefenfräse', tagEN:'Deep-Cut Machine', name:'GM 450 H', slug:'gm-450-h',
+            desc:'Bis 4.500 mm — maximale Frästiefe im LIBA-Portfolio. Für anspruchsvollste Sonderprojekte.',
+            descEN:'Up to 4,500 mm — maximum cutting depth in the LIBA portfolio. For the most demanding special projects.', modell:'gm-450-h' }
+        ]
       }
     };
 
@@ -393,12 +536,20 @@
 
     function buildCards(key1, key2) {
       var recs = (DB[key1] && DB[key1][key2]) || [];
+      var ctaLabel    = isEN ? 'Request a quote'  : 'Angebot anfragen';
+      var detailLabel = isEN ? 'View machine'      : 'Zur Maschine';
+      var arrowSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="margin-left:.3em;flex-shrink:0"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
       cards.innerHTML = recs.map(function (r) {
+        var tag  = (isEN && r.tagEN)  ? r.tagEN  : r.tag;
+        var desc = (isEN && r.descEN) ? r.descEN : r.desc;
         return '<div class="wizard-rcard">'
-          + '<span class="wizard-rcard-tag">' + r.tag + '</span>'
+          + '<span class="wizard-rcard-tag">' + tag + '</span>'
           + '<div class="wizard-rcard-name">' + r.name + '</div>'
-          + '<div class="wizard-rcard-desc">' + r.desc + '</div>'
-          + '<a href="kontakt.html?modell=' + r.modell + '" class="wizard-rcard-cta">Angebot anfragen'
+          + '<div class="wizard-rcard-desc">' + desc + '</div>'
+          + (r.slug
+            ? '<a href="' + maschBase + r.slug + '.html" class="wizard-rcard-link">' + detailLabel + arrowSvg + '</a>'
+            : '')
+          + '<a href="' + kontaktBase + '?modell=' + r.modell + '" class="wizard-rcard-cta">' + ctaLabel
           + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>'
           + '</div>';
       }).join('');
