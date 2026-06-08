@@ -1,27 +1,50 @@
 ---
+pagination:
+  data: site.langs
+  size: 1
+  alias: lang
+permalink: "{{ '/en/impressum.html' if lang == 'en' else '/impressum.html' }}"
 layout: base.njk
-permalink: /impressum.html
-title: "Impressum — LIBA Lingener Baumaschinen"
-description: "Impressum der Lingener Baumaschinen GmbH & Co. KG gemäß § 5 TMG."
-canonical: "https://www.lingener-baumaschinen.de/impressum.html"
 navSolid: true
 noindex: true
+langDE: "/impressum.html"
+langEN: "/en/impressum.html"
+
+titleDE: "Impressum — LIBA Lingener Baumaschinen"
+titleEN: "Legal Notice — LIBA Lingener Baumaschinen"
+descDE: "Impressum der Lingener Baumaschinen GmbH & Co. KG gemäß § 5 TMG."
+descEN: "Legal notice of Lingener Baumaschinen GmbH & Co. KG."
+canonicalDE: "https://www.lingener-baumaschinen.de/impressum.html"
+canonicalEN: "https://www.lingener-baumaschinen.de/en/impressum.html"
 schema: >
-  {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de"}
+
+eleventyComputed:
+  title: "{{ titleDE if lang == 'de' else titleEN }}"
+  description: "{{ descDE if lang == 'de' else descEN }}"
+  canonical: "{{ canonicalDE if lang == 'de' else canonicalEN }}"
+  ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
 ---
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumbs"><a href="/index.html">Start</a><span class="sep">/</span><span>Impressum</span></div>
-    <span class="eyebrow hero-eyebrow"><span class="dot"></span>Rechtliche Angaben</span>
-    <h1 class="mt-3">Impressum</h1>
-    <p>Angaben gemäß § 5 TMG.</p>
+    <div class="breadcrumbs">
+      <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
+      <span class="sep">/</span>
+      <span>{% if lang == "de" %}Impressum{% else %}Legal Notice{% endif %}</span>
+    </div>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Rechtliche Angaben{% else %}Legal information{% endif %}</span>
+    <h1 class="mt-3">{% if lang == "de" %}Impressum{% else %}Legal <em class="serif-italic">Notice</em>{% endif %}</h1>
+    <p>{% if lang == "de" %}Angaben gemäß § 5 TMG.{% else %}Information in accordance with § 5 German Telemedia Act (TMG).{% endif %}</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="prose reveal">
+
+{% if lang == "de" %}
+
       <p class="legal-meta">Stand: Mai 2025</p>
 
       <h3>Anbieter</h3>
@@ -64,6 +87,54 @@ schema: >
 
       <h3>Urheberrecht</h3>
       <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+
+{% else %}
+
+      <p class="legal-meta">Last updated: May 2025</p>
+
+      <h3>Service provider</h3>
+      <address>
+        Lingener Baumaschinen GmbH &amp; Co. KG<br>
+        Diekstrasse 59<br>
+        49809 Lingen (Ems)<br>
+        Germany
+      </address>
+
+      <h3>Contact</h3>
+      <p>
+        Phone: <a href="tel:+4959176314">+49 (0) 591 76 314</a><br>
+        Email: <a href="mailto:info@lingener-baumaschinen.de">info@lingener-baumaschinen.de</a>
+      </p>
+
+      <h3>Commercial register</h3>
+      <p>
+        Register court: Amtsgericht Osnabrück (Local Court Osnabrück)<br>
+        Registration number: HRA [XXXXX]<br>
+        General partner: Lingener Baumaschinen Verwaltungs GmbH, HRB [XXXXX]<br>
+        Managing director: [First name Last name]
+      </p>
+
+      <h3>VAT identification number</h3>
+      <p>VAT ID pursuant to § 27a German VAT Act: DE [XXXXXXXXX]</p>
+
+      <h3>Responsible for editorial content</h3>
+      <p>Management of Lingener Baumaschinen GmbH &amp; Co. KG · address as above.</p>
+
+      <h3>EU online dispute resolution</h3>
+      <p>The European Commission provides a platform for online dispute resolution: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a></p>
+      <p>We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+
+      <h3>Liability for content</h3>
+      <p>As a service provider we are responsible for our own content on these pages in accordance with general legislation. However, we are not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general legislation remain unaffected. Liability in this regard is only possible from the point in time at which a concrete infringement becomes known. Upon becoming aware of any such infringement, we will remove the relevant content immediately.</p>
+
+      <h3>Liability for links</h3>
+      <p>Our website contains links to external third-party websites over whose content we have no influence. We therefore accept no liability for this external content. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking. No illegal content was apparent at the time of linking. Permanent monitoring of the linked pages is not reasonable without concrete evidence of an infringement. Upon becoming aware of any infringement, we will remove such links immediately.</p>
+
+      <h3>Copyright</h3>
+      <p>The content and works created by the site operators on these pages are subject to German copyright law. Reproduction, editing, distribution and any kind of exploitation beyond the limits of copyright law require the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use.</p>
+
+{% endif %}
+
     </div>
   </div>
 </section>

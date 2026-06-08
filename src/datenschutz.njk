@@ -1,27 +1,50 @@
 ---
+pagination:
+  data: site.langs
+  size: 1
+  alias: lang
+permalink: "{{ '/en/datenschutz.html' if lang == 'en' else '/datenschutz.html' }}"
 layout: base.njk
-permalink: /datenschutz.html
-title: "Datenschutzerklärung — LIBA Lingener Baumaschinen"
-description: "Datenschutzerklärung der Lingener Baumaschinen GmbH & Co. KG gemäß DSGVO."
-canonical: "https://www.lingener-baumaschinen.de/datenschutz.html"
 navSolid: true
 noindex: true
+langDE: "/datenschutz.html"
+langEN: "/en/datenschutz.html"
+
+titleDE: "Datenschutzerklärung — LIBA Lingener Baumaschinen"
+titleEN: "Privacy Policy — LIBA Lingener Baumaschinen"
+descDE: "Datenschutzerklärung der Lingener Baumaschinen GmbH & Co. KG gemäß DSGVO."
+descEN: "Privacy policy of Lingener Baumaschinen GmbH & Co. KG in accordance with GDPR."
+canonicalDE: "https://www.lingener-baumaschinen.de/datenschutz.html"
+canonicalEN: "https://www.lingener-baumaschinen.de/en/datenschutz.html"
 schema: >
-  {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de"}
+
+eleventyComputed:
+  title: "{{ titleDE if lang == 'de' else titleEN }}"
+  description: "{{ descDE if lang == 'de' else descEN }}"
+  canonical: "{{ canonicalDE if lang == 'de' else canonicalEN }}"
+  ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
 ---
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumbs"><a href="/index.html">Start</a><span class="sep">/</span><span>Datenschutz</span></div>
-    <span class="eyebrow hero-eyebrow"><span class="dot"></span>Rechtliche Angaben</span>
-    <h1 class="mt-3">Datenschutz<em class="serif-italic">erklärung</em></h1>
-    <p>Informationen zur Verarbeitung personenbezogener Daten gemäß Art. 13, 14 DSGVO.</p>
+    <div class="breadcrumbs">
+      <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
+      <span class="sep">/</span>
+      <span>{% if lang == "de" %}Datenschutz{% else %}Privacy Policy{% endif %}</span>
+    </div>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Rechtliche Angaben{% else %}Legal information{% endif %}</span>
+    <h1 class="mt-3">{% if lang == "de" %}Datenschutz<em class="serif-italic">erklärung</em>{% else %}Privacy <em class="serif-italic">Policy</em>{% endif %}</h1>
+    <p>{% if lang == "de" %}Informationen zur Verarbeitung personenbezogener Daten gemäß Art. 13, 14 DSGVO.{% else %}Information on the processing of personal data in accordance with Art. 13, 14 GDPR.{% endif %}</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="prose reveal">
+
+{% if lang == "de" %}
+
       <p class="legal-meta">Stand: Juni 2025</p>
 
       <h3>1. Verantwortlicher</h3>
@@ -37,10 +60,11 @@ schema: >
       <p>Bei jedem Aufruf unserer Website erhebt unser Hosting-Anbieter automatisch folgende technische Informationen in Server-Logdateien: IP-Adresse des anfragenden Geräts, Datum und Uhrzeit des Zugriffs, aufgerufene URL, übertragene Datenmenge, HTTP-Statuscode, verwendeter Browser und Betriebssystem sowie ggf. die Referrer-URL.</p>
       <p>Diese Daten sind technisch notwendig, um die Website auszuliefern, und dienen der Erkennung und Abwehr von Angriffen. Eine Zusammenführung mit anderen Datenquellen findet nicht statt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren Betrieb). Die Logdateien werden nach spätestens 30 Tagen automatisch gelöscht.</p>
 
-      <h3>3. Kontaktformular und E-Mail-Kontakt</h3>
-      <p>Wenn Sie uns über das Kontaktformular oder per E-Mail eine Anfrage zukommen lassen, werden die von Ihnen angegebenen Daten (Name, E-Mail-Adresse, ggf. Firma, Telefon sowie Ihre Nachricht) zur Bearbeitung der Anfrage und für mögliche Rückfragen gespeichert.</p>
-      <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung oder vorvertragliche Maßnahmen), soweit Ihre Anfrage auf den Abschluss eines Vertrages gerichtet ist, andernfalls Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung von Anfragen). Die Daten werden nicht an Dritte weitergegeben und nach abschließender Bearbeitung gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
-      <p>Die Übermittlung der Formulardaten erfolgt über den Dienst <strong>Formspree</strong> (Formspree, Inc., 209 Orange St, Wilmington, DE 19801, USA). Formspree ist als Auftragsverarbeiter gemäß Art. 28 DSGVO tätig; die Datenverarbeitung findet auf Basis der EU-Standardvertragsklauseln statt. Die Datenschutzhinweise von Formspree finden Sie unter <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer">formspree.io/legal/privacy-policy</a>.</p>
+      <h3>3. Terminbuchung über Calendly</h3>
+      <p>Auf unserer Kontaktseite haben Sie die Möglichkeit, über ein eingebettetes Calendly-Widget einen Gesprächstermin mit uns zu buchen. Dabei wird ein Widget des Dienstleisters <strong>Calendly LLC</strong>, 271 17th St. NW, Suite 1000, Atlanta, GA 30363, USA geladen.</p>
+      <p>Sobald die Kontaktseite aufgerufen wird, stellt Ihr Browser eine Verbindung zu den Servern von Calendly her, um das Buchungsformular zu laden. Dabei werden technische Daten wie Ihre IP-Adresse und Browser-Informationen an Calendly übermittelt.</p>
+      <p>Wenn Sie aktiv einen Termin buchen, verarbeitet Calendly die von Ihnen eingegebenen Daten (Name, E-Mail-Adresse, ggf. Telefon sowie die Termindetails). Diese Daten werden zur Koordination und Durchführung des Beratungsgesprächs genutzt.</p>
+      <p>Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen), da die Buchung der Anbahnung eines Beratungsgesprächs dient. Calendly LLC ist unter dem EU-US Data Privacy Framework zertifiziert, sodass ein angemessenes Datenschutzniveau gewährleistet ist (Art. 45 DSGVO). Die Datenschutzhinweise von Calendly finden Sie unter <a href="https://calendly.com/privacy" target="_blank" rel="noopener noreferrer">calendly.com/privacy</a>.</p>
 
       <h3>4. Google Fonts</h3>
       <p>Diese Website lädt Schriftarten über den Dienst Google Fonts von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Beim Seitenaufruf wird Ihre IP-Adresse an Server von Google LLC (Mountain View, CA, USA) übertragen. Google LLC ist unter dem EU-US Data Privacy Framework zertifiziert, sodass ein angemessenes Datenschutzniveau gewährleistet ist (Art. 45 DSGVO).</p>
@@ -50,6 +74,7 @@ schema: >
       <p>Wir setzen Cookies und ähnliche Technologien gemäß § 25 TTDSG und Art. 6 DSGVO ein. Nachfolgend erläutern wir die verwendeten Kategorien:</p>
       <ul>
         <li><strong>Technisch notwendig (keine Einwilligung erforderlich):</strong> Wir speichern Ihre Cookie-Einstellungsentscheidung im <em>localStorage</em> Ihres Browsers unter dem Schlüssel <code>liba_consent_v1</code>. Dieser Eintrag enthält ausschließlich Ihre Zustimmungs- oder Ablehnungsentscheidung und wird nicht an Dritte übermittelt.</li>
+        <li><strong>Calendly (technisch notwendig für die Terminbuchung):</strong> Das eingebettete Calendly-Widget setzt den Cookie <code>__cf_bm</code> (Cloudflare Bot Management, Sitzung) zum Schutz vor automatisierten Zugriffen. Dieser Cookie ist für den sicheren Betrieb des Buchungswidgets technisch erforderlich.</li>
         <li><strong>Statistik / Analyse (nur mit Einwilligung, Art. 6 Abs. 1 lit. a DSGVO):</strong> Google Analytics 4 setzt nach erteilter Einwilligung folgende Cookies: <code>_ga</code> (Speicherdauer: 2 Jahre), <code>_ga_*</code> (2 Jahre), <code>_gid</code> (24 Stunden). Diese Cookies ermöglichen die anonymisierte Zählung von Seitenaufrufen und Sitzungen.</li>
       </ul>
       <p>Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, indem Sie im Seitenfooter auf „Cookie-Einstellungen" klicken oder in Ihrem Browser den localStorage löschen. Eine Ablehnung hat keinen Einfluss auf die Nutzbarkeit der Website.</p>
@@ -83,6 +108,77 @@ schema: >
         30159 Hannover<br>
         <a href="https://www.lfd.niedersachsen.de" target="_blank" rel="noopener noreferrer">www.lfd.niedersachsen.de</a>
       </address>
+
+{% else %}
+
+      <p class="legal-meta">Last updated: June 2025</p>
+
+      <h3>1. Controller</h3>
+      <address>
+        Lingener Baumaschinen GmbH &amp; Co. KG<br>
+        Diekstrasse 59<br>
+        49809 Lingen (Ems)<br>
+        Germany
+      </address>
+      <p>Phone: <a href="tel:+4959176314">+49 (0) 591 76 314</a><br>
+      Email: <a href="mailto:info@lingener-baumaschinen.de">info@lingener-baumaschinen.de</a></p>
+
+      <h3>2. Server log files</h3>
+      <p>Each time our website is accessed, our hosting provider automatically collects the following technical information in server log files: IP address of the requesting device, date and time of access, URL accessed, data volume transferred, HTTP status code, browser and operating system used, and the referrer URL where applicable.</p>
+      <p>These data are technically necessary to deliver the website and are used to detect and defend against attacks. No merging with other data sources takes place. The legal basis is Art. 6(1)(f) GDPR (legitimate interest in secure operation). Log files are automatically deleted after a maximum of 30 days.</p>
+
+      <h3>3. Appointment booking via Calendly</h3>
+      <p>On our contact page you can book a consultation call with us using an embedded Calendly widget. This widget is provided by <strong>Calendly LLC</strong>, 271 17th St. NW, Suite 1000, Atlanta, GA 30363, USA.</p>
+      <p>When the contact page is loaded, your browser establishes a connection to Calendly's servers in order to render the booking interface. Technical data such as your IP address and browser information are transmitted to Calendly in the process.</p>
+      <p>If you actively book an appointment, Calendly processes the data you provide (name, email address, phone number if given, and the appointment details). These data are used solely to coordinate and conduct the consultation call.</p>
+      <p>The legal basis for this processing is Art. 6(1)(b) GDPR (pre-contractual measures), as the booking initiates the process of arranging a consultation. Calendly LLC is certified under the EU–US Data Privacy Framework, ensuring an adequate level of data protection (Art. 45 GDPR). Calendly's privacy policy is available at <a href="https://calendly.com/privacy" target="_blank" rel="noopener noreferrer">calendly.com/privacy</a>.</p>
+
+      <h3>4. Google Fonts</h3>
+      <p>This website loads typefaces via Google Fonts, a service provided by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. When a page is loaded, your IP address is transmitted to servers of Google LLC (Mountain View, CA, USA). Google LLC is certified under the EU–US Data Privacy Framework, ensuring an adequate level of data protection (Art. 45 GDPR).</p>
+      <p>Google Fonts is required for the visual presentation of this website. You can prevent external fonts from loading via browser settings or a content blocker; the website will continue to function. Further information: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.</p>
+
+      <h3>5. Cookies and consent management</h3>
+      <p>We use cookies and similar technologies in accordance with applicable law. The categories we use are explained below:</p>
+      <ul>
+        <li><strong>Technically necessary (no consent required):</strong> We store your cookie preference in your browser's <em>localStorage</em> under the key <code>liba_consent_v1</code>. This entry contains only your accept/decline decision and is never transmitted to third parties.</li>
+        <li><strong>Calendly (technically necessary for appointment booking):</strong> The embedded Calendly widget sets the cookie <code>__cf_bm</code> (Cloudflare Bot Management, session) to protect against automated requests. This cookie is technically required for the secure operation of the booking widget.</li>
+        <li><strong>Statistics / analytics (with consent only, Art. 6(1)(a) GDPR):</strong> After your consent, Google Analytics 4 sets the following cookies: <code>_ga</code> (retention: 2 years), <code>_ga_*</code> (2 years), <code>_gid</code> (24 hours). These cookies enable anonymised measurement of page views and sessions.</li>
+      </ul>
+      <p>You may withdraw your consent at any time with effect for the future by clicking "Cookie settings" in the site footer or by clearing localStorage in your browser. Declining cookies does not affect your ability to use this website.</p>
+
+      <h3>6. Google Analytics 4</h3>
+      <p>This website uses Google Analytics 4 (GA4), a web analytics service provided by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. GA4 is only activated after your explicit consent.</p>
+      <p>Using Consent Mode v2, GA4 collects the following data: pages visited, time on site, approximate geographic origin (no exact IP address), device type, and traffic source (e.g. search engine, direct visit). IP addresses are truncated before transmission and are not stored in full. Data are transferred to servers of Google LLC (USA); Google LLC is certified under the EU–US Data Privacy Framework.</p>
+      <p>Legal basis: Art. 6(1)(a) GDPR (consent). You may withdraw your consent at any time (see Section 5). Further information is available in <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a> and at <a href="https://support.google.com/analytics/answer/6004245" target="_blank" rel="noopener noreferrer">support.google.com/analytics/answer/6004245</a>.</p>
+
+      <h3>7. Data security</h3>
+      <p>For security reasons and to protect the transmission of confidential content, this website uses TLS/SSL encryption. You can recognise an encrypted connection by the "https://" prefix and the padlock icon in your browser's address bar.</p>
+
+      <h3>8. Your rights</h3>
+      <p>As a data subject you have the following rights in relation to your personal data:</p>
+      <ul>
+        <li><strong>Access</strong> (Art. 15 GDPR): You may request information about the data we process.</li>
+        <li><strong>Rectification</strong> (Art. 16 GDPR): You may request the correction of inaccurate data.</li>
+        <li><strong>Erasure</strong> (Art. 17 GDPR): You may request the deletion of your data, provided no statutory retention obligations apply.</li>
+        <li><strong>Restriction of processing</strong> (Art. 18 GDPR): You may request that processing of your data be restricted.</li>
+        <li><strong>Data portability</strong> (Art. 20 GDPR): You may request that your data be provided in a machine-readable format.</li>
+        <li><strong>Objection</strong> (Art. 21 GDPR): You may object at any time to processing based on Art. 6(1)(f) GDPR.</li>
+        <li><strong>Withdrawal of consent</strong> (Art. 7(3) GDPR): Any consent given (e.g. for Google Analytics) may be withdrawn at any time with effect for the future.</li>
+      </ul>
+      <p>To exercise your rights, please contact: <a href="mailto:info@lingener-baumaschinen.de">info@lingener-baumaschinen.de</a></p>
+
+      <h3>9. Right to lodge a complaint</h3>
+      <p>Without prejudice to any other administrative or judicial remedy, you have the right to lodge a complaint with a supervisory authority. The competent authority for Lower Saxony, Germany is:</p>
+      <address>
+        Die Landesbeauftragte für den Datenschutz Niedersachsen<br>
+        (State Commissioner for Data Protection of Lower Saxony)<br>
+        Prinzenstraße 5<br>
+        30159 Hannover, Germany<br>
+        <a href="https://www.lfd.niedersachsen.de" target="_blank" rel="noopener noreferrer">www.lfd.niedersachsen.de</a>
+      </address>
+
+{% endif %}
+
     </div>
   </div>
 </section>

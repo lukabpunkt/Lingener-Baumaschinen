@@ -1,27 +1,50 @@
 ---
+pagination:
+  data: site.langs
+  size: 1
+  alias: lang
+permalink: "{{ '/en/agb.html' if lang == 'en' else '/agb.html' }}"
 layout: base.njk
-permalink: /agb.html
-title: "AGB — LIBA Lingener Baumaschinen"
-description: "Allgemeine Geschäftsbedingungen der Lingener Baumaschinen GmbH & Co. KG für Kauf, Miete und Service."
-canonical: "https://www.lingener-baumaschinen.de/agb.html"
 navSolid: true
 noindex: true
+langDE: "/agb.html"
+langEN: "/en/agb.html"
+
+titleDE: "AGB — LIBA Lingener Baumaschinen"
+titleEN: "Terms & Conditions — LIBA Lingener Baumaschinen"
+descDE: "Allgemeine Geschäftsbedingungen der Lingener Baumaschinen GmbH & Co. KG für Kauf, Miete und Service."
+descEN: "General Terms and Conditions of Lingener Baumaschinen GmbH & Co. KG for purchase, hire and service."
+canonicalDE: "https://www.lingener-baumaschinen.de/agb.html"
+canonicalEN: "https://www.lingener-baumaschinen.de/en/agb.html"
 schema: >
-  {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de"}
+
+eleventyComputed:
+  title: "{{ titleDE if lang == 'de' else titleEN }}"
+  description: "{{ descDE if lang == 'de' else descEN }}"
+  canonical: "{{ canonicalDE if lang == 'de' else canonicalEN }}"
+  ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
 ---
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumbs"><a href="/index.html">Start</a><span class="sep">/</span><span>AGB</span></div>
-    <span class="eyebrow hero-eyebrow"><span class="dot"></span>Rechtliche Angaben</span>
-    <h1 class="mt-3">Allgemeine<br><em class="serif-italic">Geschäftsbedingungen</em></h1>
-    <p>Gültig für alle Kauf-, Miet- und Servicevorgänge mit LIBA – Lingener Baumaschinen.</p>
+    <div class="breadcrumbs">
+      <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
+      <span class="sep">/</span>
+      <span>{% if lang == "de" %}AGB{% else %}Terms &amp; Conditions{% endif %}</span>
+    </div>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Rechtliche Angaben{% else %}Legal information{% endif %}</span>
+    <h1 class="mt-3">{% if lang == "de" %}Allgemeine<br><em class="serif-italic">Geschäftsbedingungen</em>{% else %}Terms &amp;<br><em class="serif-italic">Conditions</em>{% endif %}</h1>
+    <p>{% if lang == "de" %}Gültig für alle Kauf-, Miet- und Servicevorgänge mit LIBA – Lingener Baumaschinen.{% else %}Applicable to all purchase, hire and service transactions with LIBA – Lingener Baumaschinen.{% endif %}</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="prose reveal">
+
+{% if lang == "de" %}
+
       <p class="legal-meta">Stand: Mai 2025 · Diese Fassung ersetzt alle früheren Versionen.</p>
 
       <h3>§ 1 Geltungsbereich</h3>
@@ -53,6 +76,43 @@ schema: >
 
       <h3>§ 10 Schlussbestimmungen</h3>
       <p>Sollten einzelne Bestimmungen dieser AGB ganz oder teilweise unwirksam sein oder werden, berührt dies die Wirksamkeit der übrigen Bestimmungen nicht. Die unwirksame Bestimmung gilt als durch eine wirksame ersetzt, die dem wirtschaftlichen Zweck der unwirksamen Bestimmung am nächsten kommt. Änderungen und Ergänzungen dieser AGB bedürfen der Schriftform.</p>
+
+{% else %}
+
+      <p class="legal-meta">Version: May 2025 · This version supersedes all earlier versions.</p>
+
+      <h3>§ 1 Scope</h3>
+      <p>These General Terms and Conditions ("GTC") apply to all deliveries, services and offers of Lingener Baumaschinen GmbH &amp; Co. KG (hereinafter "LIBA") to business customers within the meaning of § 14 of the German Civil Code (BGB). They apply exclusively; conflicting or deviating conditions of the client are not recognised unless LIBA has expressly agreed to them in writing.</p>
+
+      <h3>§ 2 Offer and conclusion of contract</h3>
+      <p>Offers by LIBA are non-binding and subject to change. A contract is only formed upon LIBA's written order confirmation or upon commencement of performance. Verbal ancillary agreements require written confirmation.</p>
+
+      <h3>§ 3 Prices and payment</h3>
+      <p>The prices stated in the order confirmation apply, plus statutory VAT applicable at the time of delivery. Invoices are — unless otherwise agreed — payable net within 14 days of the invoice date without deduction. In the event of late payment, LIBA is entitled to charge interest at a rate of 9 percentage points above the respective base interest rate pursuant to § 288(2) BGB.</p>
+
+      <h3>§ 4 Delivery and transfer of risk</h3>
+      <p>Delivery dates are only binding if they have been agreed in writing as binding. Events of force majeure, industrial action, operational disruptions and other unforeseeable obstacles beyond LIBA's control shall extend the delivery period by a reasonable amount. Risk passes to the client upon handover of the machine to the client or the appointed freight carrier (§ 447 BGB).</p>
+
+      <h3>§ 5 Retention of title</h3>
+      <p>All delivered goods remain the property of LIBA until all claims arising from the business relationship have been paid in full. The client is not authorised to pledge or transfer ownership of reserved goods as security. In the event of third-party access to reserved goods, the client must notify LIBA immediately.</p>
+
+      <h3>§ 6 Hire conditions</h3>
+      <p>The following additional conditions apply to hire transactions: The hirer accepts the machine in perfect condition, inspects it before use and returns it in a cleaned condition. Damage and breakdowns must be reported to LIBA immediately. The hirer is liable for damage caused by improper operation or failure to brief operating personnel. The hirer is obliged to provide evidence of adequate insurance for the hire period.</p>
+
+      <h3>§ 7 Warranty</h3>
+      <p>The client's warranty claims are conditional upon the client having fulfilled its obligation to inspect goods and give notice of defects in accordance with §§ 377, 381 HGB. Warranty claims become time-barred 12 months after delivery, unless mandatory statutory provisions (§§ 438(1) no. 2, 634a(1) no. 2 BGB) provide otherwise. LIBA is entitled first to remedy the defect or deliver a replacement. If subsequent performance fails on two occasions, the client has the right to withdraw from the contract or to reduce the purchase price.</p>
+
+      <h3>§ 8 Limitation of liability</h3>
+      <p>LIBA is liable without limitation for damage arising from injury to life, body or health, as well as in cases of intent and gross negligence. Otherwise, liability is limited to the damage that is typically foreseeable under the type of contract. Liability for minor negligence is excluded — unless essential contractual obligations (cardinal obligations) are affected.</p>
+
+      <h3>§ 9 Place of performance, jurisdiction and applicable law</h3>
+      <p>The place of performance for all deliveries and services is Lingen (Ems). The exclusive place of jurisdiction for all disputes arising from and in connection with contracts with LIBA is Lingen (Ems), provided the client is a merchant, a legal entity under public law or a special fund under public law. The law of the Federal Republic of Germany applies, excluding the UN Convention on Contracts for the International Sale of Goods (CISG).</p>
+
+      <h3>§ 10 Final provisions</h3>
+      <p>Should any individual provisions of these GTC be or become wholly or partially invalid, this shall not affect the validity of the remaining provisions. The invalid provision shall be deemed replaced by a valid provision that comes closest to the economic purpose of the invalid provision. Amendments and additions to these GTC require written form.</p>
+
+{% endif %}
+
     </div>
   </div>
 </section>
