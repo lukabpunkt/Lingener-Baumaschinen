@@ -506,7 +506,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   border-left: 1px solid var(--line-strong);
   display: none;
 }
-@media (min-width: 1400px) { .nav-brand .meta { display: block; } }
+/* .nav-brand .meta intentionally hidden — logo image is sufficient */
 
 /* Nav links — hidden on mobile/tablet, visible at 1100px+ */
 .nav-links { display: none; }
