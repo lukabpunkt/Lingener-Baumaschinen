@@ -2568,7 +2568,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   position: fixed;
   right: 1.25rem;
   bottom: 5.5rem;
-  z-index: 510;
+  z-index: 9200;
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;

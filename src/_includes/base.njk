@@ -401,7 +401,7 @@
     </div>
   </div>
 </div>
-<button class="scroll-top" id="scroll-top" aria-label="{% if lang == 'en' %}Back to top{% else %}Nach oben{% endif %}">
+<button type="button" class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="{% if lang == 'en' %}Back to top{% else %}Nach oben{% endif %}">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 <script src="/assets/js/main.js" defer></script>
