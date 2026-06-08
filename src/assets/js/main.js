@@ -279,8 +279,9 @@
     var busy  = false;
     var noAnim = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var isEN        = document.documentElement.lang === 'en';
-    var kontaktBase = 'kontakt.html';
-    var maschBase   = 'maschinen/';
+    var _wiz        = document.getElementById('maschinenwizard');
+    var kontaktBase = (_wiz && _wiz.dataset.kontakt) || (isEN ? '/en/kontakt.html' : '/kontakt.html');
+    var maschBase   = (_wiz && _wiz.dataset.masch)   || (isEN ? '/en/maschinen/'   : '/maschinen/');
 
     var DB = {
       bagger: {

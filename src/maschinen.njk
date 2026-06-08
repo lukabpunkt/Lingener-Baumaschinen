@@ -49,7 +49,9 @@ eleventyComputed:
   <div class="container">
 
     <!-- {% if lang == "de" %}Maschinenberater{% else %}Machine Adviser{% endif %} — inline card -->
-    <div class="wizard-inline reveal" id="maschinenwizard" style="margin-bottom:3.5rem;">
+    <div class="wizard-inline reveal" id="maschinenwizard" style="margin-bottom:3.5rem;"
+      data-kontakt="{{ ('/kontakt.html' if lang == 'de' else '/en/kontakt.html') | url }}"
+      data-masch="{{ ('/maschinen/' if lang == 'de' else '/en/maschinen/') | url }}">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1.25rem;">
         <div>
           <span style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);display:block;margin-bottom:.25rem;">{% if lang == "de" %}Entscheidungshilfe{% else %}Decision Guide{% endif %}</span>
