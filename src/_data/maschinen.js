@@ -28,7 +28,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-6-asr.jpg',
     heroAltDE: 'LIBA GM 6 ASR Grabenfräse für schweren Boden',
     heroAltEN: 'LIBA GM 6 ASR trench cutter for heavy ground',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/grabenfraese-fuer-schweren-boden-gm-6-asr/',
   },
 
@@ -55,7 +54,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-4-allrad.jpg',
     heroAltDE: 'LIBA GM 4 Allrad Grabenfräse',
     heroAltEN: 'LIBA GM 4 All-Wheel trench cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/grabenfraese-gm4-4wd-zur-sportplatzentwaesserung/',
   },
 
@@ -82,7 +80,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-1800-p.jpg',
     heroAltDE: 'LIBA GM 1800 P Grabenfräse für Drainage',
     heroAltEN: 'LIBA GM 1800 P trench cutter for drainage',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/landschaftsbau-mit-dem-gm-1800-p/',
   },
 
@@ -109,7 +106,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-4-raupe.jpg',
     heroAltDE: 'LIBA GM 4 Raupe Grabenfräse',
     heroAltEN: 'LIBA GM 4 Crawler trench cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/grabenfraese-gm-4-raupe-zur-glasfaserverlegung/',
   },
 
@@ -136,7 +132,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-6-asr-gebraucht.jpg',
     heroAltDE: 'LIBA GM 6 ASR Gebrauchtmaschine 2015',
     heroAltEN: 'LIBA GM 6 ASR used machine 2015',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/produkt/gm-4-raupe-vorfuehrmaschine-kopie-2/',
   },
 
@@ -161,7 +156,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-4-raupe-2023.jpg',
     heroAltDE: 'LIBA GM 4 Raupe Vorführmaschine 2023',
     heroAltEN: 'LIBA GM 4 Crawler demo machine 2023',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/produkt/gm-4-raupe-vorfuehrmaschine-kopie/',
   },
 
@@ -188,7 +182,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-4-rad-2024.jpg',
     heroAltDE: 'LIBA GM 4 Rad Vorführmaschine 2024',
     heroAltEN: 'LIBA GM 4 Wheel demo machine 2024',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/produkt/gm-160-as-kopie/',
   },
 
@@ -216,7 +209,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-250-h.jpg',
     heroAltDE: 'LIBA GM 250 H Tiefenfräse',
     heroAltEN: 'LIBA GM 250 H deep-cut machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/tiefenfraese-gm-250-h-fuer-tiefbau/',
   },
 
@@ -243,7 +235,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-180-af-m.jpg',
     heroAltDE: 'LIBA GM 180 AF Schlepperanbau-Grabenfräse',
     heroAltEN: 'LIBA GM 180 AF tractor-mounted trench cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/kabelverlegung-mit-der-gm-180-af/',
   },
 
@@ -270,7 +261,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-600-r-m.jpg',
     heroAltDE: 'LIBA Fräsrad GM 600 R',
     heroAltEN: 'LIBA milling wheel GM 600 R',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/kabelbau-mit-der-gm-600-r/',
   },
 
@@ -296,7 +286,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-160-as.jpg',
     heroAltDE: 'LIBA GM 160 AS Anbaufräse für Drainage',
     heroAltEN: 'LIBA GM 160 AS attachment cutter for drainage',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/grabenfraese-gm-160-as-fuer-drainage/',
   },
 
@@ -321,7 +310,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-140-af.jpg',
     heroAltDE: 'LIBA GM 140 AF Bodenfräse',
     heroAltEN: 'LIBA GM 140 AF soil cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/bodenfraese-140-af/',
   },
 
@@ -346,7 +334,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-1-af.jpg',
     heroAltDE: 'LIBA GM 1 AF Traktorfräse',
     heroAltEN: 'LIBA GM 1 AF tractor cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/traktorfraese-gm-1-as/',
   },
 
@@ -370,7 +357,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-300-h.jpg',
     heroAltDE: 'LIBA GM 300 H Tiefenfräse',
     heroAltEN: 'LIBA GM 300 H deep-cut machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/tiefenfraese-die-optimale-loesung-fuer-effizientes-fraesen/',
   },
 
@@ -396,7 +382,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-140-af-600-h.webp',
     heroAltDE: 'LIBA GM 140 AF 600 H Anbaufräse',
     heroAltEN: 'LIBA GM 140 AF 600 H attachment cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/grabenfraese-gm-140-afh-600-h/',
   },
 
@@ -421,7 +406,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-1-as.jpg',
     heroAltDE: 'LIBA GM 1 AS Anbaufräse',
     heroAltEN: 'LIBA GM 1 AS attachment cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/erdkabel-verlegen-mit-der-gm-1-as/',
   },
 
@@ -446,7 +430,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-160-af-m.jpg',
     heroAltDE: 'LIBA GM 160 AF Unimog-Grabenfräse',
     heroAltEN: 'LIBA GM 160 AF Unimog trench cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/grabenfraese-gm-160-af-eine-grabenfraese-fuer-unimog/',
   },
 
@@ -472,7 +455,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-450-h.jpg',
     heroAltDE: 'LIBA GM 450 H Tiefenfräse',
     heroAltEN: 'LIBA GM 450 H deep-cut machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/grabenfraese-gm-450-h/',
   },
 
@@ -498,7 +480,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gmv-100.jpg',
     heroAltDE: 'LIBA GMV 100 Anbaupflug',
     heroAltEN: 'LIBA GMV 100 attachment plough',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/anbaupflug-gmv-100/',
   },
 
@@ -523,7 +504,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-300-hf.jpg',
     heroAltDE: 'LIBA GM 300 HF Tiefenfräse',
     heroAltEN: 'LIBA GM 300 HF deep-cut machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/tiefe-fraesarbeiten-mit-der-gm-300-hf/',
   },
 
@@ -547,7 +527,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gmv-130.jpg',
     heroAltDE: 'LIBA GMV 130 Vibrationskabelpflug',
     heroAltEN: 'LIBA GMV 130 vibrating cable plough',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/vibrationskabelpflug-gmv-130/',
   },
 
@@ -568,7 +547,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/unimogfraese.jpg',
     heroAltDE: 'LIBA Unimogfräse',
     heroAltEN: 'LIBA Unimog cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/unimogfraese/',
   },
 
@@ -592,7 +570,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gmv-130-gebraucht.jpg',
     heroAltDE: 'LIBA GMV 130 Gebrauchtmaschine',
     heroAltEN: 'LIBA GMV 130 used machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/produkt/gebrauchter-pflug-gmv-130/',
   },
 
@@ -617,7 +594,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-140-af-gebraucht.jpg',
     heroAltDE: 'LIBA GM 140 AF Gebrauchtmaschine',
     heroAltEN: 'LIBA GM 140 AF used machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/produkt/gm-140-h-vorfuehrmaschine-kopie/',
   },
 
@@ -643,7 +619,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-160-as-gebraucht.jpg',
     heroAltDE: 'LIBA GM 160 AS Gebrauchtmaschine',
     heroAltEN: 'LIBA GM 160 AS used machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/produkt/gm-160-as/',
   },
 
@@ -672,7 +647,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-140-afh-500-m.jpg',
     heroAltDE: 'LIBA GM 140 AFH-500 Baggerfräse',
     heroAltEN: 'LIBA GM 140 AFH-500 excavator cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/baggerfrase-gm-140-afh-500/',
   },
 
@@ -699,7 +673,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-140-afh-600.jpg',
     heroAltDE: 'LIBA GM 140 AFH-600 Baggerfräse',
     heroAltEN: 'LIBA GM 140 AFH-600 excavator cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/rohrleitungsbau-mit-der-gm-140-afh-600/',
   },
 
@@ -727,7 +700,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-140-h.jpg',
     heroAltDE: 'LIBA GM 140 H Baggeranbaufräse',
     heroAltEN: 'LIBA GM 140 H excavator-mounted cutter',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/baggeranbaufraese-gm-140-h/',
   },
 
@@ -753,7 +725,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-140-afh-500-gebraucht.jpg',
     heroAltDE: 'LIBA GM 140 AFH 500 Gebrauchtmaschine',
     heroAltEN: 'LIBA GM 140 AFH 500 used machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/produkt/gm-140-h-vorfuehrmaschine-kopie-2/',
   },
 
@@ -779,7 +750,6 @@ module.exports = [
     heroImage: '/assets/images/products/maschinen/gm-140-h-gebraucht.jpg',
     heroAltDE: 'LIBA GM 140 H Vorführmaschine',
     heroAltEN: 'LIBA GM 140 H demo machine',
-    pdfUrl: '/assets/pdfs/LIBA-Prospekt-2023.pdf',
     oldUrl: 'https://lingener-baumaschinen.de/produkt/gm-140-h-vorfuehrmaschine/',
   },
 
