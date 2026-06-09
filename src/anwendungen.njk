@@ -150,6 +150,7 @@ eleventyComputed:
         <p>{% if lang == "de" %}Sand, Mergel, Fels, Lehm, Asphalt — schicken Sie uns Bodengutachten oder Standortfotos. Wir empfehlen Maschine und Werkzeugbestückung.{% else %}Sand, marl, rock, clay, tarmac — send us soil reports or site photographs. We'll recommend the machine and tooling configuration.{% endif %}</p>
         <div class="actions">
           <a href="/kontakt.html" class="btn btn-accent is-lg">{% if lang == "de" %}Projekt besprechen{% else %}Discuss your project{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="{{ ('/en/referenzen.html' if lang == 'en' else '/referenzen.html') | url }}" class="btn btn-ghost is-lg">{% if lang == "de" %}Referenzprojekte ansehen{% else %}View reference projects{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div>
       </div>
       <dl class="cta-side">
