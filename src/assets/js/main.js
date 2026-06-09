@@ -660,6 +660,7 @@
 
       var machLabel = selMach.options[selMach.selectedIndex].text.split(' — ')[0].trim();
 
+      var contactUrl = verdict.getAttribute('data-contact-url') || (isEN ? '/en/kontakt.html' : '/kontakt.html');
       if (isEN) {
         if (rentWins) {
           verdict.className = 'roi-verdict is-rent';
@@ -668,7 +669,7 @@
         } else {
           verdict.className = 'roi-verdict is-buy';
           verdict.innerHTML = '<span class="roi-verdict-msg">At <strong>' + days + ' operating days/year</strong>, <strong>buying already makes sense today</strong> — you save ' + fmt(rentYear - ownYear) + ' annually.</span>'
-            + '<a href="/en/kontakt.html?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Request a purchase quote</a>';
+            + '<a href="' + contactUrl + '?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Request a purchase quote</a>';
         }
       } else {
         if (rentWins) {
@@ -678,7 +679,7 @@
         } else {
           verdict.className = 'roi-verdict is-buy';
           verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> lohnt sich der <strong>Kauf bereits heute</strong> — Sie sparen ' + fmt(rentYear - ownYear) + ' jährlich.</span>'
-            + '<a href="/kontakt.html?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
+            + '<a href="' + contactUrl + '?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
         }
       }
     }

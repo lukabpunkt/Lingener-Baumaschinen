@@ -161,7 +161,7 @@ eleventyComputed:
       </div>
     </div>
 
-    <div class="roi-verdict" id="roi-verdict"></div>
+    <div class="roi-verdict" id="roi-verdict" data-contact-url="{{ ('/en/kontakt.html' if lang == 'en' else '/kontakt.html') | url }}"></div>
 
     <p class="roi-disclaimer">{% if lang == "de" %}* Richtwert: Kaufpreis / 15 Jahre + ca. 4.000 €/Jahr Wartungskosten. Unverbindliche Schätzung ohne Gewähr.{% else %}* Indicative figure: purchase price / 15 years + approx. €4,000/year maintenance costs. Non-binding estimate, no guarantee.{% endif %}</p>
   </div>
