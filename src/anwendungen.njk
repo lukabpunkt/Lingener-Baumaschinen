@@ -43,7 +43,7 @@ eleventyComputed:
     <h1 data-split-lines class="mt-3">{% if lang == "de" %}Wo LIBA <em class="serif-italic">arbeitet.</em>{% else %}Where LIBA <em class="serif-italic">works.</em>{% endif %}</h1>
     <p>{% if lang == "de" %}Glasfaser, Pipeline, Strom, Wasser, Sport, Agrar, Bergbau, Gleis. Sechzig Jahre Maschinenentwicklung — abgestimmt auf reale Aufgaben unter realen Bedingungen.{% else %}Fibre optic, pipeline, power, water, sports, agriculture, mining, track. Sixty years of machine development — tailored to real tasks under real conditions.{% endif %}</p>
     <div class="hero-actions mt-4">
-      <a href="{{ ('/en/referenzen.html' if lang == 'en' else '/referenzen.html') | url }}" class="btn btn-primary is-lg">
+      <a href="{% if lang == 'en' %}https://lukabpunkt.github.io/Lingener-Baumaschinen/en/referenzen.html{% else %}https://lukabpunkt.github.io/Lingener-Baumaschinen/referenzen.html{% endif %}" class="btn btn-primary is-lg">
         {% if lang == "de" %}Referenzprojekte ansehen{% else %}View reference projects{% endif %}
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
