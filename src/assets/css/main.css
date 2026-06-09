@@ -670,24 +670,73 @@ p { color: var(--steel-700); text-wrap: pretty; }
   color: var(--steel-600);
 }
 
-/* ----------  Hero  ---------- */
+/* ----------  Hero (split layout)  ---------- */
 .hero {
   position: relative;
-  min-height: calc(100svh - var(--nav-h) - var(--topbar-h));
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  color: var(--canvas);
   overflow: hidden;
   isolation: isolate;
-  padding-top: 2rem;
-  padding-bottom: 0;
+  color: var(--canvas);
 }
-@media (min-width: 768px) { .hero { padding-top: 4rem; } }
+@media (min-width: 900px) {
+  .hero {
+    display: flex;
+    align-items: stretch;
+    min-height: calc(100svh - var(--nav-h) - var(--topbar-h));
+  }
+}
+
+/* ---- Left: dark text panel ---- */
+.hero-left {
+  background: var(--steel-900);
+  padding: 2.5rem var(--gutter) 0;
+  position: relative;
+  z-index: 2;
+}
+@media (min-width: 900px) {
+  .hero-left {
+    flex: 0 0 57%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 5% 0 max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+  }
+}
+@media (min-width: 1200px) { .hero-left { flex-basis: 55%; } }
+
+.hero-left-content {
+  padding-bottom: 2rem;
+}
+@media (min-width: 900px) {
+  .hero-left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5rem 0 2.5rem;
+  }
+}
+
+/* ---- Right: image slideshow ---- */
+.hero-right {
+  height: 45vw;
+  min-height: 200px;
+  position: relative;
+  overflow: hidden;
+  background: var(--steel-800);
+}
+@media (min-width: 900px) {
+  .hero-right {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    clip-path: polygon(9% 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* ---- Images ---- */
 .hero-media {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   will-change: transform;
 }
 .hero-media img {
@@ -702,17 +751,17 @@ p { color: var(--steel-700); text-wrap: pretty; }
   will-change: transform, opacity;
 }
 .hero-media img.is-active { opacity: 1; transform: scale(1); }
+
+/* ---- Overlay (image panel only) ---- */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(180deg, rgba(11,15,20,.45) 0%, rgba(11,15,20,.25) 30%, rgba(11,15,20,.95) 100%),
-    linear-gradient(120deg, rgba(5,52,51,.5) 0%, transparent 55%);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(160deg, rgba(11,15,20,.4) 0%, rgba(11,15,20,.08) 55%, rgba(11,15,20,.28) 100%);
 }
 
-.hero-content { padding-bottom: 2rem; }
-@media (min-width: 768px) { .hero-content { padding-bottom: 3rem; } }
+/* ---- Typography ---- */
 .hero-eyebrow { color: var(--brand-light); }
 .hero-eyebrow .dot { background: var(--brand-light); }
 .hero h1 {
@@ -746,7 +795,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .hero-actions .btn { width: 100%; }
 @media (min-width: 480px) { .hero-actions .btn { width: auto; } }
 
-/* Hero ticker */
+/* ---- Stats ticker ---- */
 .hero-ticker {
   margin-top: 2.5rem;
   border-top: 1px solid rgba(255,255,255,.14);
@@ -792,34 +841,37 @@ p { color: var(--steel-700); text-wrap: pretty; }
   color: var(--canvas);
 }
 
-/* Hero slider dots — desktop only */
+/* ---- Slider dots (inside right panel) ---- */
 .hero-dots { display: none; }
 @media (min-width: 900px) {
   .hero-dots {
     position: absolute;
-    right: var(--gutter);
+    right: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     gap: .75rem;
-    z-index: 2;
+    z-index: 3;
   }
   .hero-dot {
     width: 3px; height: 28px;
-    background: rgba(255,255,255,.25);
+    background: rgba(255,255,255,.28);
+    border: none;
     border-radius: 2px;
+    padding: 0;
+    cursor: pointer;
     transition: background var(--dur), height var(--dur);
   }
   .hero-dot.is-active { background: var(--brand-light); height: 40px; }
 }
 
-/* Scroll hint — desktop only */
+/* ---- Scroll hint ---- */
 .scroll-hint { display: none; }
 @media (min-width: 900px) {
   .scroll-hint {
     position: absolute;
-    left: var(--gutter);
+    left: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
     bottom: 1.5rem;
     font-family: var(--font-mono);
     font-size: .7rem;
@@ -829,7 +881,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
     display: flex;
     align-items: center;
     gap: .5rem;
-    z-index: 2;
+    z-index: 5;
   }
   .scroll-hint::after {
     content: "";
