@@ -1811,7 +1811,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .mask-line {
   display: block;
   overflow: hidden;
-  padding-bottom: .04em;
+  padding-bottom: .18em;
   line-height: 1.05;
 }
 .mask-line > span {
