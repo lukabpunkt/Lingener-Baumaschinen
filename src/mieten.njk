@@ -174,7 +174,7 @@ eleventyComputed:
       <h2 class="mt-3">{% if lang == "de" %}Jetzt Verfügbarkeit<br><em class="serif-italic">anfragen.</em>{% else %}Check availability<br><em class="serif-italic">now.</em>{% endif %}</h2>
       <p class="lead mt-3">{% if lang == "de" %}Wir prüfen Verfügbarkeit, Logistik und Einsatzbedingungen — und melden uns innerhalb von 24 Stunden mit einem unverbindlichen Mietangebot.{% else %}We check availability, logistics and operating conditions — and get back to you within 24 hours with a no-obligation hire offer.{% endif %}</p>
       <div class="mt-5" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="{{ ('/en/kontakt.html' if lang == 'en' else '/kontakt.html') | url }}" class="btn btn-brand is-lg">
+        <a href="{% if lang == 'en' %}/en/kontakt.html{% else %}/kontakt.html{% endif %}" class="btn btn-brand is-lg">
           {% if lang == "de" %}Zur Kontaktseite{% else %}Go to contact page{% endif %}
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
