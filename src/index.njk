@@ -38,34 +38,46 @@ eleventyComputed:
 
 <!-- ==========  HERO  ========== -->
 <section class="hero" aria-label="{% if lang == 'de' %}Einleitung{% else %}Introduction{% endif %}">
-  <div class="hero-media" aria-hidden="true">
-    <img src="/assets/images/hero/hero-1.jpg" alt="" width="1024" height="576">
-    <img src="/assets/images/hero/hero-2.jpg" alt="" width="1024" height="576">
-    <img src="/assets/images/hero/hero-3.jpg" alt="" width="1536" height="1152">
-    {% if lang == "de" %}<img src="/assets/images/hero/hero-4.jpg" alt="" width="1024" height="768">{% endif %}
+
+  <!-- Framed image window (full-bleed on mobile, contained on desktop) -->
+  <div class="hero-frame" aria-hidden="true">
+    <div class="hero-media">
+      <img src="/assets/images/hero/hero-1.jpg" alt="" width="1024" height="576">
+      <img src="/assets/images/hero/hero-2.jpg" alt="" width="1024" height="576">
+      <img src="/assets/images/hero/hero-3.jpg" alt="" width="1536" height="1152">
+      {% if lang == "de" %}<img src="/assets/images/hero/hero-4.jpg" alt="" width="1024" height="768">{% endif %}
+    </div>
+    <div class="hero-overlay"></div>
+    <!-- Slide indicators inside the frame -->
+    <div class="hero-dots">
+      <button class="hero-dot is-active" type="button" aria-label="Slide 1"></button>
+      <button class="hero-dot" type="button" aria-label="Slide 2"></button>
+      <button class="hero-dot" type="button" aria-label="Slide 3"></button>
+      {% if lang == "de" %}<button class="hero-dot" type="button" aria-label="Slide 4"></button>{% endif %}
+    </div>
   </div>
-  <div class="hero-overlay" aria-hidden="true"></div>
 
-  <div class="hero-aside" aria-hidden="true">{% if lang == "de" %}Grabenfräsen · Made in Germany · Seit 1969{% else %}Trench Cutters · Made in Germany · Since 1969{% endif %}</div>
-
+  <!-- Text content -->
   <div class="container hero-content">
-    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Made in Lingen (Ems) · seit 1969{% else %}Made in Germany · Since 1969{% endif %}</span>
-    <h1 class="mt-3" data-split-lines>{% if lang == "de" %}Wir fräsen, wo<br>andere <em>graben.</em>{% else %}Built for the<br>toughest <em class="serif-italic">ground.</em>{% endif %}</h1>
-    <p class="hero-sub">{% if lang == "de" %}Seit über fünfzig Jahren entwickelt und fertigt LIBA Grabenfräsen, Anbaufräsen und Spezialmaschinen für den Tief-, Leitungs- und Glasfaserbau. Robust. Präzise. Made in Germany.{% else %}LIBA manufactures chain trenchers and trench cutters for pipeline, fibre optic, power cable and utility installation — from compact tractor-mounted models to heavy-duty self-propelled machines for rock.{% endif %}</p>
-    <div class="hero-actions">
-      {% if lang == "de" %}
-      <a href="/kontakt.html" class="btn btn-brand is-lg">
-        Kostenlose Beratung anfragen
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      <a href="/maschinen.html" class="btn btn-outline-light is-lg">
-        Maschinenpark entdecken
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      {% else %}
-      <a href="/maschinen.html" class="btn btn-accent is-lg">View machines <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-      <a href="/kontakt.html" class="btn btn-outline-light">Request a quote</a>
-      {% endif %}
+    <div class="hero-text-col">
+      <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Made in Lingen (Ems) · seit 1969{% else %}Made in Germany · Since 1969{% endif %}</span>
+      <h1 class="mt-3" data-split-lines>{% if lang == "de" %}Wir fräsen, wo<br>andere <em>graben.</em>{% else %}Built for the<br>toughest <em class="serif-italic">ground.</em>{% endif %}</h1>
+      <p class="hero-sub">{% if lang == "de" %}Seit über fünfzig Jahren entwickelt und fertigt LIBA Grabenfräsen, Anbaufräsen und Spezialmaschinen für den Tief-, Leitungs- und Glasfaserbau. Robust. Präzise. Made in Germany.{% else %}LIBA manufactures chain trenchers and trench cutters for pipeline, fibre optic, power cable and utility installation — from compact tractor-mounted models to heavy-duty self-propelled machines for rock.{% endif %}</p>
+      <div class="hero-actions">
+        {% if lang == "de" %}
+        <a href="/kontakt.html" class="btn btn-brand is-lg">
+          Kostenlose Beratung anfragen
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/maschinen.html" class="btn btn-outline-light is-lg">
+          Maschinenpark entdecken
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        {% else %}
+        <a href="/maschinen.html" class="btn btn-accent is-lg">View machines <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="/kontakt.html" class="btn btn-outline-light">Request a quote</a>
+        {% endif %}
+      </div>
     </div>
 
     <div class="hero-ticker">
@@ -105,13 +117,6 @@ eleventyComputed:
       </div>
       {% endif %}
     </div>
-  </div>
-
-  <div class="hero-dots" aria-hidden="true">
-    <button class="hero-dot is-active" type="button" aria-label="Slide 1"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 2"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 3"></button>
-    {% if lang == "de" %}<button class="hero-dot" type="button" aria-label="Slide 4"></button>{% endif %}
   </div>
 
   <div class="scroll-hint" aria-hidden="true">scroll</div>
