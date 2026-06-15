@@ -94,6 +94,54 @@ eleventyComputed:
   </div>
 </section>
 
+<section class="section" style="padding-top: 0;" id="anwendungen-maschine">
+  <div class="container">
+    <hr class="divider">
+    <div class="section-header reveal">
+      <div class="heading">
+        <span class="section-index">{% if lang == "de" %}03 / Einsatzbereiche{% else %}03 / Applications{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Wo die {{ maschine.name }}<br><em class="serif-italic">arbeitet.</em>{% else %}Where the {{ maschine.name }}<br><em class="serif-italic">works.</em>{% endif %}</h2>
+      </div>
+      <div class="aside">
+        <p class="lead">{% if lang == "de" %}LIBA-Grabenfräsen sind für ein breites Spektrum an Einsätzen ausgelegt. Entdecken Sie die Anwendungsbereiche — und finden Sie heraus, wo diese Maschine ihren Stärken am besten entfaltet.{% else %}LIBA trench cutters are designed for a wide range of applications. Explore the fields where this machine delivers its full potential.{% endif %}</p>
+        <a href="{% if lang == 'de' %}/anwendungen.html{% else %}/en/anwendungen.html{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Alle Einsatzbereiche{% else %}All applications{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="grid grid-3 reveal">
+      <a href="{% if lang == 'de' %}/anwendungen.html#glasfaser{% else %}/en/anwendungen.html#glasfaser{% endif %}" class="application-link-card">
+        <strong>{% if lang == "de" %}Glasfaserausbau{% else %}Fibre Optic Rollout{% endif %}</strong>
+        <span>{% if lang == "de" %}FTTH · FTTB · Backbone{% else %}FTTH · FTTB · Backbone{% endif %}</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="{% if lang == 'de' %}/anwendungen.html#pipeline{% else %}/en/anwendungen.html#pipeline{% endif %}" class="application-link-card">
+        <strong>{% if lang == "de" %}Pipeline & Rohrleitungsbau{% else %}Pipeline & Pipe Installation{% endif %}</strong>
+        <span>{% if lang == "de" %}Gas · Wasser · Abwasser{% else %}Gas · Water · Sewage{% endif %}</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="{% if lang == 'de' %}/anwendungen.html#kabel{% else %}/en/anwendungen.html#kabel{% endif %}" class="application-link-card">
+        <strong>{% if lang == "de" %}Strom- & Solartrassen{% else %}Power & Solar Cable Routes{% endif %}</strong>
+        <span>{% if lang == "de" %}PV · Wind · Mittelspannung{% else %}PV · Wind · Medium voltage{% endif %}</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="{% if lang == 'de' %}/anwendungen.html#drainage{% else %}/en/anwendungen.html#drainage{% endif %}" class="application-link-card">
+        <strong>{% if lang == "de" %}Sportplatzbau & Drainage{% else %}Sports Field & Drainage{% endif %}</strong>
+        <span>{% if lang == "de" %}Rasen · Kunstrasen · Golf{% else %}Natural turf · Artificial turf · Golf{% endif %}</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="{% if lang == 'de' %}/anwendungen.html#landwirtschaft{% else %}/en/anwendungen.html#landwirtschaft{% endif %}" class="application-link-card">
+        <strong>{% if lang == "de" %}Landwirtschaft & Bewässerung{% else %}Agriculture & Irrigation{% endif %}</strong>
+        <span>{% if lang == "de" %}Drainage · Bewässerung · Agrar{% else %}Drainage · Irrigation · Agriculture{% endif %}</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="{% if lang == 'de' %}/anwendungen.html#tiefbau{% else %}/en/anwendungen.html#tiefbau{% endif %}" class="application-link-card">
+        <strong>{% if lang == "de" %}Bergbau, Felsen & Gleisbau{% else %}Mining, Rock & Track{% endif %}</strong>
+        <span>{% if lang == "de" %}Bergbau · Gleis · Fels{% else %}Mining · Track · Rock{% endif %}</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <div class="cta-block reveal">

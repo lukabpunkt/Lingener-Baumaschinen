@@ -82,8 +82,7 @@
       <a href="/en/maschinen.html"{% if nav == "maschinen" %} aria-current="page"{% endif %}>Machines</a>
       <a href="/en/anwendungen.html"{% if nav == "anwendungen" %} aria-current="page"{% endif %}>Applications</a>
       <a href="/en/mieten.html"{% if nav == "mieten" %} aria-current="page"{% endif %}>Rental</a>
-      <a href="/en/unternehmen.html"{% if nav == "unternehmen" %} aria-current="page"{% endif %}>Company</a>
-      <a href="/en/team.html"{% if nav == "team" %} aria-current="page"{% endif %}>About Us</a>
+      <a href="/en/unternehmen.html"{% if nav == "unternehmen" or nav == "team" %} aria-current="page"{% endif %}>Company</a>
       <a href="/en/kontakt.html"{% if nav == "kontakt" %} aria-current="page"{% endif %}>Contact</a>
     </nav>
     <div class="nav-cta">
@@ -117,7 +116,6 @@
   <a href="/en/anwendungen.html">Applications</a>
   <a href="/en/mieten.html">Rental</a>
   <a href="/en/unternehmen.html">Company</a>
-  <a href="/en/team.html">About Us</a>
   <a href="/en/kontakt.html">Contact</a>
   {% if nav == "kontakt" %}
   <a href="#anfrage" class="btn btn-primary">Request a quote</a>
@@ -169,8 +167,7 @@
       <a href="{{ p }}/maschinen.html"{% if nav == "maschinen" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Machines{% else %}Maschinen{% endif %}</a>
       <a href="{{ p }}/anwendungen.html"{% if nav == "anwendungen" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Applications{% else %}Anwendungen{% endif %}</a>
       <a href="{{ p }}/mieten.html"{% if nav == "mieten" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Hire{% else %}Mieten{% endif %}</a>
-      <a href="{{ p }}/unternehmen.html"{% if nav == "unternehmen" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Company{% else %}Unternehmen{% endif %}</a>
-      <a href="{{ p }}/team.html"{% if nav == "team" %} aria-current="page"{% endif %}>{% if lang == 'en' %}About{% else %}Über uns{% endif %}</a>
+      <a href="{{ p }}/unternehmen.html"{% if nav == "unternehmen" or nav == "team" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Company{% else %}Unternehmen{% endif %}</a>
       <a href="{{ p }}/kontakt.html"{% if nav == "kontakt" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</a>
     </nav>
     <div class="nav-cta">
@@ -204,7 +201,6 @@
   <a href="{{ p }}/anwendungen.html">{% if lang == 'en' %}Applications{% else %}Anwendungen{% endif %}</a>
   <a href="{{ p }}/mieten.html">{% if lang == 'en' %}Hire{% else %}Mieten{% endif %}</a>
   <a href="{{ p }}/unternehmen.html">{% if lang == 'en' %}Company{% else %}Unternehmen{% endif %}</a>
-  <a href="{{ p }}/team.html">{% if lang == 'en' %}About{% else %}Über uns{% endif %}</a>
   <a href="{{ p }}/kontakt.html">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</a>
   {% if nav == "kontakt" %}
   <a href="#anfrage" class="btn btn-primary">{% if lang == 'en' %}Enquire{% else %}Anfrage stellen{% endif %}</a>

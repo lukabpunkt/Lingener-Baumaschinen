@@ -115,11 +115,51 @@ eleventyComputed:
   </div>
 </section>
 
+<section class="section" style="padding-top: 0;" id="faq-miete">
+  <div class="container">
+    <hr class="divider">
+    <div class="section-header reveal">
+      <div class="heading">
+        <span class="section-index">{% if lang == "de" %}03 / Häufige Fragen{% else %}03 / Frequently Asked Questions{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Fragen zur<br><em class="serif-italic">Mietmaschine.</em>{% else %}Questions about<br><em class="serif-italic">hire machines.</em>{% endif %}</h2>
+      </div>
+    </div>
+    <div class="faq-list reveal">
+
+      <details class="faq-item">
+        <summary>{% if lang == "de" %}Welche Grabenfräsen kann ich bei LIBA mieten?{% else %}Which trench cutters can I hire from LIBA?{% endif %}<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">{% if lang == "de" %}Bei LIBA können Sie folgende Grabenfräsen mieten: GM 4 Raupe (für Glasfaser und Telekommunikation), GM 4 Allrad (für Drainage und Solartrassen) und GM 6 ASR (für Fels und Hartgestein). Alle Mietgeräte werden direkt vom Werk Lingen geliefert.{% else %}From LIBA you can hire the following trench cutters: GM 4 Crawler (for fibre optic and telecommunications), GM 4 All-Wheel (for drainage and solar routes) and GM 6 ASR (for rock and hard ground). All hire machines are delivered directly from the Lingen factory.{% endif %}</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>{% if lang == "de" %}Wie schnell ist eine gemietete LIBA-Grabenfräse verfügbar?{% else %}How quickly is a hired LIBA trench cutter available?{% endif %}<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">{% if lang == "de" %}In der Regel sind die Mietgeräte von LIBA sofort verfügbar. Bei einer Anfrage heute ist die Lieferung innerhalb von 48 Stunden deutschlandweit möglich. Der Transport erfolgt per Tieflader auf Wunsch.{% else %}In most cases, LIBA hire machines are immediately available. With an enquiry today, delivery within 48 hours is possible across Germany. Transport by low-loader can be arranged on request.{% endif %}</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>{% if lang == "de" %}Ist eine Bedienereinweisung beim Mietgerät inbegriffen?{% else %}Is operator training included with the hire machine?{% endif %}<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">{% if lang == "de" %}Ja. Jede Mietmaschine von LIBA wird mit einer Bedienereinweisung am Tag der Anlieferung übergeben. Zusätzlich steht die LIBA-Werkshotline 24/7 für technische Fragen während des Einsatzes zur Verfügung.{% else %}Yes. Every LIBA hire machine is handed over with operator training on the day of delivery. In addition, the LIBA factory hotline is available 24/7 for technical questions during deployment.{% endif %}</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>{% if lang == "de" %}Kann ich eine gemietete Grabenfräse später kaufen?{% else %}Can I purchase a hired trench cutter afterwards?{% endif %}<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">{% if lang == "de" %}Ja. Bei LIBA besteht die Möglichkeit, eine Mietmaschine im Anschluss zu kaufen. Bis zu 100 % der geleisteten Mietzeit kann dabei auf den Kaufpreis angerechnet werden.{% else %}Yes. LIBA offers the option to purchase a hire machine at the end of the hire period. Up to 100% of the hire period already completed can be offset against the purchase price.{% endif %}</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>{% if lang == "de" %}Wie lange kann ich eine Grabenfräse bei LIBA mieten?{% else %}How long can I hire a trench cutter from LIBA?{% endif %}<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="faq-answer">{% if lang == "de" %}LIBA bietet flexible Mietzeiten an — tageweise, wochenweise oder monatlich. Die Mietdauer richtet sich nach Ihrem Bauvorhaben und wird individuell vereinbart.{% else %}LIBA offers flexible hire periods — by the day, week or month. The hire duration is tailored to your construction schedule and agreed individually.{% endif %}</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
 <section class="roi-section section" id="roi-rechner">
   <div class="container">
     <div class="section-header reveal">
       <div class="heading">
-        <span class="section-index">{% if lang == "de" %}03 / Kaufen vs. Mieten{% else %}03 / Buy vs. Hire{% endif %}</span>
+        <span class="section-index">{% if lang == "de" %}04 / Kaufen vs. Mieten{% else %}04 / Buy vs. Hire{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Was lohnt sich<br><em class="serif-italic">für Ihren Einsatz?</em>{% else %}What makes sense<br><em class="serif-italic">for your application?</em>{% endif %}</h2>
       </div>
       <div class="aside">
@@ -170,7 +210,7 @@ eleventyComputed:
 <section class="section section-dark" id="mietanfrage">
   <div class="container">
     <div class="reveal" style="max-width: 640px; margin: 0 auto; text-align: center;">
-      <span class="section-index is-dark" style="color: var(--brand-light); justify-content: center;">{% if lang == "de" %}04 / Mietanfrage{% else %}04 / Hire Enquiry{% endif %}</span>
+      <span class="section-index is-dark" style="color: var(--brand-light); justify-content: center;">{% if lang == "de" %}05 / Mietanfrage{% else %}05 / Hire Enquiry{% endif %}</span>
       <h2 class="mt-3">{% if lang == "de" %}Jetzt Verfügbarkeit<br><em class="serif-italic">anfragen.</em>{% else %}Check availability<br><em class="serif-italic">now.</em>{% endif %}</h2>
       <p class="lead mt-3">{% if lang == "de" %}Wir prüfen Verfügbarkeit, Logistik und Einsatzbedingungen — und melden uns innerhalb von 24 Stunden mit einem unverbindlichen Mietangebot.{% else %}We check availability, logistics and operating conditions — and get back to you within 24 hours with a no-obligation hire offer.{% endif %}</p>
       <div class="mt-5" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
