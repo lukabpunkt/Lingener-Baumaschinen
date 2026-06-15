@@ -59,12 +59,10 @@ eleventyComputed:
             The {{ maschine.name }} is a {{ maschine.category }} trench cutter from LIBA Lingener Baumaschinen — designed and manufactured in Lingen (Ems). Made in Germany since 1969.
           {% endif %}
         </p>
-        {% if maschine.pdfUrl %}
         <a href="{% if lang == 'de' %}/assets/pdfs/LIBA-Broschuere.pdf{% else %}/assets/pdfs/LIBA-Brochure.pdf{% endif %}" class="btn-link mt-3" download>
           {% if lang == "de" %}Broschüre herunterladen{% else %}Download brochure{% endif %}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 15V3m0 12l-4-4m4 4l4-4"/><path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
         </a>
-        {% endif %}
       </div>
     </div>
   </div>
