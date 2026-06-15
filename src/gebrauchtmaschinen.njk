@@ -158,7 +158,7 @@ eleventyComputed:
           </select>
         </div>
         <div class="field"><label for="g-details">{% if lang == "de" %}Einsatzprofil &amp; Budget{% else %}Application profile &amp; budget{% endif %}</label><textarea id="g-details" name="details" placeholder="{% if lang == 'de' %}Bodenart, Grabentiefe, Einsatzgebiet, Preisvorstellung{% else %}Ground type, trench depth, area of application, budget{% endif %}"></textarea></div>
-        <label class="field-check"><input type="checkbox" required> {% if lang == "de" %}Ich habe die <a href="/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Datenschutzerklärung</a> zur Kenntnis genommen.{% else %}I have read the <a href="/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Privacy Policy</a>.{% endif %}</label>
+        <label class="field-check"><input type="checkbox" required> {% if lang == "de" %}Ich habe die <a href="/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Datenschutzerklärung</a> zur Kenntnis genommen.{% else %}I have read the <a href="/en/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Privacy Policy</a>.{% endif %}</label>
         <button type="submit" class="btn btn-brand is-lg" style="justify-self: start;">{% if lang == "de" %}Anfrage senden{% else %}Send enquiry{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
         <p data-form-status role="status" hidden style="color: var(--brand); font-weight: 500;"></p>
       </form>

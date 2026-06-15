@@ -156,21 +156,22 @@
   </div>
 </div>
 
+{% set p = '/en' if lang == 'en' else '' %}
 <!-- NAV -->
 <header class="nav{{ ' is-solid' if navSolid }}" role="banner">
   <div class="container nav-inner">
-    <a href="/" class="nav-brand" aria-label="LIBA – Startseite">
+    <a href="{{ '/en/index.html' if lang == 'en' else '/' }}" class="nav-brand" aria-label="LIBA – {% if lang == 'en' %}Home{% else %}Startseite{% endif %}">
       <img src="/assets/images/logo/liba-logo-dark.png" alt="LIBA" class="logo" width="908" height="276">
       <span class="meta">Lingener<br>Baumaschinen</span>
     </a>
-    <nav class="nav-links" aria-label="Hauptnavigation">
-      <a href="/"{% if nav == "start" %} aria-current="page"{% endif %}>Start</a>
-      <a href="/maschinen.html"{% if nav == "maschinen" %} aria-current="page"{% endif %}>Maschinen</a>
-      <a href="/anwendungen.html"{% if nav == "anwendungen" %} aria-current="page"{% endif %}>Anwendungen</a>
-      <a href="/mieten.html"{% if nav == "mieten" %} aria-current="page"{% endif %}>Mieten</a>
-      <a href="/unternehmen.html"{% if nav == "unternehmen" %} aria-current="page"{% endif %}>Unternehmen</a>
-      <a href="/team.html"{% if nav == "team" %} aria-current="page"{% endif %}>Über uns</a>
-      <a href="/kontakt.html"{% if nav == "kontakt" %} aria-current="page"{% endif %}>Kontakt</a>
+    <nav class="nav-links" aria-label="{% if lang == 'en' %}Main navigation{% else %}Hauptnavigation{% endif %}">
+      <a href="{{ '/en/index.html' if lang == 'en' else '/' }}"{% if nav == "start" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Home{% else %}Start{% endif %}</a>
+      <a href="{{ p }}/maschinen.html"{% if nav == "maschinen" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Machines{% else %}Maschinen{% endif %}</a>
+      <a href="{{ p }}/anwendungen.html"{% if nav == "anwendungen" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Applications{% else %}Anwendungen{% endif %}</a>
+      <a href="{{ p }}/mieten.html"{% if nav == "mieten" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Hire{% else %}Mieten{% endif %}</a>
+      <a href="{{ p }}/unternehmen.html"{% if nav == "unternehmen" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Company{% else %}Unternehmen{% endif %}</a>
+      <a href="{{ p }}/team.html"{% if nav == "team" %} aria-current="page"{% endif %}>{% if lang == 'en' %}About{% else %}Über uns{% endif %}</a>
+      <a href="{{ p }}/kontakt.html"{% if nav == "kontakt" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</a>
     </nav>
     <div class="nav-cta">
       {% if langDE and langEN %}
@@ -180,15 +181,15 @@
       </div>
       {% endif %}
       {% if nav == "kontakt" %}
-      <a href="#anfrage" class="btn btn-ghost is-sm">Anfrage</a>
+      <a href="#anfrage" class="btn btn-ghost is-sm">{% if lang == 'en' %}Enquiry{% else %}Anfrage{% endif %}</a>
       <a href="tel:+4959176314" class="btn btn-primary is-sm">
-        Anrufen
+        {% if lang == 'en' %}Call{% else %}Anrufen{% endif %}
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
       {% else %}
-      <a href="/kontakt.html" class="btn btn-ghost is-sm">Beratung</a>
-      <a href="/kontakt.html" class="btn btn-primary is-sm">
-        Anfragen
+      <a href="{{ p }}/kontakt.html" class="btn btn-ghost is-sm">{% if lang == 'en' %}Advice{% else %}Beratung{% endif %}</a>
+      <a href="{{ p }}/kontakt.html" class="btn btn-primary is-sm">
+        {% if lang == 'en' %}Enquire{% else %}Anfragen{% endif %}
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
       {% endif %}
@@ -198,19 +199,19 @@
 </header>
 
 <div id="mobile-nav" class="mobile-nav">
-  <a href="/">Start</a>
-  <a href="/maschinen.html">Maschinen</a>
-  <a href="/anwendungen.html">Anwendungen</a>
-  <a href="/mieten.html">Mieten</a>
-  <a href="/unternehmen.html">Unternehmen</a>
-  <a href="/team.html">Über uns</a>
-  <a href="/kontakt.html">Kontakt</a>
+  <a href="{{ '/en/index.html' if lang == 'en' else '/' }}">{% if lang == 'en' %}Home{% else %}Start{% endif %}</a>
+  <a href="{{ p }}/maschinen.html">{% if lang == 'en' %}Machines{% else %}Maschinen{% endif %}</a>
+  <a href="{{ p }}/anwendungen.html">{% if lang == 'en' %}Applications{% else %}Anwendungen{% endif %}</a>
+  <a href="{{ p }}/mieten.html">{% if lang == 'en' %}Hire{% else %}Mieten{% endif %}</a>
+  <a href="{{ p }}/unternehmen.html">{% if lang == 'en' %}Company{% else %}Unternehmen{% endif %}</a>
+  <a href="{{ p }}/team.html">{% if lang == 'en' %}About{% else %}Über uns{% endif %}</a>
+  <a href="{{ p }}/kontakt.html">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</a>
   {% if nav == "kontakt" %}
-  <a href="#anfrage" class="btn btn-primary">Anfrage stellen</a>
+  <a href="#anfrage" class="btn btn-primary">{% if lang == 'en' %}Enquire{% else %}Anfrage stellen{% endif %}</a>
   {% elif nav == "mieten" %}
-  <a href="#mietanfrage" class="btn btn-primary">Mietanfrage</a>
+  <a href="#mietanfrage" class="btn btn-primary">{% if lang == 'en' %}Hire enquiry{% else %}Mietanfrage{% endif %}</a>
   {% else %}
-  <a href="/kontakt.html" class="btn btn-primary">Anfrage stellen</a>
+  <a href="{{ p }}/kontakt.html" class="btn btn-primary">{% if lang == 'en' %}Enquire{% else %}Anfrage stellen{% endif %}</a>
   {% endif %}
   {% if langDE and langEN %}
   <div class="mobile-lang-switch">

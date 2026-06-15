@@ -683,52 +683,13 @@ p { color: var(--steel-700); text-wrap: pretty; }
   isolation: isolate;
 }
 
-/* Brand spine — vertical accent aligned to container left edge, desktop only */
-@media (min-width: 900px) {
-  .hero::before {
-    content: '';
-    position: absolute;
-    left: max(0px, calc((100vw - var(--container)) / 2));
-    top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      var(--brand) 20%,
-      var(--brand) 56%,
-      var(--brand-light) 76%,
-      rgba(94,234,212,.12) 92%,
-      transparent 100%
-    );
-    z-index: 3;
-    pointer-events: none;
-  }
-}
-
-/* ---- Framed image window ---- */
-/* Mobile: full-bleed so text stays readable over image */
+/* ---- Full-bleed image background ---- */
 .hero-frame {
   position: absolute;
   inset: 0;
   z-index: 0;
   background: var(--steel-800);
-}
-
-/* Desktop: contained window on the right */
-@media (min-width: 900px) {
-  .hero-frame {
-    inset: auto;
-    top: 3rem;
-    right: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
-    bottom: 7rem;
-    width: clamp(280px, 43vw, 600px);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow:
-      inset 0 0 0 1px rgba(14, 124, 123, .28),
-      0 0 0 1px rgba(14, 124, 123, .1),
-      0 40px 100px -20px rgba(0,0,0,.65);
-  }
+  overflow: hidden;
 }
 
 /* Images fill the frame */
@@ -751,52 +712,40 @@ p { color: var(--steel-700); text-wrap: pretty; }
 }
 .hero-media img.is-active { opacity: 1; transform: scale(1); }
 
-/* Overlay: strong gradient on mobile for text readability, subtle on desktop */
+/* Overlay: gradient for text readability over full-bleed image */
 .hero-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-}
-@media (max-width: 899px) {
-  .hero-overlay {
-    background:
-      linear-gradient(to top, rgba(11,15,20,.98) 0%, rgba(11,15,20,.88) 22%, rgba(11,15,20,.52) 44%, rgba(11,15,20,.18) 65%, transparent 85%),
-      linear-gradient(110deg, rgba(11,15,20,.72) 0%, rgba(11,15,20,.38) 38%, transparent 62%);
-  }
-}
-@media (min-width: 900px) {
-  .hero-overlay {
-    background: linear-gradient(170deg, rgba(11,15,20,.28) 0%, transparent 45%, rgba(11,15,20,.18) 100%);
-  }
+  background:
+    linear-gradient(to top, rgba(11,15,20,.97) 0%, rgba(11,15,20,.78) 22%, rgba(11,15,20,.42) 46%, rgba(11,15,20,.14) 66%, transparent 84%),
+    linear-gradient(105deg, rgba(11,15,20,.65) 0%, rgba(11,15,20,.28) 38%, transparent 62%);
 }
 
-/* Slide indicators — inside the frame, bottom-left */
-.hero-dots { display: none; }
-@media (min-width: 900px) {
-  .hero-dots {
-    position: absolute;
-    bottom: 1.1rem;
-    left: 1.25rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: .42rem;
-    z-index: 3;
-  }
-  .hero-dot {
-    height: 2px;
-    width: 20px;
-    background: rgba(255,255,255,.25);
-    border: none;
-    border-radius: 1px;
-    padding: 0;
-    cursor: pointer;
-    transition: background var(--dur), width var(--dur-slow);
-  }
-  .hero-dot.is-active { background: var(--brand-light); width: 40px; }
-  .hero-dot:hover:not(.is-active) { background: rgba(255,255,255,.45); }
+/* Slide indicators — bottom-right of hero */
+.hero-dots {
+  position: absolute;
+  bottom: 1.5rem;
+  right: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .42rem;
+  z-index: 3;
 }
+.hero-dot {
+  height: 2px;
+  width: 20px;
+  background: rgba(255,255,255,.25);
+  border: none;
+  border-radius: 1px;
+  padding: 0;
+  cursor: pointer;
+  transition: background var(--dur), width var(--dur-slow);
+}
+.hero-dot.is-active { background: var(--brand-light); width: 40px; }
+.hero-dot:hover:not(.is-active) { background: rgba(255,255,255,.45); }
 
 /* ---- Text content — sits above the frame ---- */
 .hero-content {
@@ -805,16 +754,8 @@ p { color: var(--steel-700); text-wrap: pretty; }
   padding-bottom: 0;
 }
 
-/* Constrain text to the left column (away from the image frame) on desktop */
-.hero-text-col { /* no max-width on mobile — full width */ }
-@media (min-width: 900px) {
-  .hero-text-col {
-    max-width: calc(57% - 3rem);
-  }
-}
-@media (min-width: 1200px) {
-  .hero-text-col { max-width: calc(54% - 4rem); }
-}
+/* Text column — comfortable reading width on all screen sizes */
+.hero-text-col { max-width: 62ch; }
 
 /* ---- Typography ---- */
 .hero-eyebrow { color: var(--brand-light); }
