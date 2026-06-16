@@ -69,13 +69,13 @@ eleventyComputed:
           Kostenlose Beratung anfragen
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        <a href="/maschinen.html" class="btn btn-outline-light is-lg">
+        <a href="/maschinen.html" class="hero-secondary">
           Maschinenpark entdecken
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
         {% else %}
-        <a href="/en/maschinen.html" class="btn btn-accent is-lg">View machines <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-        <a href="/en/kontakt.html" class="btn btn-outline-light">Request a quote</a>
+        <a href="/en/kontakt.html" class="btn btn-brand is-lg">Request a quote <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="/en/maschinen.html" class="hero-secondary">View machines <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         {% endif %}
       </div>
     </div>
@@ -166,22 +166,26 @@ eleventyComputed:
 
     <div class="split align-start reveal">
       <div>
-        <ul class="spec-list">
+        <ul class="spec-list is-kerf">
           <li>
-            <span class="num">01</span>
-            <div><strong>{% if lang == "de" %}Eigene Fertigung in Lingen (Ems){% else %}Own manufacturing in Lingen (Ems){% endif %}</strong><span>{% if lang == "de" %}Konstruktion, Schweißbau, Hydraulik-Integration und Endmontage unter einem Dach.{% else %}Design, welding, hydraulic integration and final assembly under one roof.{% endif %}</span></div>
+            <span class="spec-kicker">{% if lang == "de" %}Fertigung{% else %}Manufacturing{% endif %}</span>
+            <strong>{% if lang == "de" %}Eigene Fertigung in Lingen (Ems){% else %}Own manufacturing in Lingen (Ems){% endif %}</strong>
+            <span class="spec-desc">{% if lang == "de" %}Konstruktion, Schweißbau, Hydraulik-Integration und Endmontage unter einem Dach.{% else %}Design, welding, hydraulic integration and final assembly under one roof.{% endif %}</span>
           </li>
           <li>
-            <span class="num">02</span>
-            <div><strong>{% if lang == "de" %}30 Maschinenmodelle{% else %}30 machine models{% endif %}</strong><span>{% if lang == "de" %}Anbaufräsen, Selbstfahrer, Pflüge und Spezialmaschinen — abgestimmt auf jedes Trägergerät.{% else %}Attachment cutters, self-propelled machines, ploughs and specialist machines — matched to every carrier.{% endif %}</span></div>
+            <span class="spec-kicker">{% if lang == "de" %}Sortiment{% else %}Range{% endif %}</span>
+            <strong>{% if lang == "de" %}30 Maschinenmodelle{% else %}30 machine models{% endif %}</strong>
+            <span class="spec-desc">{% if lang == "de" %}Anbaufräsen, Selbstfahrer, Pflüge und Spezialmaschinen — abgestimmt auf jedes Trägergerät.{% else %}Attachment cutters, self-propelled machines, ploughs and specialist machines — matched to every carrier.{% endif %}</span>
           </li>
           <li>
-            <span class="num">03</span>
-            <div><strong>{% if lang == "de" %}Direkter Werkskontakt{% else %}Direct factory contact{% endif %}</strong><span>{% if lang == "de" %}Kein Anrufcenter, kein Zwischenhändler. Persönliche Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}No call centres, no middlemen. Personal points of contact from first enquiry through to delivery.{% endif %}</span></div>
+            <span class="spec-kicker">{% if lang == "de" %}Kontakt{% else %}Contact{% endif %}</span>
+            <strong>{% if lang == "de" %}Direkter Werkskontakt{% else %}Direct factory contact{% endif %}</strong>
+            <span class="spec-desc">{% if lang == "de" %}Kein Anrufcenter, kein Zwischenhändler. Persönliche Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}No call centres, no middlemen. Personal points of contact from first enquiry through to delivery.{% endif %}</span>
           </li>
           <li>
-            <span class="num">04</span>
-            <div><strong>{% if lang == "de" %}Lebensdauer statt Lebenszyklus{% else %}Lifespan, not lifecycle{% endif %}</strong><span>{% if lang == "de" %}Maschinen, die nach Jahrzehnten noch im Einsatz sind — und mit Original­ersatzteilen aus dem Werk weiterlaufen.{% else %}Machines still in service after decades — running on original spare parts from the factory.{% endif %}</span></div>
+            <span class="spec-kicker">{% if lang == "de" %}Langlebigkeit{% else %}Longevity{% endif %}</span>
+            <strong>{% if lang == "de" %}Lebensdauer statt Lebenszyklus{% else %}Lifespan, not lifecycle{% endif %}</strong>
+            <span class="spec-desc">{% if lang == "de" %}Maschinen, die nach Jahrzehnten noch im Einsatz sind — und mit Original­ersatzteilen aus dem Werk weiterlaufen.{% else %}Machines still in service after decades — running on original spare parts from the factory.{% endif %}</span>
           </li>
         </ul>
         <a href="{% if lang == 'de' %}/unternehmen.html{% else %}/en/unternehmen.html{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Mehr über LIBA{% else %}More about LIBA{% endif %} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
@@ -293,7 +297,7 @@ eleventyComputed:
       <a href="{% if lang == 'de' %}/anwendungen.html#glasfaser{% else %}/en/anwendungen.html#glasfaser{% endif %}" class="app reveal">
         <img loading="lazy" src="/assets/images/applications/glasfaser.webp" alt="{% if lang == 'de' %}Glasfaserkabel verlegen mit LIBA Grabenfräse — FTTH-Ausbau{% endif %}" width="1536" height="1152">
         <div class="app-body">
-          <div class="idx">{% if lang == "de" %}01 — Telekom{% else %}01 — Telecom{% endif %}</div>
+          <div class="idx">{% if lang == "de" %}Telekom{% else %}Telecom{% endif %}</div>
           <h3>{% if lang == "de" %}Glasfaser­ausbau{% else %}Fibre Optic{% endif %}</h3>
           <p>{% if lang == "de" %}Schmale Gräben, hohe Tagesleistung, präzise Geometrie — wirtschaftlich überlegen.{% else %}Narrow trenches, high daily output, precise geometry.{% endif %}</p>
         </div>
@@ -301,7 +305,7 @@ eleventyComputed:
       <a href="{% if lang == 'de' %}/anwendungen.html#pipeline{% else %}/en/anwendungen.html#pipeline{% endif %}" class="app reveal reveal-delay-1">
         <img loading="lazy" src="/assets/images/applications/rohrleitungsbau.jpg" alt="{% if lang == 'de' %}Rohrleitungsbau und Pipeline-Verlegung mit LIBA Grabenfräse{% endif %}" width="1024" height="768">
         <div class="app-body">
-          <div class="idx">{% if lang == "de" %}02 — Versorgung{% else %}02 — Utilities{% endif %}</div>
+          <div class="idx">{% if lang == "de" %}Versorgung{% else %}Utilities{% endif %}</div>
           <h3>{% if lang == "de" %}Pipeline &amp; Rohrleitungen{% else %}Pipeline{% endif %}</h3>
           <p>{% if lang == "de" %}Gas, Wasser, Fernwärme. Definierte Grabengeometrie für sichere Trassen.{% else %}Gas, water, district heating — defined trench geometry for safe routes.{% endif %}</p>
         </div>
@@ -309,7 +313,7 @@ eleventyComputed:
       <a href="{% if lang == 'de' %}/anwendungen.html#kabel{% else %}/en/anwendungen.html#kabel{% endif %}" class="app reveal reveal-delay-2">
         <img loading="lazy" src="/assets/images/applications/kabelverlegung.jpg" alt="{% if lang == 'de' %}Stromkabel und Solartrassenverlegung mit Kettenfräse{% endif %}" width="1024" height="768">
         <div class="app-body">
-          <div class="idx">{% if lang == "de" %}03 — Energie{% else %}03 — Energy{% endif %}</div>
+          <div class="idx">{% if lang == "de" %}Energie{% else %}Energy{% endif %}</div>
           <h3>{% if lang == "de" %}Strom- &amp; Solar­trassen{% else %}Power &amp; Solar Cables{% endif %}</h3>
           <p>{% if lang == "de" %}Erdkabel-Verlegung für Solarparks, Windparks und Mittelspannungs­netze.{% else %}Cable trenching for solar parks, wind farms and medium-voltage grids.{% endif %}</p>
         </div>
@@ -317,7 +321,7 @@ eleventyComputed:
       <a href="{% if lang == 'de' %}/anwendungen.html#drainage{% else %}/en/anwendungen.html#drainage{% endif %}" class="app reveal">
         <img loading="lazy" src="/assets/images/applications/sportplatzbau.jpg" alt="{% if lang == 'de' %}Sportplatzdrainage mit LIBA Grabenfräse — minimale Rasenschäden{% endif %}" width="1024" height="768">
         <div class="app-body">
-          <div class="idx">{% if lang == "de" %}04 — Sport{% else %}04 — Sports{% endif %}</div>
+          <div class="idx">{% if lang == "de" %}Sport{% else %}Sports{% endif %}</div>
           <h3>{% if lang == "de" %}Sportplatzbau &amp; Drainage{% else %}Drainage{% endif %}</h3>
           <p>{% if lang == "de" %}Saubere Drainagegräben mit minimaler Rasennarben-Schädigung.{% else %}Precision drainage on sports pitches with minimal surface damage.{% endif %}</p>
         </div>
@@ -325,7 +329,7 @@ eleventyComputed:
       <a href="{% if lang == 'de' %}/anwendungen.html#landwirtschaft{% else %}/en/anwendungen.html#landwirtschaft{% endif %}" class="app reveal reveal-delay-1">
         <img loading="lazy" src="/assets/images/applications/landwirtschaft.jpg" alt="{% if lang == 'de' %}Bewässerungs- und Drainagegräben in der Landwirtschaft mit LIBA-Grabenfräse{% endif %}" width="1024" height="768">
         <div class="app-body">
-          <div class="idx">{% if lang == "de" %}05 — Agrar{% else %}05 — Agriculture{% endif %}</div>
+          <div class="idx">{% if lang == "de" %}Agrar{% else %}Agriculture{% endif %}</div>
           <h3>{% if lang == "de" %}Landwirtschaft &amp; Bewässerung{% else %}Irrigation &amp; Drainage{% endif %}</h3>
           <p>{% if lang == "de" %}Bewässerungs- und Drainagelösungen für effiziente Bewirtschaftung.{% else %}Irrigation and drainage solutions for fields and plantations.{% endif %}</p>
         </div>
@@ -333,7 +337,7 @@ eleventyComputed:
       <a href="{% if lang == 'de' %}/anwendungen.html#tiefbau{% else %}/en/anwendungen.html#tiefbau{% endif %}" class="app reveal reveal-delay-2">
         <img loading="lazy" src="/assets/images/applications/baustelle.jpg" alt="{% if lang == 'de' %}LIBA Tiefenfräse im Bergbau- und Tiefbaueinsatz auf Baustelle{% endif %}" width="1536" height="1024">
         <div class="app-body">
-          <div class="idx">{% if lang == "de" %}06 — Infra{% else %}06 — Special{% endif %}</div>
+          <div class="idx">{% if lang == "de" %}Infrastruktur{% else %}Special{% endif %}</div>
           <h3>{% if lang == "de" %}Tief- &amp; Spezialbau{% else %}Mining &amp; Rock{% endif %}</h3>
           <p>{% if lang == "de" %}Bergbau, Felsen, Gleisbau — wo Bagger an Grenzen kommen, beginnt LIBA.{% else %}Where excavators fail, LIBA begins.{% endif %}</p>
         </div>
@@ -464,6 +468,11 @@ eleventyComputed:
     </div>
   </div>
 </section>
+
+<!-- ==========  TRENCH DIVIDER (Signatur)  ========== -->
+<div class="container">
+  <div class="trench" aria-hidden="true"><span class="trench-cut"></span></div>
+</div>
 
 <!-- ==========  CTA  ========== -->
 <section class="section" style="padding-top: 0;">

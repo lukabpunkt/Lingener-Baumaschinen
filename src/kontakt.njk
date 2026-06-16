@@ -54,9 +54,9 @@ eleventyComputed:
       </div>
       <div class="aside">
         <p class="lead">{% if lang == "de" %}Wählen Sie einen freien Termin — wir rufen Sie zur vereinbarten Zeit direkt an. Kein Callcenter, keine Warteschleife.{% else %}Pick a free slot and we'll call you at the agreed time. No call centre, no hold music.{% endif %}</p>
-        <ul class="spec-list mt-3">
-          <li><span class="num">01</span><div><strong>{% if lang == "de" %}30 Minuten{% else %}30 minutes{% endif %}</strong><span>{% if lang == "de" %}Technische Beratung direkt vom LIBA-Konstrukteur.{% else %}Technical advice direct from the LIBA engineering team.{% endif %}</span></div></li>
-          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Direkte Leitung{% else %}Direct line{% endif %}</strong><span>{% if lang == "de" %}Persönlicher Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}Personal point of contact from first enquiry through to delivery.{% endif %}</span></div></li>
+        <ul class="spec-list is-kerf mt-3">
+          <li><strong>{% if lang == "de" %}30 Minuten{% else %}30 minutes{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Technische Beratung direkt vom LIBA-Konstrukteur.{% else %}Technical advice direct from the LIBA engineering team.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Direkte Leitung{% else %}Direct line{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Persönlicher Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}Personal point of contact from first enquiry through to delivery.{% endif %}</span></li>
         </ul>
       </div>
     </div>
@@ -132,9 +132,9 @@ eleventyComputed:
         <span class="section-index">{% if lang == "de" %}02 / Schreiben Sie uns{% else %}02 / Send us a message{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Lieber per<br><em class="serif-italic">Formular?</em>{% else %}Prefer to<br><em class="serif-italic">write to us?</em>{% endif %}</h2>
         <p class="lead mt-3">{% if lang == "de" %}Beschreiben Sie kurz Ihr Anliegen — wir antworten werktags innerhalb von 24 Stunden.{% else %}Briefly describe your enquiry — we respond on working days within 24 hours.{% endif %}</p>
-        <ul class="spec-list mt-4">
-          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Antwort in 24 h{% else %}Reply within 24 h{% endif %}</strong><span>{% if lang == "de" %}Werktags, direkt aus dem Werk Lingen.{% else %}On working days, direct from the Lingen factory.{% endif %}</span></div></li>
-          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Kein Callcenter{% else %}No call centre{% endif %}</strong><span>{% if lang == "de" %}Ihr Anliegen geht direkt an das LIBA-Vertriebsteam.{% else %}Your message goes directly to the LIBA sales team.{% endif %}</span></div></li>
+        <ul class="spec-list is-kerf mt-4">
+          <li><strong>{% if lang == "de" %}Antwort in 24 h{% else %}Reply within 24 h{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Werktags, direkt aus dem Werk Lingen.{% else %}On working days, direct from the Lingen factory.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Kein Callcenter{% else %}No call centre{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Ihr Anliegen geht direkt an das LIBA-Vertriebsteam.{% else %}Your message goes directly to the LIBA sales team.{% endif %}</span></li>
         </ul>
       </div>
       <form class="form reveal reveal-delay-1" data-form="https://formspree.io/f/YOUR_FORMSPREE_ID_KONTAKT" action="https://formspree.io/f/YOUR_FORMSPREE_ID_KONTAKT" method="POST">

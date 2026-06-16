@@ -55,11 +55,11 @@ eleventyComputed:
         <span class="section-index">{% if lang == "de" %}01 / Unser Versprechen{% else %}01 / Our Promise{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Kein Händler.<br>Kein Risiko.<br><em class="serif-italic">Werksstandard.</em>{% else %}No dealers.<br>No risk.<br><em class="serif-italic">Factory standard.</em>{% endif %}</h2>
         <p class="lead mt-3">{% if lang == "de" %}Gebrauchte LIBA-Maschinen kommen direkt aus unserem Werk — nicht aus Auktionen, nicht von Zwischenhändlern. Wir kennen jede Maschine, die wir gebaut haben.{% else %}Used LIBA machines come directly from our factory — not from auctions, not from middlemen. We know every machine we have built.{% endif %}</p>
-        <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Vollständige Werksinspektion{% else %}Full factory inspection{% endif %}</strong><span>{% if lang == "de" %}Hydraulik, Fräswelle, Kette, Lager, Elektrik — alles geprüft, defekte Teile ersetzt.{% else %}Hydraulics, cutter shaft, chain, bearings, electrics — all checked, defective parts replaced.{% endif %}</span></div></li>
-          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Lückenlose Maschinenhistorie{% else %}Complete machine history{% endif %}</strong><span>{% if lang == "de" %}Wir wissen, wo jede Maschine war und was sie geleistet hat.{% else %}We know where every machine has been and what it has done.{% endif %}</span></div></li>
-          <li><span class="num">03</span><div><strong>{% if lang == "de" %}Werksgarantie auf Instandsetzung{% else %}Factory warranty on reconditioning{% endif %}</strong><span>{% if lang == "de" %}Alle im Rahmen der Inspektion getauschten Teile sind garantiert.{% else %}All parts replaced during inspection are warranted.{% endif %}</span></div></li>
-          <li><span class="num">04</span><div><strong>{% if lang == "de" %}Einweisung inklusive{% else %}Operator training included{% endif %}</strong><span>{% if lang == "de" %}Übergabe mit Bedienereinweisung durch unser Werkspersonal.{% else %}Handover with operator training by our factory personnel.{% endif %}</span></div></li>
+        <ul class="spec-list is-kerf">
+          <li><strong>{% if lang == "de" %}Vollständige Werksinspektion{% else %}Full factory inspection{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Hydraulik, Fräswelle, Kette, Lager, Elektrik — alles geprüft, defekte Teile ersetzt.{% else %}Hydraulics, cutter shaft, chain, bearings, electrics — all checked, defective parts replaced.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Lückenlose Maschinenhistorie{% else %}Complete machine history{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Wir wissen, wo jede Maschine war und was sie geleistet hat.{% else %}We know where every machine has been and what it has done.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Werksgarantie auf Instandsetzung{% else %}Factory warranty on reconditioning{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Alle im Rahmen der Inspektion getauschten Teile sind garantiert.{% else %}All parts replaced during inspection are warranted.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Einweisung inklusive{% else %}Operator training included{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Übergabe mit Bedienereinweisung durch unser Werkspersonal.{% else %}Handover with operator training by our factory personnel.{% endif %}</span></li>
         </ul>
       </div>
       <div class="media-frame is-wide">
@@ -121,9 +121,9 @@ eleventyComputed:
         <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}03 / Anfrage{% else %}03 / Enquiry{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Welche Maschine<br>suchen <em>Sie?</em>{% else %}Which machine<br>are you <em>looking for?</em>{% endif %}</h2>
         <p class="lead mt-3">{% if lang == "de" %}Teilen Sie uns Einsatzprofil, Bodenart und Budget mit — wir prüfen, ob wir etwas Passendes haben, und informieren Sie auch über neue Zugänge.{% else %}Share your application profile, ground type and budget with us — we'll check whether we have something suitable and keep you informed about new arrivals.{% endif %}</p>
-        <ul class="spec-list">
-          <li><span class="num">01</span><div><strong>{% if lang == "de" %}Direkt vom Werk{% else %}Direct from the factory{% endif %}</strong><span>{% if lang == "de" %}Kein Aufschlag durch Zwischenhändler.{% else %}No premium through middlemen.{% endif %}</span></div></li>
-          <li><span class="num">02</span><div><strong>{% if lang == "de" %}Schnelle Antwort{% else %}Fast response{% endif %}</strong><span>{% if lang == "de" %}Rückmeldung innerhalb eines Werktags.{% else %}Reply within one working day.{% endif %}</span></div></li>
+        <ul class="spec-list is-kerf">
+          <li><strong>{% if lang == "de" %}Direkt vom Werk{% else %}Direct from the factory{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Kein Aufschlag durch Zwischenhändler.{% else %}No premium through middlemen.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Schnelle Antwort{% else %}Fast response{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Rückmeldung innerhalb eines Werktags.{% else %}Reply within one working day.{% endif %}</span></li>
         </ul>
       </div>
       <form class="form reveal reveal-delay-1" data-form="https://formspree.io/f/YOUR_FORMSPREE_ID_GEBRAUCHT" action="https://formspree.io/f/YOUR_FORMSPREE_ID_GEBRAUCHT" method="POST">
