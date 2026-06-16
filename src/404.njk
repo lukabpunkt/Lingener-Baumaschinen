@@ -19,10 +19,12 @@ permalink: /404.html
     .err-page::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 56px 56px; z-index: 0; mask-image: linear-gradient(180deg, transparent, black 30%, transparent); }
     .err-page > * { position: relative; z-index: 1; }
   </style>
-  <!-- Google Analytics 4 + Consent Mode v2 — G-XXXXXXXXXX mit echter Measurement-ID ersetzen -->
+  {% if site.ga4 and site.ga4 != "G-XXXXXXXXXX" %}
+  <!-- Google Analytics 4 + Consent Mode v2 — Mess-ID zentral in src/_data/site.js -->
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:800});gtag('js',new Date());</script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>gtag('config','G-XXXXXXXXXX');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga4 }}"></script>
+  <script>gtag('config','{{ site.ga4 }}');</script>
+  {% endif %}
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://www.lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://www.lingener-baumaschinen.de","logo":"https://www.lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}</script>
 </head>
 <body>

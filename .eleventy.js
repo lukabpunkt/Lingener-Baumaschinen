@@ -3,7 +3,6 @@ const { HtmlBasePlugin } = require("@11ty/eleventy");
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
   eleventyConfig.addPassthroughCopy({"src/assets": "assets"});
-  eleventyConfig.addPassthroughCopy({"src/sitemap.xml": "sitemap.xml"});
   eleventyConfig.addPassthroughCopy({"src/robots.txt": "robots.txt"});
   eleventyConfig.addPassthroughCopy({"src/llms.txt": "llms.txt"});
 

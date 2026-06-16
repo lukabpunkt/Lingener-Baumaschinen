@@ -1,5 +1,6 @@
 ---
 pagination:
+  addAllPagesToCollections: true
   data: site.langs
   size: 1
   alias: lang
@@ -31,7 +32,7 @@ eleventyComputed:
   ogTitle: "{{ ogTitleDE if lang == 'de' else ogTitleEN }}"
   ogDescription: "{{ ogDescDE if lang == 'de' else ogDescEN }}"
   ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
-  schema: "{{ schemaDE if lang == 'de' else schemaEN }}"
+  schema: "{{ (schemaDE if lang == 'de' else schemaEN) | safe }}"
 ---
 
 <section class="page-hero">
