@@ -5,6 +5,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({"src/assets": "assets"});
   eleventyConfig.addPassthroughCopy({"src/sitemap.xml": "sitemap.xml"});
   eleventyConfig.addPassthroughCopy({"src/robots.txt": "robots.txt"});
+  eleventyConfig.addPassthroughCopy({"src/llms.txt": "llms.txt"});
 
   return {
     templateFormats: ["njk"],

@@ -18,6 +18,7 @@ eleventyComputed:
   ogTitle: "{% if maschine.lang == 'de' %}{{ maschine.name }} — {{ maschine.subtitleDE }} | LIBA{% else %}{{ maschine.name }} — {{ maschine.subtitleEN }} | LIBA{% endif %}"
   ogDescription: "{% if maschine.lang == 'de' %}{{ maschine.subtitleDE }}. LIBA Lingener Baumaschinen — Made in Germany seit 1969.{% else %}{{ maschine.subtitleEN }}. LIBA Lingener Baumaschinen — Made in Germany since 1969.{% endif %}"
   ogLocale: "{{ 'de_DE' if maschine.lang == 'de' else 'en_GB' }}"
+  schema: "{{ maschine.schema | safe }}"
 ---
 
 <section class="page-hero">
@@ -46,7 +47,7 @@ eleventyComputed:
   <div class="container">
     <div class="split align-start reveal">
       <div class="media-frame is-wide">
-        <img loading="lazy" src="{{ maschine.heroImage }}" alt="{% if lang == 'de' %}{{ maschine.heroAltDE }}{% else %}{{ maschine.heroAltEN }}{% endif %}">
+        <picture><source type="image/webp" srcset="{{ maschine.heroImage | replace('.jpg', '.webp') | replace('.png', '.webp') }}"><img loading="lazy" src="{{ maschine.heroImage }}" alt="{% if lang == 'de' %}{{ maschine.heroAltDE }}{% else %}{{ maschine.heroAltEN }}{% endif %}"></picture>
         <span class="tag">{{ maschine.category }}{% if maschine.condition != 'Neu' %} · {{ maschine.condition }}{% if maschine.year %} {{ maschine.year }}{% endif %}{% endif %}</span>
       </div>
       <div>
