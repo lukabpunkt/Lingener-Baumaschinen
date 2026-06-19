@@ -12,18 +12,18 @@
   <meta property="og:url" content="{{ canonical }}">
   <meta property="og:title" content="{{ ogTitle if ogTitle else (og.title if og else title) }}">
   <meta property="og:description" content="{{ ogDescription if ogDescription else (og.description if og else description) }}">
-  <meta property="og:image" content="{{ ogImage if ogImage else (og.image if og else 'https://www.lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
+  <meta property="og:image" content="{{ ogImage if ogImage else (og.image if og else 'https://lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
   <meta property="og:locale" content="{{ ogLocale if ogLocale else (og.locale if og else 'de_DE') }}">
   {% if lang == "en" %}<meta property="og:locale:alternate" content="de_DE">{% endif %}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ ogTitle if ogTitle else (og.title if og else title) }}">
   <meta name="twitter:description" content="{{ ogDescription if ogDescription else (og.description if og else description) }}">
-  <meta name="twitter:image" content="{{ ogImage if ogImage else (og.image if og else 'https://www.lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
+  <meta name="twitter:image" content="{{ ogImage if ogImage else (og.image if og else 'https://lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
   <link rel="canonical" href="{{ canonical }}">
   {% if langDE and langEN %}
-  <link rel="alternate" hreflang="de" href="https://www.lingener-baumaschinen.de{{ langDE }}">
-  <link rel="alternate" hreflang="en" href="https://www.lingener-baumaschinen.de{{ langEN }}">
-  <link rel="alternate" hreflang="x-default" href="https://www.lingener-baumaschinen.de{{ langDE }}">
+  <link rel="alternate" hreflang="de" href="https://lingener-baumaschinen.de{{ langDE }}">
+  <link rel="alternate" hreflang="en" href="https://lingener-baumaschinen.de{{ langEN }}">
+  <link rel="alternate" hreflang="x-default" href="https://lingener-baumaschinen.de{{ langDE }}">
   {% endif %}
   {% if extraHead %}{{ extraHead | safe }}{% endif %}
   {% if preloadImage %}<link rel="preload" as="image" href="{{ preloadImage }}" fetchpriority="high">{% endif %}

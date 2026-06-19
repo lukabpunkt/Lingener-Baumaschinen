@@ -1,0 +1,15 @@
+---
+permalink: /_redirects
+eleventyExcludeFromCollections: true
+---
+# Netlify _redirects — AUTO-GENERIERT aus src/_data/redirects.js (nicht von Hand editieren).
+# Format: <alt-pfad>  <neu-ziel>  <status>. Echte 301-Weiterleitungen für den Domain-Umzug.
+{% for r in redirects %}{{ r.from }}  {{ r.to }}  {{ r.status }}
+{% endfor %}
+# --- Sammel-/Splat-Regeln (spezifische Regeln oben gewinnen, Catch-all zuletzt) ---
+# FR & ES entfallen -> beide auf die englische Seite.
+/fr/*         /en/   301
+/es/*         /en/   301
+# Blog entfällt -> alles auf die Startseite.
+/aktuelles/*  /      301
+/aktuelles/   /      301

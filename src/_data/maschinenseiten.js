@@ -1,7 +1,7 @@
 'use strict';
 const maschinen = require('./maschinen.js');
 
-const BASE = 'https://www.lingener-baumaschinen.de';
+const BASE = 'https://lingener-baumaschinen.de';
 
 /* Find first spec whose German label matches one of the given needles. */
 function findSpec(m, needles) {

@@ -2705,7 +2705,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   a[href]::after { content: none; }
 
   main::after {
-    content: "Lingener Baumaschinen GmbH & Co. KG · Diekstrasse 59 · 49809 Lingen (Ems) · Tel. +49 (0) 591 76 314 · info@lingener-baumaschinen.de · www.lingener-baumaschinen.de";
+    content: "Lingener Baumaschinen GmbH & Co. KG · Diekstrasse 59 · 49809 Lingen (Ems) · Tel. +49 (0) 591 76 314 · info@lingener-baumaschinen.de · lingener-baumaschinen.de";
     display: block;
     margin-top: 1cm;
     padding-top: .4cm;

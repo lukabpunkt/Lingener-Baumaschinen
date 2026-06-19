@@ -1,0 +1,12 @@
+# Netlify-Build für die LIBA-Website (Eleventy)
+# Domain liegt im Root (apex) -> KEIN ELEVENTY_PATH_PREFIX setzen,
+# damit .eleventy.js den Default pathPrefix "/" nutzt.
+# Echte 301-Weiterleitungen kommen aus der generierten _site/_redirects
+# (siehe src/_redirects.njk + src/_data/redirects.js).
+
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "24"
