@@ -22,9 +22,9 @@ ogTitleEN: "Applications — LIBA Lingener Baumaschinen"
 ogDescDE: "Glasfaser, Pipeline, Strom, Wasser, Sport, Agrar, Bergbau. Sechzig Jahre Maschinenentwicklung — abgestimmt auf reale Aufgaben unter realen Bedingungen."
 ogDescEN: "Fibre optic, pipeline, power, water, sports, agriculture, mining. Sixty years of machine development — tailored to real tasks under real conditions."
 schemaDE: >-
-  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
 schemaEN: >-
-  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de/en/anwendungen.html","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Manufacturer specialising in the sale, hire and servicing of trench cutters for civil engineering, cable, road and track construction. Founded 1969, worldwide dealer network.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Lower Saxony","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English","French","Spanish"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Manufacturer specialising in the sale, hire and servicing of trench cutters for civil engineering, cable, road and track construction. Founded 1969, worldwide dealer network.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Lower Saxony","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
 
 eleventyComputed:
   title: "{{ titleDE if lang == 'de' else titleEN }}"
@@ -67,7 +67,7 @@ eleventyComputed:
         </ul>
         <a href="{% if lang == 'de' %}/maschinen.html#selbstfahrer{% else %}/en/maschinen.html#selbstfahrer{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Passende Maschinen ansehen{% else %}View matching machines{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/glasfaser.webp" alt="" width="1536" height="1152"><span class="tag">FTTH · FTTB · Backbone</span></div>
+      <div class="media-frame"><img loading="lazy" src="/assets/images/applications/glasfaser.webp" alt="{% if lang == 'de' %}Glasfaserverlegung mit LIBA Grabenfräse{% else %}Fibre-optic installation with a LIBA trench cutter{% endif %}" width="1536" height="1152"><span class="tag">FTTH · FTTB · Backbone</span></div>
     </div>
 
     <hr class="divider">
@@ -84,7 +84,7 @@ eleventyComputed:
         </ul>
         <a href="{% if lang == 'de' %}/maschinen.html#anbau-bagger{% else %}/en/maschinen.html#anbau-bagger{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Passende Maschinen ansehen{% else %}View matching machines{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/rohrleitungsbau.webp"><img loading="lazy" src="/assets/images/applications/rohrleitungsbau.jpg" alt="" width="1024" height="768"></picture><span class="tag">DN 50 — DN 600</span></div>
+      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/rohrleitungsbau.webp"><img loading="lazy" src="/assets/images/applications/rohrleitungsbau.jpg" alt="{% if lang == 'de' %}Rohrleitungsbau mit LIBA Grabenfräse{% else %}Pipeline construction with a LIBA trench cutter{% endif %}" width="1024" height="768"></picture><span class="tag">DN 50 — DN 600</span></div>
     </div>
 
     <hr class="divider">
@@ -100,7 +100,7 @@ eleventyComputed:
         </ul>
         <a href="{% if lang == 'de' %}/maschinen.html#selbstfahrer{% else %}/en/maschinen.html#selbstfahrer{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Passende Maschinen ansehen{% else %}View matching machines{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/kabelverlegung.webp"><img loading="lazy" src="/assets/images/applications/kabelverlegung.jpg" alt="" width="1024" height="768"></picture><span class="tag">{% if lang == "de" %}PV · Wind · Mittelspannung{% else %}PV · Wind · Medium voltage{% endif %}</span></div>
+      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/kabelverlegung.webp"><img loading="lazy" src="/assets/images/applications/kabelverlegung.jpg" alt="{% if lang == 'de' %}Strom- und Solartrassen verlegen mit LIBA Grabenfräse{% else %}Power and solar cable-route trenching with a LIBA trench cutter{% endif %}" width="1024" height="768"></picture><span class="tag">{% if lang == "de" %}PV · Wind · Mittelspannung{% else %}PV · Wind · Medium voltage{% endif %}</span></div>
     </div>
 
     <hr class="divider">
@@ -116,7 +116,7 @@ eleventyComputed:
         </ul>
         <a href="{% if lang == 'de' %}/maschinen.html#selbstfahrer{% else %}/en/maschinen.html#selbstfahrer{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Passende Maschinen ansehen{% else %}View matching machines{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/sportplatzbau.webp"><img loading="lazy" src="/assets/images/applications/sportplatzbau.jpg" alt="" width="1024" height="768"></picture><span class="tag">{% if lang == "de" %}Rasen · Kunstrasen · Golf{% else %}Natural turf · Artificial turf · Golf{% endif %}</span></div>
+      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/sportplatzbau.webp"><img loading="lazy" src="/assets/images/applications/sportplatzbau.jpg" alt="{% if lang == 'de' %}Sportplatzdrainage mit LIBA Grabenfräse{% else %}Sports-field drainage with a LIBA trench cutter{% endif %}" width="1024" height="768"></picture><span class="tag">{% if lang == "de" %}Rasen · Kunstrasen · Golf{% else %}Natural turf · Artificial turf · Golf{% endif %}</span></div>
     </div>
 
     <hr class="divider">
@@ -132,7 +132,7 @@ eleventyComputed:
         </ul>
         <a href="{% if lang == 'de' %}/maschinen.html#pfluege{% else %}/en/maschinen.html#pfluege{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Passende Maschinen ansehen{% else %}View matching machines{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/landwirtschaft.webp"><img loading="lazy" src="/assets/images/applications/landwirtschaft.jpg" alt="" width="1024" height="768"></picture><span class="tag">{% if lang == "de" %}Drainage · Bewässerung{% else %}Drainage · Irrigation{% endif %}</span></div>
+      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/landwirtschaft.webp"><img loading="lazy" src="/assets/images/applications/landwirtschaft.jpg" alt="{% if lang == 'de' %}Drainage und Bewässerung in der Landwirtschaft mit LIBA Grabenfräse{% else %}Drainage and irrigation in agriculture with a LIBA trench cutter{% endif %}" width="1024" height="768"></picture><span class="tag">{% if lang == "de" %}Drainage · Bewässerung{% else %}Drainage · Irrigation{% endif %}</span></div>
     </div>
 
     <hr class="divider">
@@ -148,7 +148,7 @@ eleventyComputed:
         </ul>
         <a href="{% if lang == 'de' %}/maschinen.html#spezial{% else %}/en/maschinen.html#spezial{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Passende Maschinen ansehen{% else %}View matching machines{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/baustelle.webp"><img loading="lazy" src="/assets/images/applications/baustelle.jpg" alt="" width="1536" height="1024"></picture><span class="tag">{% if lang == "de" %}Bergbau · Gleis · Fels{% else %}Mining · Track · Rock{% endif %}</span></div>
+      <div class="media-frame"><picture><source type="image/webp" srcset="/assets/images/applications/baustelle.webp"><img loading="lazy" src="/assets/images/applications/baustelle.jpg" alt="{% if lang == 'de' %}LIBA Grabenfräse im Tiefbau-, Berg- und Gleisbaueinsatz{% else %}LIBA trench cutter in civil engineering, mining and track construction{% endif %}" width="1536" height="1024"></picture><span class="tag">{% if lang == "de" %}Bergbau · Gleis · Fels{% else %}Mining · Track · Rock{% endif %}</span></div>
     </div>
 
   </div>

@@ -38,8 +38,8 @@ jobs:
 
       - name: Build with Eleventy
         run: npm run build
-        env:
-          ELEVENTY_PATH_PREFIX: /Lingener-Baumaschinen/
+        # Hinweis: Hosting läuft über Netlify (apex, Pfade im Root). KEIN ELEVENTY_PATH_PREFIX,
+        # sonst würden Asset-/Canonical-Pfade auf der apex-Domain brechen.
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -144,11 +144,11 @@ eleventyComputed:
           <span class="section-index">{% if lang == "de" %}00 / Maschinenübersicht{% else %}00 / All Machines{% endif %}</span>
           <h2 class="mt-2">{% if lang == "de" %}Alle 30 Maschinen<br><em class="serif-italic">im Überblick.</em>{% else %}All 30 Machines<br><em class="serif-italic">at a glance.</em>{% endif %}</h2>
         </div>
-        <div class="maschinen-filter" role="tablist" id="mf-tabs">
-          <button class="mf-tab is-active" data-filter="all" type="button">{% if lang == "de" %}Alle (30){% else %}All (30){% endif %}</button>
-          <button class="mf-tab" data-filter="Selbstfahrer" type="button">{% if lang == "de" %}Selbstfahrer (7){% else %}Self-Propelled (7){% endif %}</button>
-          <button class="mf-tab" data-filter="Schlepperanbau" type="button">{% if lang == "de" %}Schlepperanbau (18){% else %}Tractor-Mounted (18){% endif %}</button>
-          <button class="mf-tab" data-filter="Baggeranbau" type="button">{% if lang == "de" %}Baggeranbau (5){% else %}Excavator-Mounted (5){% endif %}</button>
+        <div class="maschinen-filter" role="group" aria-label="{% if lang == 'de' %}Maschinen nach Kategorie filtern{% else %}Filter machines by category{% endif %}" id="mf-tabs">
+          <button class="mf-tab is-active" data-filter="all" type="button" aria-pressed="true">{% if lang == "de" %}Alle (30){% else %}All (30){% endif %}</button>
+          <button class="mf-tab" data-filter="Selbstfahrer" type="button" aria-pressed="false">{% if lang == "de" %}Selbstfahrer (7){% else %}Self-Propelled (7){% endif %}</button>
+          <button class="mf-tab" data-filter="Schlepperanbau" type="button" aria-pressed="false">{% if lang == "de" %}Schlepperanbau (18){% else %}Tractor-Mounted (18){% endif %}</button>
+          <button class="mf-tab" data-filter="Baggeranbau" type="button" aria-pressed="false">{% if lang == "de" %}Baggeranbau (5){% else %}Excavator-Mounted (5){% endif %}</button>
         </div>
       </div>
 
@@ -162,7 +162,7 @@ eleventyComputed:
                  alt="{% if lang == 'de' %}{{ m.heroAltDE }}{% else %}{{ m.heroAltEN }}{% endif %}">
           </div>
           <div class="maschine-card-body">
-            <span class="maschine-card-cat">{{ m.category }}</span>
+            <span class="maschine-card-cat">{{ labels.cat(m.category, lang) }}</span>
             <p class="maschine-card-name">{{ m.name }}</p>
             <p class="maschine-card-sub">{% if lang == "de" %}{{ m.subtitleDE }}{% else %}{{ m.subtitleEN }}{% endif %}</p>
             <span class="maschine-card-badge {% if m.condition == 'Neu' %}badge-neu{% elif m.condition == 'Gebraucht' %}badge-gebraucht{% else %}badge-vorfuehrmaschine{% endif %}">
@@ -181,8 +181,9 @@ eleventyComputed:
       tabs.forEach(function(tab){
         tab.addEventListener('click', function(){
           var filter = tab.dataset.filter;
-          tabs.forEach(function(t){ t.classList.remove('is-active'); });
+          tabs.forEach(function(t){ t.classList.remove('is-active'); t.setAttribute('aria-pressed','false'); });
           tab.classList.add('is-active');
+          tab.setAttribute('aria-pressed','true');
           cards.forEach(function(card){
             if(filter === 'all' || card.dataset.category === filter){
               card.classList.remove('is-hidden');

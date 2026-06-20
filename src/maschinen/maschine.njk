@@ -13,12 +13,13 @@ eleventyComputed:
   lang: "{{ maschine.lang }}"
   langDE: "{{ maschine.langDE }}"
   langEN: "{{ maschine.langEN }}"
-  title: "{% if maschine.lang == 'de' %}{{ maschine.name }} — {{ maschine.subtitleDE }} | LIBA{% else %}{{ maschine.name }} — {{ maschine.subtitleEN }} | LIBA{% endif %}"
-  description: "{% if maschine.lang == 'de' %}{{ maschine.name }}: {{ maschine.subtitleDE }}. Grabenfräsen Made in Germany — LIBA Lingener Baumaschinen.{% else %}{{ maschine.name }}: {{ maschine.subtitleEN }}. Trench cutters Made in Germany — LIBA Lingener Baumaschinen.{% endif %}"
+  title: "{% if maschine.lang == 'de' %}{{ maschine.name }} — {{ maschine.subtitleDE | safe }} | LIBA{% else %}{{ maschine.name }} — {{ maschine.subtitleEN | safe }} | LIBA{% endif %}"
+  description: "{% if maschine.lang == 'de' %}{{ maschine.name }}: {{ maschine.subtitleDE | safe }}. Grabenfräsen Made in Germany — LIBA Lingener Baumaschinen.{% else %}{{ maschine.name }}: {{ maschine.subtitleEN | safe }}. Trench cutters Made in Germany — LIBA Lingener Baumaschinen.{% endif %}"
   canonical: "{% if maschine.lang == 'de' %}https://lingener-baumaschinen.de{{ maschine.langDE }}{% else %}https://lingener-baumaschinen.de{{ maschine.langEN }}{% endif %}"
-  ogTitle: "{% if maschine.lang == 'de' %}{{ maschine.name }} — {{ maschine.subtitleDE }} | LIBA{% else %}{{ maschine.name }} — {{ maschine.subtitleEN }} | LIBA{% endif %}"
-  ogDescription: "{% if maschine.lang == 'de' %}{{ maschine.subtitleDE }}. LIBA Lingener Baumaschinen — Made in Germany seit 1969.{% else %}{{ maschine.subtitleEN }}. LIBA Lingener Baumaschinen — Made in Germany since 1969.{% endif %}"
+  ogTitle: "{% if maschine.lang == 'de' %}{{ maschine.name }} — {{ maschine.subtitleDE | safe }} | LIBA{% else %}{{ maschine.name }} — {{ maschine.subtitleEN | safe }} | LIBA{% endif %}"
+  ogDescription: "{% if maschine.lang == 'de' %}{{ maschine.subtitleDE | safe }}. LIBA Lingener Baumaschinen — Made in Germany seit 1969.{% else %}{{ maschine.subtitleEN | safe }}. LIBA Lingener Baumaschinen — Made in Germany since 1969.{% endif %}"
   ogLocale: "{{ 'de_DE' if maschine.lang == 'de' else 'en_GB' }}"
+  ogImage: "{{ maschine.ogImage }}"
   schema: "{{ maschine.schema | safe }}"
 ---
 
@@ -33,7 +34,7 @@ eleventyComputed:
       <span>{{ maschine.name }}</span>
     </div>
     <span class="eyebrow hero-eyebrow">
-      <span class="dot"></span>{{ maschine.category }}{% if maschine.condition != 'Neu' %} · {{ maschine.condition }}{% if maschine.year %} {{ maschine.year }}{% endif %}{% endif %}
+      <span class="dot"></span>{{ maschine.categoryLabel }}{% if maschine.condition != 'Neu' %} · {{ maschine.conditionLabel }}{% if maschine.year %} {{ maschine.year }}{% endif %}{% endif %}
     </span>
     <h1 data-split-lines class="mt-3">{{ maschine.name }}</h1>
     <p>{% if lang == "de" %}{{ maschine.subtitleDE }}{% else %}{{ maschine.subtitleEN }}{% endif %}</p>
@@ -49,7 +50,7 @@ eleventyComputed:
     <div class="split align-start reveal">
       <div class="media-frame is-wide">
         <picture><source type="image/webp" srcset="{{ maschine.heroImage | replace('.jpg', '.webp') | replace('.png', '.webp') }}"><img loading="lazy" src="{{ maschine.heroImage }}" alt="{% if lang == 'de' %}{{ maschine.heroAltDE }}{% else %}{{ maschine.heroAltEN }}{% endif %}"></picture>
-        <span class="tag">{{ maschine.category }}{% if maschine.condition != 'Neu' %} · {{ maschine.condition }}{% if maschine.year %} {{ maschine.year }}{% endif %}{% endif %}</span>
+        <span class="tag">{{ maschine.categoryLabel }}{% if maschine.condition != 'Neu' %} · {{ maschine.conditionLabel }}{% if maschine.year %} {{ maschine.year }}{% endif %}{% endif %}</span>
       </div>
       <div>
         <span class="section-index">{% if lang == "de" %}01 / Übersicht{% else %}01 / Overview{% endif %}</span>
@@ -99,7 +100,7 @@ eleventyComputed:
         <h2 class="mt-3">{% if lang == "de" %}Wo die {{ maschine.name }}<br><em class="serif-italic">arbeitet.</em>{% else %}Where the {{ maschine.name }}<br><em class="serif-italic">works.</em>{% endif %}</h2>
       </div>
       <div class="aside">
-        <p class="lead">{% if lang == "de" %}LIBA-Grabenfräsen sind für ein breites Spektrum an Einsätzen ausgelegt. Entdecken Sie die Anwendungsbereiche — und finden Sie heraus, wo diese Maschine ihren Stärken am besten entfaltet.{% else %}LIBA trench cutters are designed for a wide range of applications. Explore the fields where this machine delivers its full potential.{% endif %}</p>
+        <p class="lead">{% if lang == "de" %}LIBA-Grabenfräsen sind für ein breites Spektrum an Einsätzen ausgelegt. Entdecken Sie die Anwendungsbereiche — und finden Sie heraus, wo diese Maschine ihre Stärken am besten entfaltet.{% else %}LIBA trench cutters are designed for a wide range of applications. Explore the fields where this machine delivers its full potential.{% endif %}</p>
         <a href="{% if lang == 'de' %}/anwendungen.html{% else %}/en/anwendungen.html{% endif %}" class="btn-link mt-4">{% if lang == "de" %}Alle Einsatzbereiche{% else %}All applications{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
     </div>
@@ -166,7 +167,7 @@ eleventyComputed:
         {% for r in maschine.related %}
         <a href="{% if lang == 'de' %}/maschinen/{{ r.slug }}.html{% else %}/en/maschinen/{{ r.slug }}.html{% endif %}" class="application-link-card">
           <strong>{{ r.name }}</strong>
-          <span>{{ maschine.category }} · {% if lang == "de" %}Grabenfräse{% else %}Trench cutter{% endif %}</span>
+          <span>{{ maschine.categoryLabel }} · {% if lang == "de" %}Grabenfräse{% else %}Trench cutter{% endif %}</span>
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
         {% endfor %}

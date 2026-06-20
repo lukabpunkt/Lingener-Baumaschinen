@@ -34,7 +34,6 @@ const manual = [
   { from: '/gm-4-allrad-die-perfekte-maschine-fuer-den-breitbandausbau/', to: '/maschinen/gm-4-allrad.html' },
   { from: '/grabenfraese-gm-140-afh-500-als-baggerfraese/',            to: '/maschinen/gm-140-afh-500.html' },
   { from: '/baggeranbaufraese-gm-140-afh-500/',                        to: '/maschinen/gm-140-afh-500.html' },
-  { from: '/baggeranbaufraese-gm-140-h/',                              to: '/maschinen/gm-140-h.html' },
   { from: '/grabenfraese-gm-140-h-fuer-bagger/',                       to: '/maschinen/gm-140-h.html' },
   { from: '/grabenfraese-gm-6-asr-bewaehrt-sich-im-extrem-harten-gelaende/', to: '/maschinen/gm-6-asr.html' },
   { from: '/grabenfraese-mieten-gm-6-asr-fuer-harte-boeden/',          to: '/maschinen/gm-6-asr.html' },
@@ -43,7 +42,6 @@ const manual = [
   { from: '/grabenfraese-gmv-130-als-vibrationskabelpflug/',           to: '/maschinen/gmv-130.html' },
   { from: '/grabenfraese-gm-300-hf-fuer-tiefe-fraesarbeiten/',         to: '/maschinen/gm-300-hf.html' },
   { from: '/gmv-100/',                                                 to: '/maschinen/gmv-100.html' },
-  { from: '/rohrleitungsbau-mit-der-gm-140-afh-600/',                  to: '/maschinen/gm-140-afh-600.html' },
   { from: '/grabenfraese-gm-140-afh-600/',                             to: '/maschinen/gm-140-afh-600.html' },
 
   // --- Standard- & Funktionsseiten ---

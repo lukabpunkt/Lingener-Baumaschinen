@@ -7,6 +7,9 @@ eleventyExcludeFromCollections: true
 {% for r in redirects %}{{ r.from }}  {{ r.to }}  {{ r.status }}
 {% endfor %}
 # --- Sammel-/Splat-Regeln (spezifische Regeln oben gewinnen, Catch-all zuletzt) ---
+# EN-Fallback: alte, nicht einzeln gemappte englische Deeplinks auf die EN-Startseite
+# (verhindert 404, bis die vollständige EN-Map aus dem Search-Console-Export vorliegt).
+/en/*         /en/   301
 # FR & ES entfallen -> beide auf die englische Seite.
 /fr/*         /en/   301
 /es/*         /en/   301

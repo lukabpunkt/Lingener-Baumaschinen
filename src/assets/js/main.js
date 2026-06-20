@@ -148,43 +148,30 @@
     items.forEach(item => track.appendChild(item.cloneNode(true)));
   });
 
-  /* Form: Formspree submission */
+  /* Form: Netlify Forms submission (AJAX POST to "/", URL-encoded incl. form-name) */
   $$('form[data-form]').forEach(form => {
-    const endpoint = form.dataset.form;
+    const okMsg = form.dataset.success || 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.';
+    const errMsg = form.dataset.error || 'Senden fehlgeschlagen. Bitte rufen Sie uns an oder schreiben Sie eine E-Mail.';
+    const sendingMsg = form.dataset.sending || 'Wird gesendet …';
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = $('[data-form-status]', form);
       const btn = form.querySelector('[type="submit"]');
       const origHTML = btn ? btn.innerHTML : null;
-      if (btn) { btn.disabled = true; btn.innerHTML = 'Wird gesendet&nbsp;…'; }
-
-      /* If no real endpoint is configured yet, show fallback */
-      if (!endpoint || endpoint.includes('YOUR_')) {
-        if (status) { status.hidden = false; status.textContent = 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.'; }
-        form.reset();
-        if (btn) { btn.disabled = false; btn.innerHTML = origHTML; }
-        return;
-      }
+      if (btn) { btn.disabled = true; btn.innerHTML = sendingMsg; }
 
       try {
-        const resp = await fetch(endpoint, {
+        const body = new URLSearchParams(new FormData(form)).toString();
+        const resp = await fetch('/', {
           method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' }
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body
         });
-        if (resp.ok) {
-          if (status) { status.hidden = false; status.textContent = 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.'; }
-          form.reset();
-        } else {
-          const data = await resp.json().catch(() => ({}));
-          throw new Error(data.error || 'Serverfehler');
-        }
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        if (status) { status.hidden = false; status.style.color = ''; status.textContent = okMsg; }
+        form.reset();
       } catch {
-        if (status) {
-          status.hidden = false;
-          status.style.color = '#dc2626';
-          status.textContent = 'Fehler beim Senden. Bitte rufen Sie uns an oder schreiben Sie eine E-Mail.';
-        }
+        if (status) { status.hidden = false; status.style.color = '#dc2626'; status.textContent = errMsg; }
       } finally {
         if (btn) { btn.disabled = false; btn.innerHTML = origHTML; }
       }
@@ -257,7 +244,7 @@
     var msg = document.getElementById('k-nachricht');
     var subj = document.getElementById('k-betreff');
     if (msg && !msg.value) msg.value = 'Ich interessiere mich für: ' + decodeURIComponent(p) + '\n\nBitte senden Sie mir ein Angebot.';
-    if (subj) { for (var i = 0; i < subj.options.length; i++) { if (subj.options[i].value === 'Kaufanfrage' || subj.options[i].text === 'Kaufanfrage') { subj.selectedIndex = i; break; } } }
+    if (subj) { for (var i = 0; i < subj.options.length; i++) { if (subj.options[i].value === 'Kauf') { subj.selectedIndex = i; break; } } }
   })();
 
   /* Maschinenberater-Wizard */

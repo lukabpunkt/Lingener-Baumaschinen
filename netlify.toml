@@ -10,3 +10,16 @@
 
 [build.environment]
   NODE_VERSION = "24"
+
+# Sicherheits-Header (MA-3). CSP erlaubt self + die tatsächlich genutzten Dritt-Origins
+# (Calendly/Stripe nur nach Klick; Google Analytics/Tag Manager, sobald echte GA4-ID gesetzt ist).
+# Inline-Skripte/-Styles der Seite sind via 'unsafe-inline' erlaubt.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://assets.calendly.com https://*.calendly.com https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; frame-src https://*.calendly.com https://js.stripe.com; connect-src 'self' https://*.calendly.com https://*.stripe.com https://www.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"

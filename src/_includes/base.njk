@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="{{ ogDescription if ogDescription else (og.description if og else description) }}">
   <meta name="twitter:image" content="{{ ogImage if ogImage else (og.image if og else 'https://lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
   <link rel="canonical" href="{{ canonical }}">
-  {% if langDE and langEN %}
+  {% if langDE and langEN and not noindex %}
   <link rel="alternate" hreflang="de" href="https://lingener-baumaschinen.de{{ langDE }}">
   <link rel="alternate" hreflang="en" href="https://lingener-baumaschinen.de{{ langEN }}">
   <link rel="alternate" hreflang="x-default" href="https://lingener-baumaschinen.de{{ langDE }}">
@@ -30,15 +30,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo/favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/logo/favicon-192.png">
   <link rel="apple-touch-icon" href="/assets/images/logo/apple-touch-icon.png">
-  {% if lang == "en" or useGoogleFonts %}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/main.css">
-  {% else %}
+  <!-- Schriften durchgehend selbst gehostet (DE + EN) – kein Drittanbieter-Request, DSGVO-konform -->
   <link rel="stylesheet" href="/assets/css/fonts.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  {% endif %}
   {% if schema %}
   <script type="application/ld+json">{{ schema | safe }}</script>
   {% endif %}
@@ -55,7 +49,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- TOP BAR -->
-<div class="topbar">
+<div class="topbar" role="region" aria-label="Contact information">
   <div class="container topbar-inner">
     <div class="topbar-meta">
       <span><span class="dot">●</span> Factory Lingen (Ems) · Made in Germany</span>
@@ -139,7 +133,7 @@
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
 <!-- TOP BAR -->
-<div class="topbar">
+<div class="topbar" role="region" aria-label="Kontaktinformationen">
   <div class="container topbar-inner">
     <div class="topbar-meta">
       <span><span class="dot">●</span> Werk Lingen (Ems) · Made in Germany</span>
@@ -249,7 +243,7 @@
         </div>
       </div>
       <div>
-        <h4>Products</h4>
+        <h3 class="footer-col">Products</h3>
         <ul>
           <li><a href="/en/maschinen.html#anbau-bagger">Excavator attachments</a></li>
           <li><a href="/en/maschinen.html#anbau-traktor">Tractor attachments</a></li>
@@ -260,7 +254,7 @@
         </ul>
       </div>
       <div>
-        <h4>Service</h4>
+        <h3 class="footer-col">Service</h3>
         <ul>
           <li><a href="/en/mieten.html">Rental</a></li>
           <li><a href="/en/kontakt.html">Spare parts</a></li>
@@ -270,7 +264,7 @@
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h3 class="footer-col">Contact</h3>
         <ul>
           <li><a href="tel:+4959176314">+49 (0) 591 76 314</a></li>
           <li><a href="mailto:info@lingener-baumaschinen.de">info@lingener-<br>baumaschinen.de</a></li>
@@ -315,7 +309,7 @@
         </div>
       </div>
       <div>
-        <h4>Produkte</h4>
+        <h3 class="footer-col">Produkte</h3>
         <ul>
           <li><a href="/maschinen.html#anbau-bagger">Anbaufräsen Bagger</a></li>
           <li><a href="/maschinen.html#anbau-traktor">Anbaufräsen Traktor</a></li>
@@ -326,7 +320,7 @@
         </ul>
       </div>
       <div>
-        <h4>Service</h4>
+        <h3 class="footer-col">Service</h3>
         <ul>
           <li><a href="/mieten.html">Mieten</a></li>
           <li><a href="/gebrauchtmaschinen.html">Gebrauchtmaschinen</a></li>
@@ -337,7 +331,7 @@
         </ul>
       </div>
       <div>
-        <h4>Kontakt</h4>
+        <h3 class="footer-col">Kontakt</h3>
         <ul>
           <li><a href="tel:+4959176314">+49 (0) 591 76 314</a></li>
           <li><a href="mailto:info@lingener-baumaschinen.de">info@lingener-<br>baumaschinen.de</a></li>
@@ -403,7 +397,7 @@
     </div>
   </div>
 </div>
-<button type="button" class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="{% if lang == 'en' %}Back to top{% else %}Nach oben{% endif %}">
+<button type="button" class="scroll-top" id="scroll-top" aria-label="{% if lang == 'en' %}Back to top{% else %}Nach oben{% endif %}">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 <script src="/assets/js/main.js" defer></script>
