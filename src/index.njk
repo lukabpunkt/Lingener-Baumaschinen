@@ -46,7 +46,7 @@ eleventyComputed:
       <img class="is-active" src="/assets/images/hero/hero-1.jpg" alt="" width="1024" height="576" fetchpriority="high">
       <picture><source type="image/webp" srcset="/assets/images/hero/hero-2.webp"><img src="/assets/images/hero/hero-2.jpg" alt="" width="1024" height="576" loading="lazy"></picture>
       <picture><source type="image/webp" srcset="/assets/images/hero/hero-3.webp"><img src="/assets/images/hero/hero-3.jpg" alt="" width="1536" height="1152" loading="lazy"></picture>
-      {% if lang == "de" %}<picture><source type="image/webp" srcset="/assets/images/hero/hero-4.webp"><img src="/assets/images/hero/hero-4.jpg" alt="" width="1024" height="768" loading="lazy"></picture>{% endif %}
+      <picture><source type="image/webp" srcset="/assets/images/hero/hero-4.webp"><img src="/assets/images/hero/hero-4.jpg" alt="" width="1024" height="768" loading="lazy"></picture>
     </div>
     <div class="hero-overlay"></div>
     <!-- Slide indicators inside the frame -->
@@ -54,7 +54,7 @@ eleventyComputed:
       <button class="hero-dot is-active" type="button" aria-label="Slide 1"></button>
       <button class="hero-dot" type="button" aria-label="Slide 2"></button>
       <button class="hero-dot" type="button" aria-label="Slide 3"></button>
-      {% if lang == "de" %}<button class="hero-dot" type="button" aria-label="Slide 4"></button>{% endif %}
+      <button class="hero-dot" type="button" aria-label="Slide 4"></button>
     </div>
   </div>
 
@@ -73,8 +73,8 @@ eleventyComputed:
   <div class="container hero-content">
     <div class="hero-text-col">
       <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Made in Lingen (Ems) · seit 1969{% else %}Made in Germany · Since 1969{% endif %}</span>
-      <h1 class="mt-3" data-split-lines>{% if lang == "de" %}Wir fräsen, wo<br>andere <em>graben.</em>{% else %}Built for the<br>toughest <em class="serif-italic">ground.</em>{% endif %}</h1>
-      <p class="hero-sub">{% if lang == "de" %}Seit über fünfzig Jahren entwickelt und fertigt LIBA Grabenfräsen, Anbaufräsen und Spezialmaschinen für den Tief-, Leitungs- und Glasfaserbau. Robust. Präzise. Made in Germany.{% else %}LIBA manufactures chain trenchers and trench cutters for pipeline, fibre optic, power cable and utility installation — from compact tractor-mounted models to heavy-duty self-propelled machines for rock.{% endif %}</p>
+      <h1 class="mt-3" data-split-lines>{% if lang == "de" %}Wir fräsen, wo<br>andere <em>graben.</em>{% else %}We cut where<br>others <em class="serif-italic">dig.</em>{% endif %}</h1>
+      <p class="hero-sub">{% if lang == "de" %}Seit über fünfzig Jahren entwickelt und fertigt LIBA Grabenfräsen, Anbaufräsen und Spezialmaschinen für den Tief-, Leitungs- und Glasfaserbau. Robust. Präzise. Made in Germany.{% else %}For over fifty years, LIBA has designed and built trench cutters, attachment cutters and specialist machines for civil engineering, utility and fibre-optic construction. Robust. Precise. Made in Germany.{% endif %}</p>
       <div class="hero-actions">
         {% if lang == "de" %}
         <a href="/kontakt.html" class="btn btn-brand is-lg">
@@ -112,20 +112,20 @@ eleventyComputed:
       </div>
       {% else %}
       <div class="hero-ticker-item">
-        <span class="k">Founded</span>
+        <span class="k">Experience since</span>
         <span class="v">1969</span>
       </div>
       <div class="hero-ticker-item">
-        <span class="k">Machine models</span>
-        <span class="v"><span data-count="40">0</span>+</span>
+        <span class="k">Machines in operation</span>
+        <span class="v"><span data-count="1000">0</span>+</span>
       </div>
       <div class="hero-ticker-item">
-        <span class="k">Countries</span>
-        <span class="v"><span data-count="60">0</span></span>
+        <span class="k">Countries worldwide</span>
+        <span class="v"><span data-count="60">0</span>+</span>
       </div>
       <div class="hero-ticker-item">
-        <span class="k">Made in Germany</span>
-        <span class="v">100 <span style="font-family: var(--font-serif); font-style: italic; color: var(--brand-light); font-weight: 400; font-size: .8em;">%</span></span>
+        <span class="k">Spare-parts delivery</span>
+        <span class="v">24<span style="font-family: var(--font-serif); font-style: italic; color: var(--brand-light); font-weight: 400; font-size: .75em;"> h</span></span>
       </div>
       {% endif %}
     </div>
@@ -311,7 +311,7 @@ eleventyComputed:
         <div class="app-body">
           <div class="idx">{% if lang == "de" %}Telekom{% else %}Telecom{% endif %}</div>
           <h3>{% if lang == "de" %}Glasfaser­ausbau{% else %}Fibre Optic{% endif %}</h3>
-          <p>{% if lang == "de" %}Schmale Gräben, hohe Tagesleistung, präzise Geometrie — wirtschaftlich überlegen.{% else %}Narrow trenches, high daily output, precise geometry.{% endif %}</p>
+          <p>{% if lang == "de" %}Schmale Gräben, hohe Tagesleistung, präzise Geometrie — wirtschaftlich überlegen.{% else %}Narrow trenches, high daily output, precise geometry — economically superior.{% endif %}</p>
         </div>
       </a>
       <a href="{% if lang == 'de' %}/anwendungen.html#pipeline{% else %}/en/anwendungen.html#pipeline{% endif %}" class="app reveal reveal-delay-1">
@@ -334,7 +334,7 @@ eleventyComputed:
         <picture><source type="image/webp" srcset="/assets/images/applications/sportplatzbau.webp"><img loading="lazy" src="/assets/images/applications/sportplatzbau.jpg" alt="{% if lang == 'de' %}Sportplatzdrainage mit LIBA Grabenfräse — minimale Rasenschäden{% else %}Sports-field drainage with a LIBA trench cutter — minimal turf damage{% endif %}" width="1024" height="768"></picture>
         <div class="app-body">
           <div class="idx">{% if lang == "de" %}Sport{% else %}Sports{% endif %}</div>
-          <h3>{% if lang == "de" %}Sportplatzbau &amp; Drainage{% else %}Drainage{% endif %}</h3>
+          <h3>{% if lang == "de" %}Sportplatzbau &amp; Drainage{% else %}Sports Field Construction &amp; Drainage{% endif %}</h3>
           <p>{% if lang == "de" %}Saubere Drainagegräben mit minimaler Rasennarben-Schädigung.{% else %}Precision drainage on sports pitches with minimal surface damage.{% endif %}</p>
         </div>
       </a>
@@ -342,16 +342,16 @@ eleventyComputed:
         <picture><source type="image/webp" srcset="/assets/images/applications/landwirtschaft.webp"><img loading="lazy" src="/assets/images/applications/landwirtschaft.jpg" alt="{% if lang == 'de' %}Bewässerungs- und Drainagegräben in der Landwirtschaft mit LIBA-Grabenfräse{% else %}Irrigation and drainage trenches in agriculture with a LIBA trench cutter{% endif %}" width="1024" height="768"></picture>
         <div class="app-body">
           <div class="idx">{% if lang == "de" %}Agrar{% else %}Agriculture{% endif %}</div>
-          <h3>{% if lang == "de" %}Landwirtschaft &amp; Bewässerung{% else %}Irrigation &amp; Drainage{% endif %}</h3>
-          <p>{% if lang == "de" %}Bewässerungs- und Drainagelösungen für effiziente Bewirtschaftung.{% else %}Irrigation and drainage solutions for fields and plantations.{% endif %}</p>
+          <h3>{% if lang == "de" %}Landwirtschaft &amp; Bewässerung{% else %}Agriculture &amp; Irrigation{% endif %}</h3>
+          <p>{% if lang == "de" %}Bewässerungs- und Drainagelösungen für effiziente Bewirtschaftung.{% else %}Irrigation and drainage solutions for efficient land management.{% endif %}</p>
         </div>
       </a>
       <a href="{% if lang == 'de' %}/anwendungen.html#tiefbau{% else %}/en/anwendungen.html#tiefbau{% endif %}" class="app reveal reveal-delay-2">
         <picture><source type="image/webp" srcset="/assets/images/applications/baustelle.webp"><img loading="lazy" src="/assets/images/applications/baustelle.jpg" alt="{% if lang == 'de' %}LIBA Tiefenfräse im Bergbau- und Tiefbaueinsatz auf Baustelle{% else %}LIBA depth cutter in mining and civil-engineering use on a construction site{% endif %}" width="1536" height="1024"></picture>
         <div class="app-body">
-          <div class="idx">{% if lang == "de" %}Infrastruktur{% else %}Special{% endif %}</div>
-          <h3>{% if lang == "de" %}Tief- &amp; Spezialbau{% else %}Mining &amp; Rock{% endif %}</h3>
-          <p>{% if lang == "de" %}Bergbau, Felsen, Gleisbau — wo Bagger an Grenzen kommen, beginnt LIBA.{% else %}Where excavators fail, LIBA begins.{% endif %}</p>
+          <div class="idx">{% if lang == "de" %}Infrastruktur{% else %}Infrastructure{% endif %}</div>
+          <h3>{% if lang == "de" %}Tief- &amp; Spezialbau{% else %}Civil &amp; Special Construction{% endif %}</h3>
+          <p>{% if lang == "de" %}Bergbau, Felsen, Gleisbau — wo Bagger an Grenzen kommen, beginnt LIBA.{% else %}Mining, rock, track construction — where excavators reach their limits, LIBA begins.{% endif %}</p>
         </div>
       </a>
     </div>
@@ -374,7 +374,7 @@ eleventyComputed:
       <div class="stat-cell">
         <span class="lbl">{% if lang == "de" %}Gegründet{% else %}Founded{% endif %}</span>
         <span class="num">1969</span>
-        <span class="desc">{% if lang == "de" %}Familienbetrieb seit über fünf Jahrzehnten im Emsland.{% else %}Family-owned business in Lingen (Ems), Germany.{% endif %}</span>
+        <span class="desc">{% if lang == "de" %}Familienbetrieb seit über fünf Jahrzehnten im Emsland.{% else %}A family business in the Emsland region for over five decades.{% endif %}</span>
       </div>
       <div class="stat-cell">
         <span class="lbl">{% if lang == "de" %}Werkserfahrung{% else %}Experience{% endif %}</span>
@@ -503,12 +503,12 @@ eleventyComputed:
           <a href="/mieten.html" class="btn btn-outline-light">Maschine mieten</a>
         </div>
         {% else %}
-        <span class="eyebrow is-dark"><span class="dot"></span>Direct from the manufacturer</span>
-        <h2 class="mt-3">No dealers.<br>No middlemen.<br><em>Just LIBA.</em></h2>
-        <p>Tell us your soil type, carrier machine and trench depth — we'll recommend the right model and give you typical daily output figures. All from our engineering team in Lingen.</p>
+        <span class="eyebrow is-dark"><span class="dot"></span>Request advice</span>
+        <h2 class="mt-3">Which cutter suits<br>your <em>project?</em></h2>
+        <p>Tell us about your project — soil type, carrier machine, trench depth. Within 24 hours you'll receive a technical assessment directly from the LIBA factory in Lingen.</p>
         <div class="actions">
-          <a href="/en/kontakt.html" class="btn btn-accent is-lg">Request a quote <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-          <a href="/en/mieten.html" class="btn btn-ghost">Hire a machine</a>
+          <a href="/en/kontakt.html" class="btn btn-accent is-lg">Free consultation <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a href="/en/mieten.html" class="btn btn-outline-light">Hire a machine</a>
         </div>
         {% endif %}
       </div>
@@ -521,12 +521,12 @@ eleventyComputed:
         <dt>Werk</dt>
         <dd>Diekstrasse 59 · 49809 Lingen (Ems)</dd>
         {% else %}
-        <dt>Sales — direct from the factory</dt>
+        <dt>Phone</dt>
         <dd>+49 (0) 591 76 314</dd>
         <dt>Email</dt>
         <dd style="word-break: break-word;">info@lingener-baumaschinen.de</dd>
-        <dt>Address</dt>
-        <dd>Diekstrasse 59<br>49809 Lingen (Ems)<br>Germany</dd>
+        <dt>Factory</dt>
+        <dd>Diekstrasse 59 · 49809 Lingen (Ems)</dd>
         {% endif %}
       </dl>
     </div>
