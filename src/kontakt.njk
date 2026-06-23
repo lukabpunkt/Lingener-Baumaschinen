@@ -63,8 +63,8 @@ eleventyComputed:
     </div>
     <div class="reveal">
       <!-- Calendly erst nach ausdrücklicher Einwilligung laden (DSGVO: kein US-Transfer vor Klick) -->
-      <div id="calendly-consent" style="border:1px solid var(--line,#d8d8d8); border-radius:12px; padding:1.75rem; text-align:center; background:var(--surface,#f6f5f2);">
-        <p style="margin:0 0 1rem;">{% if lang == 'de' %}Online-Terminbuchung über <strong>Calendly</strong>. Beim Laden werden Daten (u. a. Ihre IP-Adresse) an Calendly LLC in den USA übertragen.{% else %}Online appointment booking via <strong>Calendly</strong>. Loading it transfers data (incl. your IP address) to Calendly LLC in the USA.{% endif %}</p>
+      <div id="calendly-consent" style="border:1px solid var(--line,#d8d8d8); border-radius:12px; padding:1.75rem; text-align:center; background:var(--surface,#f6f5f2); color:var(--ink,#1a2230);">
+        <p style="margin:0 0 1rem; color:#1a2230;">{% if lang == 'de' %}Online-Terminbuchung über <strong>Calendly</strong>. Beim Laden werden Daten (u. a. Ihre IP-Adresse) an Calendly LLC in den USA übertragen.{% else %}Online appointment booking via <strong>Calendly</strong>. Loading it transfers data (incl. your IP address) to Calendly LLC in the USA.{% endif %}</p>
         <button type="button" class="btn btn-primary" id="calendly-load">{% if lang == 'de' %}Terminbuchung laden{% else %}Load booking calendar{% endif %}</button>
       </div>
       <div class="calendly-inline-widget"
