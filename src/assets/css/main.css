@@ -746,6 +746,8 @@ p { color: var(--steel-700); text-wrap: pretty; }
   z-index: 1;
   pointer-events: none;
   background:
+    radial-gradient(125% 85% at 50% 100%, transparent 42%, rgba(11,15,20,.5) 100%),
+    radial-gradient(58% 48% at 7% 94%, rgba(14,124,123,.20), transparent 60%),
     linear-gradient(to top, rgba(11,15,20,.97) 0%, rgba(11,15,20,.78) 22%, rgba(11,15,20,.42) 46%, rgba(11,15,20,.14) 66%, transparent 84%),
     linear-gradient(105deg, rgba(11,15,20,.65) 0%, rgba(11,15,20,.28) 38%, transparent 62%);
 }
@@ -881,6 +883,15 @@ p { color: var(--steel-700); text-wrap: pretty; }
   flex-direction: column;
   gap: .25rem;
   position: relative;
+  padding-top: .9rem;
+}
+/* kerf tick mark above each value — same cut vocabulary as the gauge */
+.hero-ticker-item::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 18px; height: 2px;
+  background: var(--brand-light);
 }
 @media (min-width: 800px) {
   .hero-ticker-item { padding-right: 1rem; }
@@ -933,6 +944,76 @@ p { color: var(--steel-700); text-wrap: pretty; }
   }
 }
 @keyframes scrollPulse { 0%, 100% { width: 32px; opacity: .3; } 50% { width: 64px; opacity: .72; } }
+
+/* ============ HERO — Design-Aufwertung: Schnittkante/Tiefenskala + Lade-Moment ============ */
+.hero-gauge { display: none; }
+@media (min-width: 1024px) {
+  .hero-gauge {
+    position: absolute;
+    top: 50%;
+    right: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+    transform: translateY(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+  }
+  .hero-gauge-cap {
+    font-family: var(--font-mono);
+    font-size: .58rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(94,234,212,.72);
+    margin-bottom: .85rem;
+    text-shadow: 0 1px 8px rgba(11,15,20,.6);
+  }
+  .hero-gauge-scale {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgba(94,234,212,.32);
+    padding-right: .8rem;
+  }
+  .hero-gauge-scale .t { position: relative; text-align: right; }
+  .hero-gauge-scale .t i {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: .62rem;
+    letter-spacing: .04em;
+    color: rgba(255,255,255,.55);
+    white-space: nowrap;
+    text-shadow: 0 1px 8px rgba(11,15,20,.7);
+  }
+  .hero-gauge-scale .t::after {
+    content: "";
+    position: absolute;
+    right: -.8rem; top: .5em;
+    width: 9px; height: 1px;
+    background: var(--brand-light);
+  }
+  .hero-gauge-scale .t:last-child i { color: var(--brand-light); }
+  .hero-gauge-scale .t:last-child::after { width: 14px; height: 2px; }
+}
+
+/* Orchestrierter Lade-Moment — nur wenn Motion erwünscht ist (LCP-Bild bleibt unberührt) */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-gauge-scale { animation: gaugeDraw 1s var(--ease-out) .15s both; }
+  .hero-gauge-cap   { animation: heroRise .7s var(--ease-out) .5s both; }
+  .hero-gauge-scale .t { animation: heroFade .6s var(--ease-out) both; }
+  .hero-gauge-scale .t:nth-child(1) { animation-delay: .55s; }
+  .hero-gauge-scale .t:nth-child(2) { animation-delay: .68s; }
+  .hero-gauge-scale .t:nth-child(3) { animation-delay: .81s; }
+  .hero-gauge-scale .t:nth-child(4) { animation-delay: .94s; }
+  .hero-eyebrow { animation: heroRise .7s var(--ease-out) .05s both; }
+  .hero-sub     { animation: heroRise .7s var(--ease-out) .22s both; }
+  .hero-actions { animation: heroRise .7s var(--ease-out) .34s both; }
+  .hero-ticker  { animation: heroRise .8s var(--ease-out) .46s both; }
+}
+@keyframes gaugeDraw { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes heroRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
 
 /* ----------  Page hero (interior)  ---------- */
 .page-hero-bg {
