@@ -38,8 +38,10 @@ jobs:
 
       - name: Build with Eleventy
         run: npm run build
-        # Hinweis: Hosting läuft über Netlify (apex, Pfade im Root). KEIN ELEVENTY_PATH_PREFIX,
-        # sonst würden Asset-/Canonical-Pfade auf der apex-Domain brechen.
+        # GitHub Pages liegt im Projekt-Unterpfad /Lingener-Baumaschinen/ -> Prefix nötig.
+        # Gilt NUR für diesen CI-Build; lokal und Netlify bauen ohne Prefix (apex, Root).
+        env:
+          ELEVENTY_PATH_PREFIX: /Lingener-Baumaschinen/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
