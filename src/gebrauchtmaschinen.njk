@@ -40,7 +40,7 @@ eleventyComputed:
   <div class="container">
     <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}">{% if lang == "de" %}Maschinen{% else %}Machines{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Gebrauchtmaschinen{% else %}Used Machines{% endif %}</span></div>
     <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Direkt vom Hersteller{% else %}Direct from the manufacturer{% endif %}</span>
-    <h1 data-split-lines class="mt-3">{% if lang == "de" %}Gebraucht.<br><em class="serif-italic">Nicht kompromittiert.</em>{% else %}Used.<br><em class="serif-italic">Not compromised.</em>{% endif %}</h1>
+    <h1 data-split-lines class="mt-3">{% if lang == "de" %}Gebraucht.<br><em class="serif-italic">Nicht kompromittiert.</em>{% else %}Used.<br><em class="serif-italic">No compromises.</em>{% endif %}</h1>
     <p>{% if lang == "de" %}Jede LIBA-Gebrauchtmaschine durchläuft eine vollständige Werksinspektion, bevor sie das Haus verlässt. Was wir nicht mit gutem Gewissen verkaufen können, verkaufen wir nicht.{% else %}Every LIBA used machine undergoes a full factory inspection before it leaves our premises. What we cannot sell in good conscience, we do not sell.{% endif %}</p>
     <div class="hero-actions mt-4">
       <a href="#anfrage" class="btn btn-accent is-lg">{% if lang == "de" %}Verfügbarkeit anfragen{% else %}Check availability{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
@@ -123,7 +123,7 @@ eleventyComputed:
         <h2 class="mt-3">{% if lang == "de" %}Welche Maschine<br>suchen <em>Sie?</em>{% else %}Which machine<br>are you <em>looking for?</em>{% endif %}</h2>
         <p class="lead mt-3">{% if lang == "de" %}Teilen Sie uns Einsatzprofil, Bodenart und Budget mit — wir prüfen, ob wir etwas Passendes haben, und informieren Sie auch über neue Zugänge.{% else %}Share your application profile, ground type and budget with us — we'll check whether we have something suitable and keep you informed about new arrivals.{% endif %}</p>
         <ul class="spec-list is-kerf">
-          <li><strong>{% if lang == "de" %}Direkt vom Werk{% else %}Direct from the factory{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Kein Aufschlag durch Zwischenhändler.{% else %}No premium through middlemen.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Direkt vom Werk{% else %}Direct from the factory{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Kein Aufschlag durch Zwischenhändler.{% else %}No middleman mark-up.{% endif %}</span></li>
           <li><strong>{% if lang == "de" %}Schnelle Antwort{% else %}Fast response{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Rückmeldung innerhalb eines Werktags.{% else %}Reply within one working day.{% endif %}</span></li>
         </ul>
       </div>
