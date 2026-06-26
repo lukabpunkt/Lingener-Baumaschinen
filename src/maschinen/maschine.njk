@@ -56,7 +56,7 @@ eleventyComputed:
         <span class="section-index">{% if lang == "de" %}01 / Übersicht{% else %}01 / Overview{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}{{ maschine.subtitleDE }}<br><em class="serif-italic">{{ maschine.name }}.</em>{% else %}{{ maschine.subtitleEN }}<br><em class="serif-italic">{{ maschine.name }}.</em>{% endif %}</h2>
         <p class="lead mt-3">{{ maschine.intro }}</p>
-        <a href="{% if lang == 'de' %}/assets/pdfs/LIBA-Broschuere.pdf{% else %}/assets/pdfs/LIBA-Brochure.pdf{% endif %}" class="btn-link mt-3" download>
+        <a href="{% if lang == 'de' %}/assets/pdfs/LIBA-Broschuere.pdf?v=2026{% else %}/assets/pdfs/LIBA-Brochure.pdf?v=2026{% endif %}" class="btn-link mt-3" download>
           {% if lang == "de" %}Broschüre herunterladen{% else %}Download brochure{% endif %}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 15V3m0 12l-4-4m4 4l4-4"/><path d="M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
         </a>
