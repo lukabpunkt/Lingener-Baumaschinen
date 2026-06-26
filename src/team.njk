@@ -8,6 +8,7 @@ permalink: "{{ '/en/team.html' if lang == 'en' else '/team.html' }}"
 layout: base.njk
 nav: "team"
 navSolid: true
+noindex: true   # MOCKUP-PHASE: Beispielfotos/-texte → nicht indexieren. Vor Go-Live entfernen.
 langDE: "/team.html"
 langEN: "/en/team.html"
 
@@ -52,8 +53,8 @@ eleventyComputed:
       <div>
         <span class="section-index">{% if lang == "de" %}01 / Geschäftsführer{% else %}01 / Managing Director{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Inhabergeführt.<br><em class="serif-italic">In der dritten Generation.</em>{% else %}Owner-managed.<br><em class="serif-italic">Third generation.</em>{% endif %}</h2>
-        <p class="lead mt-3">{% if lang == "de" %}[Platzhalter: Kurze Vorstellung des Geschäftsführers — Name, Hintergrund und Werdegang in 2–3 Sätzen.]{% else %}[Placeholder: Brief introduction of the managing director — name, background and career in 2–3 sentences.]{% endif %}</p>
-        <p class="mt-3" style="color: var(--steel-700);">{% if lang == "de" %}[Platzhalter: Persönliche Motivation und Verbindung zum Unternehmen — z. B. Aufgewachsen mit dem Betrieb, Übernahme der Leitung in [Jahr], Schwerpunkte und Ziele.]{% else %}[Placeholder: Personal motivation and connection to the company — e.g. grew up with the business, took over management in [year], areas of focus and goals.]{% endif %}</p>
+        <p class="lead mt-3">{% if lang == "de" %}Markus Berg (Beispiel) führt LIBA in dritter Generation. Nach dem Maschinenbaustudium und mehreren Jahren im internationalen Anlagenbau übernahm er 2018 die Geschäftsführung des Familienunternehmens.{% else %}Markus Berg (example) leads LIBA in the third generation. After studying mechanical engineering and several years in international plant construction, he took over as managing director of the family business in 2018.{% endif %}</p>
+        <p class="mt-3" style="color: var(--steel-700);">{% if lang == "de" %}Aufgewachsen ist er praktisch in der Werkhalle — schon als Jugendlicher half er in der Montage mit. Heute treibt ihn vor allem eines an: Grabenfräsen zu bauen, die auch unter härtesten Bedingungen zuverlässig laufen. <em>(Beispieltext)</em>{% else %}He practically grew up on the shop floor — as a teenager he was already lending a hand in assembly. Today, one thing drives him above all: building trench cutters that run reliably even under the toughest conditions. <em>(example text)</em>{% endif %}</p>
         <ul class="team-facts mt-4">
           <li>
             <span class="team-facts-key">{% if lang == "de" %}Funktion{% else %}Role{% endif %}</span>
@@ -61,7 +62,7 @@ eleventyComputed:
           </li>
           <li>
             <span class="team-facts-key">{% if lang == "de" %}Im Amt seit{% else %}In role since{% endif %}</span>
-            <span class="team-facts-val">[Jahr]</span>
+            <span class="team-facts-val">2018 <em style="color:var(--steel-600);font-style:italic;">(Beispiel)</em></span>
           </li>
           <li>
             <span class="team-facts-key">{% if lang == "de" %}Generation{% else %}Generation{% endif %}</span>
@@ -74,11 +75,12 @@ eleventyComputed:
         </ul>
       </div>
       <div class="media-frame">
-        <div class="img-placeholder">
-          <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="img-placeholder-label">{% if lang == "de" %}Foto des Geschäftsführers{% else %}Photo of Managing Director{% endif %}</span>
-        </div>
-        <span class="tag">[Name] · {% if lang == "de" %}Geschäftsführer{% else %}Managing Director{% endif %}</span>
+        <span class="mockup-badge">{% if lang == "de" %}Beispielbild · Mockup{% else %}Example · Mockup{% endif %}</span>
+        <picture>
+          <source type="image/webp" srcset="/assets/images/team/gf-mockup.webp">
+          <img src="/assets/images/team/gf-mockup.jpg" alt="{% if lang == 'de' %}Beispielfoto des Geschäftsführers von LIBA{% else %}Example photo of the LIBA managing director{% endif %}" width="1024" height="1365" loading="lazy">
+        </picture>
+        <span class="tag">Markus Berg{% if lang == "de" %} (Beispiel) · Geschäftsführer{% else %} (example) · Managing Director{% endif %}</span>
       </div>
     </div>
   </div>
@@ -100,67 +102,85 @@ eleventyComputed:
     <div class="team-grid reveal">
       <div class="team-card">
         <div class="team-card-photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+          <span class="mockup-badge">{% if lang == "de" %}Beispiel{% else %}Example{% endif %}</span>
+          <picture>
+            <source type="image/webp" srcset="/assets/images/team/team-konstruktion.webp">
+            <img src="/assets/images/team/team-konstruktion.jpg" alt="{% if lang == 'de' %}Beispielfoto Mitarbeiterin Konstruktion bei LIBA{% else %}Example photo of a LIBA engineering team member{% endif %}" width="600" height="800" loading="lazy">
+          </picture>
         </div>
         <div class="team-card-body">
-          <div class="team-card-name">[Name]</div>
+          <div class="team-card-name">Lena Brinkmann</div>
           <div class="team-card-role">{% if lang == "de" %}Konstruktion{% else %}Engineering{% endif %}</div>
         </div>
       </div>
 
       <div class="team-card">
         <div class="team-card-photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+          <span class="mockup-badge">{% if lang == "de" %}Beispiel{% else %}Example{% endif %}</span>
+          <picture>
+            <source type="image/webp" srcset="/assets/images/team/team-fertigung.webp">
+            <img src="/assets/images/team/team-fertigung.jpg" alt="{% if lang == 'de' %}Beispielfoto Mitarbeiter Fertigung bei LIBA{% else %}Example photo of a LIBA manufacturing team member{% endif %}" width="600" height="800" loading="lazy">
+          </picture>
         </div>
         <div class="team-card-body">
-          <div class="team-card-name">[Name]</div>
+          <div class="team-card-name">Michael Wessels</div>
           <div class="team-card-role">{% if lang == "de" %}Fertigung{% else %}Manufacturing{% endif %}</div>
         </div>
       </div>
 
       <div class="team-card">
         <div class="team-card-photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+          <span class="mockup-badge">{% if lang == "de" %}Beispiel{% else %}Example{% endif %}</span>
+          <picture>
+            <source type="image/webp" srcset="/assets/images/team/team-montage.webp">
+            <img src="/assets/images/team/team-montage.jpg" alt="{% if lang == 'de' %}Beispielfoto Mitarbeiter Montage bei LIBA{% else %}Example photo of a LIBA assembly team member{% endif %}" width="600" height="800" loading="lazy">
+          </picture>
         </div>
         <div class="team-card-body">
-          <div class="team-card-name">[Name]</div>
+          <div class="team-card-name">Tobias Holthaus</div>
           <div class="team-card-role">{% if lang == "de" %}Montage{% else %}Assembly{% endif %}</div>
         </div>
       </div>
 
       <div class="team-card">
         <div class="team-card-photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+          <span class="mockup-badge">{% if lang == "de" %}Beispiel{% else %}Example{% endif %}</span>
+          <picture>
+            <source type="image/webp" srcset="/assets/images/team/team-vertrieb.webp">
+            <img src="/assets/images/team/team-vertrieb.jpg" alt="{% if lang == 'de' %}Beispielfoto Mitarbeiterin Vertrieb & Service bei LIBA{% else %}Example photo of a LIBA sales & service team member{% endif %}" width="600" height="800" loading="lazy">
+          </picture>
         </div>
         <div class="team-card-body">
-          <div class="team-card-name">[Name]</div>
+          <div class="team-card-name">Sandra Pohl</div>
           <div class="team-card-role">{% if lang == "de" %}Vertrieb & Service{% else %}Sales & Service{% endif %}</div>
         </div>
       </div>
 
       <div class="team-card">
         <div class="team-card-photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+          <span class="mockup-badge">{% if lang == "de" %}Beispiel{% else %}Example{% endif %}</span>
+          <picture>
+            <source type="image/webp" srcset="/assets/images/team/team-schweisstechnik.webp">
+            <img src="/assets/images/team/team-schweisstechnik.jpg" alt="{% if lang == 'de' %}Beispielfoto Schweißer bei LIBA{% else %}Example photo of a LIBA welder{% endif %}" width="600" height="800" loading="lazy">
+          </picture>
         </div>
         <div class="team-card-body">
-          <div class="team-card-name">[Name]</div>
-          <div class="team-card-role">{% if lang == "de" %}[Abteilung / Funktion]{% else %}[Department / Role]{% endif %}</div>
+          <div class="team-card-name">Heinrich Albers</div>
+          <div class="team-card-role">{% if lang == "de" %}Schweißtechnik{% else %}Welding{% endif %}</div>
         </div>
       </div>
 
       <div class="team-card">
         <div class="team-card-photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="team-card-photo-label">{% if lang == "de" %}Foto folgt{% else %}Photo coming{% endif %}</span>
+          <span class="mockup-badge">{% if lang == "de" %}Beispiel{% else %}Example{% endif %}</span>
+          <picture>
+            <source type="image/webp" srcset="/assets/images/team/team-service.webp">
+            <img src="/assets/images/team/team-service.jpg" alt="{% if lang == 'de' %}Beispielfoto Mitarbeiter Ersatzteile & Service bei LIBA{% else %}Example photo of a LIBA spare parts & service team member{% endif %}" width="600" height="800" loading="lazy">
+          </picture>
         </div>
         <div class="team-card-body">
-          <div class="team-card-name">[Name]</div>
-          <div class="team-card-role">{% if lang == "de" %}[Abteilung / Funktion]{% else %}[Department / Role]{% endif %}</div>
+          <div class="team-card-name">Jonas Frye</div>
+          <div class="team-card-role">{% if lang == "de" %}Ersatzteile & Service{% else %}Spare Parts & Service{% endif %}</div>
         </div>
       </div>
     </div>
@@ -172,18 +192,19 @@ eleventyComputed:
   <div class="container">
     <div class="split align-start reveal">
       <div class="media-frame">
-        <div class="img-placeholder">
-          <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="img-placeholder-label">{% if lang == "de" %}Foto des Geschäftsführers{% else %}Photo of Managing Director{% endif %}</span>
-        </div>
-        <span class="tag">[Name] · {% if lang == "de" %}Geschäftsführer{% else %}Managing Director{% endif %}</span>
+        <span class="mockup-badge">{% if lang == "de" %}Beispielbild · Mockup{% else %}Example · Mockup{% endif %}</span>
+        <picture>
+          <source type="image/webp" srcset="/assets/images/team/gf-mockup.webp">
+          <img src="/assets/images/team/gf-mockup.jpg" alt="{% if lang == 'de' %}Beispielfoto des Geschäftsführers von LIBA{% else %}Example photo of the LIBA managing director{% endif %}" width="1024" height="1365" loading="lazy">
+        </picture>
+        <span class="tag">Markus Berg{% if lang == "de" %} (Beispiel) · Geschäftsführer{% else %} (example) · Managing Director{% endif %}</span>
       </div>
       <div>
         <span class="section-index">{% if lang == "de" %}03 / Motivation{% else %}03 / Motivation{% endif %}</span>
         <blockquote class="team-quote mt-3">
-          {% if lang == "de" %}„[Platzhalter: Zitat des Geschäftsführers — eigene Worte zu Unternehmensphilosophie, Qualitätsanspruch oder dem Antrieb hinter LIBA. <em>2–3 prägnante Sätze.</em>]"{% else %}"[Placeholder: Quote from the managing director — personal words about the company philosophy, quality standards or the drive behind LIBA. <em>2–3 concise sentences.</em>]"{% endif %}
+          {% if lang == "de" %}„Eine Maschine ist nur so gut wie die Menschen, die sie bauen. Wir geben unseren Namen darauf — und stehen für jede Naht gerade." <em>(Beispielzitat)</em>{% else %}"A machine is only as good as the people who build it. We put our name on it — and stand behind every weld." <em>(example quote)</em>{% endif %}
         </blockquote>
-        <p class="lead mt-4" style="color: var(--steel-700);">{% if lang == "de" %}[Platzhalter: 2–3 Sätze über die Vision und Werte, die den Geschäftsführer und das gesamte Team jeden Tag antreiben.]{% else %}[Placeholder: 2–3 sentences about the vision and values that drive the managing director and the entire team every day.]{% endif %}</p>
+        <p class="lead mt-4" style="color: var(--steel-700);">{% if lang == "de" %}Qualität, Verlässlichkeit und kurze Wege: Was uns als Familienbetrieb im Emsland ausmacht, steckt in jeder Maschine, die unser Werk verlässt. <em>(Beispieltext)</em>{% else %}Quality, reliability and short distances: what defines us as a family business in the Emsland is built into every machine that leaves our factory. <em>(example text)</em>{% endif %}</p>
         <div class="mt-5">
           <a href="{% if lang == 'de' %}/kontakt.html{% else %}/en/kontakt.html{% endif %}" class="btn btn-primary">
             {% if lang == "de" %}Jetzt Termin vereinbaren{% else %}Book a consultation{% endif %}
