@@ -1,7 +1,8 @@
 # GO-LIVE-Checkliste — LIBA Website
 
 > Alle Punkte, die **vor dem echten Launch** auf `lingener-baumaschinen.de` noch erledigt werden müssen.
-> Stand: 2026-06-24. Detail-Berichte im Repo: `QA-Prelaunch.md`, `Security-Audit.md`, `DE-EN-Parity.md`, `CLAUDE.md` (Migrations-Handover).
+> Stand: 2026-07-10. Detail-Berichte im Repo: `QA-Prelaunch.md`, `Security-Audit.md`, `DE-EN-Parity.md`, `CLAUDE.md` (Migrations-Handover).
+> **Schritt-für-Schritt-Anleitung zu allen [Betreiber]-Punkten (wo finde ich was?): → `Zulieferungen-Checkliste.md`**
 > Legende: **[Betreiber]** = du (Dashboard/DNS/Konto) · **[Repo]** = im Code (mache ich auf Zuruf).
 
 ---
@@ -11,9 +12,10 @@
 - [ ] **Netlify-Hosting einrichten** — Repo `lukabpunkt/Lingener-Baumaschinen` mit Netlify verbinden, **apex `lingener-baumaschinen.de` als Primary Domain** (www→apex-301 automatisch). **[Betreiber]**
   - Wichtig: **Formulare, 301-Weiterleitungen UND Security-Header funktionieren NUR auf Netlify** — die jetzige GitHub-Pages-Vorschau kann das alles systembedingt nicht.
 - [ ] **DNS auf Netlify umstellen** (als letzter Schritt) — Domain vom alten WordPress auf Netlify zeigen lassen. **[Betreiber]**
-- [ ] **Netlify Forms scharfschalten** — nach erstem Deploy im Dashboard → Forms eine **Benachrichtigungs-E-Mail** einrichten, sonst landen Kontakt-/Gebraucht-Anfragen nur im Dashboard, nicht im Postfach. **[Betreiber]**
-- [ ] **Redirect-Map vervollständigen** — vollständige alte URL-Liste aus **Google Search Console** („Seiten"-Export) **+ alten Yoast-Sitemaps** holen; damit `src/_data/redirects.js` ergänzen und die ⚠-Einträge prüfen (`/produkt/…-kopie/`-Zuordnungen, `GM 1 AS` vs `AF`, vollständige `/en/*`-Abdeckung). Sonst verlieren indexierte alte URLs ihr Ranking. **[Betreiber liefert Export → Repo setzt um]** · Details: `QA-Prelaunch.md`, `CLAUDE.md` §5
-- [ ] **Team-Seite klären** — aktuell live mit Platzhaltern (`[Name]`, „Foto folgt", Platzhalter-Zitat). Vor Launch **entweder echte Bios/Fotos einsetzen** **[Betreiber liefert Inhalte]** **oder** Seite auf `noindex` + aus Nav/Footer entlinken **[Repo]**.
+- [ ] **Netlify Forms scharfschalten** — nach erstem Deploy im Dashboard → Forms eine **Benachrichtigungs-E-Mail** einrichten, sonst landen Anfragen nur im Dashboard, nicht im Postfach. Betrifft **drei Formulare**: `kontakt`, `gebrauchtmaschine` und `bewerbung` (Karriere-Seite, seit 2026-07-10; Empfänger für Bewerbungen ggf. Personalverantwortliche/r statt info@). **[Betreiber]**
+- [ ] **Redirect-Map vervollständigen** — vollständige alte URL-Liste aus **Google Search Console** („Seiten"-Export) **+ alten Yoast-Sitemaps** holen (⚠ zeitkritisch: Sitemaps verschwinden mit WordPress-Abschaltung!); damit `src/_data/redirects.js` ergänzen und die ⚠-Einträge prüfen. Sonst verlieren indexierte alte URLs ihr Ranking. **[Betreiber liefert Export → Repo setzt um]** · Anleitung: `Zulieferungen-Checkliste.md` Punkt 1 · Details: `QA-Prelaunch.md`, `CLAUDE.md` §5
+  - Verifiziert 2026-07-09: `/traktorfraese-gm-1-as/` leitet auf `gm-1-af.html`, obwohl `gm-1-as.html` existiert — welche alte Produktseite zu welchem neuen Modell gehört (GM 1 AS/AF, GM 140 AS), kann nur LIBA sagen → `Zulieferungen-Checkliste.md` Punkt 3.2/3.3.
+- [ ] **Team-Seite klären** — seit Juli mit **KI-Mockup-Portraits als Beispiel** gefüllt (keine `[Name]`-Platzhalter mehr). KI-Portraits als „unser Team" live zu stellen ist riskant → vor Launch **entweder echte Bios/Fotos einsetzen** **[Betreiber liefert Inhalte]** **oder** Seite auf `noindex` + aus Nav/Footer entlinken **[Repo]**. · `Zulieferungen-Checkliste.md` Punkt 5
 
 ---
 
@@ -30,8 +32,8 @@
 ## 🟢 EMPFOHLEN / Härtung (kein Blocker)
 
 **Security – Repo (mache ich auf Zuruf):**
-- [ ] **CSP härten** — `'unsafe-inline'` im `script-src` durch Hash-basierte CSP ersetzen; `object-src 'none'` + `upgrade-insecure-requests` ergänzen (`netlify.toml`). **[Repo]** · `Security-Audit.md` S-2/S-4
-- [ ] **GitHub Actions auf Commit-SHA pinnen** (statt `@v4`-Tags) in `deploy.yml`. **[Repo]** · S-3
+- [x] **CSP härten** — erledigt 2026-07-09: `'unsafe-inline'` aus `script-src` entfernt, indem **alle Inline-Skripte ausgelagert** wurden (Calendly-Gate, Tab-Filter, Kalkulator → `main.js`; GA4-Snippet → `ga4-init.js` mit `data-ga4`-Attribut, hält auch nach GA4-Aktivierung); `object-src 'none'` + `upgrade-insecure-requests` ergänzt (`netlify.toml`). 0 Inline-Skripte über alle 90 Seiten. · `Security-Audit.md` S-2/S-4
+- [x] **GitHub Actions auf Commit-SHA pinnen** — erledigt 2026-07-09 (`deploy.yml`, alle 5 Actions mit `# vN`-Kommentar). · S-3
 - [ ] **Wizard-CTA** `encodeURIComponent(r.modell)` (Robustheit). **[Repo]** · S-13
 
 **Security – Betreiber (GitHub-Einstellungen / DNS):**
@@ -41,16 +43,30 @@
 - [ ] **Netlify-Spam:** Akismet im Forms-Bereich aktivieren. **[Betreiber]** · S-7
 
 **Content / SEO / Performance – Repo:**
-- [ ] **EN-Zahlenformat** „1.600 mm" → „1,600 mm" (englisches Tausenderformat). **[Repo]** · QA-Prelaunch PL-4
+- [x] **EN-Zahlenformat** — Prüfung 2026-07-09: war bereits behoben (EN durchgehend „1,600 mm"-Format). · QA-Prelaunch PL-4
 - [ ] **`og:type=product`** auf Maschinenseiten (statt `website`). **[Repo]** · MI-11
-- [ ] **Performance Maschinenseiten** — Page-Hero ist CSS-`background-image` (kein WebP/Preload) → LCP ~7,7 s mobil; auf `<img>`/`<picture>`+WebP+Preload umstellen (größter verbliebener Perf-Hebel, 60 Seiten). **[Repo]** · QA-Prelaunch
-- [ ] **`referenzen` og:description** „DN400" vs Tabelle „DN300" angleichen (in DE+EN gleich falsch). **[Repo]**
-- [ ] **deploy.yml** für finalen Netlify-Betrieb löschen/deaktivieren (trägt noch den GitHub-Pages-Prefix; nur für die aktuelle Vorschau nötig). **[Repo]**
+- [x] **Performance Maschinenseiten** — erledigt 2026-07-09: Hero-Hintergründe (geblurrt/abgedunkelt gerendert) laden jetzt stark verkleinerte `-bg.webp`-Varianten (900px, bis −90 % Dateigröße) statt voller JPGs, plus `<link rel="preload" fetchpriority="high">` auf 80 Seiten (60 Maschinen + statische Heroes). Neues Feld `heroBg` in `maschinenseiten.js`. · QA-Prelaunch
+- [x] **`referenzen` og:description** — erledigt 2026-07-09: „DN400" → „DN 300" (an Seiteninhalt angeglichen, DE+EN). Echten Projektwert bestätigen lassen: `Zulieferungen-Checkliste.md` Punkt 3.4.
+- [x] **deploy.yml** — deaktiviert seit Netlify-Umzug (`workflow_dispatch`, nur manuell) + 2026-07-09 SHA-gepinnt. Löschen optional nach Go-Live.
+- [x] **Sitemap `<lastmod>`** — ergänzt 2026-07-09 (neuer `isoDate`-Filter in `.eleventy.js`, alle 78 URLs).
+- [x] **EN-Rechtszitat** — ergänzt 2026-07-09: „i. V. m. § 25 Abs. 1 TTDSG" im EN-GA4-Abschnitt (`datenschutz.njk`); übrige Zitate waren bereits synchron.
 
 ---
 
 ## ✅ Bereits erledigt (zur Info — nicht erneut machen)
-- Formulare auf **Netlify Forms** umgestellt (kein Formspree mehr) · **Calendly** hinter Klick-Consent · **Fonts self-hosted** · Product-Schema ohne preislosen Offer · **Impressum-Pflichtangaben** (HRA 100224 / HRB 100012 / USt DE154279934 / GF Thorsten Schrader) · Datenschutz an echte Technik angepasst · Security-Header in `netlify.toml` angelegt · A11y-Fixes · **DE/EN inhaltlich synchronisiert** + idiomatisches Englisch · Hero-Aufwertung · diverse Pre-Launch-Bugfixes (Off-Domain-Link, Calendly-Kontrast u. a.).
+
+**Bis 2026-06-26:**
+- Formulare auf **Netlify Forms** umgestellt (kein Formspree mehr) · **Calendly** hinter Klick-Consent · **Fonts self-hosted** · Product-Schema ohne preislosen Offer · **Impressum-Pflichtangaben** (HRA 100224 / HRB 100012 / USt DE154279934 / GF Thorsten Schrader) · Datenschutz an echte Technik angepasst · Security-Header in `netlify.toml` angelegt · A11y-Fixes · **DE/EN inhaltlich synchronisiert** + idiomatisches Englisch · Hero-Aufwertung · diverse Pre-Launch-Bugfixes (Off-Domain-Link, Calendly-Kontrast u. a.) · Broschüren 2026 (DE+EN) eingebunden · Team-Seite mit KI-Mockups befüllt (Beispiel).
+
+**2026-07-09 (Fix-Runde, Details oben bei den abgehakten Punkten):**
+- **Hero-LCP:** alle Hero-Hintergründe auf kleine `-bg.webp` (−70…90 %) + Preload/`fetchpriority` auf 80 Seiten.
+- **CSP ohne `unsafe-inline`:** alle 4 Inline-Skripte nach `main.js`/`ga4-init.js` ausgelagert; `object-src 'none'`, `upgrade-insecure-requests`.
+- **DN400 → DN 300** in `referenzen.njk` og:description (DE+EN).
+- **EN-TTDSG-Zitat** in `datenschutz.njk` ergänzt.
+- **Sitemap `<lastmod>`** für alle URLs (Filter `isoDate`).
+- **GitHub Actions SHA-gepinnt** in `deploy.yml`.
+- **`Zulieferungen-Checkliste.md` erstellt** — Schritt-für-Schritt-Anleitung für alle Betreiber-Zulieferungen (Search-Console-Export, GA4-ID, Firmenfakten, Netlify/DNS …).
+- Nebenbefunde: EN-Zahlenformat war schon korrekt; robots.txt-Host schon apex; Root-sitemap.xml/robots.txt schon entfernt; www→apex-Migration im Code vollständig.
 
 ---
 

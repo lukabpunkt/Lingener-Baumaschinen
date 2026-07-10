@@ -5,6 +5,14 @@
 > Stand: 17.06.2026. Erstellt aus dem Abgleich Live-Site (WordPress/WPML/WooCommerce/Yoast)
 > vs. dieses Repo (Eleventy 3, statisch, GitHub Pages).
 
+> ⚠️ **Stand-Update (2026-07-10):** Teile dieses Dokuments sind überholt — es bleibt als
+> Migrations-Referenz (v. a. §5 Redirect-Map) erhalten. Inzwischen erledigt:
+> **Hosting = Netlify** (nicht mehr GitHub Pages; `deploy.yml` deaktiviert),
+> **Kanonisierung = apex ohne www** (alle P0-Blocker 1–3 aus §4 gelöst), Root-`sitemap.xml`/
+> `robots.txt` entfernt, CSP ohne `unsafe-inline`, Hero-LCP optimiert, Sitemap mit `lastmod`.
+> **Aktueller Status & offene Punkte: → `GO-LIVE-Checkliste.md`** ·
+> **Betreiber-Zulieferungen (Anleitungen): → `Zulieferungen-Checkliste.md`**
+
 ---
 
 ## 1. Projektüberblick
