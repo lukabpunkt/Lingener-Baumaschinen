@@ -1236,6 +1236,25 @@ p { color: var(--steel-700); text-wrap: pretty; }
 @media (min-width: 768px) { .spec-list li span { font-size: .95rem; } }
 .section-dark .spec-list li span { color: var(--steel-400); }
 
+/* Modell-Links in spec-lists (Maschinen-Seite): Optik wie Text, Affordance beim Hover/Fokus.
+   .is-stretched macht bei Einzelmodell-Zeilen die ganze Zeile klickbar (Stretched-Link). */
+.spec-list li { position: relative; }
+.spec-list li strong a.spec-link { color: inherit; text-decoration: none; }
+.spec-list li strong a.spec-link:hover,
+.spec-list li strong a.spec-link:focus-visible {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.section-dark .spec-list li strong a.spec-link:hover,
+.section-dark .spec-list li strong a.spec-link:focus-visible { color: var(--brand-light); }
+.spec-list li strong a.spec-link:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.spec-list a.spec-link.is-stretched::after { content: ""; position: absolute; inset: 0; }
+
 /* ---- Kerf variant (homepage): blade marks + category kickers instead of numbers ---- */
 .spec-list.is-kerf li {
   display: block;
