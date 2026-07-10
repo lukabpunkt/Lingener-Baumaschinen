@@ -44,6 +44,10 @@ eleventyComputed:
     <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Über LIBA{% else %}About LIBA{% endif %}</span>
     <h1 data-split-lines class="mt-3">{% if lang == "de" %}Seit 1969 zuhause im Emsland.<br><em class="serif-italic">Weltweit unter Tage.</em>{% else %}At home in Emsland since 1969.<br><em class="serif-italic">At work below ground worldwide.</em>{% endif %}</h1>
     <p>{% if lang == "de" %}LIBA – Lingener Baumaschinen ist ein inhabergeführtes Familienunternehmen aus Lingen (Ems), heute in der dritten Generation geführt. Wir konstruieren und fertigen Grabenfräsen, die in über 60 Ländern für Glasfaser-, Energie-, Versorgungs- und Tiefbauprojekte im Einsatz sind.{% else %}LIBA – Lingener Baumaschinen is an owner-managed family business from Lingen (Ems), now in its third generation of family leadership. We design and manufacture trench cutters deployed in over 60 countries for fibre optic, energy, utility and civil engineering projects.{% endif %}</p>
+    <div class="hero-actions mt-4">
+      <a href="{% if lang == 'de' %}/karriere.html{% else %}/en/karriere.html{% endif %}" class="btn btn-accent is-lg">{% if lang == "de" %}Karriere bei LIBA{% else %}Careers at LIBA{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="{% if lang == 'de' %}/kontakt.html{% else %}/en/kontakt.html{% endif %}" class="btn btn-outline-light">{% if lang == "de" %}Kontakt aufnehmen{% else %}Get in touch{% endif %}</a>
+    </div>
   </div>
 </section>
 
