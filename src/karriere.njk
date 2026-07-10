@@ -1,0 +1,97 @@
+---
+pagination:
+  addAllPagesToCollections: true
+  data: site.langs
+  size: 1
+  alias: lang
+permalink: "{{ '/en/karriere.html' if lang == 'en' else '/karriere.html' }}"
+layout: base.njk
+preloadImage: "/assets/images/hero/hero-3-bg.webp"
+nav: ""
+navSolid: true
+langDE: "/karriere.html"
+langEN: "/en/karriere.html"
+
+titleDE: "Karriere — Initiativbewerbung bei LIBA Lingener Baumaschinen"
+titleEN: "Careers — Open Application at LIBA Lingener Baumaschinen"
+descDE: "Arbeiten bei LIBA: Grabenfräsen Made in Germany aus Lingen (Ems). Keine offenen Stellen nötig — senden Sie uns Ihre Initiativbewerbung direkt über unser Bewerbungsformular."
+descEN: "Working at LIBA: trench cutters Made in Germany from Lingen (Ems). No job listing needed — send us your open application directly via our application form."
+canonicalDE: "https://lingener-baumaschinen.de/karriere.html"
+canonicalEN: "https://lingener-baumaschinen.de/en/karriere.html"
+ogTitleDE: "Karriere bei LIBA — Initiativbewerbung"
+ogTitleEN: "Careers at LIBA — Open Application"
+schemaDE: >-
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+schemaEN: >-
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Manufacturer specialising in the sale, hire and servicing of trench cutters for civil engineering, cable, road and track construction. Founded 1969, worldwide dealer network.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Lower Saxony","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+
+eleventyComputed:
+  title: "{{ titleDE if lang == 'de' else titleEN }}"
+  description: "{{ descDE if lang == 'de' else descEN }}"
+  canonical: "{{ canonicalDE if lang == 'de' else canonicalEN }}"
+  ogTitle: "{{ ogTitleDE if lang == 'de' else ogTitleEN }}"
+  ogDescription: "{{ descDE if lang == 'de' else descEN }}"
+  ogLocale: "{{ 'de_DE' if lang == 'de' else 'en_GB' }}"
+  schema: "{{ (schemaDE if lang == 'de' else schemaEN) | safe }}"
+---
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('/assets/images/hero/hero-3-bg.webp');" aria-hidden="true"></div>
+  <div class="container">
+    <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Karriere{% else %}Careers{% endif %}</span></div>
+    <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Initiativbewerbung{% else %}Open application{% endif %}</span>
+    <h1 data-split-lines class="mt-3">{% if lang == "de" %}Arbeiten<br><em class="serif-italic">bei LIBA.</em>{% else %}Working<br><em class="serif-italic">at LIBA.</em>{% endif %}</h1>
+    <p>{% if lang == "de" %}Wir schreiben selten Stellen aus — gute Leute stellen wir ein, wenn sie kommen. Ob Fertigung, Service, Konstruktion oder Verwaltung: Erzählen Sie uns, wer Sie sind. Eine Initiativbewerbung genügt.{% else %}We rarely post job listings — we hire good people when they come along. Whether production, service, engineering or administration: tell us who you are. An open application is all it takes.{% endif %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="split align-start reveal">
+      <div>
+        <span class="section-index">{% if lang == "de" %}01 / Warum LIBA{% else %}01 / Why LIBA{% endif %}</span>
+        <h2 class="mt-3">{% if lang == "de" %}Maschinen bauen,<br><em class="serif-italic">die bleiben.</em>{% else %}Building machines<br><em class="serif-italic">that last.</em>{% endif %}</h2>
+        <p class="lead mt-3">{% if lang == "de" %}Seit 1969 entwickeln, schweißen und montieren wir Grabenfräsen im eigenen Werk in Lingen (Ems) — Maschinen, die weltweit unter härtesten Bedingungen laufen. Dafür brauchen wir Menschen, die etwas können und etwas bewegen wollen.{% else %}Since 1969 we have been engineering, welding and assembling trench cutters at our own factory in Lingen (Ems) — machines that run worldwide under the toughest conditions. For that we need people with real skills who want to make a difference.{% endif %}</p>
+        <ul class="spec-list is-kerf mt-4">
+          <li><strong>{% if lang == "de" %}Familienbetrieb{% else %}Family business{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Kurze Wege, direkte Entscheidungen — kein Konzern.{% else %}Short paths, direct decisions — no corporate maze.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Made in Lingen{% else %}Made in Lingen{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Entwicklung, Fertigung und Montage an einem Standort.{% else %}Engineering, production and assembly at a single site.{% endif %}</span></li>
+          <li><strong>{% if lang == "de" %}Weltweite Einsätze{% else %}Worldwide deployments{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Unsere Maschinen laufen in über 60 Ländern — Service und Montage kommen herum.{% else %}Our machines run in over 60 countries — service and assembly get around.{% endif %}</span></li>
+        </ul>
+        <p class="mt-4">{% if lang == "de" %}Fragen vorab? Rufen Sie an: <a href="tel:+4959176314">+49 (0) 591 76 314</a> — oder senden Sie Ihre Unterlagen an <a href="mailto:info@lingener-baumaschinen.de">info@lingener-baumaschinen.de</a>.{% else %}Questions first? Call us: <a href="tel:+4959176314">+49 (0) 591 76 314</a> — or send your documents to <a href="mailto:info@lingener-baumaschinen.de">info@lingener-baumaschinen.de</a>.{% endif %}</p>
+      </div>
+      <form class="form reveal reveal-delay-1" name="bewerbung" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" data-form="bewerbung"
+            data-success="{% if lang == 'de' %}Vielen Dank für Ihre Bewerbung — wir melden uns innerhalb weniger Werktage bei Ihnen.{% else %}Thank you for your application — we will get back to you within a few working days.{% endif %}"
+            data-sending="{% if lang == 'de' %}Wird gesendet …{% else %}Sending …{% endif %}"
+            data-error="{% if lang == 'de' %}Senden fehlgeschlagen. Bitte senden Sie Ihre Bewerbung per E-Mail an info@lingener-baumaschinen.de.{% else %}Sending failed. Please email your application to info@lingener-baumaschinen.de.{% endif %}"
+            data-file-error="{% if lang == 'de' %}Bitte laden Sie den Lebenslauf als PDF hoch (max. 8 MB).{% else %}Please upload your CV as a PDF (max. 8 MB).{% endif %}">
+        <input type="hidden" name="form-name" value="bewerbung">
+        <p hidden><label>{% if lang == 'de' %}Nicht ausfüllen{% else %}Do not fill this in{% endif %}: <input name="bot-field"></label></p>
+        <div class="form-row">
+          <div class="field"><label for="b-name">{% if lang == "de" %}Name *{% else %}Name *{% endif %}</label><input id="b-name" name="name" required></div>
+          <div class="field"><label for="b-tel">{% if lang == "de" %}Telefon{% else %}Phone{% endif %}</label><input id="b-tel" type="tel" name="tel"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="b-email">{% if lang == "de" %}E-Mail *{% else %}Email *{% endif %}</label><input id="b-email" type="email" name="email" required></div>
+          <div class="field"><label for="b-bereich">{% if lang == "de" %}Bereich{% else %}Area{% endif %}</label>
+            <select id="b-bereich" name="bereich">
+              <option value="">{% if lang == "de" %}Bitte wählen…{% else %}Please select…{% endif %}</option>
+              <option value="Fertigung">{% if lang == "de" %}Fertigung / Schweißen{% else %}Production / welding{% endif %}</option>
+              <option value="Montage-Service">{% if lang == "de" %}Montage / Service{% else %}Assembly / service{% endif %}</option>
+              <option value="Konstruktion">{% if lang == "de" %}Konstruktion / Technik{% else %}Engineering / design{% endif %}</option>
+              <option value="Vertrieb">{% if lang == "de" %}Vertrieb{% else %}Sales{% endif %}</option>
+              <option value="Verwaltung">{% if lang == "de" %}Verwaltung{% else %}Administration{% endif %}</option>
+              <option value="Ausbildung">{% if lang == "de" %}Ausbildung / Praktikum{% else %}Apprenticeship / internship{% endif %}</option>
+              <option value="Sonstiges">{% if lang == "de" %}Sonstiges{% else %}Other{% endif %}</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="b-nachricht">{% if lang == "de" %}Kurzvorstellung *{% else %}Brief introduction *{% endif %}</label><textarea id="b-nachricht" name="nachricht" placeholder="{% if lang == 'de' %}Wer sind Sie, was können Sie, was suchen Sie?{% else %}Who are you, what are your skills, what are you looking for?{% endif %}" required></textarea></div>
+        <div class="field"><label for="b-lebenslauf">{% if lang == "de" %}Lebenslauf (PDF, max. 8 MB){% else %}CV (PDF, max. 8 MB){% endif %}</label><input id="b-lebenslauf" type="file" name="lebenslauf" accept="application/pdf">
+          <small style="color: var(--muted, #6b7280);">{% if lang == "de" %}Optional — Sie können Unterlagen auch später per E-Mail nachreichen.{% else %}Optional — you can also send documents later by email.{% endif %}</small></div>
+        <label class="field-check"><input type="checkbox" name="datenschutz" value="akzeptiert" required> {% if lang == "de" %}Ich habe die <a href="/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Datenschutzerklärung</a> zur Kenntnis genommen.{% else %}I have read the <a href="/en/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Privacy Policy</a>.{% endif %}</label>
+        <button type="submit" class="btn btn-primary mt-4">{% if lang == "de" %}Bewerbung absenden{% else %}Submit application{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+        <p data-form-status role="status" hidden style="color: var(--brand); font-weight: 500;"></p>
+      </form>
+    </div>
+  </div>
+</section>

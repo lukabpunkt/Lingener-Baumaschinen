@@ -6,6 +6,7 @@ pagination:
   alias: lang
 permalink: "{{ '/en/unternehmen.html' if lang == 'en' else '/unternehmen.html' }}"
 layout: base.njk
+preloadImage: "/assets/images/products/gm-180-af-detail-bg.webp"
 nav: "unternehmen"
 navSolid: true
 langDE: "/unternehmen.html"
@@ -37,7 +38,7 @@ eleventyComputed:
 ---
 
 <section class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('/assets/images/products/gm-180-af-detail.jpg');" aria-hidden="true"></div>
+  <div class="page-hero-bg" style="background-image: url('/assets/images/products/gm-180-af-detail-bg.webp');" aria-hidden="true"></div>
   <div class="container">
     <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Unternehmen{% else %}About Us{% endif %}</span></div>
     <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Über LIBA{% else %}About LIBA{% endif %}</span>
@@ -143,10 +144,10 @@ eleventyComputed:
       <div>
         <span class="eyebrow is-dark"><span class="dot"></span>{% if lang == "de" %}Das LIBA-Team{% else %}The LIBA team{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Die Menschen<br>hinter der <em>Maschine.</em>{% else %}The people<br>behind the <em>machine.</em>{% endif %}</h2>
-        <p>{% if lang == "de" %}Konstrukteure, Schlosser, Vertriebler — seit drei Generationen am selben Standort in Lingen. Lernen Sie das Team kennen, das jeden Graben ein Stück besser macht.{% else %}Engineers, fitters, sales specialists — three generations at the same site in Lingen. Meet the team that makes every trench a little better.{% endif %}</p>
+        <p>{% if lang == "de" %}Konstrukteure, Schlosser, Vertriebler — seit drei Generationen am selben Standort in Lingen. Lernen Sie das Team kennen, das jeden Graben ein Stück besser macht. Und wenn Sie selbst Grabenfräsen bauen wollen: Wir freuen uns über Ihre Initiativbewerbung.{% else %}Engineers, fitters, sales specialists — three generations at the same site in Lingen. Meet the team that makes every trench a little better. And if you want to build trench cutters yourself: we welcome your open application.{% endif %}</p>
         <div class="actions">
           <a href="{% if lang == 'de' %}/team.html{% else %}/en/team.html{% endif %}" class="btn btn-accent is-lg">{% if lang == "de" %}Team kennenlernen{% else %}Meet the team{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-          <a href="{% if lang == 'de' %}/kontakt.html{% else %}/en/kontakt.html{% endif %}" class="btn btn-outline-light">{% if lang == "de" %}Kontakt aufnehmen{% else %}Get in touch{% endif %}</a>
+          <a href="{% if lang == 'de' %}/karriere.html{% else %}/en/karriere.html{% endif %}" class="btn btn-outline-light">{% if lang == "de" %}Karriere bei LIBA{% else %}Careers at LIBA{% endif %}</a>
         </div>
       </div>
       <dl class="cta-side">

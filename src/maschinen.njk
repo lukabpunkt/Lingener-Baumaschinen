@@ -6,6 +6,7 @@ pagination:
   alias: lang
 permalink: "{{ '/en/maschinen.html' if lang == 'en' else '/maschinen.html' }}"
 layout: base.njk
+preloadImage: "/assets/images/products/gm-180-af-bg.webp"
 nav: "maschinen"
 navSolid: true
 langDE: "/maschinen.html"
@@ -37,7 +38,7 @@ eleventyComputed:
 ---
 
 <section class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('/assets/images/products/gm-180-af.jpg');" aria-hidden="true"></div>
+  <div class="page-hero-bg" style="background-image: url('/assets/images/products/gm-180-af-bg.webp');" aria-hidden="true"></div>
   <div class="container">
     <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Maschinenpark{% else %}Machine Range{% endif %}</span></div>
     <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Produktportfolio{% else %}Product Portfolio{% endif %}</span>
@@ -174,27 +175,7 @@ eleventyComputed:
       </div>
     </div>
 
-    <script>
-    (function(){
-      var tabs = document.querySelectorAll('#mf-tabs .mf-tab');
-      var cards = document.querySelectorAll('#maschinen-grid .maschine-card');
-      tabs.forEach(function(tab){
-        tab.addEventListener('click', function(){
-          var filter = tab.dataset.filter;
-          tabs.forEach(function(t){ t.classList.remove('is-active'); t.setAttribute('aria-pressed','false'); });
-          tab.classList.add('is-active');
-          tab.setAttribute('aria-pressed','true');
-          cards.forEach(function(card){
-            if(filter === 'all' || card.dataset.category === filter){
-              card.classList.remove('is-hidden');
-            } else {
-              card.classList.add('is-hidden');
-            }
-          });
-        });
-      });
-    })();
-    </script>
+    <!-- Tab-Filter-Logik liegt in /assets/js/main.js (CSP ohne 'unsafe-inline') -->
 
     <hr class="divider">
 
@@ -487,68 +468,7 @@ eleventyComputed:
       <p style="color: var(--steel-500); font-size: .8rem; margin-top: 1.25rem; font-family: var(--font-mono); letter-spacing: .02em;">{% if lang == "de" %}Richtwert · Abweichungen ±30 % je nach Konfiguration und Einsatzbedingungen{% else %}Indicative figure · Variations of ±30% depending on configuration and operating conditions{% endif %}</p>
     </div>
 
-    <script>
-      (function(){
-        var boden   = document.getElementById('k-boden');
-        var modell  = document.getElementById('k-modell');
-        var dayEl   = document.getElementById('k-day');
-        var weekEl  = document.getElementById('k-week');
-        var monthEl = document.getElementById('k-month');
-        var barD    = document.getElementById('k-bar-day');
-        var barW    = document.getElementById('k-bar-week');
-        var barM    = document.getElementById('k-bar-month');
-        var MAX     = 1000;
-        var cur     = { d: 0, w: 0, m: 0 };
-        var raf     = null;
-        var locale  = '{{ lang }}' === 'en' ? 'en' : 'de';
-
-        function calcDay() {
-          var raw = parseInt(boden.value) * parseFloat(modell.value);
-          if (raw >= 100) return Math.round(raw / 50) * 50;
-          if (raw >= 20)  return Math.round(raw / 10) * 10;
-          return Math.max(Math.round(raw / 5) * 5, 5);
-        }
-
-        function animateTo(target) {
-          var from = { d: cur.d, w: cur.w, m: cur.m };
-          var dur  = 650;
-          var t0   = null;
-          if (raf) cancelAnimationFrame(raf);
-          (function step(ts) {
-            if (!t0) t0 = ts;
-            var p = Math.min((ts - t0) / dur, 1);
-            var e = 1 - Math.pow(1 - p, 3);
-            dayEl.textContent   = Math.round(from.d + (target.d - from.d) * e).toLocaleString(locale);
-            weekEl.textContent  = Math.round(from.w + (target.w - from.w) * e).toLocaleString(locale);
-            monthEl.textContent = Math.round(from.m + (target.m - from.m) * e).toLocaleString(locale);
-            if (p < 1) { raf = requestAnimationFrame(step); }
-            else {
-              dayEl.textContent   = target.d.toLocaleString(locale);
-              weekEl.textContent  = target.w.toLocaleString(locale);
-              monthEl.textContent = target.m.toLocaleString(locale);
-              cur = { d: target.d, w: target.w, m: target.m };
-              raf = null;
-            }
-          })(performance.now());
-          var pct = Math.max(target.d / MAX * 100, 2).toFixed(1);
-          barD.style.width = pct + '%';
-          barW.style.width = pct + '%';
-          barM.style.width = pct + '%';
-        }
-
-        function update() { var d = calcDay(); animateTo({ d: d, w: d * 5, m: d * 20 }); }
-
-        boden.addEventListener('change', update);
-        modell.addEventListener('change', update);
-
-        if ('IntersectionObserver' in window) {
-          var io = new IntersectionObserver(function(entries) {
-            if (entries[0].isIntersecting) { update(); io.disconnect(); }
-          }, { threshold: 0.25 });
-          io.observe(document.getElementById('kalkulator'));
-        } else { update(); }
-      })();
-    </script>
+    <!-- Kalkulator-Logik liegt in /assets/js/main.js (CSP ohne 'unsafe-inline') -->
   </div>
 </section>
 

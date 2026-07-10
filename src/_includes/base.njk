@@ -37,10 +37,11 @@
   <script type="application/ld+json">{{ schema | safe }}</script>
   {% endif %}
   {% if site.ga4 and site.ga4 != "G-XXXXXXXXXX" %}
-  <!-- Google Analytics 4 + Consent Mode v2 — Mess-ID zentral in src/_data/site.js -->
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:800});gtag('js',new Date());</script>
+  <!-- Google Analytics 4 + Consent Mode v2 — Mess-ID zentral in src/_data/site.js.
+       ga4-init.js bewusst synchron (winzig, same-origin), damit der Consent-Default
+       sicher VOR dem async gtag.js-Loader gesetzt ist. Kein Inline-Script -> CSP ohne 'unsafe-inline'. -->
+  <script src="/assets/js/ga4-init.js" data-ga4="{{ site.ga4 }}"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga4 }}"></script>
-  <script>gtag('config','{{ site.ga4 }}');</script>
   {% endif %}
 </head>
 <body>
@@ -262,6 +263,7 @@
           <li><a href="/en/kontakt.html">Spare parts</a></li>
           <li><a href="/en/kontakt.html">Training</a></li>
           <li><a href="/en/faq.html">FAQ</a></li>
+          <li><a href="/en/karriere.html">Careers</a></li>
         </ul>
       </div>
       <div>
@@ -329,6 +331,7 @@
           <li><a href="/kontakt.html">Ersatzteile</a></li>
           <li><a href="/kontakt.html">Schulungen</a></li>
           <li><a href="/faq.html">Häufige Fragen</a></li>
+          <li><a href="/karriere.html">Karriere</a></li>
         </ul>
       </div>
       <div>

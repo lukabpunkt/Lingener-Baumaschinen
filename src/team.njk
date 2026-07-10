@@ -6,6 +6,7 @@ pagination:
   alias: lang
 permalink: "{{ '/en/team.html' if lang == 'en' else '/team.html' }}"
 layout: base.njk
+preloadImage: "/assets/images/hero/hero-3-bg.webp"
 nav: "team"
 navSolid: true
 noindex: true   # MOCKUP-PHASE: Beispielfotos/-texte → nicht indexieren. Vor Go-Live entfernen.
@@ -33,7 +34,7 @@ eleventyComputed:
 ---
 
 <section class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('/assets/images/hero/hero-3.jpg');" aria-hidden="true"></div>
+  <div class="page-hero-bg" style="background-image: url('/assets/images/hero/hero-3-bg.webp');" aria-hidden="true"></div>
   <div class="container">
     <div class="breadcrumbs">
       <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>

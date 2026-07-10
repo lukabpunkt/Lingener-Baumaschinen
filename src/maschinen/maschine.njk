@@ -21,10 +21,11 @@ eleventyComputed:
   ogLocale: "{{ 'de_DE' if maschine.lang == 'de' else 'en_GB' }}"
   ogImage: "{{ maschine.ogImage }}"
   schema: "{{ maschine.schema | safe }}"
+  preloadImage: "{{ maschine.heroBg }}"
 ---
 
 <section class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('{{ maschine.heroImage }}');" aria-hidden="true"></div>
+  <div class="page-hero-bg" style="background-image: url('{{ maschine.heroBg }}');" aria-hidden="true"></div>
   <div class="container">
     <div class="breadcrumbs">
       <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>

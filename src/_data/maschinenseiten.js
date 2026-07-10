@@ -177,6 +177,8 @@ module.exports = maschinen.flatMap(m =>
       intro: buildIntro(m, lang),
       faqs,
       related: relatedMachines(m),
+      // Kleine, stark komprimierte Variante fürs geblurrte Hero-Hintergrundbild (LCP).
+      heroBg: m.heroImage.replace(/\.(jpg|webp|png)$/, '-bg.webp'),
       ogImage: BASE + m.heroImage,
       schema: buildSchema(m, lang, faqs),
     };

@@ -148,25 +148,42 @@
     items.forEach(item => track.appendChild(item.cloneNode(true)));
   });
 
-  /* Form: Netlify Forms submission (AJAX POST to "/", URL-encoded incl. form-name) */
+  /* Form: Netlify Forms submission (AJAX POST to "/").
+     Standard: URL-encoded. Formulare mit Datei-Upload (enctype=multipart, z. B.
+     Bewerbung) senden FormData direkt — der Browser setzt den multipart-Header. */
   $$('form[data-form]').forEach(form => {
     const okMsg = form.dataset.success || 'Vielen Dank — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.';
     const errMsg = form.dataset.error || 'Senden fehlgeschlagen. Bitte rufen Sie uns an oder schreiben Sie eine E-Mail.';
     const sendingMsg = form.dataset.sending || 'Wird gesendet …';
+    const fileErrMsg = form.dataset.fileError || 'Bitte laden Sie die Datei als PDF hoch (max. 8 MB).';
+    const isMultipart = form.enctype === 'multipart/form-data';
+    const MAX_FILE_BYTES = 8 * 1024 * 1024; // Netlify-Forms-Limit
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = $('[data-form-status]', form);
       const btn = form.querySelector('[type="submit"]');
       const origHTML = btn ? btn.innerHTML : null;
+
+      // Datei-Validierung vor dem Senden (nur PDF, max. 8 MB)
+      if (isMultipart) {
+        const fileInput = form.querySelector('input[type="file"]');
+        const file = fileInput && fileInput.files[0];
+        if (file && (file.size > MAX_FILE_BYTES || (file.type && file.type !== 'application/pdf'))) {
+          if (status) { status.hidden = false; status.style.color = '#dc2626'; status.textContent = fileErrMsg; }
+          return;
+        }
+      }
+
       if (btn) { btn.disabled = true; btn.innerHTML = sendingMsg; }
 
       try {
-        const body = new URLSearchParams(new FormData(form)).toString();
-        const resp = await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body
-        });
+        const resp = await (isMultipart
+          ? fetch('/', { method: 'POST', body: new FormData(form) })
+          : fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(new FormData(form)).toString()
+            }));
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         if (status) { status.hidden = false; status.style.color = ''; status.textContent = okMsg; }
         form.reset();
@@ -752,6 +769,100 @@
     }, { passive: true });
     scrollTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* Maschinen-Übersicht: Kategorie-Tab-Filter (ausgelagert aus maschinen.njk, CSP) */
+  const mfTabs = $$('#mf-tabs .mf-tab');
+  if (mfTabs.length) {
+    const mfCards = $$('#maschinen-grid .maschine-card');
+    mfTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const filter = tab.dataset.filter;
+        mfTabs.forEach((t) => { t.classList.remove('is-active'); t.setAttribute('aria-pressed', 'false'); });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-pressed', 'true');
+        mfCards.forEach((card) => {
+          card.classList.toggle('is-hidden', !(filter === 'all' || card.dataset.category === filter));
+        });
+      });
+    });
+  }
+
+  /* Leistungs-Kalkulator auf der Maschinen-Übersicht (ausgelagert aus maschinen.njk, CSP) */
+  const kalkulator = document.getElementById('kalkulator');
+  if (kalkulator) {
+    const boden   = document.getElementById('k-boden');
+    const modell  = document.getElementById('k-modell');
+    const dayEl   = document.getElementById('k-day');
+    const weekEl  = document.getElementById('k-week');
+    const monthEl = document.getElementById('k-month');
+    const barD    = document.getElementById('k-bar-day');
+    const barW    = document.getElementById('k-bar-week');
+    const barM    = document.getElementById('k-bar-month');
+    const MAX     = 1000;
+    let cur       = { d: 0, w: 0, m: 0 };
+    let raf       = null;
+    const locale  = document.documentElement.lang === 'en' ? 'en' : 'de';
+
+    const calcDay = () => {
+      const raw = parseInt(boden.value) * parseFloat(modell.value);
+      if (raw >= 100) return Math.round(raw / 50) * 50;
+      if (raw >= 20)  return Math.round(raw / 10) * 10;
+      return Math.max(Math.round(raw / 5) * 5, 5);
+    };
+
+    const animateTo = (target) => {
+      const from = { d: cur.d, w: cur.w, m: cur.m };
+      const dur  = 650;
+      let t0     = null;
+      if (raf) cancelAnimationFrame(raf);
+      (function step(ts) {
+        if (!t0) t0 = ts;
+        const p = Math.min((ts - t0) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 3);
+        dayEl.textContent   = Math.round(from.d + (target.d - from.d) * e).toLocaleString(locale);
+        weekEl.textContent  = Math.round(from.w + (target.w - from.w) * e).toLocaleString(locale);
+        monthEl.textContent = Math.round(from.m + (target.m - from.m) * e).toLocaleString(locale);
+        if (p < 1) { raf = requestAnimationFrame(step); }
+        else {
+          dayEl.textContent   = target.d.toLocaleString(locale);
+          weekEl.textContent  = target.w.toLocaleString(locale);
+          monthEl.textContent = target.m.toLocaleString(locale);
+          cur = { d: target.d, w: target.w, m: target.m };
+          raf = null;
+        }
+      })(performance.now());
+      const pct = Math.max(target.d / MAX * 100, 2).toFixed(1);
+      barD.style.width = pct + '%';
+      barW.style.width = pct + '%';
+      barM.style.width = pct + '%';
+    };
+
+    const update = () => { const d = calcDay(); animateTo({ d: d, w: d * 5, m: d * 20 }); };
+
+    boden.addEventListener('change', update);
+    modell.addEventListener('change', update);
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { update(); io.disconnect(); }
+      }, { threshold: 0.25 });
+      io.observe(kalkulator);
+    } else { update(); }
+  }
+
+  /* Calendly: Klick-zum-Laden (Consent-Gate) — Widget erst nach ausdrücklichem Klick.
+     Ausgelagert aus kontakt.njk, damit die CSP ohne 'unsafe-inline' auskommt. */
+  const calendlyBtn = $('#calendly-load');
+  if (calendlyBtn) {
+    calendlyBtn.addEventListener('click', () => {
+      const w = $('.calendly-inline-widget');
+      if (w) { w.setAttribute('data-url', w.getAttribute('data-calendly-url')); w.style.display = ''; }
+      const c = $('#calendly-consent'); if (c) c.style.display = 'none';
+      const s = document.createElement('script');
+      s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true;
+      document.body.appendChild(s);
     });
   }
 

@@ -6,6 +6,7 @@ pagination:
   alias: lang
 permalink: "{{ '/en/anwendungen.html' if lang == 'en' else '/anwendungen.html' }}"
 layout: base.njk
+preloadImage: "/assets/images/applications/rohrleitungsbau-bg.webp"
 nav: "anwendungen"
 navSolid: true
 langDE: "/anwendungen.html"
@@ -37,7 +38,7 @@ eleventyComputed:
 ---
 
 <section class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('/assets/images/applications/rohrleitungsbau.jpg');" aria-hidden="true"></div>
+  <div class="page-hero-bg" style="background-image: url('/assets/images/applications/rohrleitungsbau-bg.webp');" aria-hidden="true"></div>
   <div class="container">
     <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Anwendungen{% else %}Applications{% endif %}</span></div>
     <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Einsatzbereiche{% else %}Fields of Application{% endif %}</span>
