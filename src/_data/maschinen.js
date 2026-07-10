@@ -34,6 +34,7 @@ module.exports = [
   {
     slug: 'gm-4-allrad',
     name: 'GM 4 Allrad',
+    nameEN: 'GM 4 All-Wheel',
     category: 'Selbstfahrer',
     condition: 'Neu',
     year: null,
@@ -86,6 +87,7 @@ module.exports = [
   {
     slug: 'gm-4-raupe',
     name: 'GM 4 Raupe',
+    nameEN: 'GM 4 Crawler',
     category: 'Selbstfahrer',
     condition: 'Neu',
     year: null,
@@ -138,6 +140,7 @@ module.exports = [
   {
     slug: 'gm-4-raupe-2023',
     name: 'GM 4 Raupe',
+    nameEN: 'GM 4 Crawler',
     category: 'Selbstfahrer',
     condition: 'Vorführmaschine',
     year: 2023,
@@ -162,6 +165,7 @@ module.exports = [
   {
     slug: 'gm-4-rad-2024',
     name: 'GM 4 Rad',
+    nameEN: 'GM 4 Wheeled',
     category: 'Selbstfahrer',
     condition: 'Vorführmaschine',
     year: 2024,
@@ -241,6 +245,7 @@ module.exports = [
   {
     slug: 'gm-600-r',
     name: 'Fräsrad GM 600 R',
+    nameEN: 'GM 600 R Cutter Wheel',
     category: 'Schlepperanbau',
     condition: 'Neu',
     year: null,
@@ -533,6 +538,7 @@ module.exports = [
   {
     slug: 'unimogfraese',
     name: 'Unimogfräse',
+    nameEN: 'Unimog cutter',
     category: 'Schlepperanbau',
     condition: 'Neu',
     year: null,

@@ -324,7 +324,7 @@
           { tag:'Baggeranbau', tagEN:'Excavator-Mounted', name:'GM 140 AFH-600', slug:'gm-140-afh-600',
             desc:'Maximale Baggeranbau-Frästiefe: 1.500 mm. Für Tiefen bis 2.000 mm am Bagger — Beratung erforderlich.',
             descEN:'Maximum excavator attachment depth: 1,500 mm. For depths up to 2,000 mm on an excavator — consultation required.', modell:'gm-140-afh-600' },
-          { tag:'Beratung', tagEN:'Consultation', name:'Sonderlösung > 1.500 mm', slug:null,
+          { tag:'Beratung', tagEN:'Consultation', name:'Sonderlösung > 1.500 mm', nameEN:'Custom solution > 1,500 mm', slug:null,
             desc:'Für Frästiefen über 1.500 mm am Bagger sprechen Sie uns direkt an — wir finden die optimale Lösung.',
             descEN:'For cutting depths over 1,500 mm on an excavator, contact us directly — we will find the optimal solution.', modell:'Baggeranbau-Sonderl%C3%B6sung' }
         ],
@@ -343,7 +343,7 @@
       traktor: {
         /* ≤ 600 mm — nur Geräte mit max. ≤ 800 mm Frästiefe/Verlegetiefe */
         s: [
-          { tag:'Schlepperanbau · Fräsrad', tagEN:'Tractor-Mounted · Milling Wheel', name:'Fräsrad GM 600 R', slug:'gm-600-r',
+          { tag:'Schlepperanbau · Fräsrad', tagEN:'Tractor-Mounted · Milling Wheel', name:'Fräsrad GM 600 R', nameEN:'GM 600 R Cutter Wheel', slug:'gm-600-r',
             desc:'Max. 600 mm Frästiefe, Fräsbreite 80–200 mm. Ideal für Erdkabel und Leitungsbau ab 190 PS.',
             descEN:'Max. 600 mm cutting depth, cutting width 80–200 mm. Ideal for earth cables and utility installation from 190 hp.', modell:'gm-600-r' },
           { tag:'Schlepperanbau · Pflug', tagEN:'Tractor-Mounted · Plough', name:'GMV 100', slug:'gmv-100',
@@ -370,7 +370,7 @@
           { tag:'Schlepperanbau', tagEN:'Tractor-Mounted', name:'GM 160 AS', slug:'gm-160-as',
             desc:'Max. 1.600 mm, mit 2 Schnecken. Für effiziente Drainage-Projekte ab 160 PS.',
             descEN:'Max. 1,600 mm, with 2 augers. For efficient drainage projects from 160 hp.', modell:'gm-160-as' },
-          { tag:'Schlepperanbau · Unimog', tagEN:'Tractor-Mounted · Unimog', name:'Unimogfräse', slug:'unimogfraese',
+          { tag:'Schlepperanbau · Unimog', tagEN:'Tractor-Mounted · Unimog', name:'Unimogfräse', nameEN:'Unimog cutter', slug:'unimogfraese',
             desc:'Speziell für Mercedes-Benz Unimog, max. 1.600 mm Frästiefe ab 160 PS.',
             descEN:'Specifically for Mercedes-Benz Unimog, max. 1,600 mm cutting depth from 160 hp.', modell:'unimogfraese' },
           { tag:'Schlepperanbau · Gebraucht', tagEN:'Tractor-Mounted · Used', name:'GM 140 AF', slug:'gm-140-af-2011',
@@ -419,25 +419,25 @@
       self: {
         /* ≤ 600 mm — GM 4-Serie: kein Trägergerät nötig, ab kleiner Tiefe */
         s: [
-          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Raupe', slug:'gm-4-raupe',
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Raupe', nameEN:'GM 4 Crawler', slug:'gm-4-raupe',
             desc:'Max. 1.500 mm Frästiefe. Ideal für FTTH und flache Kabeltrassen — kein Trägergerät nötig.',
             descEN:'Max. 1,500 mm cutting depth. Ideal for FTTH and shallow cable routes — no carrier machine needed.', modell:'gm-4-raupe' },
-          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Allrad', slug:'gm-4-allrad',
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Allrad', nameEN:'GM 4 All-Wheel', slug:'gm-4-allrad',
             desc:'Max. 1.500 mm, Allradantrieb. Für Solarparks, Drainage und empfindliche Rasenflächen.',
             descEN:'Max. 1,500 mm, all-wheel drive. For solar parks, drainage and sensitive grass surfaces.', modell:'gm-4-allrad' },
-          { tag:'Selbstfahrer · Vorführmaschine', tagEN:'Self-Propelled · Demo', name:'GM 4 Raupe', slug:'gm-4-raupe-2023',
+          { tag:'Selbstfahrer · Vorführmaschine', tagEN:'Self-Propelled · Demo', name:'GM 4 Raupe', nameEN:'GM 4 Crawler', slug:'gm-4-raupe-2023',
             desc:'Vorführmaschine Bj. 2023, max. 1.500 mm — top Zustand, direkt verfügbar.',
             descEN:'Demo machine 2023, max. 1,500 mm — excellent condition, immediately available.', modell:'gm-4-raupe-2023' },
-          { tag:'Selbstfahrer · Vorführmaschine', tagEN:'Self-Propelled · Demo', name:'GM 4 Rad', slug:'gm-4-rad-2024',
+          { tag:'Selbstfahrer · Vorführmaschine', tagEN:'Self-Propelled · Demo', name:'GM 4 Rad', nameEN:'GM 4 Wheeled', slug:'gm-4-rad-2024',
             desc:'Vorführmaschine Bj. 2024, max. 1.500 mm, Allradantrieb — nahezu neuwertig.',
             descEN:'Demo machine 2024, max. 1,500 mm, all-wheel drive — near-new condition.', modell:'gm-4-rad-2024' }
         ],
         /* ≤ 1.200 mm — GM 4-Serie + GM 6 ASR für Hartgestein */
         m: [
-          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Raupe', slug:'gm-4-raupe',
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Raupe', nameEN:'GM 4 Crawler', slug:'gm-4-raupe',
             desc:'Max. 1.500 mm, autark ohne Trägergerät. Tagesleistung bis 1.000 m im Lockerboden.',
             descEN:'Max. 1,500 mm, autonomous without carrier machine. Daily output up to 1,000 m in loose ground.', modell:'gm-4-raupe' },
-          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Allrad', slug:'gm-4-allrad',
+          { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 4 Allrad', nameEN:'GM 4 All-Wheel', slug:'gm-4-allrad',
             desc:'Max. 1.500 mm, Allrad für empfindliche Flächen und Sportplatzdrainage.',
             descEN:'Max. 1,500 mm, all-wheel drive for sensitive surfaces and sports field drainage.', modell:'gm-4-allrad' },
           { tag:'Selbstfahrer', tagEN:'Self-Propelled', name:'GM 6 ASR', slug:'gm-6-asr',
@@ -568,9 +568,10 @@
       cards.innerHTML = recs.map(function (r) {
         var tag  = (isEN && r.tagEN)  ? r.tagEN  : r.tag;
         var desc = (isEN && r.descEN) ? r.descEN : r.desc;
+        var name = (isEN && r.nameEN) ? r.nameEN : r.name;
         return '<div class="wizard-rcard">'
           + '<span class="wizard-rcard-tag">' + tag + '</span>'
-          + '<div class="wizard-rcard-name">' + r.name + '</div>'
+          + '<div class="wizard-rcard-name">' + name + '</div>'
           + '<div class="wizard-rcard-desc">' + desc + '</div>'
           + (r.slug
             ? '<a href="' + maschBase + r.slug + '.html" class="wizard-rcard-link">' + detailLabel + arrowSvg + '</a>'

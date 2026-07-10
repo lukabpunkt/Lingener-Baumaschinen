@@ -167,7 +167,7 @@ eleventyComputed:
           </div>
           <div class="maschine-card-body">
             <span class="maschine-card-cat">{{ labels.cat(m.category, lang) }}</span>
-            <p class="maschine-card-name">{{ m.name }}</p>
+            <p class="maschine-card-name">{{ m.nameEN if lang == 'en' and m.nameEN else m.name }}</p>
             <p class="maschine-card-sub">{% if lang == "de" %}{{ m.subtitleDE }}{% else %}{{ m.subtitleEN }}{% endif %}</p>
             <span class="maschine-card-badge {% if m.condition == 'Neu' %}badge-neu{% elif m.condition == 'Gebraucht' %}badge-gebraucht{% else %}badge-vorfuehrmaschine{% endif %}">
               {% if lang == "de" %}{{ m.condition }}{% if m.year %} {{ m.year }}{% endif %}{% else %}{% if m.condition == 'Neu' %}New{% elif m.condition == 'Gebraucht' %}Used{% else %}Demo{% endif %}{% if m.year %} {{ m.year }}{% endif %}{% endif %}

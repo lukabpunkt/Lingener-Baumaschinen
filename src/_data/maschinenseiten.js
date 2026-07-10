@@ -110,11 +110,11 @@ function buildFaqs(m, lang) {
 }
 
 /* Up to 3 other machines in the same category, for internal linking. */
-function relatedMachines(m) {
+function relatedMachines(m, lang) {
   return maschinen
     .filter(x => x.category === m.category && x.slug !== m.slug)
     .slice(0, 3)
-    .map(x => ({ name: x.name, slug: x.slug }));
+    .map(x => ({ name: lang === 'en' ? (x.nameEN || x.name) : x.name, slug: x.slug }));
 }
 
 /* Combined Product + BreadcrumbList + FAQPage JSON-LD for one machine/language. */
@@ -166,21 +166,24 @@ function buildSchema(m, lang, faqs) {
 
 module.exports = maschinen.flatMap(m =>
   ['de', 'en'].map(lang => {
-    const faqs = buildFaqs(m, lang);
+    // Lokalisiertes Maschinenobjekt: auf EN-Seiten greift nameEN (falls gesetzt),
+    // damit Titel, H1, Intro, FAQs und Schema den englischen Namen verwenden.
+    const loc = { ...m, name: lang === 'en' ? (m.nameEN || m.name) : m.name };
+    const faqs = buildFaqs(loc, lang);
     return {
-      ...m,
+      ...loc,
       lang,
       langDE: `/maschinen/${m.slug}.html`,
       langEN: `/en/maschinen/${m.slug}.html`,
       categoryLabel: labels.cat(m.category, lang),
       conditionLabel: labels.cond(m.condition, lang),
-      intro: buildIntro(m, lang),
+      intro: buildIntro(loc, lang),
       faqs,
-      related: relatedMachines(m),
+      related: relatedMachines(m, lang),
       // Kleine, stark komprimierte Variante fürs geblurrte Hero-Hintergrundbild (LCP).
       heroBg: m.heroImage.replace(/\.(jpg|webp|png)$/, '-bg.webp'),
       ogImage: BASE + m.heroImage,
-      schema: buildSchema(m, lang, faqs),
+      schema: buildSchema(loc, lang, faqs),
     };
   })
 );
