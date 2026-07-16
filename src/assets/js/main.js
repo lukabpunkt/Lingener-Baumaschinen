@@ -10,8 +10,12 @@
   /* Year auto-fill */
   $$('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
-  /* Page-enter class */
-  document.body.classList.add('page-enter');
+  /* Page-enter: Einblend-Animation auf <main>, NICHT auf <body>.
+     Eine (per fill-mode dauerhaft aktive) Animation auf dem body bricht in
+     WebKit/iOS-Safari position:fixed aller Body-Kinder (Scroll-Progress, FAB,
+     Cookie-Banner, Drawer) — die Elemente hängen dann mitten im Viewport. */
+  const pageMain = document.getElementById('main');
+  if (pageMain) pageMain.classList.add('page-enter');
 
   /* Sticky nav scroll state */
   const nav = $('.nav');

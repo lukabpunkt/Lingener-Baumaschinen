@@ -2064,6 +2064,8 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .clip-reveal img { transform: scale(1.25); transition: transform 2.4s var(--ease-out); }
 .clip-reveal.is-visible img { transform: scale(1); }
 
+/* Wird per JS auf <main> gesetzt (NICHT auf body: aktive Animation auf dem body
+   bricht in WebKit/iOS position:fixed der Body-Kinder — Bar/FAB/Banner/Drawer). */
 .page-enter {
   opacity: 0;
   animation: pageEnter .9s var(--ease-out) .1s forwards;
