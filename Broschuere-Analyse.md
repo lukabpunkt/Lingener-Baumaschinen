@@ -70,7 +70,7 @@ Sprachlich sauber (DE praktisch fehlerfrei), **DE und EN inhaltlich deckungsglei
 - **Kontaktdaten** (Telefon, E-Mail, Adresse) stimmen mit der Website überein; überlappende Maschinen-Specs (GM 6 ASR, GM 1800 P, GMV 130, GM 450 H u. a.) stimmen mit `maschinen.js`.
 
 ## Offene Entscheidungen für dich
-1. **Echtes Gründungsjahr** (1964 oder 1969?) → falsche Quelle korrigieren (B-1).
+1. ~~Echtes Gründungsjahr~~ → ✅ geklärt 2026-07-16: **1969** (B-1, keine Aktion mehr nötig).
 2. **„Grabenmeister"** — echte Marke (→ auf die Website) oder raus aus der Broschüre? (B-2).
 3. **GM 500-R vs GM 600 R** — umbenannt oder zwei Produkte? (B-4).
 4. „GMA-Serie" = welcher Modellname? (B-3, vermutlich GM 140 H).
