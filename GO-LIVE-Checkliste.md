@@ -68,6 +68,10 @@
 - **`Zulieferungen-Checkliste.md` erstellt** — Schritt-für-Schritt-Anleitung für alle Betreiber-Zulieferungen (Search-Console-Export, GA4-ID, Firmenfakten, Netlify/DNS …).
 - Nebenbefunde: EN-Zahlenformat war schon korrekt; robots.txt-Host schon apex; Root-sitemap.xml/robots.txt schon entfernt; www→apex-Migration im Code vollständig.
 
+**2026-07-16:**
+- **Gründungsjahr geklärt: 1969 ist korrekt** (Betreiber-Bestätigung). Website war durchgängig korrekt (0× „1964"); auch die eingebundenen Broschüren-PDFs 2026 sagen bereits „1969" / „Über fünf Jahrzehnte" → Punkt vollständig erledigt (`Zulieferungen-Checkliste.md` 3.1 ✅, `Broschuere-Analyse.md` B-1 ✅).
+- Mobile-Fix: fixierte Elemente (Scroll-Progress u. a.) auf iOS korrigiert (page-enter auf `<main>` statt `<body>`); Startseiten-Slogan: Zeilenabstände vereinheitlicht (DE == EN, WebKit-verifiziert); Karriere-Button im Hero der Unternehmensseite.
+
 ---
 
 ### Schnell-Reihenfolge fürs Go-Live

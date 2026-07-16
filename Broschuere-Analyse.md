@@ -4,9 +4,9 @@
 
 > **Wichtig:** Das sind fertige PDFs — ich kann Fehler **benennen** (Seite + Stelle + Korrektur), aber die PDFs **nicht editieren**. Korrekturen gehören in die **Originaldatei** (InDesign/Affinity o. Ä.) und werden neu exportiert. Diese Datei ist die **Korrekturvorlage**.
 
-## Gesamturteil: 🟡 Gute Broschüren — aber **2 kritische Inhalts-Widersprüche** vor weiterer Verteilung klären
+## Gesamturteil: 🟡 Gute Broschüren — **1 kritischer Inhalts-Widerspruch** vor weiterer Verteilung klären *(Stand 2026-07-16: B-1 Gründungsjahr geklärt ✅, offen bleibt B-2 Markenname)*
 
-Sprachlich sauber (DE praktisch fehlerfrei), **DE und EN inhaltlich deckungsgleich** (0 Spec-Abweichungen), Kontaktdaten stimmen mit der Website. **Aber:** Die Broschüre widerspricht der Website bei **Gründungsjahr** und **Markenname** — das untergräbt die Glaubwürdigkeit und muss entschieden werden. Dazu einige Modell-/Sprach-Korrekturen.
+Sprachlich sauber (DE praktisch fehlerfrei), **DE und EN inhaltlich deckungsgleich** (0 Spec-Abweichungen), Kontaktdaten stimmen mit der Website. **Aber:** Die Broschüre widerspricht der Website beim **Markennamen** („Grabenmeister") — das untergräbt die Glaubwürdigkeit und muss entschieden werden. Dazu einige Modell-/Sprach-Korrekturen. ~~Gründungsjahr~~ ist geklärt (1969, siehe B-1).
 
 | Schweregrad | Anzahl |
 |---|---|
@@ -18,10 +18,10 @@ Sprachlich sauber (DE praktisch fehlerfrei), **DE und EN inhaltlich deckungsglei
 
 ## 🔴 CRITICAL — Widerspruch Broschüre ↔ Website (beide Sprachen)
 
-### B-1 · Gründungsjahr: Broschüre „**1964**" vs. Website „**1969**"
-- **Belegt (deterministisch):** Website-Schema `"foundingDate":"1969"`, „seit 1969"/„since 1969" durchgängig. Broschüre: „SEIT 1964 / SINCE 1964", „1964 Gründung in Lingen", „…GERMANY 1964"-Siegel — **6×** auf Cover, S. 2, 3, 4, 28.
-- **Folgefehler:** S. 3 „**Sechs Jahrzehnte / Six Decades**" baut auf 1964 auf. Wäre 1969 korrekt, sind „60 Jahre / sechs Jahrzehnte" zu hoch (real ~57).
-- **Eines von beiden ist falsch.** → **Du musst das echte Gründungsjahr bestätigen**, dann die falsche Quelle korrigieren (Broschüre **oder** Website). Bis dahin Critical.
+### B-1 · Gründungsjahr: Broschüre „**1964**" vs. Website „**1969**" — ✅ GEKLÄRT (2026-07-16)
+- **Ergebnis:** **1969 ist korrekt** (Betreiber-Bestätigung). Website war durchgängig richtig.
+- **Broschüren im Repo bereits korrigiert:** Textextraktion der eingebundenen 2026er-PDFs ergibt 0× „1964", 6× „1969" und „Über fünf Jahrzehnte / Over Five Decades" statt „Sechs Jahrzehnte" — auch der Folgefehler ist behoben. Keine weitere Aktion.
+- Ursprünglicher Befund (überholt, bezog sich auf die alte PDF-Fassung): „SEIT 1964 / SINCE 1964", „1964 Gründung in Lingen", „…GERMANY 1964"-Siegel — 6× auf Cover, S. 2, 3, 4, 28; S. 3 „Sechs Jahrzehnte / Six Decades" baute auf 1964 auf.
 
 ### B-2 · Markenname „**Grabenmeister**" (38×) — auf der Website nicht vorhanden
 - **Belegt:** Broschüre brandet alles „Grabenmeister" — „PRODUKTKATALOG GRABENMEISTER · 2024", Fußzeile fast jeder Seite, „Selbstfahrer ‚Grabenmeister'", S. 3 „Die Marke Grabenmeister entsteht / The Grabenmeister brand is born". Das **echte LIBA-Logo** ist zwar auf Cover/Kontakt vorhanden (gut), aber das dominante Markenwort ist „Grabenmeister".

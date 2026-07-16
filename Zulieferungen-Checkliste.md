@@ -68,7 +68,7 @@ Am schnellsten: kurzes Gespräch/Mail mit **GF Thorsten Schrader** bzw. Vertrieb
 
 | # | Frage | Warum wichtig | Wo nachschlagen |
 |---|-------|---------------|-----------------|
-| 3.1 | **Gründungsjahr: 1964 oder 1969?** | Broschüre sagt „SEIT 1964 / sechs Jahrzehnte", Website + strukturierte Daten sagen 1969. Eines ist falsch — steht auf Dutzenden Seiten. | Handelsregisterauszug (HRA 100224, Amtsgericht Osnabrück) — online über <https://www.handelsregister.de> (kostenlose Registerauskunft) — oder Firmenchronik/GF fragen. |
+| 3.1 | ~~Gründungsjahr: 1964 oder 1969?~~ **✅ GEKLÄRT (2026-07-16): 1969 ist korrekt** (Betreiber-Bestätigung). Website war durchgängig korrekt (0× „1964" in Quellcode & Build, Schema `foundingDate: 1969`). Auch die im Repo eingebundenen Broschüren-PDFs 2026 sind bereits korrigiert (6× „1969", „Über fünf Jahrzehnte"). Keine weitere Aktion nötig. | — | — |
 | 3.2 | **„GM 140 AS" — gibt es das Modell?** Die alte URL `/gm-140-as-fraese-fuer-drainage/` leitet derzeit auf GM 140 AF. Richtig? Oder war das die GM 160 AS? | Falscher Redirect schickt Kaufinteressenten zum falschen Produkt. | Alte Produktliste / Vertrieb / alte Prospekte. |
 | 3.3 | **GM 1 AS vs. GM 1 AF:** Die alte Seite `/traktorfraese-gm-1-as/` leitet aktuell auf **GM 1 AF** — obwohl es eine eigene GM-1-AS-Seite gibt. Welches neue Modell entspricht der alten „Traktorfräse GM 1 AS"? | dito | dito |
 | 3.4 | **Referenzprojekt Gaspipeline: DN 300 bestätigen?** (Seite sagt jetzt einheitlich DN 300; vorher stand an einer Stelle DN400.) | Referenzangaben müssen stimmen. | Projektunterlagen des Referenzprojekts. |
@@ -180,8 +180,10 @@ Beim DNS des Mailproviders (meist derselbe Registrar):
 
 ## 10 · 🟢 Broschüren-PDFs (Grafiker, nicht Repo)
 
-Die Faktenfehler aus Punkt 3 (Gründungsjahr, „Grabenmeister", GMA/GM 500-R, zwei kaputte
-EN-Sätze S. 13/26) stecken auch in den fertigen PDF-Broschüren. Korrigierbar nur in der
+~~Gründungsjahr~~ **✅ erledigt** — die eingebundenen 2026er-PDFs sagen bereits 6× „1969"
+und „Über fünf Jahrzehnte" (geprüft per Textextraktion, 2026-07-16).
+Verbleibende Faktenfragen aus Punkt 3 („Grabenmeister", GMA/GM 500-R, zwei kaputte
+EN-Sätze S. 13/26) stecken ggf. noch in den PDF-Broschüren. Korrigierbar nur in der
 **Original-Layoutdatei** (InDesign/Affinity) — beim Grafiker/der Agentur anfragen, die die
 Broschüre 2026 erstellt hat. Danach neue PDFs an mich → ich tausche sie im Repo.
 
