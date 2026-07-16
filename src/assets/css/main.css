@@ -806,11 +806,17 @@ p { color: var(--steel-700); text-wrap: pretty; }
   letter-spacing: -.02em;
   font-size: .93em;
 }
-/* Tighter line spacing for hero headline */
+/* Hero-Headline: EIN maßgeblicher Zeilenabstand (line-height). Das Padding
+   schützt Unterlängen vor overflow:hidden der Maske und wird per negativem
+   Margin neutralisiert — so sind Masken-Grenze und interner Umbruch identisch. */
 .hero h1 .mask-line {
-  line-height: 1.0;
-  padding-bottom: .26em;
+  line-height: 1.26;
+  padding-bottom: .13em;
+  margin-bottom: -.13em;
 }
+/* line-height: 0 -> die Serif-Kursive trägt nicht zur Zeilenboxhöhe bei;
+   die Höhe kommt allein aus dem Strut der Zeile (1.26em, engine-stabil). */
+.hero h1 em { line-height: 0; }
 .hero-sub {
   color: rgba(255,255,255,.62);
   margin-top: 1.5rem;
@@ -2039,10 +2045,14 @@ p { color: var(--steel-700); text-wrap: pretty; }
   .reveal-delay-4 { transition-delay: .4s; }
 }
 
+/* Padding gegen abgeschnittene Unterlängen (overflow:hidden), per negativem
+   Margin kompensiert -> Zeilenabstand kommt ausschließlich aus line-height
+   (einheitlich, auch wenn eine Masken-Zeile intern umbricht). */
 .mask-line {
   display: block;
   overflow: hidden;
-  padding-bottom: .4em;
+  padding-bottom: .2em;
+  margin-bottom: -.2em;
   line-height: 1.1;
 }
 .mask-line > span {
