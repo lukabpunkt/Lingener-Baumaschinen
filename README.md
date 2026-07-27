@@ -1,98 +1,108 @@
 # LIBA — Lingener Baumaschinen · Website
 
-Premium Corporate Website für **LIBA – Lingener Baumaschinen GmbH & Co. KG**, ein deutscher Hersteller von Grabenfräsen, Anbaufräsen, Pflügen und Spezialmaschinen mit Sitz in Lingen (Ems).
+Corporate Website für **LIBA – Lingener Baumaschinen GmbH & Co. KG**, deutscher Hersteller von Grabenfräsen, Anbaufräsen, Pflügen und Spezialmaschinen in Lingen (Ems).
 
-Komplett statisch (HTML / CSS / Vanilla JavaScript) — direkt deploybar auf GitHub Pages, Netlify, Vercel oder jedem klassischen Webserver. Keine Build-Tools, keine Dependencies.
+Statische Site, generiert mit **Eleventy 3**. Zweisprachig DE/EN, 90 Seiten, Zielhosting **Netlify**.
+
+> **Status:** Die Seite ist gebaut, aber noch **nicht live** — `lingener-baumaschinen.de` zeigt weiterhin auf die alte WordPress-Site.
+> Was vor der Liveschaltung noch fehlt, steht in **[`GO-LIVE-Checkliste.md`](GO-LIVE-Checkliste.md)**;
+> die Anleitungen für alles, was nur der Betreiber liefern kann, in **[`Zulieferungen-Checkliste.md`](Zulieferungen-Checkliste.md)**.
 
 ---
 
-## Tech & Design
+## Entwickeln
 
-- **Stack:** Semantisches HTML5, modernes CSS (Custom Properties, Grid, `clamp()`), Vanilla JavaScript (ES2015+, ~3 KB).
-- **Performance:** Keine Frameworks, keine externen JS-Libraries. Lazy-loadable Bilder, native `font-display: swap`.
-- **Accessibility:** Tastaturnavigation, Skip-Link, ARIA, `prefers-reduced-motion` respektiert.
-- **Responsiv:** Mobile-First, Breakpoints bei 600 / 800 / 900 / 960 / 1024 px.
-- **Typografie:** Inter (Body) + Space Grotesk (Display) via Google Fonts.
-- **Designsprache:** Industriell-elegant. Teal-Markenfarbe (`#0E7C7B`) der Original-LIBA-Identität, modernisiert und mit industriellem Signal-Amber (`#F59E0B`) gepaart.
+```bash
+npm ci          # einmalig; einzige devDependency ist @11ty/eleventy
+npm start       # lokaler Server mit Live-Reload
+npm run build   # statischer Output nach _site/
+```
 
-## Seiten
-
-| Datei | Inhalt |
-|---|---|
-| `index.html` | Startseite — Hero-Slider, Produktfamilien, Anwendungen, Stats, Aktuelles, CTA |
-| `maschinen.html` | Übersicht aller Produktfamilien (Bagger-, Schlepperanbau, Selbstfahrer, Spezial, Pflüge) |
-| `maschinen/gm-180-af.html` | Beispiel-Produktdetailseite mit Spec-Tabelle |
-| `anwendungen.html` | Einsatzbereiche (Glasfaser, Pipeline, Kabel, Drainage, Agrar, Spezialbau) |
-| `mieten.html` | Mietangebot mit Mietanfrage-Formular |
-| `unternehmen.html` | Über LIBA — Geschichte, Werte, Standort |
-| `kontakt.html` | Kontakt + Anfrageformular |
-| `impressum.html` · `datenschutz.html` · `agb.html` | Rechtliches |
-| `404.html` | Fehlerseite |
+`_site/` und `node_modules/` sind gitignored. Node 24 (wie auf Netlify, siehe `netlify.toml`).
 
 ## Projektstruktur
 
 ```
-LIBA Website/
-├── index.html
-├── maschinen.html
-├── anwendungen.html
-├── mieten.html
-├── unternehmen.html
-├── kontakt.html
-├── impressum.html
-├── datenschutz.html
-├── agb.html
-├── 404.html
-├── robots.txt
-├── sitemap.xml
-├── README.md
-├── maschinen/
-│   └── gm-180-af.html
-└── assets/
-    ├── css/
-    │   └── main.css            # Vollständiges Designsystem
-    ├── js/
-    │   └── main.js             # Nav, Reveal, Slider, Counter, Form
-    ├── images/
-    │   ├── hero/               # Hero-Bilder (Slider)
-    │   ├── products/           # Produktfotos
-    │   ├── applications/       # Einsatzgebiete
-    │   ├── gallery/            # Allgemeine Galerie
-    │   └── logo/               # Logo + Favicons
-    ├── icons/                  # Reserviert für SVG-Icons
-    ├── fonts/                  # Reserviert für selbstgehostete Fonts
-    └── videos/                 # Reserviert für Showcase-Videos
+src/
+├── _data/                  # Datenquellen (JS-Module, global verfügbar)
+│   ├── site.js             # langs + GA4-Mess-ID
+│   ├── maschinen.js        # 30 Maschinen: slug, name, specs, heroImage, oldUrl
+│   ├── maschinenseiten.js  # daraus 60 Seitenobjekte (30 × DE/EN) inkl. schema, ogImage, heroBg
+│   ├── labels.js           # DE↔EN-Tabelle für Datenwerte (Kategorie, Zustand)
+│   ├── faq.js              # FAQ-Text und -Schema aus einer Quelle
+│   └── redirects.js        # manuelle 301-Regeln der WordPress-Migration
+├── _includes/base.njk      # zentrales Layout (Head, Nav, Footer, Consent)
+├── maschinen/maschine.njk  # ein Template → 60 Maschinenseiten
+├── en/404.njk              # einzige separate EN-Datei (404 kommt ohne Layout aus)
+├── *.njk                   # alle übrigen Seiten, je DE + EN
+├── _redirects.njk          # generiert _site/_redirects (spezifische Regeln + Splats)
+├── assets/                 # css, js, images, fonts (self-hosted)
+├── llms.txt · robots.txt · sitemap.njk
+.eleventy.js · netlify.toml · package.json
 ```
 
-## Lokal entwickeln
+### Datenfluss
 
-Reine statische Dateien. Öffne `index.html` direkt im Browser oder starte einen Mini-Server:
-
-```bash
-# Python 3
-python3 -m http.server 8000
-
-# Node (npx)
-npx serve .
+```
+maschinen.js ──► maschinenseiten.js ──► maschinen/maschine.njk   (60 Seiten)
+      │                 ▲
+      │                 └─ labels.js (DE↔EN für Kategorie/Zustand)
+      └──────────► redirects.js ──► _redirects.njk ──► _site/_redirects
+faq.js  ──► faq.njk           (sichtbarer Text UND FAQPage-Schema)
+site.js ──► base.njk          (Sprachen; GA4 nur wenn echte Mess-ID gesetzt)
 ```
 
-Dann <http://localhost:8000> aufrufen.
+---
+
+## Konventionen — bitte vor dem ersten Commit lesen
+
+**1 · DE und EN liegen im selben Template.**
+Jede Seite paginiert über `site.langs` und schaltet inline um:
+
+```njk
+{% if lang == "de" %}Grabenfräse{% else %}Trench cutter{% endif %}
+```
+
+Es gibt **keine** separaten EN-Dateien (Ausnahme: `src/en/404.njk`). Wer EN ändert, ändert dieselbe Zeile wie DE — eine vergessene `{% else %}`-Hälfte ist der klassische Fehler hier. Übersetzungen von Datenwerten gehören in `src/_data/labels.js`.
+
+**2 · Keine Inline-Skripte.**
+Die CSP in `netlify.toml` setzt `script-src` **ohne** `'unsafe-inline'`. Jedes `<script>…</script>` im Markup bricht die Seite auf Netlify — lokal und auf der GitHub-Pages-Vorschau fällt das nicht auf, weil dort keine Header ausgeliefert werden. Erlaubt sind ausgelagerte Dateien und `<script type="application/ld+json">`. Parameter kommen per `data-`-Attribut (Muster: `ga4-init.js` liest `document.currentScript.dataset.ga4`).
+`style-src` behält bewusst `'unsafe-inline'` — `style=`-Attribute sind in Ordnung.
+
+**3 · GA4 ist per Platzhalter deaktiviert.**
+Solange `src/_data/site.js` `G-XXXXXXXXXX` enthält, wird kein Google-Markup gerendert. Beim Eintragen der echten ID nichts weiter nötig — `connect-src` deckt die regionalen GA4-Endpunkte bereits ab.
+
+**4 · iOS/WebKit-Falle.**
+Eine CSS-Animation auf einem Vorfahren zerstört in WebKit `position: fixed` bei allen Nachfahren. Deshalb liegt `page-enter` auf `<main>`, nicht auf `<body>`; Scroll-Progress, FAB, Cookie-Banner und Drawer sind bewusst direkte Kinder von `<body>`. Diese Struktur nicht umbauen.
+
+**5 · Kanonisch ist die apex-Domain ohne `www`.**
+Überall `https://lingener-baumaschinen.de`. Kein `www.` neu einführen.
+
+**6 · Die Sitemap pflegt sich selbst.**
+`sitemap.njk` nimmt jede Seite mit `canonical` und ohne `noindex`. `noindex: true` im Front-Matter entfernt eine Seite also automatisch auch aus der Sitemap.
+
+**7 · `_redirects` nie von Hand editieren.**
+Die Datei wird generiert. Spezifische Regeln gehören nach `src/_data/redirects.js`, Splat-Regeln ans Ende von `src/_redirects.njk`.
+
+---
+
+## Formulare
+
+Drei **Netlify Forms** (`data-netlify`, Honeypot, AJAX-POST in `main.js`):
+
+| Name | Seite | Besonderheit |
+|---|---|---|
+| `kontakt` | `kontakt.njk` | — |
+| `gebrauchtmaschine` | `gebrauchtmaschinen.njk` | — |
+| `bewerbung` | `karriere.njk` | `multipart/form-data`, PDF-Upload |
+
+DE- und EN-Variante teilen sich jeweils denselben `form-name`, laufen also in denselben Posteingang. **Funktionieren erst auf Netlify** — die Benachrichtigungs-E-Mail muss im Netlify-Dashboard eingerichtet werden.
 
 ## Deployment
 
-### GitHub Pages
-```bash
-git init
-git add .
-git commit -m "LIBA website — initial commit"
-git branch -M main
-git remote add origin git@github.com:<user>/<repo>.git
-git push -u origin main
-```
-Anschließend in den Repository-Einstellungen unter **Pages** die Quelle auf `main` / `root` setzen.
+**Produktion: Netlify.** Build `npm run build`, Publish `_site`, kein `ELEVENTY_PATH_PREFIX` (Domain liegt im Root). 301-Weiterleitungen und Security-Header kommen aus `netlify.toml` bzw. dem generierten `_site/_redirects` — beides kann GitHub Pages systembedingt nicht.
 
-### Netlify / Vercel
-Repository verbinden — Build-Befehl: _(leer)_, Publish-Ordner: `.`
+**Vorschau: GitHub Pages**, manuell über `gh workflow run deploy.yml` (der Workflow ist auf `workflow_dispatch` beschränkt und baut mit `ELEVENTY_PATH_PREFIX=/Lingener-Baumaschinen/`).
 
 ## Designtokens
 
@@ -103,21 +113,23 @@ Repository verbinden — Build-Befehl: _(leer)_, Publish-Ordner: `.`
 | `--brand-light` | `#5EEAD4` | Helles Teal (Akzent auf Dunkel) |
 | `--accent` | `#F59E0B` | Industrie-Amber (CTAs) |
 | `--ink` | `#0A0E14` | Tiefes Schiefer-Schwarz |
-| `--bg` | `#FAFAF9` | Off-White Hintergrund |
 | `--font-display` | Space Grotesk | Überschriften |
 | `--font-sans` | Inter | Fließtext |
 
-## Formular-Anbindung
+Schriften sind **selbst gehostet** (`src/assets/fonts/`, eingebunden über `assets/css/fonts.css`) — kein Google-Fonts-Request, DSGVO-konform.
 
-Die Formulare sind als Frontend-Markup vorbereitet. Für produktiven Einsatz wahlweise:
-- **Netlify Forms** — `data-form` durch `name="..." netlify` ersetzen.
-- **Formspree / Basin** — `action="https://formspree.io/f/..."` setzen.
-- **Eigene API** — `fetch()` in `assets/js/main.js` ergänzen.
+## Weitere Dokumente
 
-## Credits
-
-- Bildmaterial: aus dem bestehenden LIBA-Bestand übernommen.
-- Konzept, Design & Code: neu aufgebaut auf Basis der bestehenden Inhalte.
+| Datei | Inhalt |
+|---|---|
+| `GO-LIVE-Checkliste.md` | **Master-Liste der offenen Aufgaben** vor der Liveschaltung |
+| `Zulieferungen-Checkliste.md` | Schritt-für-Schritt-Anleitungen für alle Betreiber-Aufgaben |
+| `CLAUDE.md` | Migrations-Handover WordPress → Eleventy, §5 = Redirect-Map |
+| `QA-Report.md` · `QA-Prelaunch.md` | QA-Runden 1 und 2 (historische Momentaufnahmen) |
+| `Security-Audit.md` | Security-Befunde S-1…S-13 |
+| `DE-EN-Parity.md` | Sprachparität DE/EN |
+| `Broschuere-Analyse.md` | Korrekturvorlage für die Print-Broschüren |
+| `Relaunch-SEO-Checkliste.md` | SEO-Phasen des Relaunchs |
 
 ---
 

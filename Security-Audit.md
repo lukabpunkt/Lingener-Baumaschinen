@@ -55,15 +55,16 @@
 ---
 
 ## Hardening-Checkliste (im Repo, vor/kurz nach Launch)
-- [ ] **S-2** Hash-basierte CSP (drop `'unsafe-inline'` in `script-src`).
-- [ ] **S-4** CSP um `object-src 'none'; upgrade-insecure-requests`.
-- [ ] **S-3** GitHub Actions auf Commit-SHA pinnen.
-- [ ] **S-13** `encodeURIComponent` im Wizard-CTA (optional, Robustheit).
+- [x] **S-2** `'unsafe-inline'` aus `script-src` entfernt (2026-07-09) — gelöst durch **Auslagern** aller Inline-Skripte statt durch Hashes. Nachtrag 2026-07-27: die beiden 404-Seiten umgehen `base.njk` und trugen hinter dem GA4-Guard noch Inline-Blöcke; jetzt ebenfalls auf `ga4-init.js` umgestellt. Mit gesetzter Test-Mess-ID verifiziert: 0 Inline-Skripte auf allen 90 Seiten.
+- [x] **S-4** CSP um `object-src 'none'; upgrade-insecure-requests` ergänzt (2026-07-09).
+- [x] **S-3** GitHub Actions auf Commit-SHA gepinnt (2026-07-09) — alle 5 Actions in `deploy.yml`.
+- [x] **S-13** `encodeURIComponent` im Wizard-CTA (2026-07-27) — inkl. Rückbau zweier vor-encodierter Datenwerte, sonst Doppel-Encoding.
+- [x] **S-10** `connect-src` um `*.google-analytics.com` + `*.analytics.google.com` erweitert (2026-07-27) — GA4 sendet an regionale Endpunkte.
 
 ## Betreiber / DNS / Netlify / GitHub-Settings (Go-Live)
 - [ ] **S-1** SPF + DKIM + DMARC einrichten/prüfen (wichtigster Betreiber-Punkt).
 - [ ] **S-5** CAA-Record + DNSSEC.
-- [ ] **S-8** apex als Netlify-Primary-Domain (www→apex 301).
+- [ ] **S-8** apex als Netlify-Primary-Domain (www→apex 301). *Repo-Seite fertig: 0 `www.`-Vorkommen in Canonicals, Sitemap und robots.txt — verbleibt reine Netlify-Einstellung.*
 - [ ] **S-7** Akismet-Spamfilter in Netlify Forms.
 - [ ] **S-6** HSTS-preload nur nach Subdomain-Check einreichen.
 - [ ] GitHub: **Dependabot** + **Secret-Scanning/Push-Protection** + **Branch-Protection** auf `main`; ggf. GH-Pages-Vorschau nach Netlify-Go-Live archivieren.

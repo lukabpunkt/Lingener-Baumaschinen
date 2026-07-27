@@ -3,8 +3,8 @@
 **Ziel:** Die neue Website auf der bestehenden Domain live stellen, ohne Google-Ranking und
 Sichtbarkeit zu verlieren.
 **Ausgangslage:** Alt = WordPress (WPML 4 Sprachen, WooCommerce, Yoast, großer Blog).
-Neu = statische Eleventy-Site (DE + EN), Deploy aktuell via GitHub Pages.
-**Datum:** 17.06.2026
+Neu = statische Eleventy-Site (DE + EN); Hosting-Entscheidung inzwischen gefallen: **Netlify** (GitHub Pages nur noch als Vorschau).
+**Datum:** 17.06.2026 · **Stand nachgezogen:** 2026-07-27
 
 Die Domain bleibt gleich — damit bleiben Domain-Autorität, Backlinks und Markenbekanntheit erhalten.
 Das Risiko liegt nicht im Domain- oder Dateiwechsel selbst, sondern darin, dass sich **fast alle
@@ -26,34 +26,34 @@ Genau das adressiert diese Checkliste.
 
 ## Phase 2 — Grundsatzentscheidungen (Scope)
 
-- [ ] **www oder ohne www?** Alt = ohne www (`lingener-baumaschinen.de`). Neue Site nutzt aktuell
+- [x] **www oder ohne www?** ✅ entschieden: **apex ohne www**; Repo vollständig umgestellt (0 `www.`-Vorkommen), www→apex-301 übernimmt Netlify. Alt = ohne www (`lingener-baumaschinen.de`). Neue Site nutzt aktuell
       überall `www`. Eine Variante festlegen — am sichersten die bisherige beibehalten — und die
       jeweils andere per 301 darauf weiterleiten.
-- [ ] **Französisch & Spanisch:** entfallen in der neuen Site. Entscheiden: neu aufbauen ODER bewusst
+- [x] **Französisch & Spanisch:** ✅ entschieden: aufgeben, Splat-301 `/fr/*` und `/es/*` auf `/en/` liegen in `src/_redirects.njk`. entfallen in der neuen Site. Entscheiden: neu aufbauen ODER bewusst
       aufgeben und alle `/fr/…` und `/es/…` per 301 auf das DE/EN-Pendant leiten (nicht 404 lassen).
-- [ ] **Blog `/aktuelles/`:** großer indexierter Bestand. Migrieren, Top-Artikel übernehmen, oder
+- [x] **Blog `/aktuelles/`:** ✅ entschieden: nicht migrieren, Splat-301 `/aktuelles/*` → `/`. großer indexierter Bestand. Migrieren, Top-Artikel übernehmen, oder
       sauber per 301 weiterleiten.
-- [ ] **Anwendungs-Landingpages (~17 Einzelseiten):** in der neuen Site auf eine Seite reduziert.
+- [x] **Anwendungs-Landingpages (~17 Einzelseiten):** ✅ vorerst alle per 301 auf `/anwendungen.html` (Top 5–8 als eigene Unterseiten bleiben eine Option nach Go-Live). in der neuen Site auf eine Seite reduziert.
       Wichtigste als eigene Unterseiten erhalten; Rest per 301 auf `/anwendungen.html`.
 - [ ] **Shop (WooCommerce):** entfällt. Prüfen, ob Produkt-URLs ranken; falls ja, in Redirect-Map aufnehmen.
 
 ## Phase 3 — Technisches Setup (kritisch)
 
-- [ ] **Echte 301-Weiterleitungen sicherstellen.** GitHub Pages kann das **nicht** serverseitig.
+- [x] **Echte 301-Weiterleitungen sicherstellen.** ✅ Netlify gewählt; `src/_data/redirects.js` + `src/_redirects.njk` erzeugen `_site/_redirects` (94 Zeilen, alle 301). GitHub Pages kann das **nicht** serverseitig.
       Empfehlung: Umzug auf **Cloudflare Pages** oder **Netlify** (`_redirects` mit `301`) oder
       Hosting mit `.htaccess`. Ohne 301-Fähigkeit kein verlustarmer Relaunch.
 - [ ] **Redirect-Map alt→neu vollständig anlegen** (Entwurf liegt in `CLAUDE.md`, Abschnitt 5) und
       gegen die Bestandsliste aus Phase 1 abgleichen — jede wichtige alte URL braucht ein Ziel.
-- [ ] **Custom Domain korrekt konfigurieren:** Build-`pathPrefix` auf `/` und `CNAME` setzen (bzw.
+- [x] **Custom Domain korrekt konfigurieren:** ✅ `pathPrefix` steht per Default auf `/`; `netlify.toml` setzt bewusst KEINEN `ELEVENTY_PATH_PREFIX`. (Der Prefix in `deploy.yml` gilt nur für die GH-Pages-Vorschau.) Build-`pathPrefix` auf `/` und `CNAME` setzen (bzw.
       Domain bei Cloudflare/Netlify im Root verbinden). Aktuell baut der Workflow auf einen
       GitHub-Projekt-Unterpfad — das passt nicht zur eigenen Domain.
-- [ ] **Kanonische Tags prüfen:** `<link rel="canonical">` zeigt auf finale Host-Variante (www/apex einheitlich).
-- [ ] **hreflang prüfen:** DE/EN korrekt verknüpft (x-default → DE). Entfallene Sprachen nicht mehr referenzieren.
-- [ ] **Sitemap aufräumen:** veraltete Root-`sitemap.xml` (nur 8 URLs) löschen; nur die generierte,
+- [x] **Kanonische Tags prüfen:** ✅ `<link rel="canonical">` zeigt durchgehend auf die finale Host-Variante (apex, ohne www).
+- [x] **hreflang prüfen:** ✅ DE/EN verknüpft, x-default → DE; FR/ES werden nicht mehr referenziert. DE/EN korrekt verknüpft (x-default → DE). Entfallene Sprachen nicht mehr referenzieren.
+- [x] **Sitemap aufräumen:** ✅ Root-`sitemap.xml` gelöscht, generierte Sitemap mit `<lastmod>` (Filter `isoDate`), aktuell 80 URLs. veraltete Root-`sitemap.xml` (nur 8 URLs) löschen; nur die generierte,
       vollständige Sitemap ausliefern. Idealerweise `<lastmod>` ergänzen.
-- [ ] **`robots.txt`:** keine versehentliche `Disallow: /`-Sperre aus der Entwicklung; Sitemap-Zeile
-      auf finalen Host. (Aktuell sauber `Allow: /`, inkl. KI-Crawler — gut.)
-- [ ] **`noindex` ausschließen:** sicherstellen, dass keine Seite ungewollt auf `noindex` steht
+- [x] **`robots.txt`:** ✅ keine versehentliche `Disallow: /`-Sperre aus der Entwicklung; `Allow: /`
+      inkl. KI-Crawler, Sitemap-Zeile auf dem finalen Host (apex).
+- [x] **`noindex` ausschließen:** ✅ einzige `noindex`-Seite ist `/team.html` (Mockup-Phase, gewollt) plus die 404-Seiten. sicherstellen, dass keine Seite ungewollt auf `noindex` steht
       (Front-Matter-Flag `noindex` nur auf rechtlich/technisch gewollten Seiten).
 - [ ] **HTTPS:** Zertifikat für die finale Domain aktiv; kein Mixed Content.
 
@@ -65,9 +65,9 @@ Genau das adressiert diese Checkliste.
       die ursprünglichen Such-Phrasen sollten vorkommen.
 - [ ] **Bilder & PDF:** stark verlinkte Assets (v. a. Prospekt-PDF) per 301 auf neue Pfade leiten;
       Alt-Texte für Google Images vergeben.
-- [ ] **Interne Verlinkung:** keine Links auf alte WP-Slugs; Navigation und Footer konsistent.
-- [ ] **Strukturierte Daten** (FAQ-/Produkt-Schema) vorhanden und valide.
-- [ ] **Ladezeit / Core Web Vitals:** neue Seite mindestens so schnell wie die alte (statisch = Vorteil).
+- [x] **Interne Verlinkung:** ✅ keine Links auf alte WP-Slugs, keine Off-Domain-Links mehr (PL-1 behoben). keine Links auf alte WP-Slugs; Navigation und Footer konsistent.
+- [x] **Strukturierte Daten** ✅ Organization-, Product- und FAQPage-Schema vorhanden und valide (2026-07-27 Korrektur: „Händlerübersicht"-Verweis entfernt, GM-450-H-Frästiefe vereinheitlicht). (FAQ-/Produkt-Schema) vorhanden und valide.
+- [x] **Ladezeit / Core Web Vitals:** ✅ Hero-LCP optimiert (verkleinerte `-bg.webp` + Preload auf 80 Seiten), self-hosted Fonts, keine Frameworks. neue Seite mindestens so schnell wie die alte (statisch = Vorteil).
 
 ## Phase 5 — Go-Live
 
