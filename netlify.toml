@@ -7,6 +7,12 @@
 [build]
   command = "npm run build"
   publish = "_site"
+  # Build überspringen, wenn ein Push AUSSCHLIESSLICH Markdown-Dateien geändert hat
+  # (Checklisten, README, QA-Berichte). Spart Build-Minuten auf dem Free-Tier.
+  # ⚠️ Netlify-Konvention ist invertiert: Exit 0 = Build ÜBERSPRINGEN, Exit ≠ 0 = bauen.
+  # Sicher, weil .eleventy.js templateFormats auf ["njk"] beschränkt — keine .md-Datei
+  # kann den Output beeinflussen. Gegen vier echte Commits verifiziert (2026-07-27).
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)*.md'"
 
 [build.environment]
   NODE_VERSION = "24"
