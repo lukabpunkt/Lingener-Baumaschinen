@@ -8,7 +8,7 @@
   <meta name="description" content="{{ description }}">
   {% if noindex %}<meta name="robots" content="noindex, follow">{% endif %}
   <!-- Open Graph / Social -->
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{{ ogType if ogType else 'website' }}">
   <meta property="og:url" content="{{ canonical }}">
   <meta property="og:title" content="{{ ogTitle if ogTitle else (og.title if og else title) }}">
   <meta property="og:description" content="{{ ogDescription if ogDescription else (og.description if og else description) }}">

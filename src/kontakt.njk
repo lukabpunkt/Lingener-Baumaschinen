@@ -169,7 +169,7 @@ eleventyComputed:
           </select>
         </div>
         <div class="field"><label for="k-nachricht">{% if lang == "de" %}Nachricht *{% else %}Message *{% endif %}</label><textarea id="k-nachricht" name="nachricht" placeholder="{% if lang == 'de' %}Wie können wir Ihnen helfen?{% else %}How can we help you?{% endif %}" required></textarea></div>
-        <label class="field-check"><input type="checkbox" name="datenschutz" value="akzeptiert" required> {% if lang == "de" %}Ich habe die <a href="/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Datenschutzerklärung</a> zur Kenntnis genommen.{% else %}I have read the <a href="/en/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Privacy Policy</a>.{% endif %}</label>
+        <label class="field-check"><input type="checkbox" name="datenschutz" value="{% if lang == 'de' %}akzeptiert{% else %}accepted{% endif %}" required> {% if lang == "de" %}Ich habe die <a href="/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Datenschutzerklärung</a> zur Kenntnis genommen.{% else %}I have read the <a href="/en/datenschutz.html" style="color: var(--brand); text-decoration: underline;">Privacy Policy</a>.{% endif %}</label>
         <button type="submit" class="btn btn-primary mt-4">{% if lang == "de" %}Nachricht senden{% else %}Send message{% endif %} <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
         <p data-form-status role="status" hidden style="color: var(--brand); font-weight: 500;"></p>
       </form>

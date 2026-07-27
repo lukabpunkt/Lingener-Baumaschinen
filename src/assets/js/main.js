@@ -330,7 +330,7 @@
             descEN:'Maximum excavator attachment depth: 1,500 mm. For depths up to 2,000 mm on an excavator — consultation required.', modell:'gm-140-afh-600' },
           { tag:'Beratung', tagEN:'Consultation', name:'Sonderlösung > 1.500 mm', nameEN:'Custom solution > 1,500 mm', slug:null,
             desc:'Für Frästiefen über 1.500 mm am Bagger sprechen Sie uns direkt an — wir finden die optimale Lösung.',
-            descEN:'For cutting depths over 1,500 mm on an excavator, contact us directly — we will find the optimal solution.', modell:'Baggeranbau-Sonderl%C3%B6sung' }
+            descEN:'For cutting depths over 1,500 mm on an excavator, contact us directly — we will find the optimal solution.', modell:'Baggeranbau-Sonderlösung' }
         ],
         /* > 2.000 mm — Tiefengeräte, alternativ am schweren Träger */
         x: [
@@ -464,7 +464,7 @@
         x: [
           { tag:'Beratung', tagEN:'Consultation', name:'Individuelle Lösung', slug:null,
             desc:'Für Frästiefen über 2.000 mm ohne Trägergerät beraten wir Sie direkt.',
-            descEN:'For cutting depths over 2,000 mm without a carrier machine, contact us directly.', modell:'Selbstfahrer-Sonderl%C3%B6sung' }
+            descEN:'For cutting depths over 2,000 mm without a carrier machine, contact us directly.', modell:'Selbstfahrer-Sonderlösung' }
         ]
       },
       /* ─── TIEFENFRÄSE ───────────────────────────────────────────────────
@@ -580,7 +580,7 @@
           + (r.slug
             ? '<a href="' + maschBase + r.slug + '.html" class="wizard-rcard-link">' + detailLabel + arrowSvg + '</a>'
             : '')
-          + '<a href="' + kontaktBase + '?modell=' + r.modell + '" class="wizard-rcard-cta">' + ctaLabel
+          + '<a href="' + kontaktBase + '?modell=' + encodeURIComponent(r.modell) + '" class="wizard-rcard-cta">' + ctaLabel
           + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>'
           + '</div>';
       }).join('');
