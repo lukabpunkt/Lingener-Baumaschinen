@@ -20,10 +20,13 @@ permalink: /en/404.html
     .err-page > * { position: relative; z-index: 1; }
   </style>
   {% if site.ga4 and site.ga4 != "G-XXXXXXXXXX" %}
-  <!-- Google Analytics 4 + Consent Mode v2 — Measurement ID centrally in src/_data/site.js -->
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:800});gtag('js',new Date());</script>
+  <!-- Google Analytics 4 + Consent Mode v2 — Measurement ID centrally in src/_data/site.js.
+       This page deliberately does not use base.njk but must satisfy the same CSP:
+       ga4-init.js instead of an inline script (script-src without 'unsafe-inline'),
+       loaded synchronously so the consent default is set before the async gtag.js
+       loader. ga4-init.js handles consent default + js + config in one. -->
+  <script src="/assets/js/ga4-init.js" data-ga4="{{ site.ga4 }}"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga4 }}"></script>
-  <script>gtag('config','{{ site.ga4 }}');</script>
   {% endif %}
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Manufacturer specialising in the sale, hire and servicing of trench cutters for civil engineering, cable, road and track construction. Founded 1969, worldwide dealer network.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Lower Saxony","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}</script>
 </head>
