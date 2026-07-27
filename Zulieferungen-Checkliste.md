@@ -117,25 +117,66 @@ Die Team-Seite ist aktuell mit **KI-generierten Beispiel-Portraits** gefüllt. V
 
 ## 6 · 🔴 Netlify-Konto & Dashboard-Aktionen (kann nur der Kontoinhaber)
 
-**Voraussetzung:** Netlify-Konto, verbunden mit dem GitHub-Repo `lukabpunkt/Lingener-Baumaschinen`.
-Falls noch nicht geschehen: <https://app.netlify.com> → „Add new site" → „Import an
-existing project" → GitHub → Repo wählen. Build-Einstellungen werden automatisch aus
-`netlify.toml` gelesen — nichts eintragen.
+> **Stand 2026-07-27: Das Projekt läuft.** Vorschau: <https://lingener-baumaschinen.netlify.app>
+> · Dashboard: <https://app.netlify.com/projects/lingener-baumaschinen>
+> · Site-ID `b7a1838d-acfe-4523-b82d-9167aaf6d5ee` · Git-angebunden an Branch `main`,
+> jeder Push löst automatisch einen Build aus.
 
-Danach im Netlify-Dashboard:
-1. **Forms aktivieren + E-Mail-Benachrichtigung:** Site → **Forms** → nach dem ersten
-   Deploy erscheinen die Formulare (`kontakt`, `gebrauchtmaschine`, `bewerbung`) →
-   **Form notifications** → „Email notification" → Empfängeradresse
-   (z. B. info@lingener-baumaschinen.de) eintragen. Für `bewerbung` (Karriere-Seite,
-   Initiativbewerbungen inkl. Lebenslauf-PDF) ggf. eine eigene Benachrichtigung an
-   die/den Personalverantwortliche/n einrichten.
-   ⚠️ Ohne diesen Schritt landen Kundenanfragen NUR im Dashboard und niemand merkt es.
-2. Optional: Forms → Spam-Schutz (Akismet) aktivieren.
-3. **Custom Domain:** Site → Domain management → `lingener-baumaschinen.de` als
-   **Primary domain** hinzufügen (apex, ohne www; www als Alias → Netlify leitet
-   automatisch www→apex per 301 um).
-4. **Deploy-Preview testen** (VOR der DNS-Umstellung!): Die `…netlify.app`-URL aufrufen —
-   ich mache dann die technische Verifikation (301-Stichproben, Security-Header, Formulare).
+### ✅ Bereits erledigt (über die Netlify-API)
+
+- **Formularerkennung aktiviert.** Sie war am Projekt **ausgeschaltet** — die API meldete
+  `forms: "not enabled"` und null erkannte Formulare. Wäre die Seite so live gegangen,
+  hätte das Frontend jede Anfrage brav mit „gesendet" quittiert, während Netlify nichts
+  entgegennimmt: **alle Kundenanfragen wären spurlos verschwunden.**
+  Nach dem Aktivieren und einem neuen Deploy sind alle drei Formulare erkannt —
+  `kontakt`, `gebrauchtmaschine`, `bewerbung` (letzteres inkl. `lebenslauf` als
+  Datei-Feld), jeweils mit aktivem Honeypot.
+- **Ende-zu-Ende getestet:** Ein echter Testeintrag über das Kontaktformular kam mit allen
+  Feldern korrekt an. Damit ist bewiesen, dass Honeypot, AJAX-POST auf `/` und `form-name`
+  zusammenspielen.
+- **Projekt umbenannt** von `candid-semolina-d3f436` auf `lingener-baumaschinen`.
+- **Security-Header, 301-Redirects und Calendly real verifiziert** — siehe Abschnitt 6b.
+
+### 🔴 Was jetzt nur du im Dashboard machen kannst
+
+1. **E-Mail-Benachrichtigung für die Formulare** — Site → **Forms** → **Form notifications**
+   → „Email notification" → Empfänger eintragen (z. B. info@lingener-baumaschinen.de).
+   Für `bewerbung` sinnvollerweise eine eigene Benachrichtigung an die/den
+   Personalverantwortliche/n, weil dort Lebensläufe als PDF ankommen.
+   ⚠️ **Das ist der letzte verbleibende Schritt, damit Anfragen tatsächlich jemanden
+   erreichen.** Ohne ihn liegen sie nur im Dashboard und niemand merkt es.
+   *(Über die API nicht einstellbar — geht nur in der Oberfläche.)*
+   - Nebenbei: Netlify beschriftet die Felder in der Benachrichtigung mit den **englischen**
+     Labels („Name *", „Company", „Message *"), weil DE- und EN-Formular denselben
+     `form-name` teilen. Nur kosmetisch, die Werte stimmen.
+2. **Akismet-Spamfilter** aktivieren — Forms → Spam filtering.
+3. **Custom Domain hinzufügen** — Domain management → `lingener-baumaschinen.de` als
+   **Primary domain**, `www.lingener-baumaschinen.de` als Alias (Netlify legt www→apex
+   als 301 automatisch an). **Das schaltet noch nichts live** — solange das DNS auf
+   WordPress zeigt, bleibt die alte Seite online. Erst danach zeigt Netlify die exakten
+   DNS-Zielwerte für Punkt 7 an.
+4. **Deploy-Benachrichtigung** einrichten (Site configuration → Notifications), damit ein
+   fehlgeschlagener Build nicht unbemerkt bleibt.
+5. **Testeintrag löschen** — Forms → `kontakt` → der Eintrag „TESTEINTRAG Claude Code".
+   Ich konnte ihn nicht selbst entfernen: die Löschoperation der Netlify-Schnittstelle
+   antwortete dreimal mit einem Server-Fehler (502), während alle anderen Aufrufe liefen.
+   Ein Klick im Dashboard.
+
+### 6b · Abnahmemessung auf Netlify (2026-07-27) — erstmals wirklich möglich
+
+Auf der GitHub-Pages-Vorschau war das systembedingt nie prüfbar, weil dort keine Header
+und keine Weiterleitungen ausgeliefert werden.
+
+| Geprüft | Ergebnis |
+|---|---|
+| Security-Header (CSP, HSTS, X-Frame, X-Content-Type, Referrer, Permissions) | ✅ auf Startseite, Maschinenseite, Rechtsseite **und** 404 |
+| **Calendly** — der Fall, den erst die unabhängige Prüfung fand | ✅ iframe lädt von `calendly.com` (Apex), **0 CSP-Verstöße** in der Konsole. Der CSP-Fix wirkt. |
+| Modell-Redirects, Anwendungs-Landingpages, Funktionsseiten | ✅ Status 301, korrektes Ziel |
+| Alte Pfade mit Namenskollision (`/maschinen/`, `/kontakt/`, `/faq/` …) | ✅ **nach Fix**: ein Sprung auf die `.html`-URL. Vorher normalisierte Netlify sie auf eine nicht-kanonische URL. |
+| FR/ES → `/en/`, Blog `/aktuelles/*` → `/` | ✅ 301 |
+| EN-Deeplinks ohne Mapping | ✅ **nach Fix**: englische 404-Seite mit Status 404. Vorher kam die **deutsche** Fehlerseite, weil die alte Regel `/en/* → /en/` selbstreferenziell war und von Netlify als Schleife ignoriert wurde. |
+| Alle echten Seiten DE/EN inkl. 60 Maschinenseiten | ✅ 200 |
+| 404 DE und EN | ✅ echter Status 404, jeweils richtige Sprache |
 
 ---
 
@@ -148,8 +189,11 @@ den Unterlagen/Rechnungen des bisherigen Hosters).
 1. Login beim Registrar → DNS-Verwaltung der Domain.
 2. Netlify zeigt unter Domain management → „Set up Netlify DNS" bzw. „Check DNS
    configuration" die genauen Werte an. Standard:
-   - **A-Record** für `@` (apex) → `75.2.60.5` (Netlifys Load-Balancer-IP; im Dashboard verifizieren!)
-   - **CNAME** für `www` → `<sitename>.netlify.app`
+   - **A-Record** für `@` (apex) → `75.2.60.5` (Netlifys Load-Balancer-IP; **im Dashboard verifizieren**, Netlify zeigt den gültigen Wert nach dem Hinzufügen der Domain an)
+   - **CNAME** für `www` → `lingener-baumaschinen.netlify.app`
+   - **Nameserver NICHT umstellen.** Wir bleiben bewusst bei deinem DNS-Anbieter und
+     ändern dort nur diese zwei Einträge — so bleiben MX-, SPF-, DKIM- und
+     DMARC-Records unangetastet und die Firmen-E-Mail kann nicht ausfallen.
 3. Alte A-/CNAME-Records auf den WordPress-Server entfernen/ersetzen.
 4. ⚠️ **Reihenfolge:** Erst wenn Punkt 6 komplett ist und die Preview geprüft wurde.
    Ab diesem Schritt ist die neue Site live — Rückweg nur durch DNS-Rückstellung.
