@@ -157,10 +157,8 @@ Die Team-Seite ist aktuell mit **KI-generierten Beispiel-Portraits** gefüllt. V
    DNS-Zielwerte für Punkt 7 an.
 4. **Deploy-Benachrichtigung** einrichten (Site configuration → Notifications), damit ein
    fehlgeschlagener Build nicht unbemerkt bleibt.
-5. **Testeintrag löschen** — Forms → `kontakt` → der Eintrag „TESTEINTRAG Claude Code".
-   Ich konnte ihn nicht selbst entfernen: die Löschoperation der Netlify-Schnittstelle
-   antwortete dreimal mit einem Server-Fehler (502), während alle anderen Aufrufe liefen.
-   Ein Klick im Dashboard.
+*(Der Testeintrag aus der Formular-Verifikation wurde wieder gelöscht — das Kontaktformular
+steht bei null Einträgen.)*
 
 ### 6b · Abnahmemessung auf Netlify (2026-07-27) — erstmals wirklich möglich
 
