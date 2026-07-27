@@ -10,9 +10,9 @@ const items = [
   },
   {
     qde: 'Wie tief kann eine LIBA-Grabenfräse fräsen?',
-    ade: 'Die Frästiefe hängt vom Modell ab. Kompakte Baggeranbau-Fräsen erreichen bis zu 900 mm, Schlepperanbau-Modelle wie die GM 180 AF bis 1.800 mm. Tiefenfräsen wie die GM 450 H ermöglichen bis zu 3.000 mm Frästiefe für anspruchsvollen Sondertiefbau.',
+    ade: 'Die Frästiefe hängt vom Modell ab. Kompakte Baggeranbau-Fräsen erreichen bis zu 900 mm, Schlepperanbau-Modelle wie die GM 180 AF bis 1.800 mm. Tiefenfräsen wie die GM 450 H ermöglichen bis zu 4.500 mm Frästiefe für anspruchsvollen Sondertiefbau.',
     qen: 'How deep can a LIBA trench cutter cut?',
-    aen: 'Cutting depth depends on the model. Compact excavator-mounted cutters reach up to 900 mm, tractor-mounted models such as the GM 180 AF up to 1,800 mm. Deep-cut machines such as the GM 450 H enable up to 3,000 mm for demanding special civil engineering.',
+    aen: 'Cutting depth depends on the model. Compact excavator-mounted cutters reach up to 900 mm, tractor-mounted models such as the GM 180 AF up to 1,800 mm. Deep-cut machines such as the GM 450 H enable up to 4,500 mm for demanding special civil engineering.',
   },
   {
     qde: 'Kann ich bei LIBA eine Grabenfräse mieten?',
