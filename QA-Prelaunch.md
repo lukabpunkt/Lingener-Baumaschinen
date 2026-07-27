@@ -2,7 +2,7 @@
 
 **Datum:** 2026-06-24 · **Runde 2** (nach `QA-Report.md`) · **Methodik:** echte Browser-Testläufe über **alle 88 Seiten** (Playwright/axe/Lighthouse) + **8 unabhängige, adversariale Agenten** + deterministische Verifikation der Neufunde. Baseline = `QA-Report.md`. **Report-only — kein Code geändert.**
 
-> **Erledigungsstand (Nachtrag 2026-07-27):** PL-1, PL-2, PL-4, PL-6 sowie PL-5 und PL-7 sind behoben, PL-3 technisch abgesichert. Der Report bleibt als Momentaufnahme vom 2026-06-24 stehen; die Erledigungsvermerke stehen jeweils direkt beim Befund. Aktueller Gesamtstand: `GO-LIVE-Checkliste.md`.
+> **Erledigungsstand (Nachtrag 2026-07-27):** PL-1, PL-2, PL-5, PL-6 und PL-7 sind behoben, PL-3 technisch abgesichert. **PL-4 (EN-Zahlenformat) ist weiterhin offen** — eine erste Notiz hatte es fälschlich als erledigt geführt, die unabhängige Prüfung hat das widerlegt. Der Report bleibt als Momentaufnahme vom 2026-06-24 stehen; die Erledigungsvermerke stehen jeweils direkt beim Befund. Aktueller Gesamtstand: `GO-LIVE-Checkliste.md`.
 
 ## Go/No-Go: 🟢 GRÜN nach 2 schnellen Fixes
 
@@ -45,7 +45,7 @@
 ---
 
 ## 🔵 MINOR
-- **PL-4 — ✅ BEHOBEN — EN-Zahlenformat:** englische Prosa nutzt deutsches Tausender-Format „1.600 mm / 1.300 mm" (inkonsistent: hand-getextete EN-Startseite nutzt korrekt „1,800 mm"). Auch die **Hero-Tiefenskala zeigt „3.000 mm" auf EN-Seiten** (per `aria-hidden` für AT versteckt, aber sichtbar). Quelle `maschinenseiten.js` / `index.njk`. *(MI-14)*
+- **PL-4 — ❌ OFFEN (Korrektur 2026-07-27: war fälschlich als behoben notiert) — EN-Zahlenformat:** Nachprüfung im Build zeigt, dass **nichts davon behoben ist**: alle 60 EN-Maschinenseiten nutzen weiterhin deutsche Tausendertrenner in englischer Prosa **und** im Product-JSON-LD (`4.500 mm` statt `4,500 mm`), Quelle ist das gemeinsame `val`-Feld in `src/_data/maschinen.js`, das DE und EN teilt. Dadurch widersprechen sich seit dem 2026-07-27 sogar zwei EN-Seiten: `/en/maschinen.html` sagt „4,500 mm", `/en/maschinen/gm-450-h.html` sagt „4.500 mm". **Fix-Ansatz:** `valEN`-Feld nutzen (existiert bereits für Texte wie „from 400 hp") oder die Zahlen beim Rendern lokalisieren. Ursprünglicher Befund: englische Prosa nutzt deutsches Tausender-Format „1.600 mm / 1.300 mm" (inkonsistent: hand-getextete EN-Startseite nutzt korrekt „1,800 mm"). Auch die **Hero-Tiefenskala zeigt „3.000 mm" auf EN-Seiten** (per `aria-hidden` für AT versteckt, aber sichtbar). Quelle `maschinenseiten.js` / `index.njk`. *(MI-14)*
 - **PL-5 — ✅ BEHOBEN — heading-order:** `unternehmen.html` springt h2→h4 (4 Prinzip-Karten; indexierte Seite). `impressum.html` h1→h3 (noindex, vernachlässigbar). → Karten-Headings auf `<h3>` setzen, Größe per CSS halten. *(Unternehmen 2026-07-09. Rechtsseiten 2026-07-27 — dabei zeigte sich, dass der h1→h3-Sprung nicht nur im Impressum, sondern genauso in `datenschutz.html` und `agb.html` steckte; alle drei auf `h2` gehoben, Optik über `.prose h2, .prose h3` in `main.css` gehalten.)*
 - **PL-6 — ✅ BEHOBEN — Redundante Redirect-Zeile:** `_redirects` hat `/aktuelles/` zusätzlich zur Splat-Regel `/aktuelles/*` (unerreichbar, gleiches Ziel). Kosmetisch; Netlify-Warnung möglich. Quelle `src/_redirects.njk`.
 - **PL-7 — ✅ BEHOBEN (2026-07-27) — EN-Privacy-Checkbox `value="akzeptiert"`** (deutsch). Nicht sichtbar, Einwilligung wird trotzdem übertragen; kosmetisch. *Jetzt sprachabhängig in allen drei Formularen — inzwischen betraf es auch das neue Bewerbungsformular.*

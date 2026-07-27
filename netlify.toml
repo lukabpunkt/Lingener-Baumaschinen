@@ -19,6 +19,13 @@
 # connect-src enthält neben www.google-analytics.com auch *.google-analytics.com und
 # *.analytics.google.com: GA4 sendet Messwerte an regionale Endpunkte (region1.…),
 # die sonst geblockt würden und einzelne Hits verlieren (S-10).
+#
+# WICHTIG — CSP-Wildcards decken die Apex-Domain NICHT ab: `*.calendly.com` matcht
+# `assets.calendly.com`, aber nicht `calendly.com`. Das Calendly-Widget lädt seinen
+# iframe genau von der Apex-Domain, deshalb steht `https://calendly.com` ueberall
+# zusaetzlich zum Wildcard. Gleiches gilt fuer analytics.google.com.
+# Das Widget zieht ausserdem sein eigenes Stylesheet von assets.calendly.com nach —
+# daher der Eintrag in style-src.
 [[headers]]
   for = "/*"
   [headers.values]
@@ -27,4 +34,4 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://assets.calendly.com https://*.calendly.com https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; object-src 'none'; frame-src https://*.calendly.com https://js.stripe.com; connect-src 'self' https://*.calendly.com https://*.stripe.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://calendly.com https://*.calendly.com https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https:; font-src 'self'; object-src 'none'; frame-src https://calendly.com https://*.calendly.com https://js.stripe.com; connect-src 'self' https://calendly.com https://*.calendly.com https://*.stripe.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"

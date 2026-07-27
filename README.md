@@ -106,17 +106,20 @@ DE- und EN-Variante teilen sich jeweils denselben `form-name`, laufen also in de
 
 ## Designtokens
 
+Definiert in `src/assets/css/main.css` (`:root`) — dort steht die maßgebliche, vollständige Liste.
+
 | Token | Wert | Bedeutung |
 |---|---|---|
 | `--brand` | `#0E7C7B` | LIBA Teal (Primärfarbe) |
-| `--brand-deep` | `#064E4F` | Dunkles Teal (Hover, Tiefe) |
+| `--brand-deep` | `#0A5E5D` | Dunkles Teal (Hover, Tiefe) |
 | `--brand-light` | `#5EEAD4` | Helles Teal (Akzent auf Dunkel) |
 | `--accent` | `#F59E0B` | Industrie-Amber (CTAs) |
-| `--ink` | `#0A0E14` | Tiefes Schiefer-Schwarz |
-| `--font-display` | Space Grotesk | Überschriften |
-| `--font-sans` | Inter | Fließtext |
+| `--ink` | `#0B0F14` | Tiefes Schiefer-Schwarz |
+| `--canvas` | `#FFFFFF` | Heller Grund |
+| `--font-sans` / `--font-display` | Inter | Fließtext **und** Überschriften |
+| `--font-serif` | Instrument Serif | kursive Akzente (`.serif-italic`) |
 
-Schriften sind **selbst gehostet** (`src/assets/fonts/`, eingebunden über `assets/css/fonts.css`) — kein Google-Fonts-Request, DSGVO-konform.
+Schriften sind **selbst gehostet** (`src/assets/fonts/`, eingebunden über `assets/css/fonts.css`) — kein Google-Fonts-Request, DSGVO-konform. Eingebunden sind genau drei Familien: Inter, Instrument Serif und JetBrains Mono.
 
 ## Weitere Dokumente
 

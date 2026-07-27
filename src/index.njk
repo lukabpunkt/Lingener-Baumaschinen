@@ -63,9 +63,9 @@ eleventyComputed:
     <span class="hero-gauge-cap">{% if lang == "de" %}Frästiefe{% else %}Cutting depth{% endif %}</span>
     <div class="hero-gauge-scale">
       <span class="t"><i>0</i></span>
-      <span class="t"><i>1.000</i></span>
-      <span class="t"><i>2.000</i></span>
-      <span class="t"><i>3.000&nbsp;mm</i></span>
+      <span class="t"><i>{% if lang == "de" %}1.500{% else %}1,500{% endif %}</i></span>
+      <span class="t"><i>{% if lang == "de" %}3.000{% else %}3,000{% endif %}</i></span>
+      <span class="t"><i>{% if lang == "de" %}4.500{% else %}4,500{% endif %}&nbsp;mm</i></span>
     </div>
   </div>
 
