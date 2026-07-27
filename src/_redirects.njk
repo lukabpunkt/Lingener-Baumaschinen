@@ -16,10 +16,19 @@ eleventyExcludeFromCollections: true
 {% endfor %}
 # --- Sammel-/Splat-Regeln (spezifische Regeln oben gewinnen, Catch-all zuletzt) ---
 # ACHTUNG: Die Splats bleiben BEWUSST ohne "!". Ein geforcter /en/*-Splat würde jede
-# echte englische Seite auf die EN-Startseite umleiten und die halbe Website zerstören.
-# EN-Fallback: alte, nicht einzeln gemappte englische Deeplinks auf die EN-Startseite
-# (verhindert 404, bis die vollständige EN-Map aus dem Search-Console-Export vorliegt).
-/en/*         /en/   301
+# echte englische Seite überdecken und die halbe Website zerstören.
+#
+# EN-Fallback: liefert die ENGLISCHE 404-Seite für nicht gemappte englische Deeplinks.
+# Vorher stand hier `/en/*  /en/  301`. Diese Regel war wirkungslos: Das Ziel `/en/`
+# matcht das eigene Muster `/en/*`, Netlify erkennt die Schleife und ignoriert die Regel
+# (auf Netlify gemessen 2026-07-27 — /fr/* und /es/* funktionieren, weil ihr Ziel
+# ausserhalb des eigenen Musters liegt). Ergebnis war: englische Besucher bekamen die
+# DEUTSCHE Fehlerseite, weil Netlify auf das Root-404.html zurückfiel.
+# Ein 404-Rewrite statt eines 301 loest beides: keine Schleife, richtige Sprache, und
+# ein echter 404-Status ist SEO-seitig ohnehin besser als ein Sammel-Redirect auf die
+# Startseite (Google wertet solche Catch-all-Weiterleitungen als Soft-404).
+# Die vollstaendige EN-Weiterleitungsliste kommt spaeter aus dem Search-Console-Export.
+/en/*         /en/404.html   404
 # FR & ES entfallen -> beide auf die englische Seite.
 /fr/*         /en/   301
 /es/*         /en/   301
