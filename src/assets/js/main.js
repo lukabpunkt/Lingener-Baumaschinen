@@ -857,4 +857,41 @@
     } else { update(); }
   }
 
+  /* Ankersprung beim Laden nachsetzen.
+     Ursache: html { scroll-behavior: smooth } laesst Chrome den browserseitigen
+     Sprung auf #hash als weiche Animation ausfuehren. Die bricht ab, sobald
+     Hero-Bilder und Schriften die Layouthoehe noch verschieben — die Seite bleibt
+     dann oben stehen. Betrifft jeden Aufruf mit Fragment, u. a. den Anfrage-Button
+     und die Angebots-Links aus dem ROI-Rechner (/kontakt.html?modell=...#anfrage).
+     Deshalb nach dem load-Event einmal hart nachsetzen, mit kurzzeitig
+     abgeschaltetem smooth-Scrolling, damit es nicht erneut wegdriftet. */
+  if (window.location.hash.length > 1) {
+    let userScrolled = false;
+    const noteUserScroll = () => { userScrolled = true; };
+    window.addEventListener('wheel', noteUserScroll, { passive: true, once: true });
+    window.addEventListener('touchstart', noteUserScroll, { passive: true, once: true });
+    window.addEventListener('keydown', noteUserScroll, { once: true });
+
+    const jumpToHash = () => {
+      if (userScrolled) return;
+      let target = null;
+      try { target = document.getElementById(decodeURIComponent(window.location.hash.slice(1))); } catch (e) { /* ungueltiges Fragment */ }
+      if (!target) return;
+      const root = document.documentElement;
+      const prev = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      target.scrollIntoView();
+      root.style.scrollBehavior = prev;
+    };
+
+    /* Mehrfach nachsetzen statt einmal: Der erste Versuch faellt noch in die
+       laufende page-enter-Animation (.1s Verzoegerung + .9s Dauer), spaetere
+       Layoutspruenge durch Hero-Bilder und Schriften verschieben das Ziel
+       zusaetzlich. Sobald der Besucher selbst scrollt, wird abgebrochen —
+       niemand soll gegen die Seite ankaempfen muessen. */
+    window.addEventListener('load', () => {
+      [0, 120, 400, 1100].forEach((delay) => setTimeout(jumpToHash, delay));
+    });
+  }
+
 })();
