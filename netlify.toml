@@ -18,7 +18,7 @@
   NODE_VERSION = "24"
 
 # Sicherheits-Header (MA-3). CSP erlaubt self + die tatsächlich genutzten Dritt-Origins
-# (Calendly/Stripe nur nach Klick; Google Analytics/Tag Manager, sobald echte GA4-ID gesetzt ist).
+# (Stripe; Google Analytics/Tag Manager, sobald echte GA4-ID gesetzt ist).
 # script-src OHNE 'unsafe-inline': alle Seiten-Skripte sind ausgelagert
 # (main.js, ga4-init.js). style-src behält 'unsafe-inline' für style=-Attribute
 # (Hero-Hintergründe, Layout-Feinheiten) — für style-Attribute ist das risikoarm.
@@ -26,12 +26,14 @@
 # *.analytics.google.com: GA4 sendet Messwerte an regionale Endpunkte (region1.…),
 # die sonst geblockt würden und einzelne Hits verlieren (S-10).
 #
-# WICHTIG — CSP-Wildcards decken die Apex-Domain NICHT ab: `*.calendly.com` matcht
-# `assets.calendly.com`, aber nicht `calendly.com`. Das Calendly-Widget lädt seinen
-# iframe genau von der Apex-Domain, deshalb steht `https://calendly.com` ueberall
-# zusaetzlich zum Wildcard. Gleiches gilt fuer analytics.google.com.
-# Das Widget zieht ausserdem sein eigenes Stylesheet von assets.calendly.com nach —
-# daher der Eintrag in style-src.
+# WICHTIG — CSP-Wildcards decken die Apex-Domain NICHT ab: `*.analytics.google.com`
+# matcht `region1.analytics.google.com`, aber nicht `analytics.google.com`. Deshalb
+# steht die Apex-Form jeweils zusaetzlich zum Wildcard. Wer hier eine Herkunft
+# ergaenzt, muss beide Formen eintragen.
+#
+# Calendly wurde am 2026-08-03 vollstaendig entfernt (Terminbuchung gestrichen);
+# calendly.com, *.calendly.com und assets.calendly.com sind damit aus script-src,
+# style-src, frame-src und connect-src verschwunden.
 [[headers]]
   for = "/*"
   [headers.values]
@@ -40,4 +42,4 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://calendly.com https://*.calendly.com https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; img-src 'self' data: https:; font-src 'self'; object-src 'none'; frame-src https://calendly.com https://*.calendly.com https://js.stripe.com; connect-src 'self' https://calendly.com https://*.calendly.com https://*.stripe.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; object-src 'none'; frame-src https://js.stripe.com; connect-src 'self' https://*.stripe.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"

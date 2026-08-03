@@ -47,35 +47,6 @@ eleventyComputed:
   </div>
 </section>
 
-<section class="section section-dark" id="anfrage">
-  <div class="container">
-    <div class="section-header reveal" style="margin-bottom: 2.5rem;">
-      <div class="heading">
-        <span class="section-index is-dark" style="color: var(--brand-light);">{% if lang == "de" %}01 / Termin{% else %}01 / Book a call{% endif %}</span>
-        <h2 class="mt-3">{% if lang == "de" %}Termin für ein<br><em class="serif-italic">Beratungsgespräch.</em>{% else %}Book a<br><em class="serif-italic">consultation call.</em>{% endif %}</h2>
-      </div>
-      <div class="aside">
-        <p class="lead">{% if lang == "de" %}Wählen Sie einen freien Termin — wir rufen Sie zur vereinbarten Zeit direkt an. Kein Callcenter, keine Warteschleife.{% else %}Pick a free slot and we'll call you at the agreed time. No call centre, no hold music.{% endif %}</p>
-        <ul class="spec-list is-kerf mt-3">
-          <li><strong>{% if lang == "de" %}30 Minuten{% else %}30 minutes{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Technische Beratung direkt vom LIBA-Konstrukteur.{% else %}Technical advice direct from the LIBA engineering team.{% endif %}</span></li>
-          <li><strong>{% if lang == "de" %}Direkte Leitung{% else %}Direct line{% endif %}</strong><span class="spec-desc">{% if lang == "de" %}Persönlicher Ansprechpartner vom Erstkontakt bis zur Auslieferung.{% else %}Personal point of contact from first enquiry through to delivery.{% endif %}</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="reveal">
-      <!-- Calendly erst nach ausdrücklicher Einwilligung laden (DSGVO: kein US-Transfer vor Klick) -->
-      <div id="calendly-consent" style="border:1px solid var(--line,#d8d8d8); border-radius:12px; padding:1.75rem; text-align:center; background:var(--surface,#f6f5f2); color:var(--ink,#1a2230);">
-        <p style="margin:0 0 1rem; color:#1a2230;">{% if lang == 'de' %}Online-Terminbuchung über <strong>Calendly</strong>. Beim Laden werden Daten (u. a. Ihre IP-Adresse) an Calendly LLC in den USA übertragen.{% else %}Online appointment booking via <strong>Calendly</strong>. Loading it transfers data (incl. your IP address) to Calendly LLC in the USA.{% endif %}</p>
-        <button type="button" class="btn btn-primary" id="calendly-load">{% if lang == 'de' %}Terminbuchung laden{% else %}Load booking calendar{% endif %}</button>
-      </div>
-      <div class="calendly-inline-widget"
-        data-calendly-url="https://calendly.com/luka-bloemendal/30min?background_color=111827&text_color=f1f5f9&primary_color=5eead4{% if lang == 'de' %}&locale=de{% else %}&locale=en{% endif %}"
-        style="min-width: 320px; display:none;"></div>
-      <!-- Klick-zum-Laden-Logik liegt in /assets/js/main.js (CSP ohne 'unsafe-inline') -->
-    </div>
-  </div>
-</section>
-
 <section class="section">
   <div class="container">
     <div class="grid grid-2 reveal">
@@ -131,12 +102,16 @@ eleventyComputed:
   </div>
 </section>
 
-<section class="section" id="kontaktformular" style="padding-top: 0;">
+{# id="anfrage" liegt seit dem Entfernen der Terminbuchung (2026-08-03) auf dem Formular.
+   Darauf verlinken der Anfrage-Button in Top-Bar und Navigation (base.njk, jede Seite),
+   die Gebrauchtmaschinen-Seite und der ROI-Rechner in main.js — insgesamt zehn Stellen.
+   Der frühere Anker "kontaktformular" war nirgends verlinkt und ist hier aufgegangen. #}
+<section class="section" id="anfrage" style="padding-top: 0;">
   <div class="container">
     <hr class="divider">
     <div class="split align-start reveal">
       <div>
-        <span class="section-index">{% if lang == "de" %}02 / Schreiben Sie uns{% else %}02 / Send us a message{% endif %}</span>
+        <span class="section-index">{% if lang == "de" %}01 / Schreiben Sie uns{% else %}01 / Send us a message{% endif %}</span>
         <h2 class="mt-3">{% if lang == "de" %}Lieber per<br><em class="serif-italic">Formular?</em>{% else %}Prefer to<br><em class="serif-italic">write to us?</em>{% endif %}</h2>
         <p class="lead mt-3">{% if lang == "de" %}Beschreiben Sie kurz Ihr Anliegen — wir antworten werktags innerhalb von 24 Stunden.{% else %}Briefly describe your enquiry — we respond on working days within 24 hours.{% endif %}</p>
         <ul class="spec-list is-kerf mt-4">

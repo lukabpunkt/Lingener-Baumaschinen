@@ -3038,10 +3038,6 @@ p { color: var(--steel-700); text-wrap: pretty; }
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Calendly inline widget — responsive height */
-.calendly-inline-widget { height: 630px; }
-@media (min-width: 480px) { .calendly-inline-widget { height: 700px; } }
-
 /* Body bottom padding when the fixed mobile-cta-bar is present (contact page) */
 @media (max-width: 1023px) {
   body:has(.mobile-cta-bar) .footer {

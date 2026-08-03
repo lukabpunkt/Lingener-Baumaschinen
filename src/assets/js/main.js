@@ -857,18 +857,4 @@
     } else { update(); }
   }
 
-  /* Calendly: Klick-zum-Laden (Consent-Gate) — Widget erst nach ausdrücklichem Klick.
-     Ausgelagert aus kontakt.njk, damit die CSP ohne 'unsafe-inline' auskommt. */
-  const calendlyBtn = $('#calendly-load');
-  if (calendlyBtn) {
-    calendlyBtn.addEventListener('click', () => {
-      const w = $('.calendly-inline-widget');
-      if (w) { w.setAttribute('data-url', w.getAttribute('data-calendly-url')); w.style.display = ''; }
-      const c = $('#calendly-consent'); if (c) c.style.display = 'none';
-      const s = document.createElement('script');
-      s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true;
-      document.body.appendChild(s);
-    });
-  }
-
 })();
