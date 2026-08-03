@@ -15,7 +15,7 @@ permalink: /404.html
   <style>
     body { background: var(--ink); }
     .err-page { min-height: 100svh; display: grid; place-items: center; padding: 6rem var(--gutter) 4rem; background: var(--ink); color: var(--canvas); text-align: center; position: relative; overflow: hidden; }
-    .err-page::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(14,124,123,.3), transparent 55%); z-index: 0; }
+    .err-page::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(var(--brand-rgb), .3), transparent 55%); z-index: 0; }
     .err-page::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 56px 56px; z-index: 0; mask-image: linear-gradient(180deg, transparent, black 30%, transparent); }
     .err-page > * { position: relative; z-index: 1; }
   </style>

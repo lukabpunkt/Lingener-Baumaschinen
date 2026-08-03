@@ -5,13 +5,46 @@
 
 /* ----------  Design Tokens  ---------- */
 :root {
-  /* Brand */
-  --brand: #0E7C7B;
-  --brand-deep: #0A5E5D;
-  --brand-darker: #053433;
-  --brand-light: #5EEAD4;
-  --brand-tint: #E6FAF8;
-  --brand-glow: rgba(14, 124, 123, 0.45);
+  /* ──────────────────────────────────────────────────────────────────────
+     MARKENFARBEN — umgestellt 2026-08-03 von Teal auf dunkles Blau.
+
+     ⟲ ROLLBACK: Diese Umstellung liegt in genau EINEM Commit — der schnellste
+       Weg zurück ist `git revert <commit>`. Wer es von Hand machen will,
+       kopiert den ALT-Block unten über die aktiven Werte. Beides genügt:
+       außerhalb dieses Blocks steht keine Markenfarbe mehr im Stylesheet.
+
+     Vorgegeben waren #0C3352, #09263E und #6EC1E4 — alles Übrige ist daraus
+     abgeleitet und an seinem tatsächlichen Einsatzort gemessen.
+
+     ⚠️ Gemessene Kontraste (WCAG):
+        --brand       auf Weiß 13,04:1 ✓   auf --ink  1,47:1 ✗
+        --brand-deep  auf Weiß 15,46:1 ✓   auf --ink  1,24:1 ✗
+        --brand-light auf Weiß  2,02:1 ✗   auf --ink  9,53:1 ✓
+        Daraus die Regel: --brand-light ist NUR auf dunklem Grund Textfarbe.
+        Auf hellem Grund trägt Navy die Farbe und --brand-light die Linie
+        (Unterstreichung, Hover, Fokusring) — siehe "Blueprint" weiter unten.
+
+     ALT (Teal, bis 2026-08-03):
+       --brand: #0E7C7B;  --brand-deep: #0A5E5D;  --brand-darker: #053433;
+       --brand-light: #5EEAD4;  --brand-tint: #E6FAF8;
+       --brand-rgb: 14, 124, 123;  --brand-light-rgb: 94, 234, 212;
+     ────────────────────────────────────────────────────────────────────── */
+  --brand: #0C3352;
+  --brand-deep: #09263E;
+  /* Trotz des Namens bewusst HELLER als --ink: dieser Ton wird ausschließlich
+     als Oberkante des Schnittkanten-Verlaufs (.kerf) benutzt. Teal trug viel
+     Grün und lag deshalb 1,41:1 über --ink; ein „dunkleres" Navy hätte die
+     Fräsnut plattgedrückt. #1D303A stellt exakt diese Kantenstärke wieder her. */
+  --brand-darker: #1D303A;
+  --brand-light: #6EC1E4;
+  --brand-tint: #F1F9FC;
+
+  /* Kanal-Werte für rgba(): halten alle Transparenzen an der Palette.
+     Ohne sie lägen ~19 Markenfarben als feste rgba() über das Stylesheet
+     verstreut — und jeder Farbwechsel würde wieder Reste hinterlassen. */
+  --brand-rgb: 12, 51, 82;
+  --brand-light-rgb: 110, 193, 228;
+  --brand-glow: rgba(var(--brand-rgb), 0.45);
 
   /* Accent */
   --accent: #F59E0B;
@@ -65,7 +98,7 @@
   --shadow-sm: 0 1px 2px rgba(11, 15, 20, .04);
   --shadow-md: 0 14px 36px -16px rgba(11, 15, 20, .14), 0 2px 6px rgba(11, 15, 20, .05);
   --shadow-lg: 0 36px 80px -28px rgba(11, 15, 20, .25), 0 10px 24px -10px rgba(11, 15, 20, .12);
-  --shadow-brand: 0 22px 70px -22px rgba(14, 124, 123, .55);
+  --shadow-brand: 0 22px 70px -22px rgba(var(--brand-rgb), .55);
 
   /* Motion */
   --ease: cubic-bezier(.22, 1, .36, 1);
@@ -747,7 +780,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   pointer-events: none;
   background:
     radial-gradient(125% 85% at 50% 100%, transparent 42%, rgba(11,15,20,.5) 100%),
-    radial-gradient(58% 48% at 7% 94%, rgba(14,124,123,.20), transparent 60%),
+    radial-gradient(58% 48% at 7% 94%, rgba(var(--brand-rgb), .20), transparent 60%),
     linear-gradient(to top, rgba(11,15,20,.97) 0%, rgba(11,15,20,.78) 22%, rgba(11,15,20,.42) 46%, rgba(11,15,20,.14) 66%, transparent 84%),
     linear-gradient(105deg, rgba(11,15,20,.65) 0%, rgba(11,15,20,.28) 38%, transparent 62%);
 }
@@ -970,7 +1003,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
     font-size: .58rem;
     letter-spacing: .22em;
     text-transform: uppercase;
-    color: rgba(94,234,212,.72);
+    color: rgba(var(--brand-light-rgb), .72);
     margin-bottom: .85rem;
     text-shadow: 0 1px 8px rgba(11,15,20,.6);
   }
@@ -979,7 +1012,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid rgba(94,234,212,.32);
+    border-right: 1px solid rgba(var(--brand-light-rgb), .32);
     padding-right: .8rem;
   }
   .hero-gauge-scale .t { position: relative; text-align: right; }
@@ -1047,8 +1080,8 @@ p { color: var(--steel-700); text-wrap: pretty; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 80% 0%, rgba(14,124,123,.4), transparent 60%),
-    radial-gradient(ellipse 60% 80% at 0% 100%, rgba(94,234,212,.08), transparent 60%);
+    radial-gradient(ellipse 80% 60% at 80% 0%, rgba(var(--brand-rgb), .4), transparent 60%),
+    radial-gradient(ellipse 60% 80% at 0% 100%, rgba(var(--brand-light-rgb), .08), transparent 60%);
   z-index: -1;
 }
 .page-hero::after {
@@ -1218,10 +1251,10 @@ p { color: var(--steel-700); text-wrap: pretty; }
 }
 .spec-list li:hover {
   box-shadow: inset 3px 0 0 var(--brand);
-  background: rgba(14,124,123,.04);
+  background: rgba(var(--brand-rgb), .04);
 }
 .section-dark .spec-list li:hover {
-  background: rgba(94,234,212,.05);
+  background: rgba(var(--brand-light-rgb), .05);
   box-shadow: inset 3px 0 0 var(--brand-light);
 }
 @media (min-width: 768px) {
@@ -1250,6 +1283,8 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .spec-list li strong a.spec-link:focus-visible {
   color: var(--brand);
   text-decoration: underline;
+  text-decoration-color: var(--brand-light); /* Blueprint: helle Linie unter dunklem Text */
+  text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
 .section-dark .spec-list li strong a.spec-link:hover,
@@ -1363,8 +1398,8 @@ p { color: var(--steel-700); text-wrap: pretty; }
   display: inline-flex;
   align-items: center;
   gap: .4rem;
-  background: rgba(94,234,212,.1);
-  border: 1px solid rgba(94,234,212,.18);
+  background: rgba(var(--brand-light-rgb), .1);
+  border: 1px solid rgba(var(--brand-light-rgb), .18);
   border-radius: 999px;
   padding: .25rem .65rem;
 }
@@ -1523,7 +1558,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
     position: absolute;
     top: -1px; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, var(--brand-light), rgba(94,234,212,.2) 85%, transparent);
+    background: linear-gradient(90deg, var(--brand-light), rgba(var(--brand-light-rgb), .2) 85%, transparent);
     pointer-events: none;
   }
 }
@@ -1580,7 +1615,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at top right, rgba(14,124,123,.45), transparent 55%);
+  background: radial-gradient(ellipse at top right, rgba(var(--brand-rgb), .45), transparent 55%);
   z-index: -1;
 }
 .cta-block::after {
@@ -1776,7 +1811,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   outline: 2px solid var(--brand);
   outline-offset: 1px;
   border-color: var(--brand);
-  box-shadow: 0 0 0 4px rgba(14,124,123,.20);
+  box-shadow: 0 0 0 4px rgba(var(--brand-rgb), .20);
 }
 .field-check { display: flex; gap: .6rem; align-items: flex-start; font-size: .85rem; color: var(--steel-600); line-height: 1.45; }
 .field-check input { margin-top: 4px; flex-shrink: 0; min-height: 0; width: auto; }
@@ -1828,7 +1863,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .spec-table tbody tr:first-child th { background: var(--brand-tint); color: var(--brand-deep); }
 .spec-table tbody tr:first-child td { color: var(--brand-deep); font-size: 1.05rem; }
 @media (min-width: 768px) { .spec-table tbody tr:first-child td { font-size: 1.1rem; } }
-.section-dark .spec-table tbody tr:first-child th { background: rgba(94,234,212,.07); color: var(--brand-light); }
+.section-dark .spec-table tbody tr:first-child th { background: rgba(var(--brand-light-rgb), .07); color: var(--brand-light); }
 .section-dark .spec-table tbody tr:first-child td { color: var(--brand-light); }
 
 /* Hover-Effekt auf Zeilen (Desktop) */
@@ -1838,7 +1873,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   .spec-table tbody tr:hover td { background: var(--brand-tint); }
   .spec-table tbody tr:hover td { color: var(--brand-deep); }
   .section-dark .spec-table tbody tr:hover th,
-  .section-dark .spec-table tbody tr:hover td { background: rgba(94,234,212,.07); }
+  .section-dark .spec-table tbody tr:hover td { background: rgba(var(--brand-light-rgb), .07); }
   .section-dark .spec-table tbody tr:hover td { color: var(--brand-light); }
 }
 
@@ -2148,7 +2183,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   transition: background var(--dur-fast), color var(--dur-fast);
 }
 .fab-item:hover .fab-item-icon {
-  background: rgba(94,234,212,.12);
+  background: rgba(var(--brand-light-rgb), .12);
   color: var(--brand-light);
 }
 .fab-item-icon svg { width: 17px; height: 17px; }
@@ -2438,7 +2473,20 @@ p { color: var(--steel-700); text-wrap: pretty; }
 .prose ul li, .prose ol li { color: var(--steel-700); line-height: 1.7; margin-bottom: .35rem; }
 .prose ul li { list-style: disc; }
 .prose ol li { list-style: decimal; }
-.prose a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+/* Blueprint-Prinzip: Auf hellem Grund trägt Navy die Farbe, --brand-light die Linie.
+   --brand-light als Textfarbe wäre hier unlesbar (2,02:1), als Unterstreichung neben
+   13:1-Text ist es dagegen genau der Akzent, den die dunkle Marke sonst verliert.
+   Beim Hover verdichtet sich die Linie zu Navy, statt dass der Text die Farbe wechselt. */
+.prose a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-decoration-color: var(--brand-light);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  transition: text-decoration-color var(--dur-fast) var(--ease);
+}
+.prose a:hover,
+.prose a:focus-visible { text-decoration-color: var(--brand); }
 .prose strong { color: var(--ink); font-weight: 600; }
 .prose address { font-style: normal; color: var(--steel-700); line-height: 1.7; margin-bottom: 1rem; }
 .prose .legal-meta { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .04em; color: var(--steel-500); margin-bottom: 2.5rem; }
@@ -2451,6 +2499,15 @@ p { color: var(--steel-700); text-wrap: pretty; }
 }
 .skip-link:focus { top: 1rem; }
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+/* Auf dunklem Grund wäre Navy als Fokusring praktisch unsichtbar (1,47:1 gegen --ink) —
+   mit dem früheren Teal waren es noch 3,83:1. Dort übernimmt --brand-light mit 9,53:1.
+   Ohne diese Umkehr wäre die Tastaturbedienung auf allen dunklen Sektionen, im Footer,
+   im Cookie-Banner und auf den Seiten-Heroes faktisch blind. */
+.section-dark :focus-visible,
+.page-hero :focus-visible,
+.footer :focus-visible,
+.cookie-banner :focus-visible,
+.err-page :focus-visible { outline-color: var(--brand-light); }
 
 /* ----------  Mobile Sticky CTA Bar (nur kontakt.html)  ---------- */
 .mobile-cta-bar {
@@ -2595,7 +2652,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
 @media (min-width: 480px) { .wizard-rcard { padding: 1.1rem 1.25rem; } }
 .wizard-rcard-tag {
   font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
-  color: var(--brand-light); background: rgba(94,234,212,.1);
+  color: var(--brand-light); background: rgba(var(--brand-light-rgb), .1);
   border-radius: 4px; padding: .2rem .5rem; align-self: flex-start;
 }
 .wizard-rcard-name { font-size: 1rem; font-weight: 700; color: var(--canvas); }
@@ -2707,8 +2764,8 @@ p { color: var(--steel-700); text-wrap: pretty; }
   display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap;
   margin-bottom: 1rem;
 }
-.roi-verdict.is-buy { background: rgba(14,124,123,.07); border: 1px solid rgba(14,124,123,.2); }
-.roi-verdict.is-rent { background: rgba(94,234,212,.05); border: 1px solid rgba(94,234,212,.15); }
+.roi-verdict.is-buy { background: rgba(var(--brand-rgb), .07); border: 1px solid rgba(var(--brand-rgb), .2); }
+.roi-verdict.is-rent { background: rgba(var(--brand-light-rgb), .05); border: 1px solid rgba(var(--brand-light-rgb), .15); }
 .roi-verdict-msg { font-size: .9rem; font-weight: 500; color: var(--ink); flex: 1; min-width: 0; }
 .roi-disclaimer { font-size: .72rem; color: #525c6e; line-height: 1.6; text-align: center; }
 
@@ -2972,7 +3029,7 @@ p { color: var(--steel-700); text-wrap: pretty; }
   font-weight: 700;
   letter-spacing: .09em;
   text-transform: uppercase;
-  color: var(--brand); /* a11y: --brand-light (#5EEAD4) ergab nur 1.46:1 auf weißer Karte */
+  color: var(--brand); /* a11y: --brand-light auf weißer Karte reicht nicht — früher #5EEAD4 mit 1,46:1, heute #6EC1E4 mit 2,02:1. Beides weit unter AA. */
 }
 .maschine-card-name {
   font-size: 1.05rem;
