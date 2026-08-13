@@ -7,23 +7,22 @@
 [build]
   command = "npm run build"
   publish = "_site"
-  # Build überspringen, wenn ein Push AUSSCHLIESSLICH Markdown-Dateien geändert hat
-  # (Checklisten, README, QA-Berichte). Spart Build-Minuten auf dem Free-Tier.
-  # ⚠️ Netlify-Konvention ist invertiert: Exit 0 = Build ÜBERSPRINGEN, Exit ≠ 0 = bauen.
-  # Sicher, weil .eleventy.js templateFormats auf ["njk"] beschränkt — keine .md-Datei
-  # kann den Output beeinflussen.
+  # KEIN ignore-Kommando. Bewusst entfernt am 2026-08-13.
   #
-  # ⚠️ Die Leer-Prüfung auf $CACHED_COMMIT_REF ist ZWINGEND, nicht kosmetisch.
-  # Ohne sie hat diese Regel am 2026-08-13 einen echten Deploy verschluckt:
-  # Netlify meldete "Failed to fetch cache / No cached dependencies found", damit war
-  # $CACHED_COMMIT_REF LEER und der Befehl degenerierte zu
-  #     git diff --quiet <commit> -- . ...
-  # also zu einem Vergleich gegen den Arbeitsstand. Der ist im frisch geklonten Repo
-  # immer identisch -> Exit 0 -> "no content change" -> Build abgebrochen, obwohl drei
-  # Commits mit CSS-, JS- und Template-Änderungen anstanden.
-  # Fehlt der Referenzpunkt, wird deshalb IMMER gebaut (exit 1) — im Zweifel eine
-  # Build-Minute zu viel statt einem stillschweigend verschluckten Deploy.
-  ignore = '''if [ -z "$CACHED_COMMIT_REF" ]; then exit 1; fi; git diff --quiet "$CACHED_COMMIT_REF" "$COMMIT_REF" -- . ":(exclude)*.md"'''
+  # Hier stand eine Regel, die Builds überspringen sollte, wenn ein Push nur
+  # Markdown-Dateien ändert ("git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF …").
+  # Sie hat ZWEI echte Deploys stillschweigend verschluckt — Netlify meldete
+  # "Canceled build due to no content change", obwohl Commits mit CSS-, JS- und
+  # Template-Änderungen anstanden. Auch eine abgesicherte Fassung mit Leer-Prüfung
+  # auf $CACHED_COMMIT_REF lieferte weiter Exit 0. Der Referenzpunkt, auf den solche
+  # Regeln bauen, ist auf diesem Projekt nicht verlässlich (die Builds starten
+  # regelmäßig mit "Failed to fetch cache / No cached dependencies found").
+  #
+  # Ein nicht ausgelieferter Deploy fällt erst auf, wenn jemand die Live-Seite prüft —
+  # das wiegt schwerer als die paar Build-Minuten, die die Regel gespart hätte.
+  # Build-Minuten bei reinen Doku-Pushes lassen sich weiterhin sparen: "[skip ci]" in
+  # die Commit-Betreffzeile schreiben. Das ist explizit und beim Commit sichtbar,
+  # statt implizit und überraschend.
 
 [build.environment]
   NODE_VERSION = "24"
