@@ -1,8 +1,14 @@
 # GO-LIVE-Checkliste — LIBA Website
 
 > Alle Punkte, die **vor dem echten Launch** auf `lingener-baumaschinen.de` noch erledigt werden müssen.
-> Stand: 2026-07-27. Detail-Berichte im Repo: `QA-Prelaunch.md`, `Security-Audit.md`, `DE-EN-Parity.md`, `CLAUDE.md` (Migrations-Handover).
+> Stand: **2026-08-17** — an diesem Tag wurde jeder Punkt gegen Code, Build, DNS, HTTP und die
+> GitHub-API nachgeprüft; Messergebnisse stehen jeweils beim Punkt.
+> Detail-Berichte im Repo: `QA-Prelaunch.md`, `Security-Audit.md`, `DE-EN-Parity.md`, `CLAUDE.md` (Migrations-Handover).
 > **Schritt-für-Schritt-Anleitung zu allen [Betreiber]-Punkten (wo finde ich was?): → `Zulieferungen-Checkliste.md`**
+> ⚠️ **Überholt seit 2026-09-15:** Die Strategie hat sich geändert — Launch zuerst unter einer **neuen Domain**,
+> WordPress bleibt parallel auf `lingener-baumaschinen.de`, später evtl. Umzug. Alle Punkte unten, die „DNS auf Netlify
+> umstellen" / „Custom Domain lingener-baumaschinen.de" meinen, gelten dafür nicht mehr direkt.
+> **Aktueller Stand und offene Punkte: → `Launch-Audit.md`** (inkl. Umsetzungsstand der Repo-Fixes vom 2026-09-15).
 > Legende: **[Betreiber]** = du (Dashboard/DNS/Konto) · **[Repo]** = im Code (mache ich auf Zuruf).
 
 ---
@@ -12,10 +18,12 @@
 - [x] **Netlify-Hosting eingerichtet** — erledigt 2026-07-27. Projekt `lingener-baumaschinen` (Site-ID `b7a1838d-acfe-4523-b82d-9167aaf6d5ee`), Git-angebunden an `main`, Vorschau: <https://lingener-baumaschinen.netlify.app>. Damit sind **Formulare, 301-Weiterleitungen und Security-Header erstmals real prüfbar** — die GitHub-Pages-Vorschau konnte das systembedingt nie. Abnahmemessung siehe `Zulieferungen-Checkliste.md` 6b.
 - [ ] **Custom Domain in Netlify eintragen** — Domain management → `lingener-baumaschinen.de` als **Primary**, `www` als Alias. Schaltet noch nichts live, liefert aber die exakten DNS-Zielwerte für den nächsten Punkt. **[Betreiber]**
 - [ ] **DNS auf Netlify umstellen** (als letzter Schritt) — Domain vom alten WordPress auf Netlify zeigen lassen. **[Betreiber]**
+  - Nachgemessen 2026-08-17: apex zeigt weiterhin auf `85.13.144.211` (ALL-INKL), `www` auf dieselbe IP; die Live-Domain liefert unverändert WordPress (`Server: Apache`, `wp-json`-Link im HTTP-Header). Der Go-Live hat also nachweislich nicht stattgefunden.
 - [ ] **Netlify Forms scharfschalten** — ⚠️ **Die Formularerkennung war am Projekt ausgeschaltet** (2026-07-27 festgestellt: `forms: "not enabled"`, null erkannte Formulare). Wäre die Seite so live gegangen, hätte das Frontend jede Anfrage mit „gesendet" quittiert, während Netlify nichts entgegennimmt — **alle Kundenanfragen wären spurlos verschwunden.** Aktiviert und neu deployt; alle **drei Formulare** (`kontakt`, `gebrauchtmaschine`, `bewerbung`) sind erkannt und mit einem echten Testeintrag Ende-zu-Ende bestätigt.
   - **Offen bleibt der letzte Schritt:** im Dashboard → Forms → Notifications eine **Benachrichtigungs-E-Mail** hinterlegen (für `bewerbung` sinnvollerweise die Personalverantwortliche statt info@). Nur in der Oberfläche einstellbar. Ohne das liegen Anfragen im Dashboard und niemand merkt es. **[Betreiber]**
 - [ ] **Redirect-Map vervollständigen** — vollständige alte URL-Liste aus **Google Search Console** („Seiten"-Export) **+ alten Yoast-Sitemaps** holen (⚠ zeitkritisch: Sitemaps verschwinden mit WordPress-Abschaltung!); damit `src/_data/redirects.js` ergänzen und die ⚠-Einträge prüfen. Sonst verlieren indexierte alte URLs ihr Ranking. **[Betreiber liefert Export → Repo setzt um]** · Anleitung: `Zulieferungen-Checkliste.md` Punkt 1 · Details: `QA-Prelaunch.md`, `CLAUDE.md` §5
-  - Verifiziert 2026-07-09: `/traktorfraese-gm-1-as/` leitet auf `gm-1-af.html`, obwohl `gm-1-as.html` existiert — welche alte Produktseite zu welchem neuen Modell gehört (GM 1 AS/AF, GM 140 AS), kann nur LIBA sagen → `Zulieferungen-Checkliste.md` Punkt 3.2/3.3.
+  - Verifiziert 2026-07-09, 2026-08-17 nachgeschärft: **zwei alte AS-URLs zeigen auf zwei verschiedene Modelle**, beide aus dem `oldUrl`-Feld der Maschinendaten — `/traktorfraese-gm-1-as/` → `gm-1-af.html` (`src/_data/maschinen.js:342`) gegenüber `/erdkabel-verlegen-mit-der-gm-1-as/` → `gm-1-as.html` (`src/_data/maschinen.js:414`). Eine der beiden Zuordnungen ist falsch; welche alte Produktseite zu welchem neuen Modell gehört (GM 1 AS/AF, GM 140 AS), kann nur LIBA sagen → `Zulieferungen-Checkliste.md` Punkt 3.2/3.3.
+  - Stand der ⚠-Einträge in `src/_data/redirects.js` (2026-08-17): **alle fünf unverändert offen** — `/gm-140-as-fraese-fuer-drainage/`, `/kaufanfrage/`, `/extras-fuer-die-grabenfraese/`, `/videos/`, `/haendler/`.
 - [x] **Calendly-Konto ersetzen** — ~~zeigte auf das private Konto `luka-bloemendal`~~ **erledigt 2026-08-03 durch Entfernen der Funktion.** Die Terminbuchung ist ersatzlos gestrichen: Sektion auf der Kontaktseite, Consent-Gate im JavaScript, CSS-Regel, beide Datenschutz-Passagen (DE+EN) und alle Calendly-Herkünfte in der CSP. Damit entfällt auch der einzige verbliebene US-Datentransfer neben GA4.
 - [ ] **Team-Seite klären** — seit Juli mit **KI-Mockup-Portraits als Beispiel** gefüllt (keine `[Name]`-Platzhalter mehr). KI-Portraits als „unser Team" live zu stellen ist riskant. **Technisch bereits abgesichert (2026-07-27):** `noindex: true` in `src/team.njk` gesetzt → damit automatisch auch aus der Sitemap raus; kein Link mehr in Nav, Footer **oder** auf der Unternehmensseite (der CTA „Team kennenlernen" wurde entfernt). **Offen ist nur noch die inhaltliche Entscheidung:** echte Bios/Fotos liefern **[Betreiber]** — dann `noindex` **und** den CTA in `src/unternehmen.njk` zusammen zurücknehmen — oder die Seite dauerhaft so lassen. · `Zulieferungen-Checkliste.md` Punkt 5
 
@@ -27,8 +35,21 @@
   - Technisch vorbereitet: die CSP deckt seit 2026-07-27 auch die regionalen GA4-Endpunkte ab (S-10), und die beiden 404-Seiten nutzen jetzt `ga4-init.js` statt Inline-Skripten — beim Aktivieren ist also nichts weiter zu tun.
   - Optional dabei: strenge Variante „`gtag.js` erst nach Zustimmung laden" (kein Google-Kontakt vor Consent). **[Repo]**
 - [ ] **Sitemap in Search Console einreichen** (nach Go-Live) — `https://lingener-baumaschinen.de/sitemap.xml`; Property behalten, Index-Abdeckung + 404-Report 4–8 Wochen beobachten. **[Betreiber]**
-- [ ] **E-Mail-Authentifizierung SPF / DKIM / DMARC** für `lingener-baumaschinen.de` einrichten/prüfen (Schutz vor Spoofing, bessere Zustellung der Form-Mails). **[Betreiber]** · Details: `Security-Audit.md` S-1
-- [ ] **Security-Header auf Netlify-Staging verifizieren** — `curl -I` gegen den Netlify-Deploy: CSP/HSTS/X-Frame etc. wirklich ausgeliefert; 301-Stichproben (Status 301 + Location); www→apex; keine CSP-Verstöße in der Konsole. **[Repo/Betreiber gemeinsam]** · `Security-Audit.md` E1–E5
+- [ ] **E-Mail-Authentifizierung SPF / DKIM / DMARC** für `lingener-baumaschinen.de` — **Teilstand, geprüft 2026-08-17.** Die Firmen-Mail läuft über **ALL-INKL** (`MX w01fb260.kasserver.com`). **[Betreiber]** · Details: `Security-Audit.md` S-1
+  - ✅ **SPF vorhanden:** `v=spf1 a mx include:spf.kasserver.com ~all`
+  - ⚠️ **DMARC vorhanden, aber wirkungsarm:** `v=DMARC1; p=none;` — **ohne `rua`**. Die Policy beobachtet also nur, und die Berichte gehen nirgendwohin. → um `rua=mailto:info@lingener-baumaschinen.de` ergänzen.
+  - ☐ **DKIM nicht auffindbar** — unter den Standard-Selektoren `default`, `k1`, `kas`, `dkim`, `mail` und `selector1` existiert kein `_domainkey`-Eintrag. Im KAS-Adminbereich aktivieren (oder den tatsächlich genutzten Selektor nennen, falls doch vorhanden).
+  - Nebenbefund: im TXT-Record steht `google-site-verification=aF8gBPGymNwk8NMQA5GcklnkzaQY8qeizI7w-J62bjQ` — es gibt also eine per DNS verifizierte Search-Console-Property. Das ist der Zugang, den Punkt 1 der `Zulieferungen-Checkliste.md` braucht.
+- [x] **Security-Header auf Netlify verifiziert** — erledigt 2026-08-17, `curl -I` gegen <https://lingener-baumaschinen.netlify.app>:
+
+  | Prüfung | Ergebnis |
+  |---|---|
+  | CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy | ✅ alle sechs werden ausgeliefert |
+  | `/maschinen/` | ✅ 301 → `/maschinen.html` |
+  | `/traktorfraese-gm-1-as/` | ✅ 301 (technisch korrekt; Ziel inhaltlich offen, siehe 🔴 Redirect-Map) |
+  | `/en/<nicht gemappt>` | ✅ echter Status 404 |
+
+  Offen bleibt nur die Prüfung **www→apex**, die erst nach dem Eintragen der Custom Domain möglich ist. · `Security-Audit.md` E1–E5
 
 ---
 
@@ -42,13 +63,19 @@
 - [x] **Wizard-CTA** `encodeURIComponent(r.modell)` — erledigt 2026-07-27. Dabei die zwei vor-encodierten Datenwerte (`…-Sonderl%C3%B6sung`) auf Klartext-Umlaute zurückgeführt, sonst wäre Doppel-Encoding entstanden. · S-13
 
 **Security – Betreiber (GitHub-Einstellungen / DNS):**
-- [ ] **GitHub:** Dependabot-Alerts + Secret-Scanning/Push-Protection + Branch-Protection auf `main` aktivieren. **[Betreiber]** · S-2/C2
-- [ ] **DNS:** CAA-Record (`letsencrypt.org`) + DNSSEC. **[Betreiber]** · S-5
+- **GitHub** — Sammelpunkt aufgeteilt, Stand laut GitHub-API 2026-08-17. **[Betreiber]** · S-2/C2
+  - [x] **Secret Scanning aktiv**
+  - [x] **Push Protection aktiv**
+  - [ ] **Dependabot Security Updates:** `disabled` → im Repo unter Settings → Code security aktivieren
+  - [ ] **Branch Protection auf `main`:** nicht gesetzt (API antwortet „Branch not protected")
+  - Nebenbefund: das Repo ist **öffentlich**. Kein Go-Live-Blocker, aber bei einem Kundenprojekt eine bewusste Entscheidung wert.
+- [ ] **DNS:** CAA-Record (`letsencrypt.org`) + DNSSEC — geprüft 2026-08-17: **kein CAA-Record, kein DS-Eintrag** vorhanden, beides unverändert offen. **[Betreiber]** · S-5
 - [ ] **HSTS-`preload`** erst bei hstspreload.org einreichen, wenn alle Subdomains HTTPS können (dauerhafte Verpflichtung). **[Betreiber]** · S-6
 - [ ] **Netlify-Spam:** Akismet im Forms-Bereich aktivieren. **[Betreiber]** · S-7
 
 **Content / SEO / Performance – Repo:**
-- [ ] **EN-Zahlenformat** — ⚠️ **Korrektur 2026-07-27: doch nicht behoben.** Die Prüfung vom 2026-07-09 hatte nur handgetextete EN-Seiten angesehen. Tatsächlich nutzen **alle 60 EN-Maschinenseiten** deutsche Tausendertrenner in Prosa und Product-Schema (`4.500 mm` statt `4,500 mm`), weil `src/_data/maschinen.js` ein gemeinsames `val`-Feld für beide Sprachen hat. Fix über das vorhandene `valEN`-Feld oder Lokalisierung beim Rendern. **[Repo]** · QA-Prelaunch PL-4
+- [ ] **EN-Zahlenformat** — ⚠️ **Korrektur 2026-07-27: doch nicht behoben.** Die Prüfung vom 2026-07-09 hatte nur handgetextete EN-Seiten angesehen. Tatsächlich nutzen **alle 30 EN-Maschinenseiten** deutsche Tausendertrenner in Prosa und Product-Schema (`4.500 mm` statt `4,500 mm`), weil `src/_data/maschinen.js` ein gemeinsames `val`-Feld für beide Sprachen hat. Fix über das vorhandene `valEN`-Feld oder Lokalisierung beim Rendern. **[Repo]** · QA-Prelaunch PL-4
+  - Präzisiert 2026-08-17: hier stand „60 EN-Maschinenseiten" — 60 ist die Summe aus DE **und** EN, englische Maschinenseiten gibt es **30**. Der Befund selbst ist unverändert gültig, gegengeprüft an `_site/en/maschinen/gm-450-h.html` (`2.500 mm`, `3.100 mm`, `4.500 mm`, `5.000 mm`). Umfang der Arbeit: `valEN` deckt derzeit **59 von 263** Spec-Werten ab.
 - [x] **`og:type=product`** auf Maschinenseiten — erledigt 2026-07-27: Override-Hook in `base.njk` (`{{ ogType if ogType else 'website' }}`), `maschine.njk` setzt `ogType: "product"`. 60 Maschinenseiten `product`, die übrigen 28 unverändert `website`. · MI-11
 - [x] **GM 450 H Frästiefe vereinheitlicht** — erledigt 2026-07-27: Spec-Tabelle und Wizard sagten 4.500 mm, 16 Übersichtsstellen (inkl. FAQPage-Schema DE+EN, `llms.txt`, Seitentitel) sagten 3.000 mm. Auf **4.500 mm** vereinheitlicht — die 3.000 stammt vom GM 300 H. ⚠ Datenblattwert noch von LIBA bestätigen lassen: `Zulieferungen-Checkliste.md` Punkt 3.7.
 - [x] **FAQ-Schema: „Händlerübersicht"** — erledigt 2026-07-27: Das Schema verwies auf eine Seite, die es nicht gibt (`/haendler/` → 301 auf Kontakt). Auf den tatsächlichen Weg umformuliert (DE+EN). ⚠ Der zweite Schema-Fehler — „GM 140 AS" als lieferbares Modell — bleibt offen bis zur Produktauskunft: `Zulieferungen-Checkliste.md` Punkt 3.2.
@@ -60,6 +87,29 @@
 - [x] **deploy.yml** — deaktiviert seit Netlify-Umzug (`workflow_dispatch`, nur manuell) + 2026-07-09 SHA-gepinnt. Löschen optional nach Go-Live.
 - [x] **Sitemap `<lastmod>`** — ergänzt 2026-07-09 (neuer `isoDate`-Filter in `.eleventy.js`, alle 78 URLs).
 - [x] **EN-Rechtszitat** — ergänzt 2026-07-09: „i. V. m. § 25 Abs. 1 TTDSG" im EN-GA4-Abschnitt (`datenschutz.njk`); übrige Zitate waren bereits synchron.
+
+---
+
+## 📌 Seit dem 27.07. gelaufen (war in dieser Liste nicht dokumentiert)
+
+Nachgetragen 2026-08-17. Diese Arbeiten stehen im Git-Verlauf, aber bisher in keiner Checkliste.
+
+- **Farbumstellung Teal → dunkles Blau** (2026-08-03, Commit `6e5c6b8`): `--brand #0C3352`,
+  `--brand-deep #09263E`, `--brand-light #6EC1E4`, Akzent bleibt Amber. Der Rollback-Weg ist im
+  Kopf von `src/assets/css/main.css` dokumentiert und liegt in genau **einem** Commit —
+  `git revert 6e5c6b8` genügt, außerhalb dieses Blocks steht keine Markenfarbe mehr im Stylesheet.
+  ⚠️ Die Designtoken-Tabelle in `README.md` nennt noch die alten Teal-Werte und muss nachgezogen werden.
+- **Ankersprung beim Laden repariert** (Commit `639ea1c`) — Altbestand-Bug.
+- **⚠️ `ignore`-Kommando aus `netlify.toml` entfernt** (2026-08-13, Commits `14fd66c` + `d6516a0`).
+  Die Regel sollte Builds bei reinen Doku-Pushes überspringen und hat stattdessen **zwei echte
+  Deploys verschluckt** — Netlify meldete „Canceled build due to no content change", obwohl
+  Commits mit CSS-, JS- und Template-Änderungen anstanden. Auch eine abgesicherte Fassung lieferte
+  weiter Exit 0, weil `$CACHED_COMMIT_REF` auf diesem Projekt unzuverlässig ist.
+  **Merksatz: Build-Minuten nur noch per `[skip ci]` in der Commit-Betreffzeile sparen, nie wieder
+  über eine `ignore`-Regel.** Ein nicht ausgelieferter Deploy fällt sonst erst auf, wenn jemand
+  die Live-Seite prüft.
+- **Deploy-Aktualität bestätigt** (2026-08-17): Navy-Palette und Ankersprung-Fix liegen live auf
+  der Netlify-Preview, GA4 lädt erwartungsgemäß nicht. Das `ignore`-Problem wirkt also nicht nach.
 
 ---
 
@@ -90,6 +140,14 @@
 - **Doku:** README komplett neu (beschrieb noch eine Site ohne Build-Tools), Checklisten-Häkchen in `Security-Audit.md`, `QA-Prelaunch.md` und `Relaunch-SEO-Checkliste.md` nachgezogen.
 - **Nicht angefasst** (braucht LIBA): „GM 140 AS" im FAQ-Schema, die 6 ⚠-Redirects, Bestätigung der 4.500 mm.
 
+**Stichprobe 2026-08-17 — die abgehakten Punkte halten stand:** Calendly ist restlos entfernt
+(einziger Treffer ist der erklärende Kommentar in `netlify.toml`) · **0 Inline-Skripte** über alle
+90 Seiten des Builds · `og:type=product` auf **genau 60** Maschinenseiten · `encodeURIComponent`
+an allen drei Wizard-CTAs · `deploy.yml` steht auf `workflow_dispatch` · GM 450 H durchgehend
+4.500 mm (die verbliebenen „3.000 mm"-Fundstellen gehören zur GM 300 H oder sind Längenmaße) ·
+Team-Seite trägt `noindex`, ist nirgends verlinkt und taucht in `sitemap.xml` nicht auf ·
+GA4 steht unverändert auf dem Platzhalter `G-XXXXXXXXXX`.
+
 **2026-07-16:**
 - **Gründungsjahr geklärt: 1969 ist korrekt** (Betreiber-Bestätigung). Website war durchgängig korrekt (0× „1964"); auch die eingebundenen Broschüren-PDFs 2026 sagen bereits „1969" / „Über fünf Jahrzehnte" → Punkt vollständig erledigt (`Zulieferungen-Checkliste.md` 3.1 ✅, `Broschuere-Analyse.md` B-1 ✅).
 - Mobile-Fix: fixierte Elemente (Scroll-Progress u. a.) auf iOS korrigiert (page-enter auf `<main>` statt `<body>`); Startseiten-Slogan: Zeilenabstände vereinheitlicht (DE == EN, WebKit-verifiziert); Karriere-Button im Hero der Unternehmensseite.
@@ -97,7 +155,7 @@
 ---
 
 ### Schnell-Reihenfolge fürs Go-Live
-1. ~~Repo-Restarbeiten~~ ✅ erledigt 2026-07-27 — offen ist nur noch die **inhaltliche** Entscheidung zur Team-Seite.
+1. **Repo-Restarbeiten** — die Runde vom 2026-07-27 ist abgeschlossen, aber zwei Aufgaben sind es nicht (präzisiert 2026-08-17): das **EN-Zahlenformat** ist reine Repo-Arbeit und sofort machbar; **„GM 140 AS" im FAQ-Schema** (`src/maschinen.njk:26` DE, `:28` EN) wartet auf die Produktauskunft. Dazu die **inhaltliche** Entscheidung zur Team-Seite.
 2. **Netlify** verbinden → Deploy-Preview → Header/Forms/Redirects testen.
 3. Search-Console-Export → Redirect-Map vervollständigen.
 4. GA4-ID + SPF/DKIM/DMARC + DNS (CAA/DNSSEC).

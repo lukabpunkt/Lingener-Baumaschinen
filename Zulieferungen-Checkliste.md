@@ -6,6 +6,10 @@
 > Entscheidungen erfordern — mit genauer Anleitung, wo alles zu finden ist.
 > **Gesamtstatus & abgehakte Punkte: → `GO-LIVE-Checkliste.md`**
 
+>
+> ⚠️ **Update 2026-09-15:** Launch zuerst unter einer **neuen Domain** (WordPress bleibt parallel). Punkt 7 (DNS von
+> `lingener-baumaschinen.de` auf Netlify) gilt deshalb erst für den späteren Umzug; für den Launch braucht es DNS der
+> **neuen** Domain. Punkt 5 (Team): Seite ist bis zu echten Inhalten aus dem Build genommen. Gesamtstand: `Launch-Audit.md`.
 ---
 
 ## 1 · 🔴 Alte URL-Liste für die Redirect-Map (wichtigster Punkt)

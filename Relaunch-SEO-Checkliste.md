@@ -53,7 +53,7 @@ Genau das adressiert diese Checkliste.
       vollständige Sitemap ausliefern. Idealerweise `<lastmod>` ergänzen.
 - [x] **`robots.txt`:** ✅ keine versehentliche `Disallow: /`-Sperre aus der Entwicklung; `Allow: /`
       inkl. KI-Crawler, Sitemap-Zeile auf dem finalen Host (apex).
-- [x] **`noindex` ausschließen:** ✅ einzige `noindex`-Seite ist `/team.html` (Mockup-Phase, gewollt) plus die 404-Seiten. sicherstellen, dass keine Seite ungewollt auf `noindex` steht
+- [x] **`noindex` ausschließen:** ✅ `noindex` tragen Impressum, Datenschutz, AGB und die 404-Seiten (Stand 2026-09-15; die Team-Seite wird bis zu echten Inhalten gar nicht gebaut). Zusätzlich global per `site.noindex` (Vorschauen, Parallelbetrieb). sicherstellen, dass keine Seite ungewollt auf `noindex` steht
       (Front-Matter-Flag `noindex` nur auf rechtlich/technisch gewollten Seiten).
 - [ ] **HTTPS:** Zertifikat für die finale Domain aktiv; kein Mixed Content.
 

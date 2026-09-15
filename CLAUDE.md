@@ -13,6 +13,11 @@
 > **Aktueller Status & offene Punkte: → `GO-LIVE-Checkliste.md`** ·
 > **Betreiber-Zulieferungen (Anleitungen): → `Zulieferungen-Checkliste.md`**
 
+> ⚠️ **Stand-Update (2026-09-15):** Strategiewechsel — Launch zuerst unter **neuer Domain**, WordPress bleibt parallel,
+> späterer Umzug auf `.de` möglich. Domain ist jetzt per Umgebung konfigurierbar (`src/_data/site.js`, Transform in
+> `.eleventy.js`, Build-Check `scripts/check-domain.js`). GitHub-Pages-Workflow entfernt. **Maßgeblich: `Launch-Audit.md`.**
+> Die Redirect-Map in §5 wird erst beim Umzug auf `.de` relevant.
+
 ---
 
 ## 1. Projektüberblick
