@@ -2,7 +2,8 @@
 const maschinen = require('./maschinen.js');
 const labels = require('./labels.js');
 
-const BASE = 'https://lingener-baumaschinen.de';
+// Absolute URLs gegen die Referenz-Domain; die Transform in .eleventy.js setzt die Ziel-Domain.
+const BASE = require('./site.js').referenceUrl;
 
 /* Spec-Label von führendem/abschließendem "max." befreien (DE "… max.", EN "Max. …"). */
 function cleanLabel(label) {
@@ -142,8 +143,11 @@ function buildSchema(m, lang, faqs) {
       name: isDE ? s.de : s.en,
       value: (!isDE && s.valEN) ? s.valEN : s.val,
     })),
-    // Kein "offers" ohne Preis: ein preisloser Offer macht das Product-Rich-Result ungültig.
-    // Preis ist nicht öffentlich (Anfrage-Geschäft) → Product bleibt valide ohne Offer.
+    // Kein "offers" ohne Preis: ein preisloser Offer ist ungültig. ACHTUNG (Launch-Audit M-8):
+    // Für Product-Rich-Results verlangt Google offers ODER review ODER aggregateRating — ohne
+    // eines davon gibt es kein Produkt-Snippet, und die Search Console meldet die Elemente als
+    // ungültig. Das ist beim Anfrage-Geschäft ohne öffentliche Preise bewusst in Kauf genommen;
+    // Product, Breadcrumb und FAQ bleiben als strukturierte Daten trotzdem nutzbar.
   };
   const breadcrumb = {
     '@type': 'BreadcrumbList',
@@ -164,11 +168,22 @@ function buildSchema(m, lang, faqs) {
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': [product, breadcrumb, faqPage] });
 }
 
+/* Deutsches Zahlenformat -> englisches (Launch-Audit M-6): "4.500 mm" -> "4,500 mm",
+   "1,5 t" -> "1.5 t". Greift nur, wenn für einen Wert kein handgepflegtes valEN existiert.
+   Ein Zahl-Token wird als Ganzes getauscht, damit neu gesetzte Kommas nicht erneut
+   umgewandelt werden. */
+function toEnNumber(val) {
+  return String(val).replace(/\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+,\d+/g, (tok) =>
+    tok.replace(/\./g, '\u0000').replace(/,/g, '.').replace(/\u0000/g, ','));
+}
+
 module.exports = maschinen.flatMap(m =>
   ['de', 'en'].map(lang => {
     // Lokalisiertes Maschinenobjekt: auf EN-Seiten greift nameEN (falls gesetzt),
     // damit Titel, H1, Intro, FAQs und Schema den englischen Namen verwenden.
-    const loc = { ...m, name: lang === 'en' ? (m.nameEN || m.name) : m.name };
+    // valEN wird für alle Spec-Werte ergänzt, die keine eigene englische Fassung haben.
+    const specs = (m.specs || []).map(s => ({ ...s, valEN: s.valEN || toEnNumber(s.val) }));
+    const loc = { ...m, specs, name: lang === 'en' ? (m.nameEN || m.name) : m.name };
     const faqs = buildFaqs(loc, lang);
     return {
       ...loc,

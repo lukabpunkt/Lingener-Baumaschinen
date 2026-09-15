@@ -4,9 +4,9 @@
   "description": "Premium Corporate Website für **LIBA – Lingener Baumaschinen GmbH & Co. KG**, ein deutscher Hersteller von Grabenfräsen, Anbaufräsen, Pflügen und Spezialmaschinen mit Sitz in Lingen (Ems).",
   "main": "index.js",
   "scripts": {
-    "build": "eleventy",
+    "build": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\" && eleventy && node scripts/check-domain.js",
     "start": "eleventy --serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check:domain": "node scripts/check-domain.js"
   },
   "repository": {
     "type": "git",

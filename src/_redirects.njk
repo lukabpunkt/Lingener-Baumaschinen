@@ -12,6 +12,12 @@ eleventyExcludeFromCollections: true
 # (/maschinen/, /anwendungen/, /faq/, /kontakt/, /impressum/).
 # Die Regeln sind exakte Pfad-Matches, keine Präfixe — /maschinen/gm-450-h.html
 # wird davon nicht erfasst.
+# --- Alias-Domains -> Ziel-Domain (Umzug). MUESSEN vor den Pfadregeln stehen, sonst
+#     laeuft ein Altpfad auf der Alias-Domain erst in die Pfadregel und dann in die Host-Regel.
+#     Quelle: SITE_ALIAS_HOSTS (siehe src/_data/site.js). Leer = keine Regeln.
+{% for h in site.aliasHosts %}http://{{ h }}/*  {{ site.url }}/:splat  301!
+https://{{ h }}/*  {{ site.url }}/:splat  301!
+{% endfor %}
 {% for r in redirects %}{{ r.from }}  {{ r.to }}  {{ r.status }}!
 {% endfor %}
 # --- Sammel-/Splat-Regeln (spezifische Regeln oben gewinnen, Catch-all zuletzt) ---

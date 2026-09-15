@@ -14,7 +14,7 @@
 
 const maschinen = require('./maschinen.js');
 
-const ORIGIN = 'https://lingener-baumaschinen.de';
+const ORIGIN = require('./site.js').referenceUrl;
 
 // Vollen URL/Pfad auf reinen Pfad normalisieren (Host weg, Pfad behalten).
 function toPath(u) {

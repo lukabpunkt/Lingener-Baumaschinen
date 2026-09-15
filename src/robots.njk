@@ -1,3 +1,7 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+---
 User-agent: *
 Allow: /
 
@@ -26,4 +30,6 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://lingener-baumaschinen.de/sitemap.xml
+{# Bei noindex (Vorschau / Parallelbetrieb) keine Sitemap anbieten. Bewusst KEIN "Disallow: /" —
+   sonst sieht Google das noindex-Meta nie und kann URLs trotzdem ohne Inhalt indexieren. #}
+{% if not site.noindex %}Sitemap: https://lingener-baumaschinen.de/sitemap.xml{% endif %}

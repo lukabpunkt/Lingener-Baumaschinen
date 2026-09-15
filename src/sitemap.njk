@@ -4,9 +4,11 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- if not site.noindex %}
 {%- for page in collections.all %}
 {%- if page.data.canonical and not page.data.noindex and "/404" not in page.url %}
-  <url><loc>{{ page.data.canonical }}</loc><lastmod>{{ page.date | isoDate }}</lastmod><changefreq>{{ page.data.sitemapChangefreq or "monthly" }}</changefreq></url>
+  <url><loc>{{ page.data.canonical }}</loc><changefreq>{{ page.data.sitemapChangefreq or "monthly" }}</changefreq></url>
 {%- endif %}
 {%- endfor %}
+{%- endif %}
 </urlset>
