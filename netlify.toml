@@ -5,7 +5,7 @@
 # (siehe src/_redirects.njk + src/_data/redirects.js).
 
 [build]
-  command = "npm run build"
+  command = "npm run build"   # inkl. scripts/check-domain.js
   publish = "_site"
   # KEIN ignore-Kommando. Bewusst entfernt am 2026-08-13.
   #
@@ -27,29 +27,58 @@
 [build.environment]
   NODE_VERSION = "24"
 
-# Sicherheits-Header (MA-3). CSP erlaubt self + die tatsächlich genutzten Dritt-Origins
-# (Stripe; Google Analytics/Tag Manager, sobald echte GA4-ID gesetzt ist).
-# script-src OHNE 'unsafe-inline': alle Seiten-Skripte sind ausgelagert
-# (main.js, ga4-init.js). style-src behält 'unsafe-inline' für style=-Attribute
-# (Hero-Hintergründe, Layout-Feinheiten) — für style-Attribute ist das risikoarm.
+# Pretty URLs AUS (Launch-Audit H-13): Netlify schrieb sonst alle internen Links auf
+# endungslose Pfade um (/maschinen statt /maschinen.html) -> 301-Umwege auf DE-Seiten und
+# doppelt erreichbare Seiten. Canonicals, Sitemap und Redirect-Map arbeiten mit .html.
+[build.processing.html]
+  pretty_urls = false
+
+# ─── Domain & Indexierung (siehe src/_data/site.js) ───────────────────────────────
+# Solange hier nichts gesetzt ist, nutzt der Build Netlifys eigene Variable URL
+# (= Primary Domain des Projekts). Unter *.netlify.app ist automatisch noindex aktiv.
+# Zum Launch unter der neuen Domain die Werte eintragen und committen:
+#
+# [context.production.environment]
+#   SITE_URL = "https://<neue-domain>"          # beim späteren Umzug: https://lingener-baumaschinen.de
+#   SITE_NOINDEX = "1"                           # Entscheidung E-1: bis zum Umzug nicht indexieren
+#   SITE_ALIAS_HOSTS = "<alte-domain>,www.<alte-domain>"   # erst beim Umzug: 301 auf SITE_URL
+
+# Sicherheits-Header (MA-3). CSP erlaubt self + Google Analytics/Tag Manager (GA4 lädt
+# erst nach Einwilligung, siehe main.js). script-src OHNE 'unsafe-inline': alle
+# Seiten-Skripte sind ausgelagert. style-src behält 'unsafe-inline' für style=-Attribute.
 # connect-src enthält neben www.google-analytics.com auch *.google-analytics.com und
-# *.analytics.google.com: GA4 sendet Messwerte an regionale Endpunkte (region1.…),
-# die sonst geblockt würden und einzelne Hits verlieren (S-10).
+# *.analytics.google.com: GA4 sendet an regionale Endpunkte (S-10).
 #
 # WICHTIG — CSP-Wildcards decken die Apex-Domain NICHT ab: `*.analytics.google.com`
-# matcht `region1.analytics.google.com`, aber nicht `analytics.google.com`. Deshalb
-# steht die Apex-Form jeweils zusaetzlich zum Wildcard. Wer hier eine Herkunft
-# ergaenzt, muss beide Formen eintragen.
+# matcht `region1.analytics.google.com`, aber nicht `analytics.google.com`. Wer hier eine
+# Herkunft ergänzt, muss beide Formen eintragen.
 #
-# Calendly wurde am 2026-08-03 vollstaendig entfernt (Terminbuchung gestrichen);
-# calendly.com, *.calendly.com und assets.calendly.com sind damit aus script-src,
-# style-src, frame-src und connect-src verschwunden.
+# Stripe entfernt (2026-09-15, Launch-Audit N-11): wurde nirgends genutzt. Calendly wurde
+# am 2026-08-03 entfernt. img-src auf self/data + GA4-Pixel eingeschränkt.
+#
+# HSTS bewusst OHNE includeSubDomains/preload (Launch-Audit M-1): Die Seite startet unter
+# einer Übergangsdomain und zieht evtl. auf lingener-baumaschinen.de um, wo webmail/mail/
+# autodiscover bei ALL-INKL kein gültiges Zertifikat haben. preload ist praktisch nicht
+# rückgängig zu machen. Erst nach Subdomain-Inventur erweitern.
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Strict-Transport-Security = "max-age=31536000"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; object-src 'none'; frame-src https://js.stripe.com; connect-src 'self' https://*.stripe.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; object-src 'none'; frame-src 'none'; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+
+# Caching (Launch-Audit N-13). Schriftdateien tragen einen Hash im Namen -> dauerhaft cachebar.
+# Bilder: 1 Tag frisch, danach bis 7 Tage im Hintergrund revalidiert (Dateinamen ohne Hash,
+# daher bewusst kein immutable). CSS/JS bleiben beim Netlify-Standard (revalidieren).
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
