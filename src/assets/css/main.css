@@ -2124,11 +2124,17 @@ html.nav-open, html.nav-open body { overflow: hidden; }
 
 /* Wird per JS auf <main> gesetzt (NICHT auf body: aktive Animation auf dem body
    bricht in WebKit/iOS position:fixed der Body-Kinder — Bar/FAB/Banner/Drawer). */
-.page-enter {
-  opacity: 0;
-  animation: pageEnter .9s var(--ease-out) .1s forwards;
+/* Seiten-Einblendung (Variante B, 2026-09-15): kurz und ab halber Deckkraft, ohne Verzögerung.
+   Vorher: per JS gesetzte Klasse, Start bei opacity 0, .1s Verzögerung + .9s Dauer -> bis ~1 s
+   leere Fläche unter der Navigation und spätes LCP.
+   Reines CSS: greift ab dem ersten Paint (kein Aufblitzen, falls der Browser vor main.js malt).
+   fill-mode "backwards" statt "forwards": Nach dem Ende hängt KEIN Animationszustand mehr an
+   <main> — wichtig für WebKit, wo dauerhafte Animationen an Vorfahren position:fixed stören.
+   Weiterhin auf <main>, nie auf <body> (fixierte Elemente sind direkte body-Kinder). */
+@media (prefers-reduced-motion: no-preference) {
+  #main { animation: pageEnter .3s var(--ease-out) backwards; }
 }
-@keyframes pageEnter { to { opacity: 1; } }
+@keyframes pageEnter { from { opacity: .5; } to { opacity: 1; } }
 
 /* ----------  Floating Action Button — Kontakt  ---------- */
 .fab {

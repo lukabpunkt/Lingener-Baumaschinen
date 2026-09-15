@@ -27,6 +27,11 @@
   {% endif %}
   {% if extraHead %}{{ extraHead | safe }}{% endif %}
   {% if preloadImage %}<link rel="preload" as="image" href="{{ preloadImage }}" fetchpriority="high">{% endif %}
+  <!-- Überschriften-Schriften vorladen (LCP): Inter (variable, alle Stärken, Latin) und
+       Instrument Serif kursiv (Latin). Ohne Preload fand der Browser sie erst nach fonts.css,
+       die Hero-Headline stand bis dahin in der Systemschrift. crossorigin ist bei Fonts Pflicht. -->
+  <link rel="preload" href="/assets/fonts/6aa8d83d0cf7.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/3b04c06b849d.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo/favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/logo/favicon-192.png">
   <link rel="apple-touch-icon" href="/assets/images/logo/apple-touch-icon.png">

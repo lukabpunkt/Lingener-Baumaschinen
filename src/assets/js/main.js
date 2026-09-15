@@ -20,12 +20,9 @@
   /* Year auto-fill */
   $$('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
-  /* Page-enter: Einblend-Animation auf <main>, NICHT auf <body>.
-     Eine (per fill-mode dauerhaft aktive) Animation auf dem body bricht in
-     WebKit/iOS-Safari position:fixed aller Body-Kinder (Scroll-Progress, FAB,
-     Cookie-Banner, Drawer) — die Elemente hängen dann mitten im Viewport. */
-  const pageMain = document.getElementById('main');
-  if (pageMain) pageMain.classList.add('page-enter');
+  /* Seiten-Einblendung liegt seit 2026-09-15 rein im CSS (#main, siehe main.css "pageEnter").
+     Weiterhin NIE auf <body>: Eine Animation am body bricht in WebKit/iOS-Safari
+     position:fixed aller Body-Kinder (Scroll-Progress, FAB, Cookie-Banner, Drawer). */
 
   /* Sticky nav scroll state */
   const nav = $('.nav');
@@ -1003,7 +1000,7 @@
     };
 
     /* Mehrfach nachsetzen statt einmal: Der erste Versuch faellt noch in die
-       laufende page-enter-Animation (.1s Verzoegerung + .9s Dauer), spaetere
+       laufende Seiten-Einblendung (.3s), spaetere
        Layoutspruenge durch Hero-Bilder und Schriften verschieben das Ziel
        zusaetzlich. Sobald der Besucher selbst scrollt, wird abgebrochen —
        niemand soll gegen die Seite ankaempfen muessen. */
