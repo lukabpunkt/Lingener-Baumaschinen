@@ -30,6 +30,32 @@ Geprüft: ✅ von mir nachgemessen · ◐ teilweise/per Code bestätigt · — A
 - `npm audit`: 0 Lücken, HTML-Output nach dem Update byte-identisch
 - 88 JSON-LD-Blöcke gültig, „GM 140 AS" nirgends mehr enthalten
 
+### Nachmessung auf Netlify (2026-09-15, Deploy von `625a88a`)
+
+| Prüfung | Ergebnis |
+|---|---|
+| Browser-Tests (38 Fälle, Chromium + WebKit) gegen die Live-Vorschau | ✅ 38/38 |
+| axe gegen alle 88 Seiten live | ✅ 0 Verstöße |
+| CSP ohne Stripe, X-Frame, Referrer, Permissions | ✅ ausgeliefert |
+| HSTS | ⚠️ Live noch `includeSubDomains; preload`. **Netlify setzt das auf `*.netlify.app` selbst**, solange keine eigene Domain eingetragen ist ([Netlify-Forum](https://answers.netlify.com/t/security-headers-adding-includesubdomains-and-preload-to-strict-transport-security-header-to-sites-with-default-domain-name/19706)). Der Wert aus `netlify.toml` greift erst mit der Custom Domain, dann per `curl -I` gegenprüfen. |
+| Cache-Header | ✅ Fonts `max-age=31536000, immutable`, Bilder `max-age=86400, stale-while-revalidate=604800` |
+| noindex unter `netlify.app` | ✅ Meta `noindex`, Canonical und og:image auf `netlify.app`, keine hreflang-Tags, Sitemap leer, robots.txt ohne Sitemap-Zeile |
+| Pretty URLs aus | ✅ interne Links wieder `.html`. Hinweis: Netlify liefert `/en/maschinen` weiterhin mit 200 (Standard-Dateiauflösung, keine Nachbearbeitung). Das Canonical zeigt auf `.html`, unkritisch. |
+| Netlify-Einfügung | ❌ Kommentar „This site is hosted on Netlify…", Meta `hosting-provider`/`netlify-deploy` und Header `netlify-hosting` weiterhin vorhanden. Per Repo nicht abschaltbar, **Dashboard oder Netlify-Support [Betreiber]**. |
+| Weiterleitungen, Team-Seite, alte GA4-Datei | ✅ `/maschinen/` 301, `/fr/*` 301, `/en/nope` 404, `/team.html` 404, `ga4-init.js` 404 |
+| Formularerkennung | ✅ `kontakt`, `gebrauchtmaschine`, `bewerbung` weiter erkannt (Honeypot aktiv) |
+
+**Lighthouse mobil live** (SEO 69 überall = gewolltes noindex unter `netlify.app`):
+
+| Seite | Performance vorher → jetzt | LCP vorher → jetzt | Gewicht | A11y / BP |
+|---|---|---|---|---|
+| `/` | 80 → **79** | 5,0 s → **5,2 s** | 1.083 KiB | 100 / 100 |
+| `/maschinen.html` | 89 → **98** | 3,0 s → **1,9 s** | 636 KiB (vorher 3,2 MB) | 100 / 100 |
+| `/maschinen/gm-6-asr.html` | 83 → **95** | 4,5 s → **2,2 s** | 546 KiB | 100 / 100 |
+| `/kontakt.html` | 92 → **97** | 2,7 s → **2,1 s** | 210 KiB | 100 / 100 |
+
+⚠️ **Startseite nicht verbessert.** Das LCP-Element ist die Hero-H1, die Render-Verzögerung liegt bei 1,1 s (vorher 4,46 s). Der simulierte LCP bleibt bei 5,2 s. Wahrscheinliche Ursachen: Die Überschrift wartet auf die Web-Schrift Inter, und die Einblend-Animation von `<main>` verzögert zusätzlich. Nächster Schritt [Repo]: Hero-Schriftschnitte vorladen (`preload`) und `page-enter` für den ersten Viewport abschwächen oder weglassen (Design-Entscheidung).
+
 ### Umgesetzt (Repo)
 
 | ID | Was |
