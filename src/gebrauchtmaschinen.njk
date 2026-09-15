@@ -22,9 +22,9 @@ ogTitleEN: "Used Machines — LIBA Lingener Baumaschinen"
 ogDescDE: "Gebrauchte Grabenfräsen direkt vom Hersteller. Geprüft, generalüberholt, mit Werksgarantie."
 ogDescEN: "Used trench cutters direct from the manufacturer. Inspected, reconditioned, with factory warranty."
 schemaDE: >-
-  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+  {"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
 schemaEN: >-
-  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Manufacturer specialising in the sale, hire and servicing of trench cutters for civil engineering, cable, road and track construction. Founded 1969, worldwide dealer network.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Lower Saxony","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
+  {"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Manufacturer specialising in the sale, hire and servicing of trench cutters for civil engineering, cable, road and track construction. Founded 1969, worldwide dealer network.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Lower Saxony","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}
 
 eleventyComputed:
   title: "{{ titleDE if lang == 'de' else titleEN }}"
@@ -39,7 +39,7 @@ eleventyComputed:
 <section class="page-hero">
   <div class="page-hero-bg" style="background-image: url('/assets/images/products/gm-4-raupe-bg.webp');" aria-hidden="true"></div>
   <div class="container">
-    <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}">{% if lang == "de" %}Maschinen{% else %}Machines{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Gebrauchtmaschinen{% else %}Used Machines{% endif %}</span></div>
+    <div class="breadcrumbs"><a href="{% if lang == 'de' %}/{% else %}/en/{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><a href="{% if lang == 'de' %}/maschinen.html{% else %}/en/maschinen.html{% endif %}">{% if lang == "de" %}Maschinen{% else %}Machines{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Gebrauchtmaschinen{% else %}Used Machines{% endif %}</span></div>
     <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Direkt vom Hersteller{% else %}Direct from the manufacturer{% endif %}</span>
     <h1 data-split-lines class="mt-3">{% if lang == "de" %}Gebraucht.<br><em class="serif-italic">Nicht kompromittiert.</em>{% else %}Used.<br><em class="serif-italic">No compromises.</em>{% endif %}</h1>
     <p>{% if lang == "de" %}Jede LIBA-Gebrauchtmaschine durchläuft eine vollständige Werksinspektion, bevor sie das Haus verlässt. Was wir nicht mit gutem Gewissen verkaufen können, verkaufen wir nicht.{% else %}Every LIBA used machine undergoes a full factory inspection before it leaves our premises. What we cannot sell in good conscience, we do not sell.{% endif %}</p>
@@ -65,7 +65,7 @@ eleventyComputed:
         </ul>
       </div>
       <div class="media-frame is-wide">
-        <picture><source type="image/webp" srcset="/assets/images/products/gm-180-af.webp"><img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt="{% if lang == 'de' %}LIBA Gebrauchtmaschine nach Werksinspektion{% else %}LIBA used machine after factory inspection{% endif %}" width="1024" height="576"></picture>
+        <picture><source type="image/webp" srcset="/assets/images/products/gm-180-af-800.webp 800w, /assets/images/products/gm-180-af.webp 1024w" sizes="(min-width: 1024px) 50vw, 100vw"><img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt="{% if lang == 'de' %}LIBA Gebrauchtmaschine nach Werksinspektion{% else %}LIBA used machine after factory inspection{% endif %}" width="1024" height="576"></picture>
         <span class="tag">{% if lang == "de" %}Werksinspektion · Lingen (Ems){% else %}Factory inspection · Lingen (Ems){% endif %}</span>
       </div>
     </div>
@@ -86,7 +86,7 @@ eleventyComputed:
 
     <div class="grid grid-3">
       <article class="news-card reveal">
-        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-4-raupe.webp"><img loading="lazy" src="/assets/images/products/gm-4-raupe.jpg" alt="{% if lang == 'de' %}GM 4 Raupe Gebraucht{% else %}GM 4 Crawler used{% endif %}" width="1024" height="768"></picture></div>
+        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-4-raupe-800.webp 800w, /assets/images/products/gm-4-raupe.webp 1024w" sizes="(min-width: 1024px) 50vw, 100vw"><img loading="lazy" src="/assets/images/products/gm-4-raupe.jpg" alt="{% if lang == 'de' %}GM 4 Raupe Gebraucht{% else %}GM 4 Crawler used{% endif %}" width="1024" height="768"></picture></div>
         <div class="news-card-body">
           <div class="news-card-meta">{% if lang == "de" %}Selbstfahrer · Glasfaser{% else %}Self-propelled · Fibre Optic{% endif %}</div>
           <h3>{% if lang == "de" %}GM 4 Raupe{% else %}GM 4 Crawler{% endif %}</h3>
@@ -95,7 +95,7 @@ eleventyComputed:
         </div>
       </article>
       <article class="news-card reveal reveal-delay-1">
-        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-180-af.webp"><img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt="{% if lang == 'de' %}GM 180 AF Gebraucht{% else %}GM 180 AF used{% endif %}" width="1024" height="576"></picture></div>
+        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-180-af-800.webp 800w, /assets/images/products/gm-180-af.webp 1024w" sizes="(min-width: 1024px) 50vw, 100vw"><img loading="lazy" src="/assets/images/products/gm-180-af.jpg" alt="{% if lang == 'de' %}GM 180 AF Gebraucht{% else %}GM 180 AF used{% endif %}" width="1024" height="576"></picture></div>
         <div class="news-card-body">
           <div class="news-card-meta">{% if lang == "de" %}Schlepperanbau · Flaggschiff{% else %}Tractor-mounted · Flagship{% endif %}</div>
           <h3>GM 180 AF</h3>
@@ -104,7 +104,7 @@ eleventyComputed:
         </div>
       </article>
       <article class="news-card reveal reveal-delay-2">
-        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-6-asr.webp"><img loading="lazy" src="/assets/images/products/gm-6-asr.jpg" alt="{% if lang == 'de' %}GM 6 ASR Gebraucht{% else %}GM 6 ASR used{% endif %}" width="1024" height="768"></picture></div>
+        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-6-asr-800.webp 800w, /assets/images/products/gm-6-asr.webp 1024w" sizes="(min-width: 1024px) 50vw, 100vw"><img loading="lazy" src="/assets/images/products/gm-6-asr.jpg" alt="{% if lang == 'de' %}GM 6 ASR Gebraucht{% else %}GM 6 ASR used{% endif %}" width="1024" height="768"></picture></div>
         <div class="news-card-body">
           <div class="news-card-meta">{% if lang == "de" %}Selbstfahrer · Felsen{% else %}Self-propelled · Rock{% endif %}</div>
           <h3>GM 6 ASR</h3>
@@ -135,32 +135,32 @@ eleventyComputed:
         <input type="hidden" name="form-name" value="gebrauchtmaschine">
         <p hidden><label>{% if lang == 'de' %}Nicht ausfüllen{% else %}Do not fill this in{% endif %}: <input name="bot-field"></label></p>
         <div class="form-row">
-          <div class="field"><label for="g-name">{% if lang == "de" %}Name{% else %}Name{% endif %}</label><input id="g-name" name="name" required></div>
-          <div class="field"><label for="g-firma">{% if lang == "de" %}Firma{% else %}Company{% endif %}</label><input id="g-firma" name="firma"></div>
+          <div class="field"><label for="g-name">Name *</label><input id="g-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="g-firma">{% if lang == "de" %}Firma{% else %}Company{% endif %}</label><input id="g-firma" name="firma" autocomplete="organization"></div>
         </div>
         <div class="form-row">
-          <div class="field"><label for="g-email">{% if lang == "de" %}E-Mail{% else %}Email{% endif %}</label><input id="g-email" type="email" name="email" required></div>
-          <div class="field"><label for="g-tel">{% if lang == "de" %}Telefon{% else %}Phone{% endif %}</label><input id="g-tel" type="tel" name="tel"></div>
+          <div class="field"><label for="g-email">{% if lang == "de" %}E-Mail *{% else %}Email *{% endif %}</label><input id="g-email" type="email" name="email" autocomplete="email" required></div>
+          <div class="field"><label for="g-tel">{% if lang == "de" %}Telefon{% else %}Phone{% endif %}</label><input id="g-tel" type="tel" name="tel" autocomplete="tel"></div>
         </div>
         <div class="field">
           <label for="g-modell">{% if lang == "de" %}Gesuchtes Modell{% else %}Model sought{% endif %}</label>
           <select id="g-modell" name="modell">
             {% if lang == "de" %}
-            <option>Beratung gewünscht</option>
-            <option>GM 4 Raupe</option>
-            <option>GM 4 Allrad</option>
-            <option>GM 6 ASR</option>
-            <option>GM 180 AF</option>
-            <option>GM 140 AFH</option>
-            <option>Sonstiges Modell</option>
+            <option value="Beratung gewünscht">Beratung gewünscht</option>
+            <option value="GM 4 Raupe">GM 4 Raupe</option>
+            <option value="GM 4 Allrad">GM 4 Allrad</option>
+            <option value="GM 6 ASR">GM 6 ASR</option>
+            <option value="GM 180 AF">GM 180 AF</option>
+            <option value="GM 140 AFH">GM 140 AFH</option>
+            <option value="Sonstiges Modell">Sonstiges Modell</option>
             {% else %}
-            <option>Advice requested</option>
-            <option>GM 4 Crawler</option>
-            <option>GM 4 All-Wheel</option>
-            <option>GM 6 ASR</option>
-            <option>GM 180 AF</option>
-            <option>GM 140 AFH</option>
-            <option>Other model</option>
+            <option value="Beratung gewünscht">Advice requested</option>
+            <option value="GM 4 Raupe">GM 4 Crawler</option>
+            <option value="GM 4 Allrad">GM 4 All-Wheel</option>
+            <option value="GM 6 ASR">GM 6 ASR</option>
+            <option value="GM 180 AF">GM 180 AF</option>
+            <option value="GM 140 AFH">GM 140 AFH</option>
+            <option value="Sonstiges Modell">Other model</option>
             {% endif %}
           </select>
         </div>

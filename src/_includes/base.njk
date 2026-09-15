@@ -6,21 +6,21 @@
   <meta name="theme-color" content="#0B0F14">
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
-  {% if noindex %}<meta name="robots" content="noindex, follow">{% endif %}
+  {% if noindex or site.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
   <!-- Open Graph / Social -->
   <meta property="og:type" content="{{ ogType if ogType else 'website' }}">
   <meta property="og:url" content="{{ canonical }}">
   <meta property="og:title" content="{{ ogTitle if ogTitle else (og.title if og else title) }}">
   <meta property="og:description" content="{{ ogDescription if ogDescription else (og.description if og else description) }}">
-  <meta property="og:image" content="{{ ogImage if ogImage else (og.image if og else 'https://lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
+  <meta property="og:image" content="{{ ogImage if ogImage else (og.image if og else 'https://lingener-baumaschinen.de/assets/images/og/og-default.jpg') }}">
   <meta property="og:locale" content="{{ ogLocale if ogLocale else (og.locale if og else 'de_DE') }}">
   {% if lang == "en" %}<meta property="og:locale:alternate" content="de_DE">{% endif %}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ ogTitle if ogTitle else (og.title if og else title) }}">
   <meta name="twitter:description" content="{{ ogDescription if ogDescription else (og.description if og else description) }}">
-  <meta name="twitter:image" content="{{ ogImage if ogImage else (og.image if og else 'https://lingener-baumaschinen.de/assets/images/hero/hero-1.jpg') }}">
+  <meta name="twitter:image" content="{{ ogImage if ogImage else (og.image if og else 'https://lingener-baumaschinen.de/assets/images/og/og-default.jpg') }}">
   <link rel="canonical" href="{{ canonical }}">
-  {% if langDE and langEN and not noindex %}
+  {% if langDE and langEN and not noindex and not site.noindex %}
   <link rel="alternate" hreflang="de" href="https://lingener-baumaschinen.de{{ langDE }}">
   <link rel="alternate" hreflang="en" href="https://lingener-baumaschinen.de{{ langEN }}">
   <link rel="alternate" hreflang="x-default" href="https://lingener-baumaschinen.de{{ langDE }}">
@@ -30,21 +30,39 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo/favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/logo/favicon-192.png">
   <link rel="apple-touch-icon" href="/assets/images/logo/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="manifest" href="/site.webmanifest">
   <!-- Schriften durchgehend selbst gehostet (DE + EN) – kein Drittanbieter-Request, DSGVO-konform -->
   <link rel="stylesheet" href="/assets/css/fonts.css">
   <link rel="stylesheet" href="/assets/css/main.css">
+  <!-- Ohne JavaScript bleiben Einblend-Elemente sonst unsichtbar (Launch-Audit M-5). Nur ein
+       Style-Block (style-src erlaubt 'unsafe-inline'), kein Skript -> CSP-konform. -->
+  <noscript><style>.reveal,.clip-reveal{opacity:1!important;transform:none!important;clip-path:none!important}.mask-line>span{transform:none!important}</style></noscript>
   {% if schema %}
   <script type="application/ld+json">{{ schema | safe }}</script>
   {% endif %}
-  {% if site.ga4 and site.ga4 != "G-XXXXXXXXXX" %}
-  <!-- Google Analytics 4 + Consent Mode v2 — Mess-ID zentral in src/_data/site.js.
-       ga4-init.js bewusst synchron (winzig, same-origin), damit der Consent-Default
-       sicher VOR dem async gtag.js-Loader gesetzt ist. Kein Inline-Script -> CSP ohne 'unsafe-inline'. -->
-  <script src="/assets/js/ga4-init.js" data-ga4="{{ site.ga4 }}"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga4 }}"></script>
-  {% endif %}
+  {# Google Analytics 4: KEIN Skript im Head. Die Mess-ID steht als data-ga4 am <body>;
+     main.js lädt gtag.js erst, nachdem der Besucher zugestimmt hat (strenger Consent,
+     Launch-Audit H-6). Vorher findet keinerlei Verbindung zu Google statt. #}
 </head>
-<body>
+<body{% if site.ga4Active %} data-ga4="{{ site.ga4 }}"{% endif %}>
+
+{% if site.ga4Active %}
+{# Consent-Banner nur, wenn GA4 wirklich aktiv ist (vorher gibt es nichts einzuwilligen).
+   Früh im DOM, damit Tastaturnutzer ihn als Erstes erreichen (Launch-Audit G-27). #}
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-banner-title">
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-text">
+      <strong class="cookie-banner-title" id="cookie-banner-title">{% if lang == 'en' %}Privacy settings{% else %}Datenschutz-Einstellungen{% endif %}</strong>
+      <p class="cookie-banner-body">{% if lang == 'en' %}With your consent we use Google Analytics 4 to measure website usage. Google Analytics is only loaded after you accept; data may then be transferred to the USA. Your choice is stored in your browser. <a href="/en/datenschutz.html">Privacy Policy</a>{% else %}Mit Ihrer Zustimmung nutzen wir Google Analytics 4 zur Reichweitenmessung. Google Analytics wird erst nach Ihrer Zustimmung geladen; dabei können Daten in die USA übermittelt werden. Ihre Auswahl wird in Ihrem Browser gespeichert. <a href="/datenschutz.html">Datenschutzerklärung</a>{% endif %}</p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button class="cookie-btn cookie-btn-decline" id="cookie-decline" type="button">{% if lang == 'en' %}Decline{% else %}Ablehnen{% endif %}</button>
+      <button class="cookie-btn cookie-btn-accept" id="cookie-accept" type="button">{% if lang == 'en' %}Accept{% else %}Akzeptieren{% endif %}</button>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 {% if lang == "en" %}
 <a class="skip-link" href="#main">Skip to content</a>
@@ -67,7 +85,7 @@
 <header class="nav{{ ' is-solid' if navSolid }}" role="banner">
   <div class="container nav-inner">
     <a href="/en/" class="nav-brand">
-      <img src="/assets/images/logo/liba-logo-dark.png" alt="LIBA" class="logo" width="908" height="276">
+      <picture><source type="image/webp" srcset="/assets/images/logo/liba-logo-dark.webp"><img src="/assets/images/logo/liba-logo-dark.png" alt="LIBA" class="logo" width="908" height="276"></picture>
       <span class="meta">Lingener<br>Baumaschinen</span>
     </a>
     <nav class="nav-links" aria-label="Main navigation">
@@ -80,9 +98,9 @@
     </nav>
     <div class="nav-cta">
       {% if langDE and langEN %}
-      <div class="lang-switch" aria-label="Language">
+      <div class="lang-switch" role="group" aria-label="Language">
         <a href="{{ langDE }}" class="lang-btn">DE</a>
-        <a href="{{ langEN }}" class="lang-btn is-active">EN</a>
+        <a href="{{ langEN }}" class="lang-btn is-active" aria-current="true">EN</a>
       </div>
       {% endif %}
       {% if nav == "kontakt" %}
@@ -118,9 +136,9 @@
   <a href="/en/kontakt.html" class="btn btn-primary">Request a quote</a>
   {% endif %}
   {% if langDE and langEN %}
-  <div class="mobile-lang-switch">
+  <div class="mobile-lang-switch" role="group" aria-label="{% if lang == 'en' %}Language{% else %}Sprache{% endif %}">
     <a href="{{ langDE }}" class="lang-btn">DE</a>
-    <a href="{{ langEN }}" class="lang-btn is-active">EN</a>
+    <a href="{{ langEN }}" class="lang-btn is-active" aria-current="true">EN</a>
   </div>
   {% endif %}
   <div class="mobile-nav-meta">
@@ -151,12 +169,12 @@
 <!-- NAV -->
 <header class="nav{{ ' is-solid' if navSolid }}" role="banner">
   <div class="container nav-inner">
-    <a href="{{ '/en/index.html' if lang == 'en' else '/' }}" class="nav-brand" aria-label="LIBA – {% if lang == 'en' %}Home{% else %}Startseite{% endif %}">
-      <img src="/assets/images/logo/liba-logo-dark.png" alt="LIBA" class="logo" width="908" height="276">
+    <a href="{{ '/en/' if lang == 'en' else '/' }}" class="nav-brand" aria-label="LIBA – {% if lang == 'en' %}Home{% else %}Startseite{% endif %}">
+      <picture><source type="image/webp" srcset="/assets/images/logo/liba-logo-dark.webp"><img src="/assets/images/logo/liba-logo-dark.png" alt="LIBA" class="logo" width="908" height="276"></picture>
       <span class="meta">Lingener<br>Baumaschinen</span>
     </a>
     <nav class="nav-links" aria-label="{% if lang == 'en' %}Main navigation{% else %}Hauptnavigation{% endif %}">
-      <a href="{{ '/en/index.html' if lang == 'en' else '/' }}"{% if nav == "start" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Home{% else %}Start{% endif %}</a>
+      <a href="{{ '/en/' if lang == 'en' else '/' }}"{% if nav == "start" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Home{% else %}Start{% endif %}</a>
       <a href="{{ p }}/maschinen.html"{% if nav == "maschinen" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Machines{% else %}Maschinen{% endif %}</a>
       <a href="{{ p }}/anwendungen.html"{% if nav == "anwendungen" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Applications{% else %}Anwendungen{% endif %}</a>
       <a href="{{ p }}/mieten.html"{% if nav == "mieten" %} aria-current="page"{% endif %}>{% if lang == 'en' %}Hire{% else %}Mieten{% endif %}</a>
@@ -165,8 +183,8 @@
     </nav>
     <div class="nav-cta">
       {% if langDE and langEN %}
-      <div class="lang-switch" aria-label="Sprache">
-        <a href="{{ langDE }}" class="lang-btn is-active">DE</a>
+      <div class="lang-switch" role="group" aria-label="Sprache">
+        <a href="{{ langDE }}" class="lang-btn is-active" aria-current="true">DE</a>
         <a href="{{ langEN }}" class="lang-btn">EN</a>
       </div>
       {% endif %}
@@ -189,7 +207,7 @@
 </header>
 
 <div id="mobile-nav" class="mobile-nav">
-  <a href="{{ '/en/index.html' if lang == 'en' else '/' }}">{% if lang == 'en' %}Home{% else %}Start{% endif %}</a>
+  <a href="{{ '/en/' if lang == 'en' else '/' }}">{% if lang == 'en' %}Home{% else %}Start{% endif %}</a>
   <a href="{{ p }}/maschinen.html">{% if lang == 'en' %}Machines{% else %}Maschinen{% endif %}</a>
   <a href="{{ p }}/anwendungen.html">{% if lang == 'en' %}Applications{% else %}Anwendungen{% endif %}</a>
   <a href="{{ p }}/mieten.html">{% if lang == 'en' %}Hire{% else %}Mieten{% endif %}</a>
@@ -203,8 +221,8 @@
   <a href="{{ p }}/kontakt.html" class="btn btn-primary">{% if lang == 'en' %}Enquire{% else %}Anfrage stellen{% endif %}</a>
   {% endif %}
   {% if langDE and langEN %}
-  <div class="mobile-lang-switch">
-    <a href="{{ langDE }}" class="lang-btn is-active">DE</a>
+  <div class="mobile-lang-switch" role="group" aria-label="{% if lang == 'en' %}Language{% else %}Sprache{% endif %}">
+    <a href="{{ langDE }}" class="lang-btn is-active" aria-current="true">DE</a>
     <a href="{{ langEN }}" class="lang-btn">EN</a>
   </div>
   {% endif %}
@@ -215,6 +233,8 @@
 </div>
 
 {% endif %}
+
+<div class="print-header" aria-hidden="true"><img src="/assets/images/logo/liba-logo-dark.webp" alt="" width="454" height="138"><span>Lingener Baumaschinen GmbH &amp; Co. KG · Diekstrasse 59 · 49809 Lingen (Ems) · +49 (0) 591 76 314</span></div>
 
 <main id="main">
 {{ content | safe }}
@@ -228,7 +248,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="/assets/images/logo/liba-logo-white.png" alt="LIBA" class="logo" width="908" height="276">
+        <picture><source type="image/webp" srcset="/assets/images/logo/liba-logo-white.webp"><img src="/assets/images/logo/liba-logo-white.png" alt="LIBA" class="logo" width="908" height="276" loading="lazy"></picture>
         <div class="meta">Lingener Baumaschinen · since 1969</div>
         <p class="footer-tagline">Trench cutters from the Emsland. Deployed worldwide.</p>
         <div class="footer-social">
@@ -283,7 +303,7 @@
         <a href="/en/impressum.html">Imprint</a>
         <a href="/en/datenschutz.html">Privacy</a>
         <a href="/en/agb.html">T&amp;Cs</a>
-        <button class="footer-consent-btn" data-reset-consent type="button">Cookie settings</button>
+        {% if site.ga4Active %}<button class="footer-consent-btn" data-reset-consent type="button">Privacy settings</button>{% endif %}
       </div>
     </div>
   </div>
@@ -296,7 +316,7 @@
   <div class="container" style="position: relative;">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="/assets/images/logo/liba-logo-white.png" alt="LIBA" class="logo" width="908" height="276">
+        <picture><source type="image/webp" srcset="/assets/images/logo/liba-logo-white.webp"><img src="/assets/images/logo/liba-logo-white.png" alt="LIBA" class="logo" width="908" height="276" loading="lazy"></picture>
         <div class="meta">Lingener Baumaschinen · seit 1969</div>
         <p class="footer-tagline">Grabenfräsen aus dem Emsland. Weltweit im Einsatz.</p>
         <div class="footer-social">
@@ -351,7 +371,7 @@
         <a href="/impressum.html">Impressum</a>
         <a href="/datenschutz.html">Datenschutz</a>
         <a href="/agb.html">AGB</a>
-        <button class="footer-consent-btn" data-reset-consent type="button">Cookie-Einstellungen</button>
+        {% if site.ga4Active %}<button class="footer-consent-btn" data-reset-consent type="button">Datenschutz-Einstellungen</button>{% endif %}
       </div>
     </div>
   </div>
@@ -360,7 +380,7 @@
 {% endif %}
 
 <!-- Floating Contact Button -->
-<div class="fab" id="fab">
+<div class="fab{% if nav == 'start' %} is-hero-hidden{% endif %}" id="fab">
   <div class="fab-menu" id="fab-menu" aria-hidden="true">
     <a href="tel:+4959176314" class="fab-item">
       <span class="fab-item-icon">
@@ -388,19 +408,6 @@
   </button>
 </div>
 
-<!-- Cookie Consent Banner -->
-<div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false" aria-label="{% if lang == 'en' %}Cookie Settings{% else %}Cookie-Einstellungen{% endif %}">
-  <div class="cookie-banner-inner">
-    <div class="cookie-banner-text">
-      <strong class="cookie-banner-title">{% if lang == 'en' %}Cookies &amp; Privacy{% else %}Cookies &amp; Datenschutz{% endif %}</strong>
-      <p class="cookie-banner-body">{% if lang == 'en' %}We use technically necessary cookies and — with your consent — Google Analytics 4 for anonymised reach measurement. Data may be transferred to the USA. <a href="/en/datenschutz.html">Privacy Policy</a>{% else %}Wir nutzen technisch notwendige Cookies sowie – mit Ihrer Zustimmung – Google Analytics 4 zur anonymisierten Reichweitenmessung. Dabei können Daten in die USA übermittelt werden. <a href="/datenschutz.html">Datenschutzerklärung</a>{% endif %}</p>
-    </div>
-    <div class="cookie-banner-actions">
-      <button class="cookie-btn cookie-btn-decline" id="cookie-decline" type="button">{% if lang == 'en' %}Decline{% else %}Ablehnen{% endif %}</button>
-      <button class="cookie-btn cookie-btn-accept" id="cookie-accept" type="button">{% if lang == 'en' %}Accept{% else %}Akzeptieren{% endif %}</button>
-    </div>
-  </div>
-</div>
 <button type="button" class="scroll-top" id="scroll-top" aria-label="{% if lang == 'en' %}Back to top{% else %}Nach oben{% endif %}">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
 </button>

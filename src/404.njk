@@ -10,6 +10,8 @@ permalink: /404.html
   <title>Seite nicht gefunden — LIBA</title>
   <meta name="robots" content="noindex, follow">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/logo/favicon-32.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/images/logo/apple-touch-icon.png">
   <link rel="stylesheet" href="/assets/css/fonts.css">
   <link rel="stylesheet" href="/assets/css/main.css">
   <style>
@@ -18,26 +20,21 @@ permalink: /404.html
     .err-page::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(var(--brand-rgb), .3), transparent 55%); z-index: 0; }
     .err-page::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 56px 56px; z-index: 0; mask-image: linear-gradient(180deg, transparent, black 30%, transparent); }
     .err-page > * { position: relative; z-index: 1; }
+    .err-links { margin-top: 2.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.5rem; font-size: .95rem; }
+    .err-links a, .err-footer a { color: var(--steel-300); text-decoration: underline; text-decoration-color: var(--brand-light); text-underline-offset: 3px; }
+    .err-footer { background: var(--ink); color: var(--steel-400); text-align: center; padding: 1.5rem var(--gutter); font-size: .8rem; border-top: 1px solid rgba(255,255,255,.06); display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.25rem; }
   </style>
-  {% if site.ga4 and site.ga4 != "G-XXXXXXXXXX" %}
-  <!-- Google Analytics 4 + Consent Mode v2 — Mess-ID zentral in src/_data/site.js.
-       Diese Seite nutzt bewusst nicht base.njk, muss aber dieselbe CSP erfüllen:
-       ga4-init.js statt Inline-Script (script-src ohne 'unsafe-inline'), synchron
-       eingebunden, damit der Consent-Default vor dem async gtag.js-Loader steht.
-       ga4-init.js erledigt consent default + js + config in einem. -->
-  <script src="/assets/js/ga4-init.js" data-ga4="{{ site.ga4 }}"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga4 }}"></script>
-  {% endif %}
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}</script>
+  {# GA4 lädt erst nach Einwilligung über main.js (data-ga4 am body), kein Skript im Head. #}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","description":"Lingener Baumaschinen ist spezialisiert auf Verkauf, Vermietung und Service von Grabenfräsen für Tief-, Kabel-, Straßen- und Gleisbau. Gegründet 1969, weltweites Händlernetz.","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de","contactPoint":{"@type":"ContactPoint","telephone":"+49-591-76314","contactType":"sales","availableLanguage":["German","English"]},"sameAs":["https://www.linkedin.com/company/lingener-baumaschinen-gmbh/","https://www.youtube.com/@lingenerbaumaschine","https://www.instagram.com/liba_grabenfraesen/"]}</script>
 </head>
-<body>
+<body{% if site.ga4Active %} data-ga4="{{ site.ga4 }}"{% endif %}>
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
 <header class="nav is-solid" style="background: rgba(11,15,20,.85); border-bottom-color: rgba(255,255,255,.06); position: relative; z-index: 10;">
   <div class="container nav-inner">
-    <a href="/index.html" class="nav-brand" style="color: var(--canvas);"><img src="/assets/images/logo/liba-logo-white.png" alt="LIBA" class="logo" width="908" height="276"><span class="meta" style="border-color: rgba(255,255,255,.15); color: var(--steel-400);">Lingener<br>Baumaschinen</span></a>
+    <a href="/" class="nav-brand" style="color: var(--canvas);"><picture><source type="image/webp" srcset="/assets/images/logo/liba-logo-white.webp"><img src="/assets/images/logo/liba-logo-white.png" alt="LIBA" class="logo" width="908" height="276"></picture><span class="meta" style="border-color: rgba(255,255,255,.15); color: var(--steel-400);">Lingener<br>Baumaschinen</span></a>
     <nav class="nav-links">
-      <a href="/index.html" style="color: var(--steel-300);">Start</a>
+      <a href="/" style="color: var(--steel-300);">Start</a>
       <a href="/maschinen.html" style="color: var(--steel-300);">Maschinen</a>
       <a href="/anwendungen.html" style="color: var(--steel-300);">Anwendungen</a>
       <a href="/kontakt.html" style="color: var(--steel-300);">Kontakt</a>
@@ -55,11 +52,15 @@ permalink: /404.html
     <h1 class="mt-3" style="color: var(--canvas); font-size: clamp(2rem, 4vw, 3rem); max-width: 24ch; margin-left: auto; margin-right: auto;">Hier wurde noch nicht <em class="serif-italic">gefräst.</em></h1>
     <p class="mt-3" style="color: rgba(255,255,255,.75); font-size: 1.1rem; max-width: 50ch; margin-left: auto; margin-right: auto;">Die angeforderte Seite existiert nicht oder wurde verschoben. Zurück zum Werk geht es hier:</p>
     <div class="mt-4" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="/index.html" class="btn btn-brand is-lg">Zur Startseite <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="/" class="btn btn-brand is-lg">Zur Startseite <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       <a href="/maschinen.html" class="btn btn-outline-light">Maschinen ansehen</a>
     </div>
+    <nav class="err-links" aria-label="Weitere Seiten"><a href="/maschinen.html">Maschinen</a><a href="/anwendungen.html">Anwendungen</a><a href="/mieten.html">Mieten</a><a href="/gebrauchtmaschinen.html">Gebrauchtmaschinen</a><a href="/kontakt.html">Kontakt</a></nav>
   </div>
 </main>
+
+<footer class="err-footer" role="contentinfo"><span>© <span data-year></span> Lingener Baumaschinen GmbH &amp; Co. KG</span><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a><a href="/agb.html">AGB</a><a href="/en/" lang="en" hreflang="en">English</a></footer>
+
 
 
 <!-- Floating Contact Button -->
@@ -92,19 +93,6 @@ permalink: /404.html
 </div>
 
 
-<!-- Cookie Consent Banner -->
-<div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="false" aria-label="Cookie-Einstellungen">
-  <div class="cookie-banner-inner">
-    <div class="cookie-banner-text">
-      <strong class="cookie-banner-title">Cookies &amp; Datenschutz</strong>
-      <p class="cookie-banner-body">Wir nutzen technisch notwendige Cookies sowie – mit Ihrer Zustimmung – Google Analytics 4 zur anonymisierten Reichweitenmessung. Dabei können Daten in die USA übermittelt werden. <a href="/datenschutz.html">Datenschutzerklärung</a></p>
-    </div>
-    <div class="cookie-banner-actions">
-      <button class="cookie-btn cookie-btn-decline" id="cookie-decline" type="button">Ablehnen</button>
-      <button class="cookie-btn cookie-btn-accept" id="cookie-accept" type="button">Akzeptieren</button>
-    </div>
-  </div>
-</div>
 <script src="/assets/js/main.js" defer></script>
 
 </body>

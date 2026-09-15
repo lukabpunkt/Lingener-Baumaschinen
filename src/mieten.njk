@@ -40,7 +40,7 @@ eleventyComputed:
 <section class="page-hero">
   <div class="page-hero-bg" style="background-image: url('/assets/images/products/gm-4-raupe-bg.webp');" aria-hidden="true"></div>
   <div class="container">
-    <div class="breadcrumbs"><a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Mieten{% else %}Hire{% endif %}</span></div>
+    <div class="breadcrumbs"><a href="{% if lang == 'de' %}/{% else %}/en/{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a><span class="sep">/</span><span>{% if lang == "de" %}Mieten{% else %}Hire{% endif %}</span></div>
     <span class="eyebrow hero-eyebrow"><span class="dot"></span>{% if lang == "de" %}Flexibel statt fix{% else %}Flexible instead of fixed{% endif %}</span>
     <h1 data-split-lines class="mt-3">{% if lang == "de" %}Grabenfräse mieten —<br><em class="serif-italic">direkt vom Hersteller.</em>{% else %}Hire a trench cutter —<br><em class="serif-italic">direct from the manufacturer.</em>{% endif %}</h1>
     <p>{% if lang == "de" %}Effizienter Kabel- und Glasfaserbau ohne Kapitalbindung. Tages-, Wochen- und Monatsmiete für ausgewählte LIBA-Modelle, inklusive Einweisung und 24/7-Service.{% else %}Efficient cable and fibre optic installation without capital commitment. Daily, weekly and monthly hire for selected LIBA models, including operator training and 24/7 service.{% endif %}</p>
@@ -66,7 +66,7 @@ eleventyComputed:
 
     <div class="grid grid-3">
       <article class="news-card reveal">
-        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-4-raupe.webp"><img loading="lazy" src="/assets/images/products/gm-4-raupe.jpg" alt="{% if lang == 'de' %}LIBA GM 4 Raupe Mietmaschine für den Glasfaserausbau{% else %}LIBA GM 4 Crawler rental machine for fibre-optic rollout{% endif %}" width="1024" height="768"></picture></div>
+        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-4-raupe-800.webp 800w, /assets/images/products/gm-4-raupe.webp 1024w" sizes="(min-width: 1024px) 50vw, 100vw"><img loading="lazy" src="/assets/images/products/gm-4-raupe.jpg" alt="{% if lang == 'de' %}LIBA GM 4 Raupe Mietmaschine für den Glasfaserausbau{% else %}LIBA GM 4 Crawler rental machine for fibre-optic rollout{% endif %}" width="1024" height="768"></picture></div>
         <div class="news-card-body">
           <span class="avail-badge is-green" style="display:inline-block;padding:.25rem .7rem;border-radius:999px;font-size:.72rem;font-weight:700;margin-bottom:.5rem;">{% if lang == "de" %}Sofort verfügbar{% else %}Immediately available{% endif %}</span>
           <div class="news-card-meta">{% if lang == "de" %}Glasfaser &amp; Telekommunikation{% else %}Fibre Optic &amp; Telecommunications{% endif %}</div>
@@ -77,7 +77,7 @@ eleventyComputed:
       </article>
 
       <article class="news-card reveal reveal-delay-1">
-        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-4-raupe-2.webp"><img loading="lazy" src="/assets/images/products/gm-4-raupe-2.jpg" alt="{% if lang == 'de' %}LIBA GM 4 Allrad Mietmaschine für Sportplatzdrainage und Solartrassen{% else %}LIBA GM 4 All-Wheel rental machine for sports-field drainage and solar routes{% endif %}" width="1024" height="768"></picture></div>
+        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-4-raupe-2-800.webp 800w, /assets/images/products/gm-4-raupe-2.webp 1024w" sizes="(min-width: 1024px) 50vw, 100vw"><img loading="lazy" src="/assets/images/products/gm-4-raupe-2.jpg" alt="{% if lang == 'de' %}LIBA GM 4 Allrad Mietmaschine für Sportplatzdrainage und Solartrassen{% else %}LIBA GM 4 All-Wheel rental machine for sports-field drainage and solar routes{% endif %}" width="1024" height="768"></picture></div>
         <div class="news-card-body">
           <span class="avail-badge is-green" style="display:inline-block;padding:.25rem .7rem;border-radius:999px;font-size:.72rem;font-weight:700;margin-bottom:.5rem;">{% if lang == "de" %}Sofort verfügbar{% else %}Immediately available{% endif %}</span>
           <div class="news-card-meta">{% if lang == "de" %}Sportplatz &amp; Drainage{% else %}Sports Fields &amp; Drainage{% endif %}</div>
@@ -88,7 +88,7 @@ eleventyComputed:
       </article>
 
       <article class="news-card reveal reveal-delay-2">
-        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-6-asr.webp"><img loading="lazy" src="/assets/images/products/gm-6-asr.jpg" alt="{% if lang == 'de' %}LIBA GM 6 ASR Felsfräse als Mietmaschine für extrem harten Untergrund{% else %}LIBA GM 6 ASR rock cutter rental machine for extremely hard ground{% endif %}" width="1024" height="768"></picture></div>
+        <div class="news-card-image"><picture><source type="image/webp" srcset="/assets/images/products/gm-6-asr-800.webp 800w, /assets/images/products/gm-6-asr.webp 1024w" sizes="(min-width: 1024px) 50vw, 100vw"><img loading="lazy" src="/assets/images/products/gm-6-asr.jpg" alt="{% if lang == 'de' %}LIBA GM 6 ASR Felsfräse als Mietmaschine für extrem harten Untergrund{% else %}LIBA GM 6 ASR rock cutter rental machine for extremely hard ground{% endif %}" width="1024" height="768"></picture></div>
         <div class="news-card-body">
           <span class="avail-badge is-amber" style="display:inline-block;padding:.25rem .7rem;border-radius:999px;font-size:.72rem;font-weight:700;margin-bottom:.5rem;">{% if lang == "de" %}Ab nächster Woche{% else %}Available from next week{% endif %}</span>
           <div class="news-card-meta">{% if lang == "de" %}Felsen &amp; Bergbau{% else %}Rock &amp; Mining{% endif %}</div>

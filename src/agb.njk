@@ -18,7 +18,7 @@ descEN: "General Terms and Conditions of Lingener Baumaschinen GmbH & Co. KG for
 canonicalDE: "https://lingener-baumaschinen.de/agb.html"
 canonicalEN: "https://lingener-baumaschinen.de/en/agb.html"
 schema: >
-  {"@context":"https://schema.org","@type":"Organization","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de"}
+  {"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://lingener-baumaschinen.de/#organization","name":"Lingener Baumaschinen GmbH & Co. KG","alternateName":"LIBA","url":"https://lingener-baumaschinen.de","logo":"https://lingener-baumaschinen.de/assets/images/logo/liba-logo-dark.png","foundingDate":"1969","address":{"@type":"PostalAddress","streetAddress":"Diekstrasse 59","postalCode":"49809","addressLocality":"Lingen (Ems)","addressRegion":"Niedersachsen","addressCountry":"DE"},"telephone":"+4959176314","email":"info@lingener-baumaschinen.de"}
 
 eleventyComputed:
   title: "{{ (titleDE if lang == 'de' else titleEN) | safe }}"
@@ -30,7 +30,7 @@ eleventyComputed:
 <section class="page-hero">
   <div class="container">
     <div class="breadcrumbs">
-      <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
+      <a href="{% if lang == 'de' %}/{% else %}/en/{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
       <span class="sep">/</span>
       <span>{% if lang == "de" %}AGB{% else %}Terms &amp; Conditions{% endif %}</span>
     </div>

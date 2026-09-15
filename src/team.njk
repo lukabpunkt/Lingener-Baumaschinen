@@ -4,7 +4,13 @@ pagination:
   data: site.langs
   size: 1
   alias: lang
-permalink: "{{ '/en/team.html' if lang == 'en' else '/team.html' }}"
+# Launch-Audit H-3: Seite enthält KI-Mockup-Porträts und einen fiktiven Geschäftsführer
+# ("Markus Berg (Beispiel)"). Bis echte, freigegebene Inhalte vorliegen, wird sie NICHT
+# gebaut. Zum Reaktivieren: permalink wieder auf
+#   "{{ '/en/team.html' if lang == 'en' else '/team.html' }}"
+# setzen, noindex entfernen und den CTA in src/unternehmen.njk zurückholen.
+permalink: false
+eleventyExcludeFromCollections: true
 layout: base.njk
 preloadImage: "/assets/images/hero/hero-3-bg.webp"
 nav: "team"
@@ -38,7 +44,7 @@ eleventyComputed:
   <div class="page-hero-bg" style="background-image: url('/assets/images/hero/hero-3-bg.webp');" aria-hidden="true"></div>
   <div class="container">
     <div class="breadcrumbs">
-      <a href="{% if lang == 'de' %}/index.html{% else %}/en/index.html{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
+      <a href="{% if lang == 'de' %}/{% else %}/en/{% endif %}">{% if lang == "de" %}Start{% else %}Home{% endif %}</a>
       <span class="sep">/</span>
       <span>{% if lang == "de" %}Über uns{% else %}About Us{% endif %}</span>
     </div>

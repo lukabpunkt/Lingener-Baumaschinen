@@ -6,6 +6,16 @@
   const isCoarse = window.matchMedia('(pointer: coarse)').matches;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+  const isEN = document.documentElement.lang === 'en';
+  const numLocale = isEN ? 'en-GB' : 'de-DE';
+
+  /* localStorage kann werfen (Website-Daten blockiert, manche Webviews). Ein Fehler hier
+     darf nie den Rest des Skripts abbrechen (Launch-Audit M-2). */
+  const storage = {
+    get(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { window.localStorage.setItem(k, v); } catch (e) { /* nicht speicherbar */ } },
+    remove(k) { try { window.localStorage.removeItem(k); } catch (e) { /* nicht speicherbar */ } }
+  };
 
   /* Year auto-fill */
   $$('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
@@ -51,22 +61,42 @@
     document.body.appendChild(grain);
   }
 
-  /* Mobile nav */
+  /* Mobile nav — mit Dialog-Verhalten (Launch-Audit H-4): Fokus in den Drawer, Escape
+     schließt, Tab bleibt im Menü, der Hintergrund scrollt nicht mit. Der geschlossene
+     Drawer ist per CSS (visibility) aus der Tab-Reihenfolge genommen. */
   const toggle = $('.nav-toggle');
   const drawer = $('.mobile-nav');
   if (toggle && drawer) {
-    const close = () => {
-      drawer.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    };
-    toggle.addEventListener('click', () => {
-      const open = drawer.classList.toggle('is-open');
+    const setOpen = (open, returnFocus) => {
+      drawer.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
+      document.documentElement.classList.toggle('nav-open', open);
+      if (open) {
+        const first = drawer.querySelector('a');
+        if (first) setTimeout(() => first.focus({ preventScroll: true }), 60);
+      } else if (returnFocus) {
+        toggle.focus();
+      }
+    };
+    toggle.addEventListener('click', () => setOpen(!drawer.classList.contains('is-open')));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) setOpen(false, true);
+    });
+    drawer.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      const items = $$('a, button', drawer);
+      if (!items.length) return;
+      if (!e.shiftKey && document.activeElement === items[items.length - 1]) { e.preventDefault(); toggle.focus(); }
+      else if (e.shiftKey && document.activeElement === items[0]) { e.preventDefault(); toggle.focus(); }
     });
     /* Schließen bei Link-Klick (außer tel/mailto) */
     $$('a', drawer)
       .filter(a => !a.href.startsWith('tel:') && !a.href.startsWith('mailto:'))
-      .forEach(a => a.addEventListener('click', close));
+      .forEach(a => a.addEventListener('click', () => setOpen(false)));
+    /* Wechsel auf Desktop-Breite: offenes Menü schließen */
+    const desktopMq = window.matchMedia('(min-width: 1100px)');
+    const onMq = () => { if (desktopMq.matches) setOpen(false); };
+    if (desktopMq.addEventListener) desktopMq.addEventListener('change', onMq);
   }
 
   /* Convert headlines with [data-split-lines] into line-masked spans */
@@ -102,7 +132,7 @@
     let i = 0, timer = null;
     const setActive = (n) => {
       slides.forEach((s, idx) => s.classList.toggle('is-active', idx === n));
-      dots.forEach((d, idx) => d.classList.toggle('is-active', idx === n));
+      dots.forEach((d, idx) => { d.classList.toggle('is-active', idx === n); d.setAttribute('aria-current', idx === n ? 'true' : 'false'); });
       i = n;
     };
     const next = () => setActive((i + 1) % slides.length);
@@ -117,6 +147,9 @@
   /* Counter animation */
   const counters = $$('[data-count]');
   if (counters.length && 'IntersectionObserver' in window && !reduceMotion) {
+    /* Das HTML enthält den Endwert (für No-JS, Reader, Vorschau-Crawler) — für die
+       Hochzähl-Animation hier auf 0 zurücksetzen. */
+    counters.forEach(c => { c.textContent = '0'; });
     const co = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
@@ -125,13 +158,13 @@
         const decimals = (el.dataset.count.split('.')[1] || '').length;
         const duration = 1800;
         const start = performance.now();
-        const fmt = (v) => decimals ? v.toFixed(decimals) : Math.floor(v).toLocaleString('de-DE');
+        const fmt = (v) => decimals ? v.toFixed(decimals) : Math.floor(v).toLocaleString(numLocale);
         const tick = (now) => {
           const p = Math.min(1, (now - start) / duration);
           const eased = 1 - Math.pow(1 - p, 3);
           el.textContent = fmt(target * eased);
           if (p < 1) requestAnimationFrame(tick);
-          else el.textContent = decimals ? target.toFixed(decimals) : target.toLocaleString('de-DE');
+          else el.textContent = decimals ? target.toFixed(decimals) : target.toLocaleString(numLocale);
         };
         requestAnimationFrame(tick);
         co.unobserve(el);
@@ -142,7 +175,7 @@
     counters.forEach(c => {
       const v = parseFloat(c.dataset.count);
       const d = (c.dataset.count.split('.')[1] || '').length;
-      c.textContent = d ? v.toFixed(d) : v.toLocaleString('de-DE');
+      c.textContent = d ? v.toFixed(d) : v.toLocaleString(numLocale);
     });
   }
 
@@ -161,19 +194,35 @@
     const sendingMsg = form.dataset.sending || 'Wird gesendet …';
     const fileErrMsg = form.dataset.fileError || 'Bitte laden Sie die Datei als PDF hoch (max. 8 MB).';
     const isMultipart = form.enctype === 'multipart/form-data';
-    const MAX_FILE_BYTES = 8 * 1024 * 1024; // Netlify-Forms-Limit
+    /* Netlify begrenzt die gesamte Formular-Anfrage auf 8 MB — Puffer für die übrigen Felder. */
+    const MAX_FILE_BYTES = 7.5 * 1024 * 1024;
+    const showStatus = (status, msg, isError) => {
+      if (!status) return;
+      status.hidden = false;
+      status.style.color = isError ? '#dc2626' : '';
+      status.textContent = msg;
+      status.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = $('[data-form-status]', form);
       const btn = form.querySelector('[type="submit"]');
       const origHTML = btn ? btn.innerHTML : null;
 
-      // Datei-Validierung vor dem Senden (nur PDF, max. 8 MB)
+      // Pflichtfelder, die nur Leerzeichen enthalten, gelten als leer (Browser-Validierung greift sonst nicht).
+      let blank = false;
+      $$('input[required]:not([type="checkbox"]):not([type="file"]), textarea[required]', form).forEach((el) => {
+        if (!el.value.trim()) { el.value = ''; blank = true; }
+      });
+      if (blank && !form.reportValidity()) return;
+
+      // Datei-Validierung vor dem Senden (nur PDF, max. 7,5 MB) — Endung UND Typ prüfen,
+      // denn Dateien ohne Endung liefern oft keinen MIME-Typ.
       if (isMultipart) {
         const fileInput = form.querySelector('input[type="file"]');
         const file = fileInput && fileInput.files[0];
-        if (file && (file.size > MAX_FILE_BYTES || (file.type && file.type !== 'application/pdf'))) {
-          if (status) { status.hidden = false; status.style.color = '#dc2626'; status.textContent = fileErrMsg; }
+        if (file && (file.size > MAX_FILE_BYTES || !/\.pdf$/i.test(file.name) || (file.type && file.type !== 'application/pdf'))) {
+          showStatus(status, fileErrMsg, true);
           return;
         }
       }
@@ -189,10 +238,10 @@
               body: new URLSearchParams(new FormData(form)).toString()
             }));
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        if (status) { status.hidden = false; status.style.color = ''; status.textContent = okMsg; }
+        showStatus(status, okMsg, false);
         form.reset();
       } catch {
-        if (status) { status.hidden = false; status.style.color = '#dc2626'; status.textContent = errMsg; }
+        showStatus(status, errMsg, true);
       } finally {
         if (btn) { btn.disabled = false; btn.innerHTML = origHTML; }
       }
@@ -258,14 +307,25 @@
       });
     });
   }
-  /* URL param → Kontaktformular vorausfüllen */
+  /* URL-Parameter → Kontaktformular vorausfüllen (?modell=…&betreff=Kauf|Miete).
+     URLSearchParams dekodiert bereits — kein zweites decodeURIComponent, sonst wirft ein
+     "%" im Wert und legt das restliche Skript lahm (Launch-Audit M-3). Text in Seitensprache. */
   (function () {
-    var p = new URLSearchParams(window.location.search).get('modell');
-    if (!p) return;
+    var params = new URLSearchParams(window.location.search);
+    var modell = (params.get('modell') || '').slice(0, 120);
+    var betreff = params.get('betreff');
     var msg = document.getElementById('k-nachricht');
     var subj = document.getElementById('k-betreff');
-    if (msg && !msg.value) msg.value = 'Ich interessiere mich für: ' + decodeURIComponent(p) + '\n\nBitte senden Sie mir ein Angebot.';
-    if (subj) { for (var i = 0; i < subj.options.length; i++) { if (subj.options[i].value === 'Kauf') { subj.selectedIndex = i; break; } } }
+    if (!modell && !betreff) return;
+    var wanted = betreff === 'Miete' ? 'Miete' : 'Kauf';
+    if (subj) { for (var i = 0; i < subj.options.length; i++) { if (subj.options[i].value === wanted) { subj.selectedIndex = i; break; } } }
+    if (msg && !msg.value && modell) {
+      if (isEN) {
+        msg.value = 'I am interested in: ' + modell + '\n\n' + (wanted === 'Miete' ? 'Please send me a hire quote.' : 'Please send me a quote.');
+      } else {
+        msg.value = 'Ich interessiere mich für: ' + modell + '\n\n' + (wanted === 'Miete' ? 'Bitte senden Sie mir ein Mietangebot.' : 'Bitte senden Sie mir ein Angebot.');
+      }
+    }
   })();
 
   /* Maschinenberater-Wizard */
@@ -286,7 +346,6 @@
     var cur   = 0;
     var busy  = false;
     var noAnim = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var isEN        = document.documentElement.lang === 'en';
     var _wiz        = document.getElementById('maschinenwizard');
     var kontaktBase = (_wiz && _wiz.dataset.kontakt) || (isEN ? '/en/kontakt.html' : '/kontakt.html');
     var maschBase   = (_wiz && _wiz.dataset.masch)   || (isEN ? '/en/maschinen/'   : '/maschinen/');
@@ -462,7 +521,7 @@
         ],
         /* > 2.000 mm */
         x: [
-          { tag:'Beratung', tagEN:'Consultation', name:'Individuelle Lösung', slug:null,
+          { tag:'Beratung', tagEN:'Consultation', name:'Individuelle Lösung', nameEN:'Individual solution', slug:null,
             desc:'Für Frästiefen über 2.000 mm ohne Trägergerät beraten wir Sie direkt.',
             descEN:'For cutting depths over 2,000 mm without a carrier machine, contact us directly.', modell:'Selbstfahrer-Sonderlösung' }
         ]
@@ -494,6 +553,19 @@
       });
     }
 
+    /* Nur der sichtbare Schritt ist bedienbar und im Accessibility-Tree (Launch-Audit H-4). */
+    function setInert(active) {
+      panes.forEach(function (p, i) { p.inert = i !== active; });
+    }
+    function focusPane(idx) {
+      var p = panes[idx];
+      if (!p) return;
+      p.setAttribute('tabindex', '-1');
+      p.focus({ preventScroll: true });
+    }
+    cards.setAttribute('aria-live', 'polite');
+    setInert(0);
+
     function slideTo(idx) {
       if (busy) return;
       busy = true;
@@ -501,6 +573,8 @@
       var fromH   = viewport.offsetHeight;
       var toH     = panes[idx].offsetHeight || fromH;
       cur = idx;
+      setInert(idx);
+      focusPane(idx);
 
       if (noAnim) {
         track.style.transform = 'translateX(-' + (idx * 100) + '%)';
@@ -580,7 +654,7 @@
           + (r.slug
             ? '<a href="' + maschBase + r.slug + '.html" class="wizard-rcard-link">' + detailLabel + arrowSvg + '</a>'
             : '')
-          + '<a href="' + kontaktBase + '?modell=' + encodeURIComponent(r.modell) + '" class="wizard-rcard-cta">' + ctaLabel
+          + '<a href="' + kontaktBase + '?modell=' + encodeURIComponent(name) + '#anfrage" class="wizard-rcard-cta">' + ctaLabel
           + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>'
           + '</div>';
       }).join('');
@@ -588,6 +662,7 @@
 
     $$('.wizard-opt', panes[0]).forEach(function (btn) {
       btn.addEventListener('click', function () {
+        if (busy) return; /* Schnellklick während der Animation ignorieren (F-14) */
         sel.key1 = btn.dataset.key;
         if (sel.key1 === 'tiefe') {
           buildCards('tiefe', 'm');
@@ -600,6 +675,7 @@
 
     $$('.wizard-opt', panes[1]).forEach(function (btn) {
       btn.addEventListener('click', function () {
+        if (busy) return;
         sel.key2 = btn.dataset.key;
         buildCards(sel.key1, sel.key2);
         slideTo(2); showDots(-1, 2);
@@ -608,17 +684,20 @@
 
     var backBtn = document.getElementById('wizard-back');
     if (backBtn) backBtn.addEventListener('click', function () {
+      if (busy) return;
       slideTo(0); showDots(0, 0);
     });
 
     var backResult = document.getElementById('wizard-back-result');
     if (backResult) backResult.addEventListener('click', function () {
+      if (busy) return;
       if (sel.key1 === 'tiefe') { slideTo(0); showDots(0, 0); }
       else                      { slideTo(1); showDots(1, 1); }
     });
 
     var restartBtn = document.querySelector('#maschinenwizard .wizard-restart');
     if (restartBtn) restartBtn.addEventListener('click', function () {
+      if (busy) return;
       slideTo(0); showDots(0, 0);
     });
   })();
@@ -636,7 +715,6 @@
 
     var MAINT = 4000;
     var LIFE  = 15;
-    var isEN  = document.documentElement.lang === 'en';
 
     function fmt(n) {
       return isEN ? '€' + n.toLocaleString('en-GB') : n.toLocaleString('de-DE') + ' €';
@@ -664,31 +742,43 @@
       ownAmt.textContent  = fmt(ownYear);
 
       var rentWins = rentYear < ownYear;
+      var tie      = rentYear === ownYear;
       rentAmt.classList.toggle('is-winner', rentWins);
-      ownAmt.classList.toggle('is-winner', !rentWins);
+      ownAmt.classList.toggle('is-winner', !rentWins && !tie);
 
       var machLabel = selMach.options[selMach.selectedIndex].text.split(' — ')[0].trim();
 
       var contactUrl = verdict.getAttribute('data-contact-url') || (isEN ? '/en/kontakt.html' : '/kontakt.html');
+      var buyUrl  = contactUrl + '?betreff=Kauf&modell=' + encodeURIComponent(machLabel) + '#anfrage';
+      var hireUrl = contactUrl + '?betreff=Miete&modell=' + encodeURIComponent(machLabel) + '#anfrage';
+      if (tie) {
+        verdict.className = 'roi-verdict is-buy';
+        verdict.innerHTML = isEN
+          ? '<span class="roi-verdict-msg">At <strong>' + days + ' operating days/year</strong>, hiring and buying cost about the same. With more operating days, <strong>buying pays off</strong>.</span>'
+            + '<a href="' + buyUrl + '" class="btn btn-primary is-sm">Request a purchase quote</a>'
+          : '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> liegen Miete und Kauf gleichauf. Mit jedem weiteren Einsatztag <strong>lohnt sich der Kauf</strong>.</span>'
+            + '<a href="' + buyUrl + '" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
+        return;
+      }
       if (isEN) {
         if (rentWins) {
           verdict.className = 'roi-verdict is-rent';
           verdict.innerHTML = '<span class="roi-verdict-msg">At <strong>' + days + ' operating days/year</strong>, hiring is currently cheaper. Buying pays off from <strong>' + breakEven + ' days/year</strong>.</span>'
-            + '<a href="#mietanfrage" class="btn btn-ghost is-sm">Request a hire quote</a>';
+            + '<a href="' + hireUrl + '" class="btn btn-ghost is-sm">Request a hire quote</a>';
         } else {
           verdict.className = 'roi-verdict is-buy';
           verdict.innerHTML = '<span class="roi-verdict-msg">At <strong>' + days + ' operating days/year</strong>, <strong>buying already makes sense today</strong> — you save ' + fmt(rentYear - ownYear) + ' annually.</span>'
-            + '<a href="' + contactUrl + '?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Request a purchase quote</a>';
+            + '<a href="' + buyUrl + '" class="btn btn-primary is-sm">Request a purchase quote</a>';
         }
       } else {
         if (rentWins) {
           verdict.className = 'roi-verdict is-rent';
           verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> ist Mieten aktuell günstiger. Ab <strong>' + breakEven + ' Tagen/Jahr</strong> rechnet sich der Kauf.</span>'
-            + '<a href="#mietanfrage" class="btn btn-ghost is-sm">Mietangebot anfragen</a>';
+            + '<a href="' + hireUrl + '" class="btn btn-ghost is-sm">Mietangebot anfragen</a>';
         } else {
           verdict.className = 'roi-verdict is-buy';
           verdict.innerHTML = '<span class="roi-verdict-msg">Bei <strong>' + days + ' Einsatztagen/Jahr</strong> lohnt sich der <strong>Kauf bereits heute</strong> — Sie sparen ' + fmt(rentYear - ownYear) + ' jährlich.</span>'
-            + '<a href="' + contactUrl + '?modell=' + encodeURIComponent(machLabel) + '#anfrage" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
+            + '<a href="' + buyUrl + '" class="btn btn-primary is-sm">Kaufangebot anfragen</a>';
         }
       }
     }
@@ -697,47 +787,56 @@
     calc();
   })();
 
-  /* Cookie Consent + GA4 Consent Mode v2 */
-  var CONSENT_KEY = 'liba_consent_v1';
-  function syncGA4(granted) {
-    if (typeof gtag !== 'function') return;
-    gtag('consent', 'update', {
-      analytics_storage: granted ? 'granted' : 'denied',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
+  /* Einwilligung + Google Analytics 4 — strenger Consent (Launch-Audit H-6).
+     GA4 wird erst NACH Zustimmung geladen: vorher kein gtag.js, keine Pings, keine Cookies.
+     Die Mess-ID steht als data-ga4 am <body> (nur wenn in site.js eine echte ID gesetzt ist);
+     ohne ID existiert weder Banner noch Footer-Link. Widerruf löscht die _ga-Cookies. */
+  const CONSENT_KEY = 'liba_consent_v1';
+  const GA4_ID = document.body.dataset.ga4 || '';
+  const loadGA4 = () => {
+    if (!GA4_ID || window.__libaGa4) return;
+    window.__libaGa4 = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    window.gtag('js', new Date());
+    window.gtag('config', GA4_ID);
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4_ID);
+    document.head.appendChild(tag);
+  };
+  const deleteGaCookies = () => {
+    const parts = location.hostname.split('.');
+    const domains = [''];
+    for (let i = 0; i < parts.length - 1; i++) domains.push('.' + parts.slice(i).join('.'));
+    document.cookie.split(';').forEach((c) => {
+      const name = c.split('=')[0].trim();
+      if (!/^_ga(_|$)/.test(name)) return;
+      domains.forEach((d) => { document.cookie = name + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : ''); });
     });
-  }
-  var savedChoice = localStorage.getItem(CONSENT_KEY);
-  if (savedChoice === 'granted') {
-    syncGA4(true);
-  } else if (!savedChoice) {
-    var cookieBanner = document.getElementById('cookie-banner');
-    if (cookieBanner) {
-      requestAnimationFrame(function () { requestAnimationFrame(function () {
-        cookieBanner.classList.add('is-visible');
-      }); });
-      var btnAccept = document.getElementById('cookie-accept');
-      var btnDecline = document.getElementById('cookie-decline');
-      var hideBanner = function () { cookieBanner.classList.remove('is-visible'); };
-      if (btnAccept) btnAccept.addEventListener('click', function () {
-        localStorage.setItem(CONSENT_KEY, 'granted');
-        syncGA4(true);
-        hideBanner();
-      });
-      if (btnDecline) btnDecline.addEventListener('click', function () {
-        localStorage.setItem(CONSENT_KEY, 'declined');
-        hideBanner();
-      });
+  };
+  if (GA4_ID) {
+    const savedChoice = storage.get(CONSENT_KEY);
+    if (savedChoice === 'granted') loadGA4();
+    const cookieBanner = document.getElementById('cookie-banner');
+    if (cookieBanner && !savedChoice) {
+      requestAnimationFrame(() => requestAnimationFrame(() => cookieBanner.classList.add('is-visible')));
+      const hideBanner = () => cookieBanner.classList.remove('is-visible');
+      const btnAccept = document.getElementById('cookie-accept');
+      const btnDecline = document.getElementById('cookie-decline');
+      if (btnAccept) btnAccept.addEventListener('click', () => { storage.set(CONSENT_KEY, 'granted'); loadGA4(); hideBanner(); });
+      if (btnDecline) btnDecline.addEventListener('click', () => { storage.set(CONSENT_KEY, 'declined'); hideBanner(); });
     }
-  }
-  $$('[data-reset-consent]').forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      localStorage.removeItem(CONSENT_KEY);
-      location.reload();
+    $$('[data-reset-consent]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        storage.remove(CONSENT_KEY);
+        deleteGaCookies();
+        location.reload();
+      });
     });
-  });
+  }
 
   /* Floating Action Button — Kontakt */
   const fab    = document.getElementById('fab');
@@ -764,6 +863,17 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && fab.classList.contains('is-open')) { closeFab(); fabBtn.focus(); }
     });
+    /* Startseite: FAB liegt sonst auf Hero-Kennzahlen und Slider-Punkten (Launch-Audit M-11) */
+    const heroEl = document.querySelector('.hero');
+    if (heroEl) {
+      const updateFab = () => {
+        const hidden = window.scrollY < heroEl.offsetHeight * 0.6;
+        fab.classList.toggle('is-hero-hidden', hidden);
+        if (hidden && fab.classList.contains('is-open')) closeFab();
+      };
+      window.addEventListener('scroll', updateFab, { passive: true });
+      updateFab();
+    }
   }
 
   /* Scroll-to-top button */
@@ -856,6 +966,14 @@
       io.observe(kalkulator);
     } else { update(); }
   }
+
+  /* Druck: zugeklappte FAQ-Antworten mitdrucken, danach wieder schließen (Launch-Audit M-13) */
+  window.addEventListener('beforeprint', () => {
+    $$('details:not([open])').forEach((d) => { d.dataset.printOpened = '1'; d.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    $$('details[data-print-opened]').forEach((d) => { d.open = false; delete d.dataset.printOpened; });
+  });
 
   /* Ankersprung beim Laden nachsetzen.
      Ursache: html { scroll-behavior: smooth } laesst Chrome den browserseitigen
