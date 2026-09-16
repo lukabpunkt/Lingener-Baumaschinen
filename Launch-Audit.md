@@ -49,12 +49,29 @@ Geprüft: ✅ von mir nachgemessen · ◐ teilweise/per Code bestätigt · — A
 
 | Seite | Performance vorher → jetzt | LCP vorher → jetzt | Gewicht | A11y / BP |
 |---|---|---|---|---|
-| `/` | 80 → **79** | 5,0 s → **5,2 s** | 1.083 KiB | 100 / 100 |
+| `/` | 80 → **98** (Median aus 4 Läufen) | 5,0 s → **1,9 s** | 1.083 KiB | 100 / 100 |
 | `/maschinen.html` | 89 → **98** | 3,0 s → **1,9 s** | 636 KiB (vorher 3,2 MB) | 100 / 100 |
 | `/maschinen/gm-6-asr.html` | 83 → **95** | 4,5 s → **2,2 s** | 546 KiB | 100 / 100 |
-| `/kontakt.html` | 92 → **97** | 2,7 s → **2,1 s** | 210 KiB | 100 / 100 |
+| `/kontakt.html` | 92 → **98** | 2,7 s → **1,9 s** | 210 KiB | 100 / 100 |
 
-⚠️ **Startseite nicht verbessert.** Das LCP-Element ist die Hero-H1, die Render-Verzögerung liegt bei 1,1 s (vorher 4,46 s). Der simulierte LCP bleibt bei 5,2 s. Wahrscheinliche Ursachen: Die Überschrift wartet auf die Web-Schrift Inter, und die Einblend-Animation von `<main>` verzögert zusätzlich. Nächster Schritt [Repo]: Hero-Schriftschnitte vorladen (`preload`) und `page-enter` für den ersten Viewport abschwächen oder weglassen (Design-Entscheidung).
+**Korrektur (2026-09-15, nachgemessen):** Die erste Messung der Startseite direkt nach dem Deploy
+ergab Performance 79 / LCP 5,2 s. Das war ein **Ausreißer** — vermutlich kalter Cache (TTFB 349 ms).
+In vier Wiederholungen liegt die Startseite bei Performance 95–100 und LCP 1,6–2,2 s.
+**Merksatz für künftige Messungen: Lighthouse-Werte nur als Median mehrerer, abwechselnder Läufe
+vergleichen (Produktion und Preview direkt hintereinander), nie als Einzelwert.**
+
+**Geprüfte und verworfene Optimierung (PR #1, Branch `perf/hero-lcp`, geschlossen):** Hero-Schriften
+vorladen plus abgeschwächte Seiten-Einblendung (0,3 s ab halber Deckkraft statt 0,9 s ab 0).
+A/B-Messung gegen den Deploy Preview, je 4 abwechselnde Läufe (Median):
+
+| Seite | Performance Prod → Preview | LCP Prod → Preview |
+|---|---|---|
+| `/` | 98 → 97 | 1,91 s → **2,31 s** |
+| `/kontakt.html` | 98 → 98 | 1,93 s → **2,17 s** |
+
+Ursache: Die vorgeladenen Schriften (62 KB) starten gleichzeitig mit dem LCP-Bild `hero-1.webp`
+und nehmen ihm Bandbreite weg (Ladedauer ca. 320 ms statt ca. 170 ms). FCP wird minimal besser,
+der LCP schlechter. **Nicht übernommen.** Der Branch bleibt zur Nachvollziehbarkeit bestehen.
 
 ### Umgesetzt (Repo)
 
